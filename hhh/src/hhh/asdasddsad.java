@@ -1,7 +1,7 @@
 package hhh;
 
 public class asdasddsad {
-	public int a() {
-		return 0;
+	public String a() {
+		return null;
 	}
 }
