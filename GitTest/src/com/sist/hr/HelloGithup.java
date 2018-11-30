@@ -7,5 +7,6 @@ public class HelloGithup {
 		System.out.println("문");
 		System.out.println("봇");
 		System.out.println("현석이형");
+		System.out.println("유진초이");
 	}
 }
