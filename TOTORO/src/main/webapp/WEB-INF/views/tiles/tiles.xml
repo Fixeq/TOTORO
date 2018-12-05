@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC 
+"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+"http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> 
+<tiles-definitions>
+    <definition name="basede-finition"
+     template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
+        <put-attribute name="title" value=""/>
+        <put-attribute name="header" 
+         value="/WEB-INF/views/tiles/template/header.jsp" />
+        <put-attribute name="body" 
+         value="" />
+        <put-attribute name="footer" 
+         value="/WEB-INF/views/tiles/template/footer.jsp" />   
+    </definition>
+    
+    <!-- hello.do -->
+    <definition name="home" extends="basede-finition">
+        <put-attribute name="title" value="GIT_SIST>Hello"/>
+        <put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
+    </definition>
+    
+    <!-- user.do -->
+    <definition name="/*/*" extends="basede-finition">
+        <put-attribute name="title" value="GIT_SIST>user"/>
+        <put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp"/>
+    </definition>
+    
+</tiles-definitions>
