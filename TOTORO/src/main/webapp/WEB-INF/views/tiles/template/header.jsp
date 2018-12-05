@@ -1,4 +1,13 @@
-<% String context = request.getContextPath(); %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@taglib prefix="tiles"  
+    uri="http://tiles.apache.org/tags-tiles" %>    
+ 
+<%
+	String context = request.getContextPath();//context path
+	
+%>
 
     <!-- pageheader
     ================================================== -->
@@ -52,30 +61,31 @@
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                     <ul class="header__nav">
-                        <li><a href="index.html" title="">Home</a></li>
+                        <li><a href="index.html" title="">홈</a></li>
+                        <li><a href="cross.do" title="">크로스</a></li>
                         <li class="has-children">
-                            <a href="#0" title="">Categories</a>
+                            <a href="#0" title="">입금/출금</a>
                             <ul class="sub-menu">
                             <li><a href="dodo.do">dodo</a></li>
-                            <li><a href="category.html">Health</a></li>
-                            <li><a href="category.html">Family</a></li>
-                            <li><a href="category.html">Management</a></li>
-                            <li><a href="category.html">Travel</a></li>
-                            <li><a href="category.html">Work</a></li>
+                            <li><a href="category.html">입금</a></li>
+                            <li><a href="category.html">출금</a></li>
+                            <li><a href="category.html">관리자 입금</a></li>
+                            <li><a href="category.html">관리자 출금</a></li>
+                            <li><a href="category.html">관리자 출금확인</a></li>
                             </ul>
                         </li>
                         <li class="has-children current">
-                            <a href="#0" title="">Blog</a>
+                            <a href="#0" title="">카테고리</a>
                             <ul class="sub-menu">
-                            <li><a href="single-video.html">Video Post</a></li>
-                            <li><a href="single-audio.html">Audio Post</a></li>
-                            <li><a href="single-gallery.html">Gallery Post</a></li>
+                            <li><a href="single-video.html">배팅내역</a></li>
+                            <li><a href="single-audio.html">배팅규정</a></li>
+                            <li><a href="single-gallery.html"></a></li>
                             <li><a href="single-standard.html">Standard Post</a></li>
                             </ul>
                         </li>
-                        <li><a href="style-guide.html" title="">Styles</a></li>
-                        <li><a href="about.html" title="">About</a></li>
-                        <li><a href="contact.html" title="">Contact</a></li>
+                        <li><a href="contact.html" title="">배팅내역</a></li>
+                        <li><a href="about.html" title="">게시판</a></li>
+                        <li><a href="about.html" title="">마이페이지</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>

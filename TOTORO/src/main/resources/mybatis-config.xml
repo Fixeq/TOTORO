@@ -4,11 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!-- VO에 대한 정의 -->
 <configuration>
-
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>	
- 		<!-- 이런식으로 만들어 놓으셈 ex) -->
-		<!-- <typeAlias alias="UserVO" type="com.sist.hr.user.domain.UserVO"/>
-		<typeAlias alias="SearchVO" type="com.sist.hr.common.SearchVO"/> -->
 </configuration>
