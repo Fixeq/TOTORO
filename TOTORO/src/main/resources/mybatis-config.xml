@@ -8,9 +8,7 @@
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>	
- 	<typeAliases>
  		<!-- 이런식으로 만들어 놓으셈 ex) -->
 		<!-- <typeAlias alias="UserVO" type="com.sist.hr.user.domain.UserVO"/>
 		<typeAlias alias="SearchVO" type="com.sist.hr.common.SearchVO"/> -->
-	</typeAliases>
 </configuration>

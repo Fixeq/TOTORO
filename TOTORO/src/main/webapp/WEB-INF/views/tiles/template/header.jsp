@@ -56,7 +56,7 @@
                         <li class="has-children">
                             <a href="#0" title="">Categories</a>
                             <ul class="sub-menu">
-                            <li><a href="category.html">Lifestyle</a></li>
+                            <li><a href="dodo.do">dodo</a></li>
                             <li><a href="category.html">Health</a></li>
                             <li><a href="category.html">Family</a></li>
                             <li><a href="category.html">Management</a></li>
