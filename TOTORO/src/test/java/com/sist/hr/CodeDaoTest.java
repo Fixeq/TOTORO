@@ -61,6 +61,7 @@ public class CodeDaoTest {
 	
 	
 	@Test
+	@Ignore
 	public void web_do_selectOne() throws Exception {
 		LOG.info("1==========================");
 		LOG.info("=get=");
