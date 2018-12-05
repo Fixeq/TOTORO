@@ -14,11 +14,6 @@
          value="/WEB-INF/views/tiles/template/footer.jsp" />   
     </definition>
     
-    <!-- hello.do -->
-    <definition name="home" extends="basede-finition">
-        <put-attribute name="title" value="GIT_SIST>Hello"/>
-        <put-attribute name="body" value="/WEB-INF/views/home.jsp"/>
-    </definition>
     
     <!-- user.do -->
     <definition name="/*/*" extends="basede-finition">
