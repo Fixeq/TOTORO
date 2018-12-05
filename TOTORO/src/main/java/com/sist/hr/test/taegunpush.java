@@ -5,6 +5,8 @@ public class taegunpush {
 		System.out.println("테스트");
 		System.out.println("ㅌㄱ테스트");
 		System.out.println("무혁테스트");
+		System.out.println("무혁테스트");
+
 	}
 }
 
