@@ -1,8 +1,8 @@
-package com.sist.hr.code;
+package com.sist.totoro.code;
 
 import java.util.List;
 
-import com.sist.hr.common.DTO;
+import com.sist.totoro.common.DTO;
 
 public interface CodeSvc {
 

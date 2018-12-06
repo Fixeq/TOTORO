@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.sist.hr.code;
+package com.sist.totoro.code;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.sist.hr.common.DTO;
+import com.sist.totoro.common.DTO;
 
 /**
  * @author sist1

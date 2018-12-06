@@ -1,6 +1,6 @@
-package com.sist.hr.code;
+package com.sist.totoro.code;
 
-import com.sist.hr.common.DTO;
+import com.sist.totoro.common.DTO;
 
 public class CodeVO extends DTO {
 	//TODO!!!!!!!!!!!!!!!! 우리것이랑 다름

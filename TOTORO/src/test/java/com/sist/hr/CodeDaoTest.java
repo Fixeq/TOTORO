@@ -25,8 +25,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.sist.hr.code.CodeDao;
-import com.sist.hr.code.CodeVO;
+import com.sist.totoro.code.CodeDao;
+import com.sist.totoro.code.CodeVO;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

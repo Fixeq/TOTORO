@@ -1,4 +1,4 @@
-package com.sist.hr.common;
+package com.sist.totoro.common;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sist.hr.code.CodeVO;
+import com.sist.totoro.code.CodeVO;
 
 
 

@@ -1,4 +1,4 @@
-package com.sist.hr.common;
+package com.sist.totoro.common;
 
 public class DTO {
 	private int no;

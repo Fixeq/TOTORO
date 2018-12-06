@@ -1,4 +1,4 @@
-package com.sist.hr.common;
+package com.sist.totoro.common;
 
 import java.io.File;
 import java.io.FileInputStream;
