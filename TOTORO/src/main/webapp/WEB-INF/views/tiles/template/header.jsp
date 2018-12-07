@@ -6,9 +6,8 @@
  
 <%
 	String context = request.getContextPath();//context path
-	
 %>
-    
+
     <!-- pageheader
     ================================================== -->
     <div class="s-pageheader">
@@ -17,7 +16,7 @@
             <div class="header__content row">
 
                 <div class="header__logo">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="/totoro/mainpage/mainpage.do">
                         <img src="<%=context%>/resources/images/logo.svg" alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
@@ -61,31 +60,29 @@
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
 
                     <ul class="header__nav">
-                        <li><a href="index.html" title="">홈</a></li>
-                        <li><a href="cross.do" title="">크로스</a></li>
+                        <li><a href="/totoro/mainpage/mainpage.do" title="">홈</a></li>
+                        <li><a href="/totoro/cross/view.do" title="">크로스</a></li>
                         <li class="has-children">
                             <a href="#0" title="">입금/출금</a>
                             <ul class="sub-menu">
-                            <li><a href="dodo.do">dodo</a></li>
-                            <li><a href="category.html">입금</a></li>
-                            <li><a href="category.html">출금</a></li>
-                            <li><a href="category.html">관리자 입금</a></li>
-                            <li><a href="category.html">관리자 출금</a></li>
-                            <li><a href="category.html">관리자 출금확인</a></li>
+                            <li><a href="/totoro/customerdeposit/customerdeposit.do">입금</a></li>
+                            <li><a href="/totoro/customerwithdraw/customerwithdraw.do">출금</a></li>
+                            <li><a href="/totoro/admindeposit/admindeposit.do">관리자 입금</a></li>
+                            <li><a href="/totoro/adminwithdraw/adminwithdraw.do">관리자 출금</a></li>
+                            <li><a href="/totoro/givepay/givepay.do">당첨금 지급페이지</a></li>
                             </ul>
                         </li>
                         <li class="has-children current">
                             <a href="#0" title="">카테고리</a>
                             <ul class="sub-menu">
-                            <li><a href="single-video.html">배팅내역</a></li>
-                            <li><a href="single-audio.html">배팅규정</a></li>
-                            <li><a href="single-gallery.html"></a></li>
-                            <li><a href="single-standard.html">Standard Post</a></li>
+                            <li><a href="/totoro/bethistory/bethistory.do">배팅내역</a></li>
+                            <li><a href="/totoro/betrule/betrule.do">배팅규정</a></li>
+                           
                             </ul>
+                            
                         </li>
-                        <li><a href="contact.html" title="">배팅내역</a></li>
-                        <li><a href="about.html" title="">게시판</a></li>
-                        <li><a href="about.html" title="">마이페이지</a></li>
+                        <li><a href="/totoro/board/board.do" title="">게시판</a></li>
+                        <li><a href="/totoro/mypage/mypage.do" title="">마이페이지</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
@@ -96,4 +93,3 @@
         </header> <!-- header -->
 
     </div> <!-- end s-pageheader -->
-
