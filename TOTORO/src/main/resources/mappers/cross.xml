@@ -4,15 +4,67 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sist.totoro.mappers.cross">
-	<select id="do_selectAll" resultType="com.sist.totoro.domain.CrossVO">
+	<select id="do_selectUser" resultType="com.sist.totoro.domain.CrossVO">
 		SELECT GAMESEQ, 
 			   GAMEHOME,
 			   GAMEAWAY,
 			   GAMEHP,
 			   GAMEDP,
 			   GAMEAP,
-			   GAMEDATE
+			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
  		  FROM CROSS
+ 		 WHERE GAMEDATE > SYSDATE
+ 		   AND GAMERESULT IS NULL
+ 		 ORDER BY GAMEDATE DESC
 	</select>
+	
+	<select id="do_selectAdmin" resultType="com.sist.totoro.domain.CrossVO">
+		SELECT GAMESEQ, 
+			   GAMEHOME,
+			   GAMEAWAY,
+			   GAMEHP,
+			   GAMEDP,
+			   GAMEAP,
+			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
+ 		  FROM CROSS
+ 		   AND GAMERESULT IS NULL
+ 		 ORDER BY GAMEDATE DESC
+	</select>
+	
+	
+	
+	<insert id="do_save" parameterType="CrossVO">
+		INSERT INTO CROSS (
+		    GAMESEQ,
+		    GAMEHOME,
+		    GAMEAWAY,
+		    GAMEHP,
+		    GAMEDP,
+		    GAMEAP,
+		    GAMEDATE,
+		    GAMEREGID,
+		    GAMEREGDT
+		) VALUES (
+		   #{gameSeq},
+		   #{gameHome},
+		   #{gameAway},
+		   #{gameHp},
+		   #{gameDp},
+		   #{gameAp},
+		   TO_DATE(#{gameDate}, 'YYYY-MM-DD HH24:MI:SS'),
+		   'ADMIN',
+		   SYSDATE 
+		)	
+	</insert>
+	
+	
+	<update id="do_update" parameterType="CrossVO">
+		UPDATE cross
+		   SET GAMEHS = #{gameHs},
+		       GAMEAS = #{gameAs},
+		       GAMEMODID = 'ADMIN' ,
+		       GAMEMODDT = SYSDATE
+		 WHERE GAMESEQ = #{gameSeq}
+	</update>
 </mapper>
 

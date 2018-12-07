@@ -15,6 +15,6 @@ public class CrossSvcImple {
 	private CrossDaoImple crossDao; 
 	
 	public List<CrossVO> do_selectAll(){
-		return crossDao.do_selectAll();
+		return crossDao.do_selectUser();
 	}
 }

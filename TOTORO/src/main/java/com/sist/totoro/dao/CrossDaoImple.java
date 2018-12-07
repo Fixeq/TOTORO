@@ -13,7 +13,7 @@ import com.sist.totoro.common.WorkDiv;
 import com.sist.totoro.domain.CrossVO;
 
 @Repository
-public class CrossDaoImple implements WorkDiv{
+public class CrossDaoImple {
 	
 	Logger  log = LoggerFactory.getLogger(CrossDaoImple.class);
     
@@ -22,45 +22,48 @@ public class CrossDaoImple implements WorkDiv{
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.cross";
 
-	public List<CrossVO> do_selectAll(){
-		String statement = NAME_SPACE + ".do_selectAll";
+	public List<CrossVO> do_selectUser(){
+		//접속자가 사용자면".do_selectUser"
+		//접속자가 관리자면".do_selectAdmin"
+		String statement = NAME_SPACE + ".do_selectUser";
+		
 		log.debug("1.statement : \n"+statement);
 		//log.debug("2. param : \n"+userId);
 
 		return this.sqlSession.selectList(statement);
 	}
 	
-	@Override
 	public DTO do_selectOne(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public int do_save(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int do_save(CrossVO crossVO) {
+		String statement = NAME_SPACE + ".do_save";
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+crossVO);
+		return this.sqlSession.insert(statement,crossVO);
 	}
 
-	@Override
-	public int do_update(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int do_update(CrossVO crossVO) {
+		//경기 결과 반영
+		String statement = NAME_SPACE + ".do_update";
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+crossVO);
+
+		return this.sqlSession.update(statement, crossVO);
 	}
 
-	@Override
 	public int do_delete(DTO dto) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
 	public List<?> do_retrieve(DTO dto) {
 		
 		return null;
 	}
 
-	@Override
 	public int do_excelDown(DTO dto) {
 		// TODO Auto-generated method stub
 		return 0;

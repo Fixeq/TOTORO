@@ -12,14 +12,14 @@ public class CrossVO extends DTO {
 	private Double gameHp      ;//홈팀배당률
 	private Double gameDp      ;//무승부배당률
 	private Double gameAp      ;//원정팀배당률
-	private Date gameDate    ;//경기시작시간
+	private String gameDate    ;//경기시작시간
 	private int gameResult  ;//경기결과
 	private int gameHs      ;//홈팀점수
 	private int gameAs      ;//원정팀점수
 	private String gameRegId   ;//등록자id
-	private Date gameRegDt   ;//등록일
+	private String gameRegDt   ;//등록일
 	private String modRegId   ;//수정자id
-	private Date modRegDt   ;//수정일
+	private String modRegDt   ;//수정일
 
 	public CrossVO() {}
 
@@ -110,14 +110,14 @@ public class CrossVO extends DTO {
 	/**
 	 * @return the gameDate
 	 */
-	public Date getGameDate() {
+	public String getGameDate() {
 		return gameDate;
 	}
 
 	/**
 	 * @param gameDate the gameDate to set
 	 */
-	public void setGameDate(Date gameDate) {
+	public void setGameDate(String gameDate) {
 		this.gameDate = gameDate;
 	}
 
@@ -180,14 +180,14 @@ public class CrossVO extends DTO {
 	/**
 	 * @return the gameRegDt
 	 */
-	public Date getGameRegDt() {
+	public String getGameRegDt() {
 		return gameRegDt;
 	}
 
 	/**
 	 * @param gameRegDt the gameRegDt to set
 	 */
-	public void setGameRegDt(Date gameRegDt) {
+	public void setGameRegDt(String gameRegDt) {
 		this.gameRegDt = gameRegDt;
 	}
 
@@ -208,14 +208,14 @@ public class CrossVO extends DTO {
 	/**
 	 * @return the modRegDt
 	 */
-	public Date getModRegDt() {
+	public String getModRegDt() {
 		return modRegDt;
 	}
 
 	/**
 	 * @param modRegDt the modRegDt to set
 	 */
-	public void setModRegDt(Date modRegDt) {
+	public void setModRegDt(String modRegDt) {
 		this.modRegDt = modRegDt;
 	}
 
@@ -231,8 +231,8 @@ public class CrossVO extends DTO {
 	}
 
 	public CrossVO(int gameSeq, String gameHome, String gameAway, Double gameHp, Double gameDp, Double gameAp,
-			Date gameDate, int gameResult, int gameHs, int gameAs, String gameRegId, Date gameRegDt, String modRegId,
-			Date modRegDt) {
+			String gameDate, int gameResult, int gameHs, int gameAs, String gameRegId, String gameRegDt,
+			String modRegId, String modRegDt) {
 		super();
 		this.gameSeq = gameSeq;
 		this.gameHome = gameHome;
@@ -250,5 +250,7 @@ public class CrossVO extends DTO {
 		this.modRegDt = modRegDt;
 	}
 
+
+	
 
 }
