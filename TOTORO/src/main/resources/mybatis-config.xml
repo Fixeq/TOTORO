@@ -6,5 +6,10 @@
 <configuration>
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
-	</settings>	
+	</settings>
+	
+	<typeAliases>
+ 		<typeAlias alias="AtmVo"   type="com.sist.totoro.domain.AtmVo"/>
+ 		<typeAlias alias="SearchVO" type="com.sist.totoro.common.SearchVO"/>
+ 	</typeAliases>	
 </configuration>
