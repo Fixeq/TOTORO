@@ -1,4 +1,4 @@
-package com.sist.hr;
+package com.sist.totoro;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

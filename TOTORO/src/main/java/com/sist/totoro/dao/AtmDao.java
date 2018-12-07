@@ -53,98 +53,6 @@ public class AtmDao {
 		return flag;
 		
 	}
-
-	
-
-	
-	
-	/* (non-Javadoc)
-	 * @see com.sist.hr.UserDaoI#getAll()
-	 */
-	public List<AtmVo> getAll() throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
-		
-		String statement = NAME_SPACE+".getAll";
-		log.debug("1.statement: "+statement);
-		
-		
-		StringBuilder sb=new StringBuilder();		
-		sb.append(" SELECT hr.*          \n"); 
-		sb.append("   FROM hr_users hr   \n");
-		sb.append("  ORDER by u_id       \n");
-
-		return this.sqlSession.selectList(statement);				
-	}
-	
-
-	/**
-	 * 관리자 입금 요청 전체 조회
-	 * mybatis:ok
-	 */
-	public int adReqDeAll(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".adReqDeAll";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.update(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		
-		return flag;
-	}
-	
-	/**
-	 * 관리자 출금 요청 전체 조회 
-	 * mybatis:ok
-	 */
-	public int adReqWiAll(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".adReqWiAll";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.update(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		
-		return flag;
-	}
-	
-	/**
-	 * 관리자 입출금 요청 전체 조회
-	 * mybatis:ok
-	 */
-	public int adReqDeWiAll(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".adReqDeWiAll";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.update(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		
-		return flag;
-	}
-	
-	/**
-	 * 관리자 입금 확인 전체 조회
-	 * mybatis:ok
-	 */
-	public int adPsDeAll(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".adPsDeAll";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.update(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		
-		return flag;
-	}
-	
-	/**
-	 * 관리자 출금 확인 전체 조회
-	 * mybatis:ok
-	 */
-	public int adPsWiAll(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".adPsWiAll";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.update(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		
-		return flag;
-	}
 	
 	/**
 	 * 관리자 입금 요청 확인 처리
@@ -202,6 +110,62 @@ public class AtmDao {
 		return flag;
 	}
 	
+	/**
+	 * 종합 입금 요청 수정
+	 * mybatis:ok
+	 */
+	public int Deupdate(AtmVo atmVo) throws SQLException {
+		String statement = NAME_SPACE+".Deupdate";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+atmVo);
+		int flag  = this.sqlSession.update(statement, atmVo);
+		log.debug("3.flag: "+flag);
+		
+		return flag;
+	}
+	
+	/**
+	 * 종합 출금 요청 수정
+	 * mybatis:ok
+	 */
+	public int Wiupdate(AtmVo atmVo) throws SQLException {
+		String statement = NAME_SPACE+".Wiupdate";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+atmVo);
+		int flag  = this.sqlSession.update(statement, atmVo);
+		log.debug("3.flag: "+flag);
+		
+		return flag;
+	}
+	
+	/**
+	 * 종합 단건 삭제!
+	 * mybatis:ok
+	 */
+	public int delete(AtmVo atmVo) throws SQLException {
+		String statement = NAME_SPACE+".delete";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+atmVo);
+		int flag  = this.sqlSession.delete(statement, atmVo);
+		log.debug("3.flag: "+flag);
+		return flag;
+	}
+	
+	/**
+     * 종합 단건 조회
+    * mybatis:ok
+    */
+	public AtmVo get(AtmVo atmVo) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
+		
+		String statement = NAME_SPACE+".get";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+atmVo);
+		AtmVo outVO = this.sqlSession.selectOne(statement, atmVo);
+		log.debug("3.outVO: "+outVO);
+
+		return outVO;
+	}
+	
 	
 	/**
 	 * 입출금 요청
@@ -218,40 +182,168 @@ public class AtmDao {
 		return flag;
 	}
 	
-	
-    /**
-      * 단건 조회
-     * mybatis:ok
-     */
-	public AtmVo get(AtmVo atmVo) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
-		
-		String statement = NAME_SPACE+".get";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		AtmVo outVO = this.sqlSession.selectOne(statement, atmVo);
-		log.debug("3.outVO: "+outVO);
-
-		return outVO;
-	}
-
-	/**
-	 * 단건 삭제!
-	 * mybatis:ok
-	 */
-	public int delete(AtmVo atmVo) throws SQLException {
-		String statement = NAME_SPACE+".delete";
-		log.debug("1.statement: "+statement);		
-		log.debug("2.param: "+atmVo);
-		int flag  = this.sqlSession.delete(statement, atmVo);
-		log.debug("3.flag: "+flag);
-		return flag;
-	}
 
 
 	public List<AtmVo> do_retrieve(SearchVO searchVO)
 			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
 		        
 		String statement = NAME_SPACE+".do_retrieve";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adReqDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adReqDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adReqWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adReqWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adReqDeWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adReqDeWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adPsDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adPsDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adPsWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adPsWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> adPsDeWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".adPsDeWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusReqDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusReqDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusReqWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusReqWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusPsDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusPsDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusPsWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusPsWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusReqPsDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusReqPsDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;	
+	}
+	
+	public List<AtmVo> cusReqPsWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		        
+		String statement = NAME_SPACE+".cusReqPsWiAll";
 		log.debug("1.statement: "+statement);		
 		log.debug("2.param: "+searchVO);
 		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
