@@ -1,6 +1,6 @@
 package com.sist.totoro.common;
 
-public class SearchVO {
+public class SearchVO extends DTO{
 	private int	page_size       ;
 	private int	page_num        ;
 	private String	search_word ;

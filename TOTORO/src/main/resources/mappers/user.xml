@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.totoro.mappers.user">
+	
+	<!--검색(아이디,이름,이메일,가입상태(승인대기,밴))-->
+	<sql id="baseCondition">
+		<where>
+			<choose>
+				<when test="'10'==search_div">
+					to_users.userId like  #{search_word}||'%'
+				</when>
+				<when test="'20'==search_div">
+					to_users.userName like  #{search_word}||'%'
+				</when>
+				<when test="'30'==search_div">
+					to_users.userEmail like  #{search_word}||'%'
+				</when>
+				<when test="'40'==search_div">
+					to_users.userAppStt ='ban'
+				</when>
+				<when test="'50'==search_div">
+					to_users.userAppStt ='wait'
+				</when>
+			</choose>
+		</where>
+	</sql>
+	
+	
+	<!--로그인 :아이디 체크(1:성공, 이 외 실패)-->
+	<!--회원가입 : 아이디 중복검사 체크 (0:성공, 이 외 실패)  -->
+	<select id="id_check" parameterType="DTO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM to_users WHERE userId=#{userId}
+	</select>
+	
+	<!--로그인 : 비밀번호 체크(1:성공, 이 외 실패) -->
+	<!--마이페이지 : 마이페이지 진입 전 본인확인(1:성공, 이 외 실패) -->
+	<select id="pw_check" parameterType="DTO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM to_users WHERE userId=#{userId} AND userPw=#{userPw}
+	</select>
+	
+	<!--회원가입 : 이메일 중복검사 체크 (0:성공, 이 외 실패)-->
+	<select id="email_check" parameterType="DTO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM to_users WHERE userEmail=#{userEmail}	
+	</select>
+	
+	<!--회원가입 : 회원가입 submit -->
+	<!--(기본값)userPoint:1000, userAppStt:false, userAdmin:0 -->
+	<insert id="do_save" parameterType="DTO">
+	INSERT INTO to_users (
+    	userId,    userPw,    userEmail,    userName,    userBank,
+    	userAccount,    userTel,    userFindQ,    userFindA,    userAdmin,
+    	userPoint,    userRegDt,    userAppStt
+	) VALUES (
+	    #{userId},    #{userPw},    #{userEmail},    #{userName},    #{userBank},
+	    #{userAccount},    #{userTel},    #{userFindQ},    #{userFindA},    '0',
+	    1000,    SYSDATE,    'false'
+	)
+	</insert>
+	
+	<!--회원가입 : ban user 재가입 불가 check -->
+	<select id="ban_user_check" parameterType="UserVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		  FROM to_users
+		 WHERE userTel =   #{userTel}
+		    OR userEmail = #{userEmail}
+		    OR userAccount=#{userAccount}	
+	</select>
+	
+	
+	<!--이메일 인증 : 이메일 인증 시 인증상태 wait 로변경 -->
+	<update id="email_verify" parameterType="DTO">
+		UPDATE to_users SET userAppStt='wait'
+		 WHERE userEmail=#{userEmail} 
+		   AND userAppKey=#{userAppKey}
+	</update>
+	
+	<!--관리자 승인 : 이메일 인증 후 관리자가 승인, 인증상태 true 로변경 -->
+	<update id="user_verify" parameterType="DTO">
+		UPDATE to_users SET userAppStt='true'
+		 WHERE userId=#{userId} 
+	</update>
+	
+	<!--정보찾기 : 아이디 찾기 -->
+	<select id="id_find" parameterType="DTO" resultType="DTO">
+		SELECT userId FROM to_users WHERE userEmail=#{userEmail}
+	</select>
+	
+	<!--정보찾기 : 비밀번호 찾기 확인(1:성공, 이 외 실패)-->
+	<select id="pw_find" parameterType="DTO" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM to_users 
+		 WHERE userId=#{userId}
+		   AND userFindQ=#{userFindQ}
+		   AND userFindA=#{userFindA}
+   	</select>
+	
+	<!--정보찾기 : 임시비밀번호로 변경 -->
+	<update id="pw_random_update"  parameterType="UserVO">
+		UPDATE to_users          
+		   SET userPw=#{userPw}
+ 		 WHERE userId=#{userId}
+ 	</update>
+	
+	<!--개인정보 변경 조회: 일반회원(read_only : Id,Email,Name,Bank,Account) -->
+	<select id="do_selectOne" parameterType="DTO" resultType="DTO">
+		SELECT userId, userPw, userEmail, userName,
+				userBank, userAccount,userTel,userFindQ, userFindA
+		  FROM to_users
+		 WHERE userId=#{userId}
+ 	</select>
+
+	<!--개인정보 변경 :일반회원   -->
+	<update id="do_update" parameterType="DTO">
+		UPDATE to_users
+		   SET userPw   =#{userPw}
+		     ,userTel   =#{userTel}
+		     ,userFindQ =#{userFindQ}
+		     ,userFindA =#{userFindA}
+		     ,userModId =#{userModId}
+		     ,userModDt =#{userModDt}
+		 WHERE userId=#{userId}
+	</update>
+
+	<!--개인정보 변경 조회: 관리자(read_only :  Id, AppKey) -->
+	<select id="do_selectOne_admin" parameterType="DTO" resultType="DTO">
+		SELECT userId, userPw, userEmail, userName,
+				userBank, userAccount,userTel,userFindQ, userFindA,
+				userAdmin, userPoint, userModId, userAppStt, userAppKey
+		  FROM to_users
+		 WHERE userId=#{userId}	
+ 	</select>
+ 	
+	<!--개인정보 변경 :관리자   -->
+	<update id="do_update_admin" parameterType="DTO">
+		UPDATE to_users
+		   SET userPw =#{userPw}
+		     ,userEmail =#{userEmail}
+		     ,userName =#{userName}
+		     ,userBank =#{userBank}
+		     ,userAccount =#{userAccount}
+		     ,userTel =#{userTel}
+		     ,userFindQ =#{userFindQ}
+		     ,userFindA =#{userFindA}
+		     ,userAdmin =#{userAdmin}
+		     ,userPoint =#{userPoint}
+		     ,userModId =#{userModId}
+		     ,userModDt =#{userModDt}
+		     ,userAppStt =#{userAppStt}
+		 WHERE userId=#{userId};		
+	</update>
+	
+	<!--회원탈퇴 -->
+	<delete id="do_delete" parameterType="DTO">
+		DELETE FROM to_users WHERE userId=#{userId};
+	</delete>
+	
+	<!--졸업시키기 -->
+	<update id="user_ban" parameterType="DTO">
+		update to_users set userAppStt='ban' where userId=#{userId};
+	</update>
+	
+	<!--관리자 회원정보 목록 -->
+	<select id="do_retrieve" parameterType="SearchVO" resultType="UserVO">
+		SELECT X.*,Y.*
+		  FROM(
+			SELECT T.userId,
+	               T.userEmail,
+	               T.userName,
+	               T.userAppStt,
+	               T.userPoint,
+	               TO_CHAR(T.userRegDt,'YYYY-MM-DD') userRegDt,
+	               T.rnum AS no
+			  FROM(
+	                SELECT to_users.*
+	                      ,ROW_NUMBER() OVER(ORDER BY userRegDt desc) AS rnum
+	                  FROM to_users
+					<include refid="baseCondition" />
+			)T
+				WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1) +1 ) 
+				               AND (#{page_size} * (#{page_num}-1)+#{page_size} )
+		)X
+		NATURAL JOIN(
+			SELECT count(*) AS total_cnt
+			  FROM to_users
+					<include refid="baseCondition" />
+		)Y;
+	</select>
+	
+</mapper>
