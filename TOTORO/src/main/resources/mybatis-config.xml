@@ -6,9 +6,11 @@
 <configuration>
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
 	
 	<typeAliases>
+		<typeAlias alias="BetResultVO"   type="com.sist.totoro.domain.BetResultVO"/>
 		<typeAlias alias="DTO"   type="com.sist.totoro.common.DTO"/>
  		<typeAlias alias="AtmVo"   type="com.sist.totoro.domain.AtmVo"/>
  		<typeAlias alias="SearchVO" type="com.sist.totoro.common.SearchVO"/>

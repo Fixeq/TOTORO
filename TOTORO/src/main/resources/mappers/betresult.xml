@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.totoro.mappers.betresult">
+  
+ <!-- select list -->
+    <select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO" >
+		SELECT X.*,Y.*
+		  FROM(
+		SELECT gameDate
+            ,gameHome
+            ,gameAway
+            ,gameHs
+            ,gameAs
+            ,NVL(DECODE(GAMERESULT, 1 , '홈승', 2 , '무승부', 3 , '원정승'),'대기중') as gameResult  
+		  FROM(                                          
+			SELECT hr.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY GAMEDATE desc ) AS rnum       
+			  FROM cross hr
+			  WHERE gameHome = #{gameHome}
+        	  OR gameAway = #{gameAway}
+        	  AND months_between(sysdate, TO_CHAR(gameDate, 'YY/MM/DD')) <![CDATA[<]]> 2
+		  )T
+		 WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM cross
+		)Y      
+		   
+    </select>
+</mapper>
