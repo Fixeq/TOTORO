@@ -14,7 +14,7 @@ public class UserVO extends DTO{
 	private String userFindQ     ;/*비밀번호찾기질문  	*/ 
 	private String userFindA     ;/*비밀번호찾기정답  	*/ 
 	private String userAdmin     ;/*관리자유무		*/
-	private String userPoint     ;/*현재포인트		*/ 
+	private int    userPoint     ;/*현재포인트		*/ 
 	private String userRegDt     ;/*가입일			*/ 
 	private String userModId     ;/*수정자			*/ 
 	private String userModDt     ;/*수정일            	*/ 
@@ -24,7 +24,7 @@ public class UserVO extends DTO{
 	public UserVO() {	}
 
 	public UserVO(String userId, String userPw, String userEmail, String userName, String userBank, String userAccount,
-			String userTel, String userFindQ, String userFindA, String userAdmin, String userPoint, String userRegDt,
+			String userTel, String userFindQ, String userFindA, String userAdmin, int userPoint, String userRegDt,
 			String userModId, String userModDt, String userAppStt, String userAppKey) {
 		super();
 		this.userId = userId;
@@ -54,6 +54,8 @@ public class UserVO extends DTO{
 				+ userAppStt + ", userAppKey=" + userAppKey + "]";
 	}
 
+	
+	
 	public String getUserId() {
 		return userId;
 	}
@@ -134,11 +136,11 @@ public class UserVO extends DTO{
 		this.userAdmin = userAdmin;
 	}
 
-	public String getUserPoint() {
+	public int getUserPoint() {
 		return userPoint;
 	}
 
-	public void setUserPoint(String userPoint) {
+	public void setUserPoint(int userPoint) {
 		this.userPoint = userPoint;
 	}
 
@@ -251,10 +253,7 @@ public class UserVO extends DTO{
 				return false;
 		} else if (!userName.equals(other.userName))
 			return false;
-		if (userPoint == null) {
-			if (other.userPoint != null)
-				return false;
-		} else if (!userPoint.equals(other.userPoint))
+		if (userPoint != other.userPoint)
 			return false;
 		if (userPw == null) {
 			if (other.userPw != null)
