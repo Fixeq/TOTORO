@@ -10,8 +10,12 @@ public class BetResultVO extends SearchVO{
     private String gameHs;		//홈점수
     private String gameAs;		//원정점수
     private String gameResult;	//경기경과
-	
-    public String getGameDate() {
+    
+    public BetResultVO() {
+    	
+    }
+    
+	public String getGameDate() {
 		return gameDate;
 	}
 	public void setGameDate(String gameDate) {
@@ -47,13 +51,8 @@ public class BetResultVO extends SearchVO{
 	public void setGameResult(String gameResult) {
 		this.gameResult = gameResult;
 	}
-	
-	@Override
-	public String toString() {
-		return "UserVO [gameDate=" + gameDate + ", gameHome=" + gameHome + ", gameAway=" + gameAway + ", gameHs="
-				+ gameHs + ", gameAs=" + gameAs + ", gameResult=" + gameResult + "]";
-	}
-	public BetResultVO(String gameDate, String gameHome, String gameAway, String gameHs, String gameAs, String gameResult) {
+	public BetResultVO(String gameDate, String gameHome, String gameAway, String gameHs, String gameAs,
+			String gameResult) {
 		super();
 		this.gameDate = gameDate;
 		this.gameHome = gameHome;
@@ -62,7 +61,13 @@ public class BetResultVO extends SearchVO{
 		this.gameAs = gameAs;
 		this.gameResult = gameResult;
 	}
-    
+	@Override
+	public String toString() {
+		return "BetResultVO [gameDate=" + gameDate + ", gameHome=" + gameHome + ", gameAway=" + gameAway + ", gameHs="
+				+ gameHs + ", gameAs=" + gameAs + ", gameResult=" + gameResult + "]";
+	}
+	
+   
 	
     
 }

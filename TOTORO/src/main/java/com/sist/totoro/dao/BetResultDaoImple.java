@@ -13,8 +13,6 @@ import org.springframework.stereotype.Repository;
 import com.sist.totoro.domain.BetResultVO;
 
 
-
-
 @Repository
 public class BetResultDaoImple implements BetResultDao{
 	
@@ -30,12 +28,12 @@ Logger  log = LoggerFactory.getLogger(BetResultDaoImple.class);
 		
 	}
 	
-	public List<BetResultVO> do_retrieve(BetResultVO userVO)
+	public List<BetResultVO> do_retrieve(BetResultVO betResultVO)
 			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
 		        
 		String statement = NAME_SPACE+".do_retrieve";
 		log.debug("1.statement: "+statement);		
-		List<BetResultVO> list  = this.sqlSession.selectList(statement);
+		List<BetResultVO> list  = this.sqlSession.selectList(statement,betResultVO);
 		log.debug("*****************************");
 		log.debug("3.list: "+list);
 		log.debug("*****************************");

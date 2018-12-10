@@ -77,6 +77,7 @@
                             <ul class="sub-menu">
                             <li><a href="/totoro/bethistory/bethistory.do">배팅내역</a></li>
                             <li><a href="/totoro/betrule/betrule.do">배팅규정</a></li>
+                            <li><a href="/totoro/betresult/betresult.do">경기결과</a></li>
                            
                             </ul>
                             

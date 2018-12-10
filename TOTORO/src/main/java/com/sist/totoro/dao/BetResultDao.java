@@ -12,6 +12,6 @@ import com.sist.totoro.domain.BetResultVO;
 
 public interface BetResultDao {
 	
-	List<BetResultVO> do_retrieve(BetResultVO userVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	List<BetResultVO> do_retrieve(BetResultVO betResultVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 
 }

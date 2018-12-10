@@ -58,16 +58,11 @@ public class BetResultDaoTest {
 	@Before
 	public void setUp() {
 		inVO1 = new BetResultVO("19/01/01","네덜란드","독일","2","4","원정승");
-		inVO2 = new BetResultVO("19/01/01","브라질","프랑스","1","2","대기중");		
-		inVO3 = new BetResultVO("19/01/02","세비야","발렌시아CF","","","대기중");	
-		
-		searchVO = new SearchVO(1,10,"","");
-		
 		
 		inVO1.setPage_num(1);
 		inVO1.setPage_size(10);
 		
-		LOG.info("11111111111111111111111111111111111111111111111111111111111111111111111context:"+context);
+		LOG.info("context:"+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc:"+mockMvc);
 		LOG.info("betResultDao:"+betResultDao);
@@ -76,6 +71,8 @@ public class BetResultDaoTest {
 	@Test
 	public void select() throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		LOG.info("inVO1:"+inVO1);
+		LOG.info("page_num:"+inVO1.getPage_num());
+		LOG.info("page_num:"+inVO1.getPage_size());
 		List<BetResultVO> list = betResultDao.do_retrieve(inVO1);
 		LOG.info("list:"+list);
 	}

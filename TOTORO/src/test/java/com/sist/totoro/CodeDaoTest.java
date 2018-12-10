@@ -79,7 +79,7 @@ public class CodeDaoTest {
 	
 	
 	@Test
-	@Ignore
+	
 	public void do_selectOne() {
 		LOG.info("++++++++++++++++++++++++");
 		LOG.info("+do_selectOne");
