@@ -124,7 +124,7 @@ public class UserDao implements WorkDiv {
 	
 	//TODO 이상해..ㅋㅋ resultType="DTO" 근데 return은 UserVO타입.
 	//너무 내꼴리는대로 DTO받았나.. 테스트내일해봐야지..ㅠ
-	public DTO id_find(DTO dto) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
+	public String id_find(DTO dto) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
 		
 		String statement = NAME_SPACE+".id_find";
 		UserVO inVO = (UserVO) dto;
@@ -133,10 +133,10 @@ public class UserDao implements WorkDiv {
 		log.debug("1. statement : "+statement);
 		log.debug("2.param: "+inVO);
 		//call하기
-		UserVO outVO = this.sqlSession.selectOne(statement, inVO);
-		log.debug("3.outVO: "+outVO);
+		String userId = this.sqlSession.selectOne(statement, inVO);
+		log.debug("3.outVO: "+userId);
 		
-		return outVO;
+		return userId;
 	}	
 	
 	public int pw_find(DTO dto) {
@@ -170,7 +170,7 @@ public class UserDao implements WorkDiv {
 
 	//param : string?
 	@Override
-	public DTO do_selectOne(DTO dto) {
+	public UserVO do_selectOne(DTO dto) {
 		String statement = NAME_SPACE+".do_selectOne";
 		UserVO inVO = (UserVO) dto;
 		
@@ -185,7 +185,6 @@ public class UserDao implements WorkDiv {
 	}
 
 
-
 	@Override
 	public int do_update(DTO dto) {
 		String statement = NAME_SPACE+".do_update";
@@ -194,25 +193,11 @@ public class UserDao implements WorkDiv {
 		log.debug("1. statement : "+statement);
 		log.debug("2.param: "+inVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.delete(statement, inVO);
+		
 		log.debug("3.flag: "+flag);
 
 		return flag;
-	}
-
-	//param : STring?
-	public DTO do_selectOne_admin(DTO dto) {
-		String statement = NAME_SPACE+".do_selectOne_admin";
-		UserVO inVO = (UserVO) dto;
-		
-		//이거 꼭 찾아가야함 못찾으면 쥐쥐...
-		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
-		//call하기
-		UserVO outVO = this.sqlSession.selectOne(statement, inVO);
-		log.debug("3.outVO: "+outVO);
-		
-		return outVO;
 	}
 	
 	public int do_update_admin(DTO dto) {
@@ -230,7 +215,7 @@ public class UserDao implements WorkDiv {
 	
 	@Override
 	public int do_delete(DTO dto) {
-		String statement = NAME_SPACE+".delete";
+		String statement = NAME_SPACE+".do_delete";
 		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
@@ -242,6 +227,20 @@ public class UserDao implements WorkDiv {
 		return flag;
 	}
 
+	public int user_ban(DTO dto) {
+		String statement = NAME_SPACE+".user_ban";
+		UserVO inVO = (UserVO) dto;
+		
+		log.debug("1. statement : "+statement);
+		log.debug("2.param: "+inVO);
+		
+		int flag = this.sqlSession.update(statement, inVO);
+		log.debug("3.flag: "+flag);
+		
+		return flag;
+	}
+
+	
 	@Override
 	public List<UserVO> do_retrieve(DTO dto) {
 		String statement = NAME_SPACE+".do_retrieve";

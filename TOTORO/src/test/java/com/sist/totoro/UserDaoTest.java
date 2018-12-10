@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.UUID;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -63,31 +64,36 @@ public class UserDaoTest {
 	UserVO  banVO01 = null;
 	UserVO  banVO02 = null;
 	UserVO  banVO03 = null;
+//	UserVO selectVO01=null;
 	SearchVO searchVO = null;
 	
 	
 	@Before
 	public void setUp() {
 		//기존 존재
-		inVO1 = new UserVO("test1","test1","test1@naver.com","김무혁","국민","0123456789","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","true","");
-		inVO2 = new UserVO("test2","test2","test2@naver.com","김무혁","국민","01234567890","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","wait","");	
-		inVO3 = new UserVO("test3","test3","test3@naver.com","김무혁","국민","012345678901","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","false","");
-		inVO4 = new UserVO("test4","test4","test4@naver.com","김무혁","국민","0123456789012","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","false","");
-		inVO5 = new UserVO("admin","admin","angur1@naver.com","김무혁","국민","74890200048805","01072491580","ㅋㅋㅋ","ㅋㅋㅋ","1",0,"18/12/07","","","true","");
+		inVO1 = new UserVO("test1","test1","test1@naver.com","김무혁","국민","0123456789","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"true",null);
+		inVO2 = new UserVO("test2","test2","test2@naver.com","김무혁","국민","01234567890","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"wait",null);	
+		inVO3 = new UserVO("test3","test3","test3@naver.com","김무혁","국민","012345678901","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"false",null);
+		inVO4 = new UserVO("test4","test4","test4@naver.com","김무혁","국민","0123456789012","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"false",null);
+		inVO5 = new UserVO("admin","admin","angur1@naver.com","김무혁","국민","74890200048805","01072491580","ㅋㅋㅋ","ㅋㅋㅋ","1",0,"2018-12-07",null,null,"true",null);
 		
 		//새로운 존재
-		inVO6 = new UserVO("test5","test5","test5@naver.com","김무혁","국민","50123456789","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","wait","");
-		inVO7 = new UserVO("test6","test6","test6@naver.com","김무혁","국민","601234567890","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","wait","");	
-		inVO8 = new UserVO("test7","test7","test7@naver.com","김무혁","국민","7012345678901","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","wait","");
-		inVO9 = new UserVO("test8","test8","test8@naver.com","김무혁","국민","80123456789012","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","wait","");
+		inVO6 = new UserVO("test5","test5","test5@naver.com","김무혁","국민","50123456789","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"wait",null);
+		inVO7 = new UserVO("test6","test6","test6@naver.com","김무혁","국민","601234567890","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"wait",null);	
+		inVO8 = new UserVO("test7","test7","test7@naver.com","김무혁","국민","7012345678901","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"wait",null);
+		inVO9 = new UserVO("test8","test8","test8@naver.com","김무혁","국민","80123456789012","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"wait",null);
 		
 		//밴check
-		banVO01 =new UserVO("test1b","test1","test1ban@naver.com","김무혁","국민","012345678999","0101234567888","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","ban","");   
-		banVO02 =new UserVO("test2b","test2","test22@naver.com","김무혁","국민","01234567890ban","010123456788b","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","ban","");	
-		banVO03 =new UserVO("test3b","test3","test33@naver.com","김무혁","국민","0123456789011","01012345678ban","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"18/12/07","","","ban","");
+		banVO01 =new UserVO("test1b","test1","test1ban@naver.com","김무혁","국민","012345678999","0101234567888","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"ban",null);   
+		banVO02 =new UserVO("test2b","test2","test22@naver.com","김무혁","국민","01234567890ban","010123456788b","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"ban",null);	
+		banVO03 =new UserVO("test3b","test3","test33@naver.com","김무혁","국민","0123456789011","01012345678ban","ㅋㅋㅋ","ㅋㅋㅋ","0",0,"2018-12-07",null,null,"ban",null);
+		
+		//일반회원 selectOne check
+//		selectVO01 = new UserVO("test1","test1","test1@naver.com","김무혁","국민","0123456789","01012345678","ㅋㅋㅋ","ㅋㅋㅋ","",0,"","","","","");
 		
 		searchVO = new SearchVO(10,1,"","");
-		 
+		
+		
 		LOG.info("context:"+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc:"+mockMvc);
@@ -150,66 +156,92 @@ public class UserDaoTest {
 		
 	}		
 	
-	
-	
-	
-	
-	@Test(timeout=2000)
+	@Test
 	@Ignore
-	public void addAndGet() throws SQLException, ClassNotFoundException {
-
-		//--------------------------------------------
-		//0.모두삭제 : 건건이로 수정
-		//--------------------------------------------
-//		userDao.delete(inVO1);
-//		userDao.delete(inVO2);
-//		userDao.delete(inVO3);
-		
-		
-		//--------------------------------------------
-		//1. 단건 추가
-		//--------------------------------------------
-//		userDao.add(inVO1);
-		
-		//--------------------------------------------
-		//1.1 Count
-		//--------------------------------------------
-//		assertThat(userDao.getCount("115"),is(1));
-		
-		//--------------------------------------------
-		//2. 단건 조회
-		//--------------------------------------------
-//		UserVO getVO = userDao.get(inVO1);
-		
-
-	}
-	
+	public void id_find() throws SQLException, ClassNotFoundException {
+		assertThat(userDao.id_find(inVO1),is(inVO1.getUserId()));
+	}		
 	
 	@Test
 	@Ignore
-	public void get() throws Exception {
-		LOG.info("1==========================");
-		LOG.info("=get=");
-		LOG.info("1==========================");
+	public void pw_find() throws SQLException, ClassNotFoundException {
+		assertThat(userDao.pw_find(inVO1),is(1));
+	}		
 		
-		MockHttpServletRequestBuilder createMessage =
-				MockMvcRequestBuilders.get("/user/do_search_one.do")
-				.param("u_id", "j01_115")
-				;
-		
-		mockMvc.perform(createMessage)
-		.andDo(print())
-		.andExpect(status().is2xxSuccessful());
-		
-	}
-	
 	
 	@Test
-	public void setUpTest() {
-		LOG.info("setUpTest:");
-	}
+	@Ignore
+	public void pw_random_update() throws SQLException, ClassNotFoundException {
+		String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // '-' 제거 
+        uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌. 
+		inVO1.setUserPw(uuid);
+		int flag =userDao.pw_random_update(inVO1);
+		LOG.info("flag(1:성공) : "+flag);
+	}	
 	
+	@Test
+	@Ignore
+	public void do_selectOne() throws SQLException, ClassNotFoundException {
+		assertThat(userDao.do_selectOne(inVO1),is(inVO1));
+	}			
 	
+	@Test
+	@Ignore
+	public void do_update() throws SQLException, ClassNotFoundException {
+		inVO1.setUserPw("updatePw");
+		inVO1.setUserTel("updateTel");
+		inVO1.setUserFindQ("updateQ");
+		userDao.do_update(inVO1);
+	}		
 	
+
+	@Test
+	@Ignore
+	public void do_update_admin() throws SQLException, ClassNotFoundException {
+		inVO1.setUserPw("updatePw");
+		inVO1.setUserTel("updateTel");
+		inVO1.setUserFindQ("updateQ");
+		userDao.do_update_admin(inVO1);
+	}		
+	
+	@Test
+	@Ignore
+	public void do_delete() throws SQLException, ClassNotFoundException {
+		int flag = userDao.do_delete(inVO1);
+		LOG.info("flag(1:성공) : "+flag);
+	}			
+
+	@Test
+	@Ignore
+	public void user_ban() throws SQLException, ClassNotFoundException {
+		int flag = userDao.user_ban(inVO1);
+		LOG.info("flag(1:성공) : "+flag);
+	}	
+	
+	@Test
+	public void do_retrieve() throws SQLException, ClassNotFoundException {
+		userDao.do_retrieve(searchVO);
+		LOG.info(" LIST : "+userDao.do_retrieve(searchVO));
+	}	
 	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -84,7 +84,7 @@
 	</update>
 	
 	<!--정보찾기 : 아이디 찾기 -->
-	<select id="id_find" parameterType="DTO" resultType="DTO">
+	<select id="id_find" parameterType="DTO" resultType="String">
 		SELECT userId FROM to_users WHERE userEmail=#{userEmail}
 	</select>
 	
@@ -103,13 +103,24 @@
  		 WHERE userId=#{userId}
  	</update>
 	
-	<!--개인정보 변경 조회: 일반회원(read_only : Id,Email,Name,Bank,Account) -->
-	<select id="do_selectOne" parameterType="DTO" resultType="DTO">
-		SELECT userId, userPw, userEmail, userName,
-				userBank, userAccount,userTel,userFindQ, userFindA
+	<!--개인정보 변경 조회: 
+	일반회원(show: userId, userPw, userEmail, userName, 
+				userBank, userAccount,userTel,userFindQ, userFindA)
+	일반회원(read_only : Id,Email,Name,Bank,Account) 
+	관리자(show : userId, userPw, userEmail, userName,
+				userBank, userAccount,userTel,userFindQ, userFindA,
+				userAdmin, userPoint, userModId, userAppStt, userAppKey)
+	관리자(read_only :  Id, AppKey)
+	-->
+	<select id="do_selectOne" parameterType="DTO" resultType="UserVO">
+		SELECT userId, userPw, userEmail, userName, userBank,
+				userAccount, userTel, userFindQ, userFindA,
+				userAdmin, userPoint, userRegDt, userModId,
+				userModDt, userAppStt, userAppKey 
 		  FROM to_users
 		 WHERE userId=#{userId}
  	</select>
+
 
 	<!--개인정보 변경 :일반회원   -->
 	<update id="do_update" parameterType="DTO">
@@ -119,18 +130,11 @@
 		     ,userFindQ =#{userFindQ}
 		     ,userFindA =#{userFindA}
 		     ,userModId =#{userModId}
-		     ,userModDt =#{userModDt}
+		     ,userModDt =SYSDATE
 		 WHERE userId=#{userId}
 	</update>
 
-	<!--개인정보 변경 조회: 관리자(read_only :  Id, AppKey) -->
-	<select id="do_selectOne_admin" parameterType="DTO" resultType="DTO">
-		SELECT userId, userPw, userEmail, userName,
-				userBank, userAccount,userTel,userFindQ, userFindA,
-				userAdmin, userPoint, userModId, userAppStt, userAppKey
-		  FROM to_users
-		 WHERE userId=#{userId}	
- 	</select>
+
  	
 	<!--개인정보 변경 :관리자   -->
 	<update id="do_update_admin" parameterType="DTO">
@@ -146,19 +150,19 @@
 		     ,userAdmin =#{userAdmin}
 		     ,userPoint =#{userPoint}
 		     ,userModId =#{userModId}
-		     ,userModDt =#{userModDt}
+		     ,userModDt =SYSDATE
 		     ,userAppStt =#{userAppStt}
 		 WHERE userId=#{userId};		
 	</update>
 	
 	<!--회원탈퇴 -->
 	<delete id="do_delete" parameterType="DTO">
-		DELETE FROM to_users WHERE userId=#{userId};
+		DELETE FROM to_users WHERE userId=#{userId}
 	</delete>
 	
 	<!--졸업시키기 -->
 	<update id="user_ban" parameterType="DTO">
-		update to_users set userAppStt='ban' where userId=#{userId};
+		UPDATE to_users SET userAppStt='ban' WHERE userId=#{userId}
 	</update>
 	
 	<!--관리자 회원정보 목록 -->
@@ -185,7 +189,7 @@
 			SELECT count(*) AS total_cnt
 			  FROM to_users
 					<include refid="baseCondition" />
-		)Y;
+		)Y
 	</select>
 	
 </mapper>
