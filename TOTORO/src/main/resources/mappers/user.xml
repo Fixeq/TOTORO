@@ -63,7 +63,7 @@
 	<!--회원가입 : ban user 재가입 불가 check -->
 	<select id="ban_user_check" parameterType="UserVO" resultType="java.lang.Integer">
 		SELECT COUNT(*)
-		  FROM to_users
+		  FROM (SELECT * FROM to_users WHERE userAppStt ='ban')
 		 WHERE userTel =   #{userTel}
 		    OR userEmail = #{userEmail}
 		    OR userAccount=#{userAccount}	
@@ -74,13 +74,13 @@
 	<update id="email_verify" parameterType="DTO">
 		UPDATE to_users SET userAppStt='wait'
 		 WHERE userEmail=#{userEmail} 
-		   AND userAppKey=#{userAppKey}
+		   AND userAppStt='false'
 	</update>
 	
 	<!--관리자 승인 : 이메일 인증 후 관리자가 승인, 인증상태 true 로변경 -->
 	<update id="user_verify" parameterType="DTO">
 		UPDATE to_users SET userAppStt='true'
-		 WHERE userId=#{userId} 
+		 WHERE userId=#{userId}
 	</update>
 	
 	<!--정보찾기 : 아이디 찾기 -->
@@ -97,7 +97,7 @@
    	</select>
 	
 	<!--정보찾기 : 임시비밀번호로 변경 -->
-	<update id="pw_random_update"  parameterType="UserVO">
+	<update id="pw_random_update"  parameterType="DTO">
 		UPDATE to_users          
 		   SET userPw=#{userPw}
  		 WHERE userId=#{userId}

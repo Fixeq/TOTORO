@@ -8,12 +8,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.stereotype.Repository;
 
 import com.sist.totoro.common.DTO;
 import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.common.WorkDiv;
 import com.sist.totoro.domain.UserVO;
 
+@Repository
 public class UserDao implements WorkDiv {
 
 	private final String NAME_SPACE="com.sist.totoro.mappers.user";
@@ -32,7 +34,7 @@ public class UserDao implements WorkDiv {
 		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
 		log.debug("2.param"+inVO);
-		
+//		String testId = inVO.getUserId();
 		int flag = this.sqlSession.selectOne(statement, inVO);
 		
 		return flag;
@@ -44,6 +46,9 @@ public class UserDao implements WorkDiv {
 		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
 		log.debug("2.param"+inVO);
+		
+//		String testId = inVO.getUserId();
+//		String testPw = inVO.getUserPw();
 		
 		int flag = this.sqlSession.selectOne(statement, inVO);
 		
