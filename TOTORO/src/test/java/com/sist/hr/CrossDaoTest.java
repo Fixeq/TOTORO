@@ -58,7 +58,7 @@ public class CrossDaoTest {
 		LOG.info("crossVO :" + crossVO);
 		int flag = crossDao.do_update(crossVO);
 		LOG.info("flag : "+flag);
-		
 	}
 
+	
 }

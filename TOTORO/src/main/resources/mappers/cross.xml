@@ -31,6 +31,9 @@
  		 ORDER BY GAMEDATE DESC
 	</select>
 	
+	<select id="do_selectOne" parameterType="CrossVO">
+		
+	</select>
 	
 	
 	<insert id="do_save" parameterType="CrossVO">

@@ -17,6 +17,7 @@
  	 	<typeAlias alias="CrossVO" type="com.sist.totoro.domain.CrossVO"/>
  	 	<typeAlias alias="UserVO" type="com.sist.totoro.domain.UserVO"/>
  	 	<typeAlias alias="CodeVO" type="com.sist.totoro.code.CodeVO"/>
+ 	 	<typeAlias alias="BetHistoryVO" type="com.sist.totoro.domain.BetHistoryVO"/>
  	
  	</typeAliases>	
 </configuration>
