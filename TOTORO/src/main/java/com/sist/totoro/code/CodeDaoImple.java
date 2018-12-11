@@ -16,6 +16,8 @@ import org.springframework.stereotype.Repository;
 
 import com.sist.totoro.common.DTO;
 
+
+
 /**
  * @author sist1
  *
@@ -33,10 +35,10 @@ public class CodeDaoImple implements CodeDao {
 		@Override
 		public CodeVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			CodeVO  codeVO=new CodeVO();
-			codeVO.setCd_id(rs.getString("cd_id"));
-			codeVO.setD_id(rs.getString("d_id"));
-			codeVO.setD_nm(rs.getString("d_nm"));
-			codeVO.setOrd_num(rs.getString("ord_num"));
+			codeVO.setCd_id(rs.getString("cdid"));
+			codeVO.setD_id(rs.getString("ddid"));
+			codeVO.setD_nm(rs.getString("ddnm"));
+			codeVO.setOrd_num(rs.getString("ordnum"));
 			return codeVO;
 		}
 		
@@ -48,19 +50,18 @@ public class CodeDaoImple implements CodeDao {
 	@Override
 	public DTO do_selectOne(DTO dto) {
 		StringBuilder sb=new StringBuilder();
-		sb.append(" SELECT t2.d_id,                   \n");
-		sb.append("        t2.d_nm,                   \n");
-		sb.append("        t2.ord_num,                \n");
-		sb.append("        t1.cd_id                   \n");
-		sb.append("   FROM code_m t1 join code_d t2   \n");
-		sb.append("     ON t1.cd_id  = t2.cd_id       \n");
-		sb.append("  WHERE t2.cd_id  = ?              \n");   
-		sb.append("    AND t2.use_yn = 1              \n");
-		sb.append("  ORDER by t2.ord_num              \n");
+		sb.append(" SELECT t2.ddid,                   \n");
+		sb.append("        t2.ddnm,                   \n");
+		sb.append("        t2.ordnum,                \n");
+		sb.append("        t1.cdid                   \n");
+		sb.append("   FROM codem t1 join coded t2   \n");
+		sb.append("     ON t1.cdid  = t2.cdid       \n");
+		sb.append("  WHERE t2.cdid  = ?              \n");   
+		sb.append("    AND t2.useyn = 1              \n");
+		sb.append("  ORDER by t2.ordnum              \n");
 		log.info("sql \n:"+sb.toString());
 		CodeVO  invo = (CodeVO) dto;
 		log.info("param :"+invo);
-		
 		CodeVO outVO = this.jdbcTemplate.queryForObject(sb.toString()
 				, new Object[] {invo.getCd_id()}
 				, this.rowMapper);
@@ -100,15 +101,15 @@ public class CodeDaoImple implements CodeDao {
 	@Override
 	public List<?> do_retrieve(DTO dto) {
 		StringBuilder sb=new StringBuilder();
-		sb.append(" SELECT t2.d_id,                   \n");
-		sb.append("        t2.d_nm,                   \n");
-		sb.append("        t2.ord_num,                \n");
-		sb.append("        t1.cd_id                   \n");
-		sb.append("   FROM code_m t1 join code_d t2   \n");
-		sb.append("     ON t1.cd_id  = t2.cd_id       \n");
-		sb.append("  WHERE t2.cd_id  = ?              \n");   
-		sb.append("    AND t2.use_yn = 1              \n");
-		sb.append("  ORDER by t2.ord_num              \n");
+		sb.append(" SELECT t2.ddid,                   \n");
+		sb.append("        t2.ddnm,                   \n");
+		sb.append("        t2.ordnum,                \n");
+		sb.append("        t1.cdid                   \n");
+		sb.append("   FROM codem t1 join coded t2   \n");
+		sb.append("     ON t1.cdid  = t2.cdid       \n");
+		sb.append("  WHERE t2.cdid  = ?              \n");   
+		sb.append("    AND t2.useyn = 1              \n");
+		sb.append("  ORDER by t2.ordnum              \n");
 		log.info("sql \n:"+sb.toString());
 		CodeVO  invo = (CodeVO) dto;
 		log.info("param :"+invo);
@@ -130,3 +131,7 @@ public class CodeDaoImple implements CodeDao {
 	}
 
 }
+
+
+        
+
