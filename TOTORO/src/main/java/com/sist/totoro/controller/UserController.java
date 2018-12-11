@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class MyPageController {
+public class UserController {
 
-	private static final Logger logger = LoggerFactory.getLogger(MyPageController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-	@RequestMapping(value = "/mypage/mypage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
 	public String customerdeposit(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
@@ -27,7 +27,20 @@ public class MyPageController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "/mypage/mypage";
+		return "/user/login";
 	}
-	
+
+	@RequestMapping(value = "/user/find.do", method = RequestMethod.GET)
+	public String abc(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("serverTime", formattedDate);
+
+		return "/user/find";
+	}
 }

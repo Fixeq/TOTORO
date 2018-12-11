@@ -2,8 +2,6 @@ package com.sist.totoro.code;
 
 import com.sist.totoro.common.DTO;
 
-
-
 public class CodeVO extends DTO {
 
 	private String cd_id   ;    //master code id

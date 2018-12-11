@@ -3,6 +3,14 @@
 "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
 "http://tiles.apache.org/dtds/tiles-config_3_0.dtd"> 
 <tiles-definitions>
+
+<!--     only footer
+	<definition name="only-footer" template="/WEB-INF/views/tiles/template/empty.jsp">
+        <put-attribute name="content" value=""/>  
+    </definition> -->
+    
+    
+	<!-- Header,Footer -->
     <definition name="basede-finition"
      template="/WEB-INF/views/tiles/layouts/defaultLayout.jsp">
         <put-attribute name="title" value=""/>
@@ -13,12 +21,46 @@
         <put-attribute name="footer" 
          value="/WEB-INF/views/tiles/template/footer.jsp" />   
     </definition>
+ 
+    <!-- onlyFooter -->
+	<definition name="onlyFooter" 
+	 template="/WEB-INF/views/tiles/layouts/onlyFooter.jsp">
+	 	<put-attribute name="title" value=""/>
+        <put-attribute name="body"
+         value="" />
+        <put-attribute name="footer" 
+         value="/WEB-INF/views/tiles/template/footer.jsp" />  
+    </definition>
     
+	<!-- tiles 제외 -->
+	<definition name="empty" 
+	 template="/WEB-INF/views/tiles/layouts/empty.jsp">
+	 	<put-attribute name="title" value=""/>
+        <put-attribute name="body"
+         value="" />
+    </definition>
     
+        
+
+ 	<definition name="/user/*" extends="empty">
+		<put-attribute name="title" value="GIT_SIST>user"/>
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
+    </definition>   
+    
+	<definition name="/user/*" extends="onlyFooter">
+		<put-attribute name="title" value="GIT_SIST>user"/>
+		<put-attribute name="content" value="/WEB-INF/views/user/find.jsp"></put-attribute>
+    </definition>
+        
     <!-- user.do -->
     <definition name="/*/*" extends="basede-finition">
         <put-attribute name="title" value="GIT_SIST>user"/>
         <put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp"/>
     </definition>
+    
+    
+
+
+
     
 </tiles-definitions>
