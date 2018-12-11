@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sist.totoro.code.CodeSvc;
+import com.sist.totoro.code.CodeVO;
 import com.sist.totoro.domain.BetResultVO;
 import com.sist.totoro.service.BetResultSvc;
 
@@ -26,6 +28,9 @@ public class CategoryController {
 
 	@Autowired
 	private BetResultSvc betResultSvc;
+	
+	@Autowired
+	private CodeSvc codeSvc;	
 	
 	@RequestMapping(value = "/bethistory/bethistory.do", method = RequestMethod.GET)
 	public String bethistory(Locale locale, Model model) {
@@ -74,12 +79,28 @@ public class CategoryController {
 		}
 		
 		
-		BetResultVO codePage=new BetResultVO();
+		CodeVO codePage=new CodeVO();
+		codePage.setCd_id("C_001");
 		
-		model.addAttribute("code_page",betResultSvc.do_retrieve(codePage));
+		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
 		model.addAttribute("total_cnt",total_cnt);
 		model.addAttribute("list",list);
 		
 		return "/category/BetResult";
 	}
+	
+	@RequestMapping(value = "/betrule/betrule.do", method = RequestMethod.GET)
+	public String betrule(Locale locale, Model model) {
+		logger.info("Welcome home! The client locale is {}.", locale);
+
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+
+		model.addAttribute("serverTime", formattedDate);
+
+		return "/category/BetRule";
+	}
+	
 }
