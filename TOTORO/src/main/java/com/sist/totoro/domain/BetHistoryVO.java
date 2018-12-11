@@ -12,7 +12,8 @@ public class BetHistoryVO {
 	int betCash;	//베팅금액
 	double betP;	//배당률	
 	int betWprice;	//반환금액
-	int betResult;	//전체 결과
+	String betResultString;	//전체 결과 출력할때 사용
+	int betReulstNum; //전체결과 입력할때 사용
 	int gameResult;	//한폴의 결과
 	int betReturn;  //베팅 반환 횟수 : 1을 넘기면 안됨.
 	
@@ -131,17 +132,31 @@ public class BetHistoryVO {
 	}
 
 	/**
-	 * @return the betResult
+	 * @return the betResultString
 	 */
-	public int getBetResult() {
-		return betResult;
+	public String getBetResultString() {
+		return betResultString;
 	}
 
 	/**
-	 * @param betResult the betResult to set
+	 * @param betResultString the betResultString to set
 	 */
-	public void setBetResult(int betResult) {
-		this.betResult = betResult;
+	public void setBetResultString(String betResultString) {
+		this.betResultString = betResultString;
+	}
+
+	/**
+	 * @return the betReulstNum
+	 */
+	public int getBetReulstNum() {
+		return betReulstNum;
+	}
+
+	/**
+	 * @param betReulstNum the betReulstNum to set
+	 */
+	public void setBetReulstNum(int betReulstNum) {
+		this.betReulstNum = betReulstNum;
 	}
 
 	/**
@@ -172,8 +187,19 @@ public class BetHistoryVO {
 		this.betReturn = betReturn;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "BetHistoryVO [gameSeq=" + gameSeq + ", userId=" + userId + ", betSeq=" + betSeq + ", betChoice="
+				+ betChoice + ", betDate=" + betDate + ", betCash=" + betCash + ", betP=" + betP + ", betWprice="
+				+ betWprice + ", betResultString=" + betResultString + ", betReulstNum=" + betReulstNum
+				+ ", gameResult=" + gameResult + ", betReturn=" + betReturn + "]";
+	}
+
 	public BetHistoryVO(int gameSeq, String userId, int betSeq, int betChoice, String betDate, int betCash, double betP,
-			int betWprice, int betResult, int gameResult, int betReturn) {
+			int betWprice, String betResultString, int betReulstNum, int gameResult, int betReturn) {
 		super();
 		this.gameSeq = gameSeq;
 		this.userId = userId;
@@ -183,13 +209,11 @@ public class BetHistoryVO {
 		this.betCash = betCash;
 		this.betP = betP;
 		this.betWprice = betWprice;
-		this.betResult = betResult;
+		this.betResultString = betResultString;
+		this.betReulstNum = betReulstNum;
 		this.gameResult = gameResult;
 		this.betReturn = betReturn;
 	}
-
-
-	
 
 	
 }

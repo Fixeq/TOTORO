@@ -1,5 +1,9 @@
 package com.sist.hr;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Before;
@@ -48,33 +52,37 @@ public class BetHistoryDaoTest {
 		
 		
 		@Test
+		@Ignore
 		public void do_viewByBetSeq() {
 			//각각의 폴더번호를 얻어온 사용자의 폴더별 내역 조회
 			betHistoryVO.setBetSeq(1);
 			betHistoryVO.setUserId("nununanana");
 			
 			List<BetHistoryVO> list = betHistoryDao.do_viewByBetSeq(betHistoryVO);
-			LOG.info("list : "+ list);
+			Iterator<BetHistoryVO> it = list.iterator();
+			while(it.hasNext()) {
+				LOG.info("BetHistoryVO : " + it.next());
+			}
+			
 		}
 
 		
 		
 		
 		@Test
-		@Ignore
 		public void do_insertBetHistory() {
 			//베팅내역에 추가 성공
-			betHistoryVO.setGameSeq(4256);
+			betHistoryVO.setGameSeq(211);
 			betHistoryVO.setUserId("nununanana");
 			betHistoryVO.setBetSeq(1);
 			betHistoryVO.setBetChoice(2);
 			betHistoryVO.setBetP(10);
 			betHistoryVO.setBetCash(1000);
-			betHistoryVO.setBetWprice(10000);
-			betHistoryVO.setBetReturn(0);
 			
 			int flag = betHistoryDao.do_betInsert(betHistoryVO);
 			LOG.info("flag : "+ flag);
+			
+			assertThat(flag, is(1));
 		}
 
 	

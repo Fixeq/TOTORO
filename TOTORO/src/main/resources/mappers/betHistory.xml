@@ -5,11 +5,30 @@
 
 <mapper namespace="com.sist.totoro.mappers.betHistory">
 <select id="do_viewByUserId" parameterType="String" resultType="BetHistoryVO">
-SELECT BETSEQ
+<!-- SELECT BETSEQ
 FROM BET_HISTORY
 WHERE USERID = #{userId}
 GROUP BY BETSEQ
-</select>
+ -->
+<!-- SELECT BETSEQ,MAX(BETDATE) AS BETDATE,AVG(BETCASH) AS BETCASH,AVG(BETRESULT) AS BETRESULT
+FROM BET_HISTORY
+WHERE USERID = #{userId}
+GROUP BY BETSEQ -->
+
+SELECT BETSEQ,
+        MAX(BETDATE) AS BETDATE,
+        AVG(BETCASH) AS BETCASH,
+        (SELECT  CASE WHEN SUM(NVL(BETRESULT,-999)) BETWEEN -999999 AND -1  THEN '대기중'
+             WHEN SUM(BETRESULT)=COUNT(BETSEQ)                     THEN '적중'
+                                                                   ELSE '적중실패' 
+        END "BETRESULTSTRING"
+  FROM BET_HISTORY) AS BETRESULTSTRING
+FROM BET_HISTORY
+WHERE USERID = #{userId}
+GROUP BY BETSEQ
+ 
+ 
+ </select>
 
 <select id="do_viewByBetSeq" parameterType="BetHistoryVO" resultType="BetHistoryVO">
 SELECT
@@ -35,9 +54,7 @@ INSERT INTO BET_HISTORY (
     BETCHOICE,
     BETDATE,
     BETP,
-    BETCASH,
-    BETWPRICE,
-    BETRETURN
+    BETCASH
 ) VALUES (
     #{gameSeq},
     #{userId},
@@ -45,9 +62,7 @@ INSERT INTO BET_HISTORY (
     #{betChoice},
     SYSDATE,
     #{betP},
-    #{betCash},
-    #{betWprice},
-    #{betReturn}
+    #{betCash}
 )
 </insert>
 
