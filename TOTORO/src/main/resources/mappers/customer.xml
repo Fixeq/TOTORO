@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.totoro.mappers.customer">
+  	
+    <sql id="customerColumns">
+	     cusSeq,                                 
+	     userId,                                   
+	     cusCat,                             
+	     cusTitle,                              
+	     cusContent,                                                                                        
+        TO_CHAR(cusRegDt,'YYYY-MM-DD HH24:MI:SS') cusRegDt,
+          cusModId,
+        TO_CHAR(cusRegDt,'YYYY-MM-DD HH24:MI:SS') cusModDt,
+          cusReply     
+    </sql>
+
+	<!-- 등록 -->
+	<insert id="add"  parameterType="CustomerVO" >
+	INSERT INTO cus_service( 
+			     cusSeq             
+			    ,userId          
+			    ,cusCat          
+			    ,cusTitle         
+			    ,cusContent          
+	            ,cusRegDt
+	            ,cusReply
+	            )       
+			 VALUES (              
+		     cusSeq.NEXTVAL,              
+		     #{userId},                 
+		     #{cusCat},                 
+		     #{cusTitle},                 
+		     #{cusContent},                 
+		     sysdate,                 
+		     #{cusReply}        
+		 )                      	
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="delete"  parameterType="CustomerVO"  >
+		DELETE FROM cus_service 
+		WHERE cusSeq = #{cusSeq}
+	</delete>
+	
+	<!-- 수정 -->
+	<update id="update"  parameterType="CustomerVO" >
+		 UPDATE cus_service          
+	        SET cusCat   = #{cusCat}      
+	       ,cusTitle     = #{cusTitle}      
+	       ,cusContent   = #{cusContent}       
+	       ,cusModId     = #{cusModid}      
+	       ,cusModDt     = SYSDATE
+	    WHERE cusSeq    = #{cusSeq}            
+	</update>
+	
+<!-- 단건 조회 -->
+	<select id="get" 
+	  parameterType="CustomerVO"
+	  resultType="com.sist.totoro.domain.CustomerVO"	  >
+	 SELECT                                    
+	     <include refid="customerColumns"/>                       
+	 FROM cus_service                             
+	 WHERE cusSeq = #{cusSeq}                            	
+	
+	</select>
+	
+	  <!-- 전체 조회 -->
+    <select id="getAll" resultType="com.sist.totoro.domain.CustomerVO">
+	    SELECT <include refid="customerColumns"/>
+	      FROM cus_service
+	     ORDER BY cusSeq    
+    </select>
+	
+	
+	<sql id="baseCondition">
+	    <where>
+	    	<choose>
+	    		<when test="'10'==search_div">
+	    		    cus.userId like  #{search_word}||'%'
+	    		</when>
+	    		<when test="'20'==search_div">
+	    		    cus.cusCat like  #{search_word}||'%'
+	    		</when>
+	    		<when test="'30'==search_div">
+	    		    cus.cusTitle like  #{search_word}||'%'
+	    		</when>		    		
+	    		<otherwise></otherwise>
+	    	</choose>
+	    </where>     
+    </sql>
+ 
+    <!-- select list -->
+    <select id="do_retrieve" 
+      parameterType="SearchVO"
+      resultType="com.sist.totoro.domain.CustomerVO"  >
+		SELECT X.*,Y.*
+		  FROM(
+		SELECT  T.cusSeq AS cusSeq,                                  
+				T.userId,                                  
+				T.cusCat,                              
+				T.cusTitle,                                                              
+				T.cusReply,                                                         
+				TO_CHAR(T.cusRegDt,'YYYY-MM-DD') cusRegDt,                           
+				T.rnum AS no                             
+		  FROM(                                          
+			SELECT cus.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY cusRegDt desc ) AS rnum       
+			  FROM cus_service cus
+             <include refid="baseCondition"/>
+		  )T
+		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM cus_service cus
+		    <include refid="baseCondition"/>
+		)Y      
+    </select>
+</mapper>  

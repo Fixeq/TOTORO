@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.totoro.mappers.cusreply">
+  	<!-- db컬럼명   include 하려고 씀 밑에 #은 vo (선언부분과 동일하게 카멜케이스)-->
+    <sql id="cusreplyColumns">
+	    	crseq,           
+   	 		cusseq,          
+   			userid,          
+  	 		crcontent,          
+   	 		crregid,                                                                                           
+        	TO_CHAR(cusRegDt,'YYYY-MM-DD HH24:MI:SS') crregdt,
+          	crregid   
+    </sql>
+
+	<!-- 등록 -->
+	<insert id="add"  parameterType="CusReplyVO" >
+INSERT INTO cus_reply ( 
+						    crseq,           
+						    cusseq,          
+						    userid,          
+						    crcontent,          
+						    crregid,       
+						    crregdt   
+			          )    
+ 			VALUES
+ 		 			(            
+					    COMMENTSEQ.NEXTVAL,               
+					    #{cusSeq}, 
+					    #{userId},                 
+					    #{crContent},                 
+					    #{crregId},                 
+					    SYSDATE
+   				    )                       	
+	</insert>
+	
+	<!-- 삭제 -->
+	<delete id="delete"  parameterType="CusReplyVO"  >
+		 DELETE FROM cus_reply
+			 WHERE cusseq = #{cusSeq} 
+			 AND crseq = #{crSeq} 
+	</delete>
+	
+
+	
+
+	
+	  <!-- 전체 조회 -->
+    <select id="getAll" resultType="CusReplyVO">
+	    SELECT <include refid="cusreplyColumns"/>
+	      FROM cus_reply
+	     ORDER BY crseq    
+    </select>
+	
+	
+
+ 
+    <!-- select list -->
+    <select id="do_retrieve" 
+      parameterType="CusReplyVO"
+      resultType="CusReplyVO"  >
+		 		SELECT X.*,Y.*
+		  FROM(
+		SELECT  T.cusseq AS cusseq, 
+                T.crseq,
+				T.userid,                                                              
+				T.crcontent,                                                                                                                     
+				TO_CHAR(T.crregdt,'YYYY-MM-DD') crregdt,                           
+				T.rnum AS no                             
+		  FROM(                                          
+			SELECT cusr.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY crregdt desc ) AS rnum       
+			  FROM cus_reply cusr
+		  )T
+		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM cus_reply cusr
+		)Y  
+        WHERE cusseq = #{cusSeq}
+    </select>
+</mapper>  
+
+
+
+
+
+
+
+
+
+
+
+
+
