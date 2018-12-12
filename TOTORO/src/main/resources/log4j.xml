@@ -48,9 +48,10 @@
 
 
  <!-- Application Loggers -->
- <logger name="com.sist.hr">
+ <logger name="com.sist.totoro">
   <level value="debug" />
  </logger>
+ 
  
  <!-- 3rdparty Loggers -->
  <logger name="org.springframework.core">

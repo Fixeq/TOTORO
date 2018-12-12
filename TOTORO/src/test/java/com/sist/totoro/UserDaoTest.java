@@ -103,7 +103,7 @@ public class UserDaoTest {
 	
 	@Test
 	public void id_check() throws SQLException, ClassNotFoundException {
-		assertThat(userDao.id_check(inVO1),is(1));
+		assertThat(userDao.id_check(inVO1.getUserId()),is(1));
 	}
 	
 	@Test
@@ -114,14 +114,18 @@ public class UserDaoTest {
 	
 	@Test
 	public void email_check() throws SQLException, ClassNotFoundException {
-		assertThat(userDao.email_check(inVO1),is(1));
+		assertThat(userDao.email_check(inVO1.getUserEmail()),is(1));
 	}		
 
+	@Test
+	public void account_check() throws SQLException, ClassNotFoundException {
+		assertThat(userDao.account_check(inVO1.getUserAccount()),is(1));
+	}		
 		
-//	@Test
-//	public void do_save() throws SQLException, ClassNotFoundException {
-//		assertThat(userDao.do_save(inVO7),is(1));
-//	}	
+	@Test
+	public void do_save() throws SQLException, ClassNotFoundException {
+		assertThat(userDao.do_save(inVO7),is(1));
+	}	
 	
 	
 	@Test

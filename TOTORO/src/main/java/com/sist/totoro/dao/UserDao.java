@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sist.totoro.common.DTO;
 import com.sist.totoro.common.SearchVO;
@@ -29,13 +30,13 @@ public class UserDao implements WorkDiv {
 	public UserDao() {	}
 
 	//TODO String으로 받을까?
-	public int id_check(DTO dto) throws SQLException {
+	public int id_check(String userId) throws SQLException {
 		String statement = NAME_SPACE+".id_check";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
-		log.debug("2.param"+inVO);
+		log.debug("2.param"+userId);
 //		String testId = inVO.getUserId();
-		int flag = this.sqlSession.selectOne(statement, inVO);
+		int flag = this.sqlSession.selectOne(statement, userId);
 		
 		return flag;
 	}
@@ -56,17 +57,40 @@ public class UserDao implements WorkDiv {
 	}	
 	
 	//TODO String으로 받을까?
-	public int email_check(DTO dto) throws SQLException {
+	public int email_check(String userEmail) throws SQLException {
 		String statement = NAME_SPACE+".email_check";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
-		log.debug("2.param"+inVO);
+		log.debug("2.param"+userEmail);
 		
-		int flag = this.sqlSession.selectOne(statement, inVO);
+		int flag = this.sqlSession.selectOne(statement, userEmail);
 		
 		return flag;
 	}	
 	
+	public int account_check(String userAccount) throws SQLException {
+		String statement = NAME_SPACE+".account_check";
+//		UserVO inVO = (UserVO) dto;
+		log.debug("1.statement : \n"+statement);
+		log.debug("2.param"+userAccount);
+		
+		int flag = this.sqlSession.selectOne(statement, userAccount);
+		
+		return flag;
+	}	
+
+	public int tel_check(String userTel) throws SQLException {
+		String statement = NAME_SPACE+".tel_check";
+//		UserVO inVO = (UserVO) dto;
+		log.debug("1.statement : \n"+statement);
+		log.debug("2.param"+userTel);
+		
+		int flag = this.sqlSession.selectOne(statement, userTel);
+		
+		return flag;
+	}	
+	
+	@Transactional
 	@Override
 	public int do_save(DTO dto) {
 		String statement = NAME_SPACE+".do_save";

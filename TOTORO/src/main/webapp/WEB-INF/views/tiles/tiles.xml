@@ -43,18 +43,18 @@
         
 
  	<definition name="/user/*" extends="empty">
-		<put-attribute name="title" value="GIT_SIST>user"/>
+		<put-attribute name="title" value="TOTORO World"/>
 		<put-attribute name="body" value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
     </definition>   
     
 	<definition name="/user/find.jsp" extends="onlyFooter">
-		<put-attribute name="title" value="GIT_SIST>user"/>
+		<put-attribute name="title" value="TOTORO World"/>
 		<put-attribute name="body" value="/WEB-INF/views/user/find.jsp"></put-attribute>
     </definition>
         
     <!-- user.do -->
     <definition name="/*/*" extends="basede-finition">
-        <put-attribute name="title" value="GIT_SIST>user"/>
+        <put-attribute name="title" value="TOTORO World"/>
         <put-attribute name="body"  value="/WEB-INF/views/{1}/{2}.jsp"/>
     </definition>
     
