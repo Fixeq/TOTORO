@@ -82,7 +82,7 @@
                             </ul>
                             
                         </li>
-                        <li><a href="/totoro/cus/cuslist.do" title="">게시판</a></li>
+                        <li><a href="/totoro/cus/search.do" title="">게시판</a></li>
                         <li><a href="/totoro/mypage/mypage.do" title="">마이페이지</a></li>
                     </ul> <!-- end header__nav -->
 

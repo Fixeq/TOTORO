@@ -44,7 +44,7 @@ public class CustomerController {
 	private static final String VIEW_NAME="/user/user";
 	
 	
-	@RequestMapping(value="/cus/cuslist.do")	
+	@RequestMapping(value="/cus/search.do")	
 	public String do_search(@ModelAttribute SearchVO invo,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {	
 		log.info("SearchVO: "+invo);
 		//param -> view
@@ -86,7 +86,7 @@ public class CustomerController {
 		return "/cus/CusList";  
 	}
 	
-	@RequestMapping(value="/user/delete.do",method=RequestMethod.POST
+	@RequestMapping(value="/cus/delete.do",method=RequestMethod.POST
 			,consumes= {"text/plain", "application/*"}
 			,produces="application/json;charset=UTF-8")
 	@ResponseBody
@@ -128,7 +128,7 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(value="/user/update.do",method=RequestMethod.POST
+	@RequestMapping(value="/cus/update.do",method=RequestMethod.POST
 	        ,produces="application/json;charset=utf8"  
 	)
 	@ResponseBody
@@ -174,7 +174,7 @@ public class CustomerController {
 	
 
 	
-	@RequestMapping(value="/user/do_search_one.do",method=RequestMethod.POST
+	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST
 	        ,produces="application/json;charset=utf8"  
 	)
 			@ResponseBody
