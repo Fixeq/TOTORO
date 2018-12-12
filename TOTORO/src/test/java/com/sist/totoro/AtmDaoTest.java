@@ -34,7 +34,7 @@ import com.sist.totoro.domain.AtmVo;
 //@ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/root-context.xml"
 //                                 ,"file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"		                    
 //})
-@ContextConfiguration( locations = 
+@ContextConfiguration(locations = 
                           {"file:src/main/webapp/WEB-INF/spring/**/*.xml"})
 public class AtmDaoTest {
 
@@ -54,81 +54,43 @@ public class AtmDaoTest {
 	
 	@Before
 	public void setUp() {
-		inVO1 = new AtmVo("","tester3","10000","","0","","");
-		inVO2 = new AtmVo("","tester3","","20000","0","","");	
-		inVO3 = new AtmVo("","tester3","300000","","0","","");	
+		inVO1 = new AtmVo("11","tester3","10000","0","0","2018-12-12","2018-12-12");
+		inVO2 = new AtmVo("12","tester3","0","20000","0","2018-12-12","2018-12-12");	
+		inVO3 = new AtmVo("13","tester3","30000","0","0","2018-12-12","2018-12-12");	
 	
 		searchVO = new SearchVO(10,1,"","");
-		  
+		
 		LOG.info("context:"+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc:"+mockMvc);
 		LOG.info("atmDao:"+atmDao);
 	}
 	
+	@Test
+	@Ignore
+	public void deAdd() throws SQLException, ClassNotFoundException {
+		int flag = atmDao.deAdd(inVO1);
+		LOG.info("flag111111111111111111111111111111111111111(1:성공) : "+flag);
+	}
 	
 	@Test
 	@Ignore
-	public void getCount() throws SQLException, ClassNotFoundException {
-		assertThat(atmDao.getCount("j1"),is(11077));
-	}
-	
-	@Test(timeout=2000)
-	@Ignore
-	public void addAndGet() throws SQLException, ClassNotFoundException {
-
-		//--------------------------------------------
-		//0.모두삭제 : 건건이로 수정
-		//--------------------------------------------
-		atmDao.delete(inVO1);
-		atmDao.delete(inVO2);
-		atmDao.delete(inVO3);
-		
-		
-		//--------------------------------------------
-		//1. 단건 추가
-		//--------------------------------------------
-		atmDao.add(inVO1);
-		
-		//--------------------------------------------
-		//1.1 Count
-		//--------------------------------------------
-		assertThat(atmDao.getCount("115"),is(1));
-		
-		//--------------------------------------------
-		//2. 단건 조회
-		//--------------------------------------------
-		AtmVo getVO = atmDao.get(inVO1);
-		
-
-	}
-	
+	public void wiAdd() throws SQLException, ClassNotFoundException {
+		int flag = atmDao.wiAdd(inVO1);
+		LOG.info("flag(1:성공) : "+flag);
+	}	
 	
 	@Test
 	@Ignore
-	public void get() throws Exception {
-		LOG.info("1==========================");
-		LOG.info("=get=");
-		LOG.info("1==========================");
-		
-		MockHttpServletRequestBuilder createMessage =
-				MockMvcRequestBuilders.get("/user/do_search_one.do")
-				.param("u_id", "j01_115")
-				;
-		
-		mockMvc.perform(createMessage)
-		.andDo(print())
-		.andExpect(status().is2xxSuccessful());
-		
+	public void do_retrieve() throws SQLException, ClassNotFoundException {
+		atmDao.do_retrieve(searchVO);
+		LOG.info(" LIST : "+atmDao.do_retrieve(searchVO));
 	}
-	
 	
 	@Test
 	public void setUpTest() {
 		LOG.info("setUpTest:");
 	}
-	
-	
 	
 	
 }

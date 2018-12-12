@@ -15,44 +15,6 @@
 		TO_CHAR(dwGetday,'YYYY-MM-DD HH24:MI:SS') dwGetday    
     </sql>
     
-    <!-- 출금 컬럼 -->
-    <sql id="withdrawColumns">
-    	dwSeq,   
-		userId,  
-		wiPoint,
-		dwPs,
-		TO_CHAR(dwReqday,'YYYY-MM-DD HH24:MI:SS') dwReqday,
-		TO_CHAR(dwGetday,'YYYY-MM-DD HH24:MI:SS') dwGetday    
-    </sql>
-    
-    
-    <!-- 임금 컬럼 -->
-    <sql id="depositColumns">
-    	dwSeq,   
-		userId,  
-		dePoint, 
-		dwPs,
-		TO_CHAR(dwReqday,'YYYY-MM-DD HH24:MI:SS') dwReqday,
-		TO_CHAR(dwGetday,'YYYY-MM-DD HH24:MI:SS') dwGetday    
-    </sql>
-    
-    <sql id="baseCondition">
-	    <where>
-	    	<choose>
-	    		<when test="'10'==search_div">
-	    		    hr.userId like  #{search_word}||'%'
-	    		</when>
-	    		<when test="'20'==search_div">
-	    		    hr.dwPs like  #{search_word}||'%'
-	    		</when>
-	    		<when test="'30'==search_div">
-	    		    hr.email like  #{search_word}||'%'
-	    		</when>		    		
-	    		<otherwise></otherwise>
-	    	</choose>
-	    </where>     
-    </sql>
-    
     <!-- select list -->
     <select id="do_retrieve" 
       parameterType="SearchVO"
@@ -71,7 +33,6 @@
 			SELECT dw.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 			  FROM dw_record dw
-             <include refid="baseCondition"/>
 		  )T
 		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -80,13 +41,12 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
-		    <include refid="baseCondition"/>
 		)Y      
     </select>
     
     
     <!-- 관리자 입금 요청 전체 조회 -->
-    <select id="adReqDeAll" resultType="AtmVo">   		
+    <select id="adDeReqAll" resultType="AtmVo">   		
     	SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -114,7 +74,7 @@
     </select>
     
      <!-- 관리자 출금 요청 전체 조회 -->
-    <select id="adReqWiAll" resultType="AtmVo">
+    <select id="adWiReqAll" resultType="AtmVo">
     	SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -141,36 +101,9 @@
     	AND wiPoint IS NOT NULL	
     </select>
     
-    <!-- 관리자 입출금 요청 전체 조회 -->
-    <select id="adReqDeWiAll" resultType="AtmVo">
-	    SELECT X.*,Y.*
-		  FROM(
-		SELECT T.dwSeq,                                  
-				T.userId,                                  
-				T.dePoint,                              
-				T.wiPoint,                               
-				T.dwPs,                                 
-				TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
-				TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
-				T.rnum AS no                             
-		  FROM(                                          
-			SELECT dw.*                                  
-				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
-			  FROM dw_record dw
-		  )T
-		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
-		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
-		)X    
-		NATURAL JOIN
-		(
-		  SELECT COUNT(*) AS total_cnt   
-		    FROM dw_record
-		)Y
-		WHERE dwPs=0     
-    </select>
     
     <!-- 관리자 입금 확인 전체 조회 -->
-    <select id="adPsDeAll" resultType="AtmVo">
+    <select id="adDePsAll" resultType="AtmVo">
 	   SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -198,7 +131,7 @@
     </select>
     
      <!-- 관리자 출금 확인 전체 조회 -->
-    <select id="adPsWiAll" resultType="AtmVo">
+    <select id="adWiPsAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -225,37 +158,9 @@
     		AND wiPoint IS NOT NULL
     </select>
     
-    <!-- 관리자 입출금 확인 전체 조회 -->
-    <select id="adPsDeWiAll" resultType="AtmVo">
-	    SELECT X.*,Y.*
-		  FROM(
-			SELECT T.dwSeq,                                  
-					T.userId,                                  
-					T.dePoint,                              
-					T.wiPoint,                               
-					T.dwPs,                                 
-					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
-					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
-					T.rnum AS no                             
-			  FROM(                                          
-				SELECT dw.*                                  
-					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
-				  FROM dw_record dw
-			  )T
-			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
-			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
-			)X    
-			NATURAL JOIN
-			(
-			  SELECT COUNT(*) AS total_cnt   
-			    FROM dw_record
-			)Y
-	     WHERE dwPs=1
-    </select>
-    
     
     <!-- 고객 입금 요청 전체 조회 -->
-    <select id="cusReqDeAll" resultType="AtmVo">
+    <select id="cusDeReqAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -284,7 +189,7 @@
     </select>
     
      <!-- 고객 출금 요청 전체 조회 -->
-    <select id="cusReqWiAll" resultType="AtmVo">
+    <select id="cusWiReqAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -313,7 +218,7 @@
     </select>
     
     <!-- 고객 입금 완료 전체 조회 -->
-    <select id="cusPsDeAll" resultType="AtmVo">
+    <select id="cusDePsAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -343,7 +248,7 @@
     
     
     <!-- 고객 출금 완료 전체 조회 -->
-    <select id="cusPsWiAll" resultType="AtmVo">
+    <select id="cusWiPsAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -372,7 +277,7 @@
     </select>
     
     <!-- 고객 입금 요청,완료 전체 조회 -->
-    <select id="cusReqPsDeAll" resultType="AtmVo">
+    <select id="cusDeAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -400,7 +305,7 @@
     </select>
     
     <!-- 고객 출금 요청,완료 전체 조회 -->
-    <select id="cusReqPsWiAll" resultType="AtmVo">
+    <select id="cusWiAll" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -463,26 +368,6 @@
 	    WHERE userId = #{userId}       
     </update>
 	
-	<!--종합 입금 요청 수정 -->
-	<update id="Deupdate"  parameterType="AtmVo" >
-		UPDATE dw_record          
-	        SET dePoint = #{dePoint}           
-	       ,dwReqday  = SYSDATE
-	    WHERE userId = #{userId}
-	      AND dwPs = 0
-	      AND dwSeq = #{dwSeq}          
-	</update>
-	
-	<!-- 종합 출금 요청 수정 -->
-	<update id="Wiupdate"  parameterType="AtmVo" >
-		 UPDATE dw_record          
-	        SET wiPoint = #{wiPoint}           
-	       ,dwReqday  = SYSDATE
-	    WHERE userId = #{userId}
-	      AND dwPs = 0
-	      AND dwSeq = #{dwSeq}            
-	</update>
-	
 	<!-- 종합 단건 삭제 -->
 	<delete id="delete"  parameterType="AtmVo"  >
 		DELETE FROM HR_USERS 
@@ -501,24 +386,37 @@
 	   AND dwSeq = #{dwSeq}
 	</select>
 	
-	<!--요청 등록 -->
-	<insert id="add"  parameterType="AtmVo" >
+	<!--입금 요청 등록 -->
+	<insert id="deAdd"  parameterType="AtmVo" >
 		 INSERT INTO dw_record (
 		 	dwSeq,
 		 	userId,
 		 	dePoint,
-		 	wiPoint,
 		 	dwPs,
-		 	dwReqday,
-		 	dwGetday 
+		 	dwReqday
 		 ) VALUES (
 		 	dwSeq.NEXTVAL,
 		 	#{userId},
 		 	#{dePoint},
+		 	0,
+		 	sysdate             
+		 )                      	
+	</insert>
+	
+	<!--입금 요청 등록 -->
+	<insert id="wiAdd"  parameterType="AtmVo" >
+		 INSERT INTO dw_record (
+		 	dwSeq,
+		 	userId,
+		 	wiPoint,
+		 	dwPs,
+		 	dwReqday
+		 ) VALUES (
+		 	dwSeq.NEXTVAL,
+		 	#{userId},
 		 	#{wiPoint},
 		 	0,
-		 	sysdate,
-		 	#{dwGetday}              
+		 	sysdate              
 		 )                      	
 	</insert>
 	
@@ -528,8 +426,5 @@
 		  FROM dw_record     
 		 WHERE userId LIKE #{userId} ||'%'  
 	</select>
-	
-	
-	
 	
 </mapper>  
