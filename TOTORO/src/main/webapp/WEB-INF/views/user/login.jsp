@@ -4,23 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 </head>
 <body>
-	<section class="s-content">
-		<table>
-			<tr>
-				<td>마이 페이지</td>
-				<td>1</td>
-				<td>2</td>
-			</tr>
-			<tr>
-				<td>웃어?</td>
-				<td>1</td>
-				<td>2</td>
-
-			</tr>
-		</table>
-	</section>
+	<input type="button" value="회원가입" onclick="location.href='./join.do'">
 </body>
 </html>

@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디찾기,비밀번호 찾기</title>
 </head>
 <body>
 	<section class="s-content">
 		<table>
 			<tr>
-				<td>마이 페이지</td>
+				<td>아디비번찾기</td>
 				<td>1</td>
 				<td>2</td>
 			</tr>

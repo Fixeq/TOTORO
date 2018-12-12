@@ -44,12 +44,12 @@
 
  	<definition name="/user/*" extends="empty">
 		<put-attribute name="title" value="GIT_SIST>user"/>
-		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
     </definition>   
     
-	<definition name="/user/*" extends="onlyFooter">
+	<definition name="/user/find.jsp" extends="onlyFooter">
 		<put-attribute name="title" value="GIT_SIST>user"/>
-		<put-attribute name="content" value="/WEB-INF/views/user/find.jsp"></put-attribute>
+		<put-attribute name="body" value="/WEB-INF/views/user/find.jsp"></put-attribute>
     </definition>
         
     <!-- user.do -->
