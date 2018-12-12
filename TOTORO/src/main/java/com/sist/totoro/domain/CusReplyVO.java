@@ -1,8 +1,8 @@
 package com.sist.totoro.domain;
 
-import com.sist.totoro.common.DTO;
+import com.sist.totoro.common.SearchVO;
 
-public class CusReplyVO extends DTO{
+public class CusReplyVO extends SearchVO{
 
 	private String crSeq	;	//답글번호
 	private String cusSeq	;	//글번호

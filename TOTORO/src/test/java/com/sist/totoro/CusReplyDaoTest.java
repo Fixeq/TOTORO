@@ -56,11 +56,13 @@ public class CusReplyDaoTest {
 	CusReplyVO  inVO3 = null;
 	SearchVO searchVO = null;
 	
+	
 
 	@Before
 	public void setUp() {
 		//searchVO = new SearchVO(10,1,"","");
-		  
+		inVO1.setPage_num(1); 
+		inVO1.setPage_size(10);
 		LOG.info("context:"+context);
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
 		LOG.info("mockMvc:"+mockMvc);
@@ -97,7 +99,7 @@ public class CusReplyDaoTest {
 
 
 		//다건조회
-				inVO1.setCusSeq("123");
+		inVO1.setCusSeq("22");
 		List<CusReplyVO> getVO2 = cusreplyDao.do_retrieve(inVO1);
 		
 		LOG.info("getVO2:"+getVO2);
