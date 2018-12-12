@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	
 	
 	<!-- 쿼리를 최종으로 날리기위해 sqlSessionTemplate 설정-->
 	<bean id="sqlSessionTemplate" 
@@ -35,12 +49,37 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+<!--     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
     	<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
     	<property name="url" value="jdbc:oracle:thin:@211.238.142.102:1521:orcl" />
     	<property name="username" value="TOTORO" />
     	<property name="password" value="TOTORO1224" />
     </bean>	
+ -->    
+     <!-- DB Connection Pool  -->
+	 <bean id="dataSourceSpied" class="org.apache.commons.dbcp.BasicDataSource"
+	   destroy-method="close"
+	   p:driverClassName="oracle.jdbc.driver.OracleDriver"
+	   p:url="jdbc:oracle:thin:@211.238.142.102:1521:orcl"
+	   p:username="TOTORO"
+	   p:password="TOTORO1224" 
+	   p:maxActive="10"
+	   p:maxIdle="5"
+	   p:maxWait="-1"
+  	/>  
+  	
+  <!-- log4jdbc-remix -->
+  <bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+   <constructor-arg ref="dataSourceSpied"/>
+   <property name="logFormatter">
+    <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+     <property name="loggingType" value="MULTI_LINE"/>
+     <property name="sqlPrefix"   value="SIST_SQL]  :"/>
+    </bean>
+   
+   </property>
+  </bean>
+    
     
     
     	

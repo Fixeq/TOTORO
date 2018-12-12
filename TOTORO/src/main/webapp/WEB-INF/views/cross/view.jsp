@@ -53,13 +53,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("h2")
+		alert("cross");
 	});
 	
 	
 	
 	$("#betTable>tbody>tr").on("click","#home",function(){
-		alert("home click!")
+		alert("home click!");
 	});
 
 	
