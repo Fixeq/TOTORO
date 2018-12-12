@@ -44,7 +44,7 @@ public class CustomerController {
 	private static final String VIEW_NAME="/user/user";
 	
 	
-	@RequestMapping(value="/user/search.do")	
+	@RequestMapping(value="/cus/cuslist.do")	
 	public String do_search(@ModelAttribute SearchVO invo,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {	
 		log.info("SearchVO: "+invo);
 		//param -> view
@@ -83,7 +83,7 @@ public class CustomerController {
 		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
 		model.addAttribute("total_cnt",total_cnt);
 		model.addAttribute("list",list);
-		return VIEW_NAME;  
+		return "/cus/cuslist";  
 	}
 	
 	@RequestMapping(value="/user/delete.do",method=RequestMethod.POST
