@@ -30,7 +30,6 @@
 									<td class="text-center"><c:out value="${myBetVO.betResultString}"></c:out></td>
 								</tr>
 								<div><table id = "boardList" border = "1"></table></div>
-								
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -62,10 +61,25 @@
             dataType:"html",// JSON
             data:{
             "ajgameSeq": ajgameSeq
-            },
+            },	
             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-	            
+            	console.log(data);
+            	var myson = $.parseJSON(data);//parse JSON
 				
+            	console.log(myson);
+            	
+        		tmpHtml += "<thead><tr><td>gameSeq</td><td>betSeq</td><td>betChoice</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>gameResult</td></tr></thaed>";
+        		$("#boardList").append(tmpHtml);
+
+            	
+            	for(var i = 0 ; i <myson.length;i++){
+    				var tmpHtml = "";
+            		tmpHtml2 = "<tbody><tr><td>"+myson[i].gameSeq+"</td><td>"+myson[i].getBetSeq+"</td><td>"+myson[i].getBetChoice+"</td><td>"+myson[i].getGameHome+"</td><td>"+myson[i].getGameAway+"</td><td>"+myson[i].getGameHp+"</td><td>"+myson[i].getGameDp+"</td><td>"+myson[i].getGameAp+"</td><td>"+myson[i].getGameResult+"</td></tr></tbody>";
+
+            		$("#boardList").append(tmpHtml2);
+            	
+            	}
+
 /*             	var myJSON = JSON.stringify(data);
             	console.log(myJSON);
  */            	
@@ -75,16 +89,17 @@
             	alert(parseData.gameSeq);
 				console.log(parseData);
             	*/
+            	
+            	
 
-				var result = data.sObject;
-            		alert(result);
-            		$("#boardList").append("<table><tr>''</tr><tr>2</tr></table>")	
+            	
 
-	            },
-	            complete: function(data){//무조건 수행
+            	
+	       },
+	       complete: function(data){//무조건 수행
 	             
-	            },
-	            error: function(xhr,status,error){
+	       },
+	       error: function(xhr,status,error){
              
             }
        }); //--ajax

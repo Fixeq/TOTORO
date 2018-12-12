@@ -52,7 +52,7 @@ public class BetHistoryController {
 		String json = gson.toJson(list);
 		
 */		
-/*		JSONArray array = new JSONArray();
+		JSONArray array = new JSONArray();
         
             for(int i = 0 ; i < list.size();i++){
                 JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
@@ -66,15 +66,13 @@ public class BetHistoryController {
                 sObject.put("getGameAp", list.get(i).getGameAp());
                 sObject.put("getGameResult", list.get(i).getGameResult());
                 array.add(sObject);
-                array.
             }
             String jsonData = array.toJSONString();
- */        
+        
 		
-			JSONArray array = new JSONArray();
+/*			JSONArray array = new JSONArray();
 			array.addAll(list);
-			
-			String jsonData = array.toJSONString();
+*/			
 		
     		log.debug("3========================");
     		log.debug("jsonData="+jsonData);
