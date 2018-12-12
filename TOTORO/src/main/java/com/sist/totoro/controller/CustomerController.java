@@ -83,7 +83,7 @@ public class CustomerController {
 		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
 		model.addAttribute("total_cnt",total_cnt);
 		model.addAttribute("list",list);
-		return "/cus/cuslist";  
+		return "/cus/CusList";  
 	}
 	
 	@RequestMapping(value="/user/delete.do",method=RequestMethod.POST
