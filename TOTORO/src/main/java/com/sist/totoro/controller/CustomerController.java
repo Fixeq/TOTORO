@@ -24,6 +24,7 @@ import com.sist.totoro.code.CodeSvc;
 import com.sist.totoro.code.CodeVO;
 import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.domain.CustomerVO;
+import com.sist.totoro.service.CusReplySvc;
 import com.sist.totoro.service.CustomerSvc;
 
 
@@ -36,6 +37,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerSvc customerSvc;
+	
+	@Autowired
+	private CusReplySvc cusreplysvc;
     
 	@Autowired
 	private CodeSvc codeSvc;	

@@ -86,6 +86,9 @@
 
   </head>
   <body>
+  <section class="s-content">
+
+
     <!-- contents -------------------------------------------------------->
     <div class="container-fluid">
     	<!-- Title영역 -->
@@ -108,7 +111,7 @@
 						<option value="10" <%if(search_div.equals("10"))out.print("selected='selected'"); %> >등록자</option>
 						<option value="20" <%if(search_div.equals("20"))out.print("selected='selected'"); %> >분류</option>					
 					</select>
-					<input type="text" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
+					<input type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
@@ -129,12 +132,12 @@
 				<thead class="bg-primary">
 				    <tr>
 				        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">번호</th>
-						<th class="text-center col-xs-4 col-sm-4 col-md-4 col-lg-4">등록자</th>
-						<th class="text-center col-xs-3 col-sm-3 col-md-3 col-lg-3">분류</th>
-						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">제목</th>
-						<th class="text-center col-xs-1 col-sm-1 col-md-1 col-lg-1">답변여부</th>
-						<th class="text-center col-xs-2 col-sm-2 col-md-2 col-lg-2">날짜</th>
+						<th class="text-center">번호</th>
+						<th class="text-center">등록자</th>
+						<th class="text-center">분류</th>
+						<th class="text-center">제목</th>
+						<th class="text-center">답변여부</th>
+						<th class="text-center">날짜</th>
 					</tr>
 				</thead>
 				<tbody>  
@@ -144,10 +147,10 @@
 							<tr>
 							    <td class="text-center"><input type="checkbox" id="check" name="check"></td>
 								<td class="text-center"><c:out value="${customerVo.cusSeq}"></c:out></td>
-								<td class="text-left"><c:out value="${customerVo.userId}"></c:out></td>
-								<td class="text-left"><c:out value="${customerVo.cusCat}"></c:out></td>
-								<td class="text-right"><c:out value="${customerVo.cusTitle}"></c:out></td>
-								<td class="text-right"><c:out value="${customerVo.cusReply}"></c:out></td>
+								<td class="text-center"><c:out value="${customerVo.userId}"></c:out></td>
+								<td class="text-center"><c:out value="${customerVo.cusCat}"></c:out></td>
+								<td class="text-center"><c:out value="${customerVo.cusTitle}"></c:out></td>
+								<td class="text-center"><c:out value="${customerVo.cusReply}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.cusRegDt}"></c:out></td>
 							</tr>
 						</c:forEach>
@@ -176,7 +179,7 @@
 		</div>
 		<!--// 입력 Form영역---- ----------------------------------------------->				  
 	</div>
-
+</section>
 	<!--// contents ------------------------------------------------------>
 
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
