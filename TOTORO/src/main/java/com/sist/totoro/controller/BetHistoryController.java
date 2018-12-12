@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.service.BetHistorySvcImple;
@@ -45,8 +46,13 @@ public class BetHistoryController {
 		inVO.setBetSeq(gameSeq);
 		
 		List<BetHistoryResultVO> list = betHistorySvc.do_viewByBetSeq(inVO);
+
 		
-		JSONArray array = new JSONArray();
+/*		Gson gson = new Gson();
+		String json = gson.toJson(list);
+		
+*/		
+/*		JSONArray array = new JSONArray();
         
             for(int i = 0 ; i < list.size();i++){
                 JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
@@ -59,12 +65,17 @@ public class BetHistoryController {
                 sObject.put("getGameDp", list.get(i).getGameDp());
                 sObject.put("getGameAp", list.get(i).getGameAp());
                 sObject.put("getGameResult", list.get(i).getGameResult());
-
                 array.add(sObject);
+                array.
             }
-        
             String jsonData = array.toJSONString();
-
+ */        
+		
+			JSONArray array = new JSONArray();
+			array.addAll(list);
+			
+			String jsonData = array.toJSONString();
+		
     		log.debug("3========================");
     		log.debug("jsonData="+jsonData);
     		log.debug("3========================");			

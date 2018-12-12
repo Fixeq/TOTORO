@@ -29,6 +29,8 @@
 									<td class="text-center"><c:out value="${myBetVO.betCash}"></c:out></td>
 									<td class="text-center"><c:out value="${myBetVO.betResultString}"></c:out></td>
 								</tr>
+								<div><table id = "boardList" border = "1"></table></div>
+								
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -62,26 +64,27 @@
             "ajgameSeq": ajgameSeq
             },
             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-              var parseData = $.parseJSON(data);
+	            
 				
-              alert(parseData);
-              console.log(parseData);
-              $("#userId").val(parseData.userId);
-              $("#name").val(parseData.name);
-              $("#password").val(parseData.password);
-              
-              $("#login").val(parseData.login);
-              $("#recommend").val(parseData.recommend);
-              $("#email").val(parseData.email);
-              $("#userIntLevel").val(parseData.userIntLevel);
-              $("#regDt").val(parseData.regDt);
-              
-              $("#userId").prop("disabled",true);
-            },
-            complete: function(data){//무조건 수행
-             
-            },
-            error: function(xhr,status,error){
+/*             	var myJSON = JSON.stringify(data);
+            	console.log(myJSON);
+ */            	
+            	
+            	/*  
+            	var parseData = $.parseJSON(data);
+            	alert(parseData.gameSeq);
+				console.log(parseData);
+            	*/
+
+				var result = data.sObject;
+            		alert(result);
+            		$("#boardList").append("<table><tr>''</tr><tr>2</tr></table>")	
+
+	            },
+	            complete: function(data){//무조건 수행
+	             
+	            },
+	            error: function(xhr,status,error){
              
             }
        }); //--ajax
