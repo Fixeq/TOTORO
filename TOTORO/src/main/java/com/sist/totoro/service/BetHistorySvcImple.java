@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.totoro.dao.BetHistoryDaoimple;
+import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 
 @Service
@@ -18,7 +19,7 @@ public class BetHistorySvcImple {
 	@Autowired
 	private BetHistoryDaoimple betHistoryDao;
 
-	public List<BetHistoryVO> do_viewByBetSeq(BetHistoryVO inVO){
+	public List<BetHistoryResultVO> do_viewByBetSeq(BetHistoryVO inVO){
 		return betHistoryDao.do_viewByBetSeq(inVO);
 	}
 	

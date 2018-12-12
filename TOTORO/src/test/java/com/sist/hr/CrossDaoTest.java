@@ -34,17 +34,37 @@ public class CrossDaoTest {
 	}
 	
 	@Test
+	@Ignore
+	public void do_selectUser() {
+		
+		LOG.info("cross 결과값 : "+crossDao.do_selectUser());
+		
+	}
+
+	@Test
+	public void do_selectAdmin() {
+		
+		LOG.info("cross 결과값 : "+crossDao.do_selectAdmin());
+	}
+	
+	@Test
+	@Ignore
 	public void do_save() {
+		LOG.info("cross 초기값 : "+crossDao.do_selectAll());
+		
 		crossVO.setGameSeq(2);
-		crossVO.setGameHome("세비야");
-		crossVO.setGameAway("발렌시아CF");
-		crossVO.setGameHp(1.5);
-		crossVO.setGameDp(2.5);
-		crossVO.setGameAp(2.2);
-		crossVO.setGameDate("2019-01-02 01:01:01");
+		crossVO.setGameHome("리버풀");
+		crossVO.setGameAway("나폴리");
+		crossVO.setGameHp(4.0);
+		crossVO.setGameDp(2.8);
+		crossVO.setGameAp(1.2);
+		crossVO.setGameDate("2019-12-25 11:59:59");
+		
 		LOG.info("crossVO :" + crossVO);
 		int flag = crossDao.do_save(crossVO);
 		LOG.info("flag : "+flag);
+		
+		LOG.info("cross 결과값 : "+crossDao.do_selectAll());
 		
 	}
 	
@@ -52,12 +72,15 @@ public class CrossDaoTest {
 	@Test
 	@Ignore
 	public void do_update() {
-		crossVO.setGameSeq(1);
-		crossVO.setGameHs(2);
-		crossVO.setGameAs(4);
+		LOG.info("cross 초기값 : "+crossDao.do_selectAll());
+
+		crossVO.setGameSeq(2);
+		crossVO.setGameHs(1);
+		crossVO.setGameAs(0);
 		LOG.info("crossVO :" + crossVO);
 		int flag = crossDao.do_update(crossVO);
-		LOG.info("flag : "+flag);
+		
+		LOG.info("cross 결과값 : "+crossDao.do_selectAll());
 	}
 
 	

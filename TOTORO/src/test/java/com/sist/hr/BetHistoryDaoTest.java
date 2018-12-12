@@ -19,7 +19,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.sist.totoro.dao.BetHistoryDaoimple;
-
+import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
@@ -52,14 +52,13 @@ public class BetHistoryDaoTest {
 		
 		
 		@Test
-		@Ignore
 		public void do_viewByBetSeq() {
 			//각각의 폴더번호를 얻어온 사용자의 폴더별 내역 조회
 			betHistoryVO.setBetSeq(1);
 			betHistoryVO.setUserId("nununanana");
 			
-			List<BetHistoryVO> list = betHistoryDao.do_viewByBetSeq(betHistoryVO);
-			Iterator<BetHistoryVO> it = list.iterator();
+			List<BetHistoryResultVO> list = betHistoryDao.do_viewByBetSeq(betHistoryVO);
+			Iterator<BetHistoryResultVO> it = list.iterator();
 			while(it.hasNext()) {
 				LOG.info("BetHistoryVO : " + it.next());
 			}
@@ -70,12 +69,17 @@ public class BetHistoryDaoTest {
 		
 		
 		@Test
+		@Ignore
 		public void do_insertBetHistory() {
 			//베팅내역에 추가 성공
-			betHistoryVO.setGameSeq(211);
+			String userId = "nununanana";
+			betHistoryDao.do_selectBetAll(userId);
+			
+			
+			betHistoryVO.setGameSeq(97);
 			betHistoryVO.setUserId("nununanana");
 			betHistoryVO.setBetSeq(1);
-			betHistoryVO.setBetChoice(2);
+			betHistoryVO.setBetChoice(3);
 			betHistoryVO.setBetP(10);
 			betHistoryVO.setBetCash(1000);
 			
@@ -83,6 +87,9 @@ public class BetHistoryDaoTest {
 			LOG.info("flag : "+ flag);
 			
 			assertThat(flag, is(1));
+			
+			betHistoryDao.do_selectBetAll(userId);
+
 		}
 
 	

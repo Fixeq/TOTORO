@@ -30,8 +30,23 @@ GROUP BY BETSEQ
  
  </select>
 
-<select id="do_viewByBetSeq" parameterType="BetHistoryVO" resultType="BetHistoryVO">
+<select id="do_viewByBetSeq" parameterType="BetHistoryVO" resultType="com.sist.totoro.domain.BetHistoryResultVO">
 SELECT
+    T1.GAMESEQ,
+    T1.USERID,
+    T1.BETSEQ,
+    T2.GAMEHOME,
+    T2.GAMEAWAY,
+    T2.GAMEHP,
+    T2.GAMEDP,
+    T2.GAMEAP,
+    T1.BETCHOICE,
+    T1.GAMERESULT
+FROM BET_HISTORY T1, CROSS T2
+WHERE T1.GAMESEQ = T2.GAMESEQ
+  AND BETSEQ=#{betSeq}
+  AND USERID=#{userId}
+<!-- SELECT
     GAMESEQ,
     USERID,
     BETSEQ,
@@ -44,6 +59,19 @@ SELECT
 FROM BET_HISTORY
 WHERE BETSEQ=#{betSeq}
   AND USERID=#{userId}
+ -->
+ </select>
+
+<select id="do_selectBetAll" parameterType="String" resultType="BetHistoryVO">
+SELECT GAMESEQ,
+   	 USERID,
+   	 BETSEQ,
+   	 BETCHOICE,
+   	 BETDATE,
+  	 BETP,
+     BETCASH
+  FROM BET_HISTORY 
+ WHERE USERID=#{userId}
 </select>
 
 <insert id="do_betInsert" parameterType="BetHistoryVO">

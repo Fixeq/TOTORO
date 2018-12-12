@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 
 @Repository
@@ -20,6 +21,18 @@ public class BetHistoryDaoimple {
 	private SqlSession sqlSession;
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.betHistory";
+	
+	public List<BetHistoryVO> do_selectBetAll(String userId) {
+		
+		String statement = NAME_SPACE + ".do_selectBetAll";
+		
+		log.debug("1.statement : \n"+statement);
+		log.debug("1.param : \n"+userId);
+
+		return this.sqlSession.selectList(statement,userId);
+	}
+
+	
 	
 	public List<BetHistoryVO> do_viewByUserId(String userId) {
 		//아이디 값을 가지고  betSeq 값을 얻어와야함. 그 값을 가지고 계속 돌려야함.
@@ -32,7 +45,7 @@ public class BetHistoryDaoimple {
 		return this.sqlSession.selectList(statement, userId);
 	}
 	
-	public List<BetHistoryVO> do_viewByBetSeq(BetHistoryVO bet_HistoryVO){
+	public List<BetHistoryResultVO> do_viewByBetSeq(BetHistoryVO bet_HistoryVO){
 		//리스트의 사이즈만큼 반복시키면서 다시 수행해야함.
 		String statement = NAME_SPACE + ".do_viewByBetSeq";
 		

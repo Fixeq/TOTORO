@@ -22,6 +22,18 @@ public class CrossDaoImple {
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.cross";
 
+	public List<CrossVO> do_selectAll(){
+		//접속자가 사용자면".do_selectUser"
+		//접속자가 관리자면".do_selectAdmin"
+		String statement = NAME_SPACE + ".do_selectAll";
+		
+		log.debug("1.statement : \n"+statement);
+		//log.debug("2. param : \n"+userId);
+
+		return this.sqlSession.selectList(statement);
+	}
+
+	
 	/**
 	 * 크로스 페이지 View
 	 * @return
@@ -36,6 +48,18 @@ public class CrossDaoImple {
 
 		return this.sqlSession.selectList(statement);
 	}
+	
+	public List<CrossVO> do_selectAdmin(){
+		//접속자가 사용자면".do_selectUser"
+		//접속자가 관리자면".do_selectAdmin"
+		String statement = NAME_SPACE + ".do_selectAdmin";
+		
+		log.debug("1.statement : \n"+statement);
+		//log.debug("2. param : \n"+userId);
+
+		return this.sqlSession.selectList(statement);
+	}
+
 	
 	public DTO do_selectOne(CrossVO crossVO) {
 		//팀버튼을 선택하면 해당 경기의 gameSeq, 원정인지 홈인지를 구분해야함.

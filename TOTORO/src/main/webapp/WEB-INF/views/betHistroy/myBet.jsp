@@ -56,21 +56,16 @@
 		//ajax 통신
         $.ajax({
             type:"POST",
-            url:"/betHistory/do_search_byGameSeq.do",
+            url:"do_search_byGameSeq.do",
             dataType:"html",// JSON
             data:{
             "ajgameSeq": ajgameSeq
             },
             success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
               var parseData = $.parseJSON(data);
-              /* console.log("3 parseData.u_id="+parseData.u_id);
-              console.log("3 parseData.name="+parseData.name);
-              console.log("3 parseData.password="+parseData.password);
-              console.log("3 parseData.login="+parseData.login);
-              console.log("3 parseData.recommend="+parseData.recommend);
-              console.log("3 parseData.email="+parseData.email);
-              console.log("3 parseData.level="+parseData.level);
-              console.log("3 parseData.regDt="+parseData.regDt); */
+				
+              alert(parseData);
+              console.log(parseData);
               $("#userId").val(parseData.userId);
               $("#name").val(parseData.name);
               $("#password").val(parseData.password);
