@@ -34,7 +34,6 @@ public class CrossDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void do_selectUser() {
 		
 		LOG.info("cross 결과값 : "+crossDao.do_selectUser());
@@ -48,11 +47,10 @@ public class CrossDaoTest {
 	}
 	
 	@Test
-	@Ignore
 	public void do_save() {
 		LOG.info("cross 초기값 : "+crossDao.do_selectAll());
 		
-		crossVO.setGameSeq(2);
+		crossVO.setGameSeq(3);
 		crossVO.setGameHome("리버풀");
 		crossVO.setGameAway("나폴리");
 		crossVO.setGameHp(4.0);
@@ -70,7 +68,6 @@ public class CrossDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void do_update() {
 		LOG.info("cross 초기값 : "+crossDao.do_selectAll());
 

@@ -9,14 +9,11 @@
 	    <where>
 	    	<choose>
 	    		<when test="'10'==search_div">
-	    		    hr.u_id like  #{search_word}||'%'
+	    		    hr.gameHome like  #{search_word}||'%'
 	    		</when>
 	    		<when test="'20'==search_div">
-	    		    hr.name like  #{search_word}||'%'
-	    		</when>
-	    		<when test="'30'==search_div">
-	    		    hr.email like  #{search_word}||'%'
-	    		</when>		    		
+	    		    hr.gameAway like  #{search_word}||'%'
+	    		</when>	    		
 	    		<otherwise></otherwise>
 	    	</choose>
 	    </where>     
@@ -26,18 +23,18 @@
     <select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO" >
 		SELECT X.*,Y.*
 		  FROM(
-		SELECT gameDate
-            ,gameHome
-            ,gameAway
-            ,gameHs
-            ,gameAs
-            ,NVL(DECODE(GAMERESULT, 1 , '홈승', 2 , '무승부', 3 , '원정승'),'대기중') as gameResult  
+		SELECT T.gameDate
+            ,T.gameHome
+            ,T.gameAway
+            ,T.gameHs
+            ,T.gameAs
+            ,NVL(DECODE(T.GAMERESULT, 1 , '홈승', 2 , '무승부', 3 , '원정승'),'대기중') as gameResult  
 		  FROM(                                          
 			SELECT hr.*                                  
-				  ,ROW_NUMBER() OVER(ORDER BY GAMEDATE desc ) AS rnum       
+				  ,ROW_NUMBER() OVER(ORDER BY GAMEDATE ASC) AS rnum       
 			  FROM cross hr
-			  <include refid="baseCondition"/>
-			  
+			  WHERE months_between(sysdate, TO_CHAR(gameDate, 'YY/MM/DD')) <![CDATA[<]]> 2      
+			  <include refid="baseCondition"/>			  
 		  )T
 		 WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -48,9 +45,7 @@
 		    FROM cross
 		    <include refid="baseCondition"/>
 		)Y
-		WHERE gameHome = #{gameHome}
-        	  OR gameAway = #{gameAway}
-        	  AND months_between(sysdate, TO_CHAR(gameDate, 'YY/MM/DD')) <![CDATA[<]]> 2      
-		   
+		
+		 
     </select>
 </mapper>

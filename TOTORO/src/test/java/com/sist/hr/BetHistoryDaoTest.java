@@ -41,7 +41,6 @@ public class BetHistoryDaoTest {
 		
 		
 		@Test
-		@Ignore
 		public void do_viewByUserId() {
 			//베팅내역 페이지 접근시 회원 아이디를 가지고 조회할 폴더번호를 받아옴
 			
@@ -69,14 +68,13 @@ public class BetHistoryDaoTest {
 		
 		
 		@Test
-		@Ignore
 		public void do_insertBetHistory() {
 			//베팅내역에 추가 성공
 			String userId = "nununanana";
 			betHistoryDao.do_selectBetAll(userId);
 			
 			
-			betHistoryVO.setGameSeq(97);
+			betHistoryVO.setGameSeq(100);
 			betHistoryVO.setUserId("nununanana");
 			betHistoryVO.setBetSeq(1);
 			betHistoryVO.setBetChoice(3);

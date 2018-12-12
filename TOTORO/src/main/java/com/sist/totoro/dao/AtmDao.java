@@ -42,14 +42,13 @@ public class AtmDao {
 		return list;	
 	}
 	
-	public int wiAdd(DTO dto) {
+	public int wiAdd(AtmVo atmVo) {
 		String statement = NAME_SPACE+".wiAdd";
-		AtmVo inVO = (AtmVo) dto;
-		
+
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+atmVo);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, atmVo);
 		log.debug("3.flag: "+flag);
 
 		return flag;
