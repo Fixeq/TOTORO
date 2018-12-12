@@ -102,34 +102,29 @@ public class UserDaoTest {
 	
 	
 	@Test
-	@Ignore
 	public void id_check() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.id_check(inVO1),is(1));
 	}
 	
 	@Test
-	@Ignore
 	public void pw_check() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.pw_check(inVO1),is(1));
 	}	
 	
 	
 	@Test
-	@Ignore
 	public void email_check() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.email_check(inVO1),is(1));
 	}		
 
 		
-	@Test
-	@Ignore
-	public void do_save() throws SQLException, ClassNotFoundException {
-		assertThat(userDao.do_save(inVO1),is(1));
-	}	
+//	@Test
+//	public void do_save() throws SQLException, ClassNotFoundException {
+//		assertThat(userDao.do_save(inVO7),is(1));
+//	}	
 	
 	
 	@Test
-	@Ignore
 	public void ban_user_check() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.ban_user_check(banVO01),is(1));
 		assertThat(userDao.ban_user_check(banVO02),is(1));
@@ -139,7 +134,6 @@ public class UserDaoTest {
 	}		
 	
 	@Test
-	@Ignore
 	public void email_verify() throws SQLException, ClassNotFoundException {
 		int flag = userDao.email_verify(inVO3);
 		LOG.info("flag(1:성공) : "+flag);
@@ -149,28 +143,24 @@ public class UserDaoTest {
 	}	
 	
 	@Test
-	@Ignore
 	public void user_verify() throws SQLException, ClassNotFoundException {
-		int flag = userDao.user_verify(inVO4);
+		int flag = userDao.user_verify(inVO3);
 		LOG.info("flag(1:성공) : "+flag);
 		
 	}		
 	
 	@Test
-	@Ignore
 	public void id_find() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.id_find(inVO1),is(inVO1.getUserId()));
 	}		
 	
 	@Test
-	@Ignore
 	public void pw_find() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.pw_find(inVO1),is(1));
 	}		
 		
 	
 	@Test
-	@Ignore
 	public void pw_random_update() throws SQLException, ClassNotFoundException {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", ""); // '-' 제거 
         uuid = uuid.substring(0, 10); //uuid를 앞에서부터 10자리 잘라줌. 
@@ -180,39 +170,34 @@ public class UserDaoTest {
 	}	
 	
 	@Test
-	@Ignore
 	public void do_selectOne() throws SQLException, ClassNotFoundException {
 		assertThat(userDao.do_selectOne(inVO1),is(inVO1));
 	}			
 	
 	@Test
-	@Ignore
 	public void do_update() throws SQLException, ClassNotFoundException {
 		inVO1.setUserPw("updatePw");
 		inVO1.setUserTel("updateTel");
 		inVO1.setUserFindQ("updateQ");
-		userDao.do_update(inVO1);
+		userDao.do_update(inVO3);
 	}		
 	
 
 	@Test
-	@Ignore
 	public void do_update_admin() throws SQLException, ClassNotFoundException {
 		inVO1.setUserPw("updatePw");
 		inVO1.setUserTel("updateTel");
 		inVO1.setUserFindQ("updateQ");
-		userDao.do_update_admin(inVO1);
+		userDao.do_update_admin(inVO4);
 	}		
 	
 	@Test
-	@Ignore
 	public void do_delete() throws SQLException, ClassNotFoundException {
 		int flag = userDao.do_delete(inVO1);
 		LOG.info("flag(1:성공) : "+flag);
 	}			
 
 	@Test
-	@Ignore
 	public void user_ban() throws SQLException, ClassNotFoundException {
 		int flag = userDao.user_ban(inVO1);
 		LOG.info("flag(1:성공) : "+flag);
