@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.totoro.code.CodeDao;
@@ -41,8 +42,6 @@ public class UserController {
 	
 	@Autowired
 	private CodeSvc codeSvc;
-	
-	
 //	priavte CodeSvcImple codeSvc;
 	
 	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
@@ -76,6 +75,15 @@ public class UserController {
 
 		return "/user/find";
 	}
+	
+	
+	// 아이디 중복 검사(AJAX)
+	@RequestMapping(value = "/user/check_id.do", method = RequestMethod.POST)
+	public void check_id(@RequestParam("userId") String userId, HttpServletResponse response) throws Exception{
+		userSvc.idCheck(userId, response);
+	}
+	
+	
 	
 	@RequestMapping(value="/user/save.do", method=RequestMethod.POST)
 	public String joinUser(@ModelAttribute UserVO userVO, 

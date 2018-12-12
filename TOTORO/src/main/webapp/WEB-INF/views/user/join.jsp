@@ -14,15 +14,64 @@
 
 %>	
 	
-	
-	
-	
-	
-	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+<script>
+
+	$(document).ready(function(){
+		//alert("ready");
+	       
+		//숫자만 입력
+        $(".onlynum").keyup(function(){
+			$(this).val( $(this).val().replace(/[^0-9]/g,"") );
+		});//--onlynum 
+		       
+		//영문자 입력
+		$(".onlyeng").keyup(function(){
+			$(this).val( $(this).val().replace(/[^A-z]/g,"") );
+		});//--onlynum 
+		
+		//영문자, 숫자만 입력
+		$(".onlynumeng").keyup(function(){
+			$(this).val( $(this).val().replace(/[^A-z0-9]/g,"") );
+		});//--onlynumeng
+		       
+		       
+		$("#userId").keyup(function() {
+			$.ajax({
+				url : "<%=cPath%>/user/check_id.do",
+				type : "POST",
+				data : {
+					userId : $("#userId").val()
+				},
+				success : function(result) {
+					if (result > 0) {
+						$("#id_check").html("중복된 아이디가 있습니다.");
+						$("#joinBtn").attr("disabled", "disabled");
+					}else if( (0<=$("#userId").val().length && $("#userId").val().length<6) 
+							|| $("#userId").val().length>12){
+						$("#id_check").html("6~12자를 입력해주세요.");
+						$("#joinBtn").attr("disabled", "disabled");
+					}else if(result ==0 && $("#userId").val().length !=0) {
+						$("#id_check").html("사용하셔도 좋은 아이디입니다.");
+						$("#joinBtn").removeAttr("disabled");
+					}
+				},
+			})
+		});
+
+		       
+		
+	});
+	
+
+
+</script>
+
+
 <title>TOTORO 회원가입</title>
 
     <style type="text/css" media="screen">
@@ -43,21 +92,19 @@
 <!-- styles
     ================================================== -->
 
-
-
-
     <section id="styles" class="s-styles">
         
         <div class="row narrow section-intro add-bottom text-center">
             <div class="col-twelve tab-full">
                 <h1>회원가입</h1>
                 <!-- TODO action 맞음? -->
-                <form id="joinForm" action="<%=cPath%>/user/save.do" method="post">
+                <form id="joinForm" action="/user/save.do" method="post">
                     <div>
                         <label for="userId" class="pull-left" >ID</label>
-                        <input class="full-width" type="text"  id="userId" name="userId" required placeholder="숫자 영문 조합 8~15자 입력해주세요.">
+                        <input class="full-width onlynumeng" type="text"  id="userId" name="userId" required placeholder="숫자 영문 조합 6~12자 입력해주세요.">
                         <span id="id_check" class="pull-left" style="color:red"></span><br/>  
                     </div>
+                    <br/>
                     <div>
                         <label for="userPw" class="pull-left" >PassWord</label>
                         <input class="full-width" type="password"  id="userPw" name="userPw" required placeholder="숫자 영문 조합 8~14자 입력해주세요.">
@@ -105,17 +152,13 @@
                         <label for="userFindA" class="pull-left" >Password Find Answer</label>
                         <input class="full-width" type="text"  id="userFindA" name="userFindA" required placeholder="기억할 수 있는 것으로 하세요.^^" >
                     </div>
-                    <input class="btn--primary full-width" type="submit" value="Submit">
+                    <input class="btn--primary full-width" type="submit" value="Submit" id="joinBtn">
+                    <input type="reset" class="btn btn--stroke full-width"  value="Reset"/>
+                    <input type="button" onclick="history.go(-1);" class="btn btn--stroke full-width" value="Cancel"/>
                 </form>
             </div>
         </div>
     </section> <!-- end styles -->
-
-
-
-
-
-
 
 </body>
 </html>

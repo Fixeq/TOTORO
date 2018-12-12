@@ -26,10 +26,13 @@ public class UserSvc {
 	/**
 	 * ajax
 	 * @throws SQLException 
+	 * @throws IOException 
 	 */
 	//아이디 중복검사
-	public int idCheck(String userId) throws SQLException {
-		return userDao.id_check(userId);
+	public void idCheck(String userId, HttpServletResponse response) throws SQLException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println(userDao.id_check(userId));
+		out.close();
 	}
 	
 	//이메일 중복검사
