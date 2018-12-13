@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,11 +39,6 @@ public class UserController {
 	private CodeSvc codeSvc;
 //	priavte CodeSvcImple codeSvc;
 	
-	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
-	public String moveLogin() {
-		return "/user/login";
-	}
-
 	@RequestMapping(value = "/user/join.do", method = RequestMethod.GET)
 	public String moveJoin(HttpServletRequest req) {
 		CodeVO  codeVO2=new CodeVO();		
@@ -102,4 +98,37 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
+	public String moveLogin() {
+		return "/user/login";
+	}
+	@RequestMapping(value = "/user/ban.do", method = RequestMethod.GET)
+	public String moveBan() {
+		return "/user/ban";
+	}
+	@RequestMapping(value = "/user/loginCheck.do", method = RequestMethod.GET)
+	public String loginCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response) throws Exception{
+		userVO = userSvc.loginCheck(userVO, response);
+		session.setAttribute("userVO", userVO);
+		session.setAttribute("userId",userVO.getUserId());
+		session.setAttribute("userAdmin",userVO.getUserAdmin());
+		session.setAttribute("userPoint",userVO.getUserPoint());
+		return "/mainhome/main_page";
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@ public class MainPageController {
 
 		model.addAttribute("serverTime", formattedDate);
 
-		return "/mainhome/MainPage";
+		return "/mainhome/main_page";
 	}
 	
 	

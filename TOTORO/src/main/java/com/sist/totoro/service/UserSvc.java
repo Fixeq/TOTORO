@@ -208,7 +208,7 @@ public class UserSvc {
 	//-------------------------------------------------회원가입---------------------------------------------------	
 	
 	//-------------------------------------------------로그인---------------------------------------------------
-	public UserVO login(UserVO userVO, HttpServletResponse response) throws Exception {
+	public UserVO loginCheck(UserVO userVO, HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		// 등록된 아이디가 없으면
@@ -247,20 +247,13 @@ public class UserSvc {
 				return null;
 			}else if(userVO.getUserAppStt().equals("ban")){
 				out.println("<script>");
-//				TODO 밴홈페이지하나 만들자
-//				out.println("location.href='http://localhost:8080/totoro/user/login.do';");
+				out.println("location.href='http://localhost:8080/totoro/user/ban.do';");
 				out.println("</script>");
 				out.close();
 				return null;
-				
-				//TODO 해야대무혁~
-//			로그인 일자 업데이트 및 회원정보 리턴
+			}else {
+				return userVO;
 			}
-//			}else {
-//				manager.update_log(member.getId());
-//				return member;
-//			}
-			return userVO;
 		}
 	}
 }
