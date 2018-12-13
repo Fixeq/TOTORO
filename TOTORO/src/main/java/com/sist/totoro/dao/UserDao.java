@@ -17,7 +17,7 @@ import com.sist.totoro.common.WorkDiv;
 import com.sist.totoro.domain.UserVO;
 
 @Repository
-public class UserDao implements WorkDiv {
+public class UserDao {
 
 	private final String NAME_SPACE="com.sist.totoro.mappers.user";
 	private Logger log = LoggerFactory.getLogger(UserDao.class);
@@ -91,15 +91,13 @@ public class UserDao implements WorkDiv {
 	}	
 	
 	@Transactional
-	@Override
-	public int do_save(DTO dto) {
+	public int do_save(UserVO userVO) {
 		String statement = NAME_SPACE+".do_save";
-		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
@@ -118,14 +116,14 @@ public class UserDao implements WorkDiv {
 	}	
 	
 	//TODO 파람 2개임 ...
-	public int email_verify(DTO dto) {
+	@Transactional
+	public int email_verify(UserVO userVO) {
 		String statement = NAME_SPACE+".email_verify";
-		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
@@ -193,7 +191,6 @@ public class UserDao implements WorkDiv {
 	
 
 	//param : string?
-	@Override
 	public UserVO do_selectOne(DTO dto) {
 		String statement = NAME_SPACE+".do_selectOne";
 		UserVO inVO = (UserVO) dto;
@@ -209,7 +206,6 @@ public class UserDao implements WorkDiv {
 	}
 
 
-	@Override
 	public int do_update(DTO dto) {
 		String statement = NAME_SPACE+".do_update";
 		UserVO inVO = (UserVO) dto;
@@ -237,7 +233,6 @@ public class UserDao implements WorkDiv {
 		return flag;
 	}
 	
-	@Override
 	public int do_delete(DTO dto) {
 		String statement = NAME_SPACE+".do_delete";
 		UserVO inVO = (UserVO) dto;
@@ -265,7 +260,6 @@ public class UserDao implements WorkDiv {
 	}
 
 	
-	@Override
 	public List<UserVO> do_retrieve(DTO dto) {
 		String statement = NAME_SPACE+".do_retrieve";
 		SearchVO inVO = (SearchVO) dto;
@@ -276,11 +270,5 @@ public class UserDao implements WorkDiv {
 		return this.sqlSession.selectList(statement, dto);
 	}
 	
-	
-	@Override
-	public int do_excelDown(DTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

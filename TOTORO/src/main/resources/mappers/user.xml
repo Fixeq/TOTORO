@@ -62,11 +62,11 @@
 	INSERT INTO to_users (
     	userId,    userPw,    userEmail,    userName,    userBank,
     	userAccount,    userTel,    userFindQ,    userFindA,    userAdmin,
-    	userPoint,    userRegDt,    userAppStt
+    	userPoint,    userRegDt,    userAppStt,		userAppKey
 	) VALUES (
 	    #{userId},    #{userPw},    #{userEmail},    #{userName},    #{userBank},
 	    #{userAccount},    #{userTel},    #{userFindQ},    #{userFindA},    '0',
-	    1000,    SYSDATE,    'false'
+	    1000,    SYSDATE,    'false', #{userAppKey}
 	)
 	</insert>
 	
@@ -81,10 +81,10 @@
 	
 	
 	<!--이메일 인증 : 이메일 인증 시 인증상태 wait 로변경 -->
-	<update id="email_verify" parameterType="DTO">
+	<update id="email_verify" parameterType="UserVO">
 		UPDATE to_users SET userAppStt='wait'
 		 WHERE userEmail=#{userEmail} 
-		   AND userAppStt='false'
+		   AND userAppKey=#{userAppKey}
 	</update>
 	
 	<!--관리자 승인 : 이메일 인증 후 관리자가 승인, 인증상태 true 로변경 -->
