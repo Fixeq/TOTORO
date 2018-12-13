@@ -37,7 +37,7 @@ public class UserController {
 	
 	@Autowired
 	private CodeSvc codeSvc;
-//	priavte CodeSvcImple codeSvc;
+//	private CodeSvcImple codeSvc;
 	
 	@RequestMapping(value = "/user/join.do", method = RequestMethod.GET)
 	public String moveJoin(HttpServletRequest req) {

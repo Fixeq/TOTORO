@@ -138,24 +138,6 @@ public class UserSvc {
 		}
 	}
 	
-	public void email_verify(UserVO userVO, HttpServletResponse response) throws IOException {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		if (userDao.email_verify(userVO) == 0) { // 이메일 인증에 실패하였을 경우
-			out.println("<script>");
-			out.println("alert('잘못된 접근입니다.');");
-			out.println("history.go(-1);");
-			out.println("</script>");
-			out.close();
-		} else { // 이메일 인증을 성공하였을 경우
-			out.println("<script>");
-			out.println("alert('인증이 완료되었습니다. 관리자 승인 후 로그인이 가능합니다.');");
-			out.println("location.href='http://localhost:8080/totoro/user/login.do';");
-			out.println("</script>");
-			out.close();
-		}
-
-	}
 	
 	//TODO메일보내기
 	public void sendEmail(UserVO userVO) {
@@ -176,7 +158,8 @@ public class UserSvc {
 		msg += "<h3 style='color: blue;'>";
 		msg += userVO.getUserId() + "님 회원가입을 환영합니다.</h3>";
 		msg += "<h3 style='color: black;'>";
-		msg += "언제나 토토로월드에 기부천사를 맡고있는 박태건입니다!</h3>";
+		msg += "언제나 토토로월드에 기부천사를 맡고있는 박태건입니다! <br>";
+		msg += "매일 자정에 인증 확인을 하오니 참고바랍니다.</h3>";
 		msg += "<div style='font-size: 130%'>";
 		msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
 		msg += "<form method='post' action='http://localhost:8080/totoro/user/email_verify.do'>";
@@ -205,6 +188,26 @@ public class UserSvc {
 			System.out.println("메일발송 실패 : " + e);
 		}
 	}//send mail
+	
+	public void email_verify(UserVO userVO, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (userDao.email_verify(userVO) == 0) { // 이메일 인증에 실패하였을 경우
+			out.println("<script>");
+			out.println("alert('잘못된 접근입니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		} else { // 이메일 인증을 성공하였을 경우
+			out.println("<script>");
+			out.println("alert('인증이 완료되었습니다. 관리자 승인 후 로그인이 가능합니다.');");
+			out.println("alert('매일 00시에 인증이 완료되오니 참고바랍니다.');");
+			out.println("location.href='http://localhost:8080/totoro/user/login.do';");
+			out.println("</script>");
+			out.close();
+		}
+
+	}
 	//-------------------------------------------------회원가입---------------------------------------------------	
 	
 	//-------------------------------------------------로그인---------------------------------------------------
@@ -240,7 +243,7 @@ public class UserSvc {
 			// 관리자가 승인을 아직 안한경우
 			}else if(userVO.getUserAppStt().equals("wait")){
 				out.println("<script>");
-				out.println("alert('인증은 매일 24시에 업데이트 됩니다.');");
+				out.println("alert('인증은 매일 자정에 업데이트 됩니다.');");
 				out.println("history.go(-1);");
 				out.println("</script>");
 				out.close();
@@ -254,9 +257,15 @@ public class UserSvc {
 			}else {
 				return userVO;
 			}
-		}
-	}
-}
+		}//else
+	}//loginCheck()
+	
+	
+	
+	
+	
+	
+}//UserSvc class
 
 
 
