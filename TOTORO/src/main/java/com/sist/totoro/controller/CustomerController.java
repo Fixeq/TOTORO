@@ -2,8 +2,11 @@ package com.sist.totoro.controller;
 
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -211,5 +214,16 @@ public class CustomerController {
 			return jsonData;
 			}
 	
+	
+	@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.GET)
+	public String board(Locale locale, Model model) {
+		log.info("Welcome home! The client locale is {}.", locale);
+
+		
+		
+		
+
+		return "/cus/CusWrite";
+	}
 
 }
