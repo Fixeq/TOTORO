@@ -68,8 +68,9 @@ public class AtmController {
 	}
 	
 	@RequestMapping(value = "/customerwithdraw/customerwithdraw.do", method = RequestMethod.GET)
-	public String customerwithdraw(Locale locale, Model model) {
+	public String customerwithdraw(@ModelAttribute SearchVO invo, Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -82,13 +83,39 @@ public class AtmController {
 	}
 	
 	@RequestMapping(value = "/admindeposit/admindeposit.do", method = RequestMethod.GET)
-	public String admindeposit(Locale locale, Model model) {
+	public String admindeposit(@ModelAttribute SearchVO invo, Locale locale, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		logger.info("Welcome home! The client locale is {}.", locale);
-
+		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
+		
+		if(invo.getPage_size() == 0) {
+			invo.setPage_size(10);
+		}
+		
+		if(invo.getPage_num() == 0) {
+			invo.setPage_num(1);
+		}
+		
+		if(null == invo.getSearch_div()) {
+			invo.setSearch_div("");
+		}
+		
+		if(null == invo.getSearch_word()) {
+			invo.setSearch_word("");
+		}
+		
+		List<AtmVo> list = atmSvc.adDeAll(invo);
+		int total_cnt = 0;
+		if(null != list && list.size()>0) {
+			total_cnt = list.get(0).getTotalCnt();
+		}
+		
+		model.addAttribute("total_cnt",total_cnt);
+		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 
 		model.addAttribute("serverTime", formattedDate);
 
@@ -96,13 +123,39 @@ public class AtmController {
 	}
 	
 	@RequestMapping(value = "/adminwithdraw/adminwithdraw.do", method = RequestMethod.GET)
-	public String adminwithdraw(Locale locale, Model model) {
+	public String adminwithdraw(@ModelAttribute SearchVO invo, Locale locale, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 
 		String formattedDate = dateFormat.format(date);
+		
+		if(invo.getPage_size() == 0) {
+			invo.setPage_size(10);
+		}
+		
+		if(invo.getPage_num() == 0) {
+			invo.setPage_num(1);
+		}
+		
+		if(null == invo.getSearch_div()) {
+			invo.setSearch_div("");
+		}
+		
+		if(null == invo.getSearch_word()) {
+			invo.setSearch_word("");
+		}
+		
+		List<AtmVo> list = atmSvc.adWiAll(invo);
+		int total_cnt = 0;
+		if(null != list && list.size()>0) {
+			total_cnt = list.get(0).getTotalCnt();
+		}
+		
+		model.addAttribute("total_cnt",total_cnt);
+		model.addAttribute("list",list);
+		model.addAttribute("list", list);
 
 		model.addAttribute("serverTime", formattedDate);
 

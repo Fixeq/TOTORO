@@ -19,8 +19,11 @@ public interface AtmSvc{
 	/* (non-Javadoc)
 	 * @see com.sist.hr.user.service.UserSvc#do_retrieve(com.sist.hr.common.SearchVO)
 	 */
-	List<AtmVo> do_retrieve(SearchVO searchVO)
-			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	List<AtmVo> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+
+	List<AtmVo> adWiAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+
+	List<AtmVo> adDeAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 
 }
 

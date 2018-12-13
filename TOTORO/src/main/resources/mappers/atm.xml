@@ -42,6 +42,60 @@
 		)Y      
     </select>
     
+     <!-- 관리자 입금 내역 전체 조회 -->
+    <select id="adDeAll" parameterType="SearchVO" resultType="AtmVo" >   		
+    	SELECT X.*,Y.*
+		  FROM(
+		SELECT T.dwSeq,                                  
+				T.userId,                                  
+				T.dePoint,                                                             
+				T.dwPs,                                 
+				TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
+				TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
+				T.rnum AS no                             
+		  FROM(                                          
+			SELECT dw.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
+			  FROM dw_record dw
+			  WHERE dePoint IS NOT NULL
+		  )T
+		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM dw_record
+		)Y
+    </select>
+    
+     <!-- 관리자 출금 내역 전체 조회 -->
+    <select id="adWiAll" parameterType="SearchVO" resultType="AtmVo" >   		
+    	SELECT X.*,Y.*
+		  FROM(
+		SELECT T.dwSeq,                                  
+				T.userId,                                  
+				T.wiPoint,                                                             
+				T.dwPs,                                 
+				TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
+				TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
+				T.rnum AS no                             
+		  FROM(                                          
+			SELECT dw.*                                  
+				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
+			  FROM dw_record dw
+			  WHERE wiPoint IS NOT NULL
+		  )T
+		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM dw_record
+		)Y
+    </select>
+    
     
     <!-- 관리자 입금 요청 전체 조회 -->
     <select id="adDeReqAll" parameterType="SearchVO" resultType="AtmVo" >   		
@@ -58,6 +112,8 @@
 			SELECT dw.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 			  FROM dw_record dw
+			  WHERE DWPS=0
+    		  AND dePoint IS NOT NULL
 		  )T
 		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -67,8 +123,7 @@
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
 		)Y
-		WHERE DWPS=0
-    	AND dePoint IS NOT NULL      	
+		      	
     </select>
     
      <!-- 관리자 출금 요청 전체 조회 -->
@@ -86,6 +141,8 @@
 			SELECT dw.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 			  FROM dw_record dw
+			  WHERE DWPS=0
+    		  AND wiPoint IS NOT NULL	
 		  )T
 		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -95,8 +152,7 @@
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
 		)Y
-		WHERE DWPS=0
-    	AND wiPoint IS NOT NULL	
+		
     </select>
     
     
@@ -115,6 +171,8 @@
 			SELECT dw.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 			  FROM dw_record dw
+			  WHERE dwPs=1
+    		  AND dePoint IS NOT NULL
 		  )T
 		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -124,8 +182,7 @@
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
 		)Y
-    	WHERE dwPs=1
-    	AND dePoint IS NOT NULL
+    	
     </select>
     
      <!-- 관리자 출금 확인 전체 조회 -->
@@ -143,6 +200,8 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE dwPs=1
+    			  AND wiPoint IS NOT NULL
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -152,8 +211,6 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-    		WHERE dwPs=1
-    		AND wiPoint IS NOT NULL
     </select>
     
     
@@ -172,6 +229,9 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word} <!-- To do -->
+			     AND dePoint IS NOT NULL
+			     AND dwPs=0	
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -180,10 +240,7 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
-			)Y
-	     WHERE userId = #{search_word} <!-- To do -->
-	     AND dePoint IS NOT NULL
-	     AND dwPs=0	       
+			)Y 
     </select>
     
      <!-- 고객 출금 요청 전체 조회 -->
@@ -201,6 +258,9 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word}
+	     		  AND wiPoint IS NOT NULL
+	    		  AND dwPs=0
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -210,9 +270,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{search_word}
-	     AND wiPoint IS NOT NULL
-	     AND dwPs=0	       
+	     	       
     </select>
     
     <!-- 고객 입금 완료 전체 조회 -->
@@ -230,6 +288,9 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word}
+			     AND dePoint IS NOT NULL
+			     AND dwPs=1	
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -239,9 +300,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{search_word}
-	     AND dePoint IS NOT NULL
-	     AND dwPs=1	       
+	            
     </select>
     
     
@@ -260,6 +319,9 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word}
+				  AND wiPoint IS NOT NULL
+	     		  AND dwPs=1	
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -269,9 +331,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{search_word}
-	     AND wiPoint IS NOT NULL
-	     AND dwPs=1	       
+	            
     </select>
     
     <!-- 고객 입금 요청,완료 전체 조회 -->
@@ -289,6 +349,8 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word}
+	     		  AND dePoint IS NOT NULL
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -298,8 +360,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{search_word}
-	     AND dePoint IS NOT NULL	       
+	     	       
     </select>
     
     <!-- 고객 출금 요청,완료 전체 조회 -->
@@ -317,6 +378,8 @@
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
 				  FROM dw_record dw
+				  WHERE userId = #{search_word}
+	             AND wiPoint IS NOT NULL
 			  )T
 			  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 			    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -326,8 +389,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{search_word}
-	     AND wiPoint IS NOT NULL	       
+	     	       
     </select>
     
          <!-- 관리자 입금 요청 확인 처리 -->

@@ -40,6 +40,30 @@ public class AtmDao {
 		return list;	
 	}
 	
+	public List<AtmVo> adDeAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+        
+		String statement = NAME_SPACE+".adDeAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;
+	}
+	
+	public List<AtmVo> adWiAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+        
+		String statement = NAME_SPACE+".adWiAll";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+searchVO);
+		List<AtmVo> list  = this.sqlSession.selectList(statement, searchVO);
+		log.debug("*****************************");
+		log.debug("3.list: "+list);
+		log.debug("*****************************");
+		return list;
+	}
+	
 	public List<AtmVo> adDeReqAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
         
 		String statement = NAME_SPACE+".adDeReqAll";
