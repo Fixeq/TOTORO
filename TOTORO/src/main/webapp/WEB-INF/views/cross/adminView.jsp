@@ -27,14 +27,14 @@
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="crossVo">
 								<tr >
-									<td class="text-center"><button class="btn btn--stroke full-width" id="home"><c:out value="${crossVo.gameHome}"></c:out></button></td>
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${crossVo.gameHome}"></c:out></button></td>
 									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
 									<td class="text-center"><button class="btn btn--stroke full-width">무승부</button></td>
 									<td class="text-right"><c:out value="${crossVo.gameDp}"></c:out></td>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${crossVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
-									<td class="btn btn--primary">결과반영</td>
+									<td class="btn btn--primary" class="decideWteamBtn">결과반영</td>
 								</tr id=${crossVO.gameSeq}>
 					</c:forEach>
 				</c:when>
@@ -52,8 +52,6 @@
 		</div>
 	</form>
 </section> <!-- s-content -->
-	
-
 
 </body>
 
@@ -63,9 +61,8 @@
 	});
 	
 	
-	
-	$("#betTable>tbody>tr").on("click","#home",function(){
-		alert("home click!");
+	$("decideWteamBtn").on("click",function(){
+		alert("Btn");
 	});
 	
 </script>
