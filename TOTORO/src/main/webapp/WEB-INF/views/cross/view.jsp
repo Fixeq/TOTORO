@@ -45,6 +45,11 @@
 			</c:choose>
 		</tbody>
 	</table>
+	<form action="/totoro/cross/makeGame.do" method="get">
+		<div align="right">
+			<input type="submit" value="경기생성"> 
+		</div>
+	</form>
 </section> <!-- s-content -->
 	
 
@@ -61,8 +66,6 @@
 	$("#betTable>tbody>tr").on("click","#home",function(){
 		alert("home click!");
 	});
-
-	
 	
 </script>
 
