@@ -77,12 +77,23 @@ public class UserController {
 	}
 	
 	
-	// 아이디 중복 검사(AJAX)
+	//중복 검사(AJAX)
 	@RequestMapping(value = "/user/check_id.do", method = RequestMethod.POST)
 	public void check_id(@RequestParam("userId") String userId, HttpServletResponse response) throws Exception{
 		userSvc.idCheck(userId, response);
 	}
-	
+	@RequestMapping(value = "/user/check_email.do", method = RequestMethod.POST)
+	public void check_email(@RequestParam("userEmail") String userEmail, HttpServletResponse response) throws Exception{
+		userSvc.emailCheck(userEmail, response);
+	}
+	@RequestMapping(value = "/user/check_tel.do", method = RequestMethod.POST)
+	public void check_tel(@RequestParam("userTel") String userTel, HttpServletResponse response) throws Exception{
+		userSvc.telCheck(userTel, response);
+	}
+	@RequestMapping(value = "/user/check_account.do", method = RequestMethod.POST)
+	public void check_account(@RequestParam("userAccount") String userAccount, HttpServletResponse response) throws Exception{
+		userSvc.accountCheck(userAccount, response);
+	}
 	
 	
 	@RequestMapping(value="/user/save.do", method=RequestMethod.POST)
