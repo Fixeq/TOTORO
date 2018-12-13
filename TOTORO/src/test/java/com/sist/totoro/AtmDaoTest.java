@@ -240,16 +240,16 @@ public class AtmDaoTest {
 		LOG.info(" LIST : "+atmDao.cusWiAll(searchVO));
 	}
 	
-	@Test
-	public void deleteReset() throws SQLException, ClassNotFoundException {
-
-		//--------------------------------------------
-		//0.모두삭제 : 건건이로 수정
-		//--------------------------------------------
-		atmDao.delete(atmDe);
-		atmDao.delete(atmWi);
-		
-	}
+//	@Test
+//	public void deleteReset() throws SQLException, ClassNotFoundException {
+//
+//		//--------------------------------------------
+//		//0.모두삭제 : 건건이로 수정
+//		//--------------------------------------------
+//		atmDao.delete(atmDe);
+//		atmDao.delete(atmWi);
+//		
+//	}
 	
 	
 	
