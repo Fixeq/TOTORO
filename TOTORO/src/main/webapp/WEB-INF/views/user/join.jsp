@@ -69,7 +69,7 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#id_check").css("color", "red");
-						$("#id_check").html("중복된 아이디가 있습니다.");
+						$("#id_check").html("이미 사용중이거나 탈퇴한 아이디입니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if( (0<=$("#userId").val().length && $("#userId").val().length<6) 
 							|| $("#userId").val().length>12){
@@ -78,7 +78,7 @@
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userId").val().length !=0) {
 						$("#id_check").css("color", "#6DD66D");
-						$("#id_check").html("사용가능 아이디입니다.");
+						$("#id_check").html("멋진 아이디네요!");
 						$("#joinBtn").removeAttr("disabled");
 					}
 				},
@@ -99,6 +99,7 @@
 						$("#email_check").html("이미 사용되고 있는 이메일입니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userEmail").val().length !=0) {
+						$("#email_check").html("");
 						$("#joinBtn").removeAttr("disabled");
 					}
 				},
@@ -141,6 +142,7 @@
 						$("#account_check").html("중복된 계좌번호가 있습니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userAccount").val().length !=0) {
+						$("#account_check").html("");
 						$("#joinBtn").removeAttr("disabled");
 					}
 				},
@@ -192,8 +194,9 @@
         <div class="row narrow section-intro add-bottom text-center">
             <div class="col-twelve tab-full">
                 <h1 class="dohyeon">회원가입</h1>
-                <!-- TODO action 맞음? -->
-                <form id="joinForm" action="/user/save.do" method="post">
+                <!-- TODO 전부다 밸리데이션 설정해야함 -->
+                <form id="joinForm" action="<%=cPath%>/user/save.do" method="post">
+                
                     <div>
                         <label for="userId" class="pull-left" >ID</label>
                         <input class="full-width onlynumeng nanum" type="text"  id="userId" name="userId" required placeholder="숫자 영문 조합 6~12자 입력해주세요.">
@@ -203,7 +206,7 @@
                     <div>
                         <label for="userPw" class="pull-left" >PassWord</label>
                         <input class="full-width userPw nanum" type="password"  id="userPw" name="userPw" 
-                        required placeholder="숫자 영문 조합 8~14자 입력해주세요." oninput="pw_check()">
+                        required placeholder="8~15자 영문 대 소문자,숫자,특수문자를 사용하세요." oninput="pw_check()">
                     </div>
                     <div>
                         <label for="userPw2" class="pull-left" >PW Confirm</label>
@@ -211,13 +214,11 @@
                         required placeholder="비밀번호를 한번 더 입력해주세요." oninput="pw_check()">
                         <span id="pw_check" class="pull-left nanum" ></span><br/>
                     </div>   
-                            <!-- validation해야댐 이메일형식인지-->                     
                     <div>
                         <label for="userEmail" class="pull-left" >Email</label>
                         <input class="full-width nanum" type="email"  id="userEmail" name="userEmail" required placeholder="이메일 인증 후 관리자 승인 후 로그인이 가능합니다." >
                         <span id="email_check" class="pull-left nanum" ></span><br/>  
                     </div>
-                             <!-- validation해야댐 번호 제대로 입력했나 저렇게 onlyNum-->           			
          			<div>
                         <label for="userTel" class="pull-left" >Cell Phone Number</label>
                         <input class="full-width onlynum nanum" type="text"  id="userTel" name="userTel" required placeholder="(-)를 제외한 번호를 입력해주세요" >
@@ -233,7 +234,6 @@
 							<%=StringUtil.makeSelectBox((List<CodeVO>)request.getAttribute("cdListC003"), "", "userBank", false) %>
                         </div>
                     </div>
-                    <!-- validation해야댐 번호 제대로 입력했나 저렇게 onlyNum -->                              			
                     <div>
                         <label for="userAccount" class="pull-left" >Account Number</label>
                         <input class="full-width onlynum nanum" type="text"  id="userAccount" name="userAccount" required placeholder="(-)를 제외한 번호를 입력해주세요" >

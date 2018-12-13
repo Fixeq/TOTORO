@@ -25,6 +25,7 @@
 	    <org.mybatis.version>3.4.6</org.mybatis.version>
 	    <mybatis-spring.version>1.3.2</mybatis-spring.version>
 	    <apachetiles.version>3.0.7</apachetiles.version>
+	    <commons-email.version>1.2</commons-email.version>
 	</properties>
   <!-- Oracle repositories -->
   <repositories>
@@ -36,6 +37,12 @@
   </repositories> 
   	 
   <dependencies>
+  
+  	<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>${commons-email.version}</version>
+		</dependency>
   
   	<dependency>
     	<groupId>org.lazyluke</groupId>

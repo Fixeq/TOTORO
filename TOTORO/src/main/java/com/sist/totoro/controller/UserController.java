@@ -46,7 +46,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
 	public String moveLogin() {
-
 		return "/user/login";
 	}
 
@@ -62,7 +61,6 @@ public class UserController {
 		//codeVO 쓸것들 할당 필요
 		//C002	비밀번호찾기질문
 		//C003	은행명
-		//근데 호일이형이만든거 한번 물어봐야할듯.
 		
 		req.setAttribute("cdListC002", cdListC002);
 		req.setAttribute("cdListC003", cdListC003);
@@ -72,7 +70,6 @@ public class UserController {
 	
 	@RequestMapping(value = "/user/find.do", method = RequestMethod.GET)
 	public String moveFind() {
-
 		return "/user/find";
 	}
 	
@@ -95,18 +92,20 @@ public class UserController {
 		userSvc.accountCheck(userAccount, response);
 	}
 	
+	//이메일 확인 인증
+	@RequestMapping(value="/user/email_verify.do", method = RequestMethod.POST)
+	public void email_verify(@ModelAttribute UserVO userVO, HttpServletResponse response) throws IOException {
+		userSvc.email_verify(userVO, response);
+	}
 	
 	@RequestMapping(value="/user/save.do", method=RequestMethod.POST)
-	public String joinUser(@ModelAttribute UserVO userVO, 
+	public void joinUser(@ModelAttribute UserVO userVO, 
 			RedirectAttributes rttr, HttpServletResponse response
 			)throws EmptyResultDataAccessException, ClassNotFoundException, SQLException, IOException {
 		
 		log.info("UserController>joinUser>param UserVO userVO : "+userVO);
 		rttr.addFlashAttribute("result", userSvc.joinUser(userVO, response));
 		
-		
-		//TODO 위치확인, user/login.do
-		return "redircet:/user/join.do";
 	}
 	
 }
