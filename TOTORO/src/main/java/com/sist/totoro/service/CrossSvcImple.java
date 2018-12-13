@@ -13,8 +13,16 @@ public class CrossSvcImple {
 
 	@Autowired
 	private CrossDaoImple crossDao; 
-	
 	public List<CrossVO> do_selectAll(){
+		return crossDao.do_selectAdmin();
+	}
+
+	
+	public List<CrossVO> do_selectLimit(){
 		return crossDao.do_selectUser();
+	}
+	
+	public int do_insert(CrossVO inVO) {
+		return crossDao.do_save(inVO);
 	}
 }

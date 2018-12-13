@@ -61,7 +61,7 @@
 		    GAMEREGID,
 		    GAMEREGDT
 		) VALUES (
-		   #{gameSeq},
+		   gameSeq.NEXTVAL,
 		   #{gameHome},
 		   #{gameAway},
 		   #{gameHp},

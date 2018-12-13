@@ -27,11 +27,11 @@
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="crossVo">
 								<tr>
-									<td class="text-center"><button id="home"><c:out value="${crossVo.gameHome}"></c:out></button></td>
+									<td class="text-center"><button class="btn btn--stroke full-width" id="home"><c:out value="${crossVo.gameHome}"></c:out></button></td>
 									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
-									<td class="text-center"><button>무승부</button></td>
+									<td class="text-center"><button class="btn btn--stroke full-width">무승부</button></td>
 									<td class="text-right"><c:out value="${crossVo.gameDp}"></c:out></td>
-									<td class="text-center"><button><c:out value="${crossVo.gameAway}"></c:out></button></td>
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${crossVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
 								</tr>
@@ -45,11 +45,6 @@
 			</c:choose>
 		</tbody>
 	</table>
-	<form action="/totoro/cross/makeGame.do" method="get">
-		<div align="right">
-			<input type="submit" value="경기생성"> 
-		</div>
-	</form>
 </section> <!-- s-content -->
 	
 
