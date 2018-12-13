@@ -225,5 +225,49 @@ public class CustomerController {
 
 		return "/cus/CusWrite";
 	}
+	
+	
+	
+	@RequestMapping(value="/cus/save.do")	
+	public String do_save(@ModelAttribute SearchVO invo,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {	
+		log.info("SearchVO: "+invo);
+		//param -> view
+		
+		if(invo.getPage_size() == 0) {
+			invo.setPage_size(10);
+		}
+		
+		if(invo.getPage_num() == 0) {
+			invo.setPage_num(1);
+		}
+		
+		if(null == invo.getSearch_div()) {
+			invo.setSearch_div("");
+		}
+		
+		if(null == invo.getSearch_word()) {
+			invo.setSearch_word("");
+		}		
+		
+		
+		model.addAttribute("param",invo);
+		
+		List<CustomerVO> list = customerSvc.do_retrieve(invo);
+		log.info("list: "+list);
+		//총글수
+		int total_cnt = 0;
+		if(null != list && list.size()>0) {
+			total_cnt = list.get(0).getTotalCnt();
+			log.info("total_cnt: "+total_cnt);
+		}
+		
+		CodeVO codePage=new CodeVO();
+		codePage.setCd_id("C001");
+		
+		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
+		model.addAttribute("total_cnt",total_cnt);
+		model.addAttribute("list",list);
+		return "/cus/CusList";  
+	}
 
 }
