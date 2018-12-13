@@ -42,16 +42,16 @@ public class UserDao {
 	}
 	
 	//TODO parameter 2갠데 map으로 받아야하나?
-	public int pw_check(DTO dto) throws SQLException {
+	public int pw_check(UserVO userVO) throws SQLException {
 		String statement = NAME_SPACE+".pw_check";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
-		log.debug("2.param"+inVO);
+		log.debug("2.param"+userVO);
 		
 //		String testId = inVO.getUserId();
 //		String testPw = inVO.getUserPw();
 		
-		int flag = this.sqlSession.selectOne(statement, inVO);
+		int flag = this.sqlSession.selectOne(statement, userVO);
 		
 		return flag;
 	}	
@@ -131,6 +131,7 @@ public class UserDao {
 	
 	
 	//TODO String?
+	@Transactional
 	public int user_verify(DTO dto) {
 		String statement = NAME_SPACE+".user_verify";
 		UserVO inVO = (UserVO) dto;
@@ -176,6 +177,7 @@ public class UserDao {
 	
 	//TODO String 랜덤값 받아야 하는거 아니오? service에서
 	//dao호출할때 랜덤 String uuid값 아니오?
+	@Transactional
 	public int pw_random_update(DTO dto) {
 		String statement = NAME_SPACE+".pw_random_update";
 		UserVO inVO = (UserVO) dto;
@@ -205,7 +207,7 @@ public class UserDao {
 		return outVO;
 	}
 
-
+	@Transactional
 	public int do_update(DTO dto) {
 		String statement = NAME_SPACE+".do_update";
 		UserVO inVO = (UserVO) dto;
@@ -220,6 +222,7 @@ public class UserDao {
 		return flag;
 	}
 	
+	@Transactional
 	public int do_update_admin(DTO dto) {
 		String statement = NAME_SPACE+".do_update_admin";
 		UserVO inVO = (UserVO) dto;
@@ -246,6 +249,7 @@ public class UserDao {
 		return flag;
 	}
 
+	@Transactional
 	public int user_ban(DTO dto) {
 		String statement = NAME_SPACE+".user_ban";
 		UserVO inVO = (UserVO) dto;

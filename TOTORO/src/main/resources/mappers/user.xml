@@ -37,7 +37,7 @@
 	
 	<!--로그인 : 비밀번호 체크(1:성공, 이 외 실패) -->
 	<!--마이페이지 : 마이페이지 진입 전 본인확인(1:성공, 이 외 실패) -->
-	<select id="pw_check" parameterType="DTO" resultType="java.lang.Integer">
+	<select id="pw_check" parameterType="UserVO" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM to_users WHERE userId=#{userId} AND userPw=#{userPw}
 	</select>
 	
@@ -58,6 +58,8 @@
 	
 	<!--회원가입 : 회원가입 submit -->
 	<!--(기본값)userPoint:1000, userAppStt:false, userAdmin:0 -->
+	
+	
 	<insert id="do_save" parameterType="DTO">
 	INSERT INTO to_users (
     	userId,    userPw,    userEmail,    userName,    userBank,

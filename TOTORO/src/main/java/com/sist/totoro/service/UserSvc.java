@@ -26,11 +26,11 @@ public class UserSvc {
 	@Autowired
 	private UserDao userDao;
 
+	//-------------------------------------------------회원가입---------------------------------------------------
 	public String create_key() {
 		return UUID.randomUUID().toString().replaceAll("-", "").substring(0, RANDOM_LENGTH);
 	}
-	
-	
+
 	/**
 	 * ajax
 	 * @throws SQLException 
@@ -204,12 +204,65 @@ public class UserSvc {
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 		}
-
-
+	}//send mail
+	//-------------------------------------------------회원가입---------------------------------------------------	
+	
+	//-------------------------------------------------로그인---------------------------------------------------
+	public UserVO login(UserVO userVO, HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 등록된 아이디가 없으면
+		if(userDao.id_check(userVO.getUserId()) == 0) {
+			out.println("<script>");
+			out.println("alert('등록된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			
+			// 비밀번호가 다를 경우
+			if(userDao.pw_check(userVO)==0) {
+				out.println("<script>");
+				out.println("alert('비밀번호를 잘못 입력하셨습니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			// 이메일 인증을 하지 않은 경우
+			}else if(userVO.getUserAppStt().equals("false")) {
+				out.println("<script>");
+				out.println("alert('이메일 인증 후 로그인 하세요.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			// 관리자가 승인을 아직 안한경우
+			}else if(userVO.getUserAppStt().equals("wait")){
+				out.println("<script>");
+				out.println("alert('인증은 매일 24시에 업데이트 됩니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
+			}else if(userVO.getUserAppStt().equals("ban")){
+				out.println("<script>");
+//				TODO 밴홈페이지하나 만들자
+//				out.println("location.href='http://localhost:8080/totoro/user/login.do';");
+				out.println("</script>");
+				out.close();
+				return null;
+				
+				//TODO 해야대무혁~
+//			로그인 일자 업데이트 및 회원정보 리턴
+			}
+//			}else {
+//				manager.update_log(member.getId());
+//				return member;
+//			}
+			return userVO;
+		}
 	}
-	
-	
-	
 }
 
 
