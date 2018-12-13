@@ -52,7 +52,7 @@ public class CategoryController {
 		//param -> view
 		
 		if(invo.getPage_size() == 0) {
-			invo.setPage_size(10);
+			invo.setPage_size(5);
 		}
 		
 		if(invo.getPage_num() == 0) {

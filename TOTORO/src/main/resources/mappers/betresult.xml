@@ -3,24 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.sist.totoro.mappers.betresult">
-  
-  <sql id="baseCondition">
-	    <where>
-	    	<choose>
-	    		<when test="'10'==search_div">
+<mapper namespace="com.sist.totoro.mappers.betresult"><sql id="baseCondition"><where><choose><when test="'10'==search_div">
 	    		    hr.gameHome like  #{search_word}||'%'
-	    		</when>
-	    		<when test="'20'==search_div">
+	    		</when><when test="'20'==search_div">
 	    		    hr.gameAway like  #{search_word}||'%'
-	    		</when>	    		
-	    		<otherwise></otherwise>
-	    	</choose>
-	    </where>     
-    </sql>
-  
- <!-- select list -->
-    <select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO" >
+	    		</when><otherwise/></choose></where></sql><!-- select list --><select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO">
 		SELECT X.*,Y.*
 		  FROM(
 		SELECT T.gameDate
@@ -31,21 +18,18 @@
             ,NVL(DECODE(T.GAMERESULT, 1 , '홈승', 2 , '무승부', 3 , '원정승'),'대기중') as gameResult  
 		  FROM(                                          
 			SELECT hr.*                                  
-				  ,ROW_NUMBER() OVER(ORDER BY GAMEDATE ASC) AS rnum       
+				  ,ROW_NUMBER() OVER(ORDER BY gameDate ASC) AS rnum       
 			  FROM cross hr
-			  WHERE months_between(sysdate, TO_CHAR(gameDate, 'YY/MM/DD')) <![CDATA[<]]> 2      
+			   
 			  <include refid="baseCondition"/>			  
 		  )T
 		 WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
-		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+		    AND (#{page_size} * (#{page_num}-1) + #{page_size})
 		)X    
 		NATURAL JOIN
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM cross
-		    <include refid="baseCondition"/>
-		)Y
+		)Y 
 		
-		 
-    </select>
-</mapper>
+    </select></mapper>
