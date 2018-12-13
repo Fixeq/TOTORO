@@ -64,81 +64,95 @@
     width: auto;
   }
 </style>
-
-<div class="form-group">
-					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
-</div>
-
-
-<table>
-	관리자 입금 관리 페이지
-			<tr>
-				<div class="form-group">	
-				<td class="text-center"><input type="text" id="point" name="point" maxlength=8></td>
-				<td class="text-center"><button type="button" id="do_save">요청</button></td>
-				</div>	
-			</tr>
-			<tr>
-				<div class="form-group">	
-				<td class="text-center"><button type="button" onclick="javascript:doSearch();">조회</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_excel">엑셀저장</button>
-					</td>
-				</div>	
-			</tr>
-			<!-- Grid영역 -->
-			<table id = "betTable">
-					<thead>
-						<tr>
-								<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								 <th class="">번호</th>
-								 <th class="text-center">ID</th>
-								 <th class="text-center">신청 포인트</th>
-								 <th class="text-center">신청날짜</th>
-								 <th class="text-center">충전날짜</th>
-								 <th class="text-center">처리상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:choose>
-							<c:when test="${list.size()>0}">
-								<c:forEach var="AtmVo" items="${list}">
-									<tr>
-									   <td class="text-center"><input type="checkbox" id="check" name="check"></td>
-										<td class="text-center"><c:out value="${AtmVo.no}"></c:out></td>
-										<td class="text-left"><c:out value="${AtmVo.userId}"></c:out></td>
-										<td class="text-left"><c:out value="${AtmVo.dePoint}"></c:out></td>
-										<td class="text-right"><c:out value="${AtmVo.dwReqday}"></c:out></td>
-										<td class="text-right"><c:out value="${AtmVo.dwGetday}"></c:out></td>
-										<td class="text-center"><c:out value="${AtmVo.dwPs}"></c:out></td>
-									</tr>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<tr>
-								    <td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
-								</tr>					
-							</c:otherwise>
-						</c:choose>
-					</tbody>
-				</table>
-				<div class="form-inline text-center">
-					<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "search.do", "search_page") %>
+	<div class="page-header">
+	    		<h2>관리자 입금 관리 페이지</h2>
+	</div>
+	<form  name="frm" id="frm" action="admindeposit.do" method="get" class="form-inline">
+		<input type="hidden" name="page_num" id="page_num">
+			<form action="#" class="form-inline">
+				<div class="form-group">
+						<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
 				</div>
+				</form>
+				<tr>
+					<div class="form-group">
+						<label class="col-lg-4">입금 요청 금액 : </label>
+						<div>
+							<input type="Number" name="dpoint" id="dpoint" placeholder="1000원 단위로"/>
+						</div>
+					</div>
+					
+					<input type="hidden" name="page_num" id="page_num">
+					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
+					<td class="text-center">
+						<button type="button" onclick="javascript:doSearch();"> 전체 조회</button>
+						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doReqSearch();">요청 조회</button>
+						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doPsSearch();">완료 조회</button>
+						<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
+						<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
+						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
+				</tr>
+				<!-- Grid영역 -->
+				<table id = "betTable">
+						<thead>
+							<tr>
+									<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+									 <th class="">번호</th>
+									 <th class="text-center">ID</th>
+									 <th class="text-center">신청 포인트</th>
+									 <th class="text-center">신청날짜</th>
+									 <th class="text-center">충전날짜</th>
+									 <th class="text-center">처리상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${list.size()>0}">
+									<c:forEach var="AtmVo" items="${list}">
+										<tr>
+										   <td class="text-center"><input type="checkbox" id="check" name="check"></td>
+											<td class="text-center"><c:out value="${AtmVo.no}"></c:out></td>
+											<td class="text-left"><c:out value="${AtmVo.userId}"></c:out></td>
+											<td class="text-left"><c:out value="${AtmVo.dePoint}"></c:out></td>
+											<td class="text-right"><c:out value="${AtmVo.dwReqday}"></c:out></td>
+											<td class="text-right"><c:out value="${AtmVo.dwGetday}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.dwPs}"></c:out></td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<tr>
+									    <td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+									</tr>					
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+	
+					<div class="form-inline text-center">
+						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_word, "search_page") %>
+					</div>
+					
+				</form>
 			<!--// Grid영역 ---------------------------------------------------->
 		</section>
 		<script type="text/javascript">
     
-         function search_page(url,page_num){
-        	 //alert(url+":search_page:"+page_num);
-        	 var frm = document.frm;
-        	 frm.page_num.value = page_num;
-        	 frm.action = url;
-        	 frm.submit();
-        	 
-         }
+		function search_page(url,page_num){
+       	 //alert(url+":search_page:"+page_num);
+       	 var frm = document.frm;
+       	 frm.page_num.value = page_num;
+       	 frm.action = url;
+       	 frm.submit();
+       	 
+        }
+        function doSearch(){
+       	 var frm = document.frm;
+       	 frm.page_num.value =1;
+       	 frm.search_word ="admindeposit.do";
+       	 frm.action = "admindeposit.do";
+       	 frm.submit();
+        }
          
     	 //check 전체 선택
          function checkAll(){
@@ -151,12 +165,74 @@
         	   
          }
          
-         function doSearch(){
+         function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.action = "";
+        	 frm.search_word ="depositreq.do";
+        	 frm.action = "depositreq.do";
         	 frm.submit();
          }
+         
+         function doPsSearch(){
+        	 var frm = document.frm;
+        	 frm.page_num.value =1;
+        	 frm.search_word ="depositps.do";
+        	 frm.action = "depositps.do";
+        	 frm.submit();
+         }
+         
+         $("#do_delete").on("click",function(){
+				//alert("do_delete");
+				
+				var items = [];//var items=new Array(); 
+				$( "input[name='check']:checked" ).each(function( index,row ) {
+					console.log("index="+index);
+					//console.log("row="+row);
+					var record = $(row).parents("tr");
+					var userId = $(record).find("td").eq(2).text()
+					console.log("userId="+userId);
+					items.push(userId);
+				});
+				console.log("items.length="+items.length);
+				if(items.length<=0){
+					alert("삭제할 데이터를 선택 하세요.")
+					return;
+				}
+				
+				if(false==confirm("삭제 하시겠습니까?"))return;
+				
+				var jsonIdList = JSON.stringify(items);
+				//jsonIdList=["107","108"]
+				console.log("jsonIdList="+jsonIdList);
+				
+		        $.ajax({
+		            type:"POST",
+		            url: search_word,
+		            dataType:"html",
+		            data:{
+		            	"userId_list": jsonIdList
+		            },
+		            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+			             var parseData = $.parseJSON(data);
+		                 console.log("parseData.flag="+parseData.flag);
+		                 console.log("parseData.message="+parseData.message);
+			         	 if(parseData.flag > 0){
+			         		alert(parseData.message);
+			         		doSearch();
+			         	 }else{
+			         		alert(parseData.message);
+			         		
+			         	 }				             
+		            },
+		            complete: function(data){//무조건 수행
+		             
+		            },
+		            error: function(xhr,status,error){
+		             
+		            }
+		         });//--ajax
+				
+			});//--do_delete
          
          
          

@@ -37,4 +37,18 @@ public class AtmSvcImple implements AtmSvc {
 
 		return atmDao.adDeAll(searchVO);
 	}
+	
+	@Override
+	public List<AtmVo> adDeReqAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.adDeReqAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> adDePsAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.adDePsAll(searchVO);
+	}
 }
