@@ -34,7 +34,10 @@
     <script src="<%=context%>/resources/js/plugins.js"></script>
     <script src="<%=context%>/resources/js/main.js"></script>
 
-    
+	<!-- google web font -->
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;subset=korean" rel="stylesheet">
+
 
     <!-- favicons
     ================================================== -->

@@ -36,18 +36,24 @@ public class UserSvc {
 	}
 	
 	//이메일 중복검사
-	public int emailCheck(String userEmail) throws SQLException {
-		return userDao.email_check(userEmail);
+	public void emailCheck(String userEmail, HttpServletResponse response) throws SQLException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println(userDao.email_check(userEmail));
+		out.close();
 	}
 	
 	//계좌번호 중복검사
-	public int accountCheck(String userAccount) throws SQLException {
-		return userDao.account_check(userAccount);
+	public void accountCheck(String userAccount, HttpServletResponse response) throws SQLException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println(userDao.account_check(userAccount));
+		out.close();
 	}
 
 	//전화번호 중복검사
-	public int telCheck(String userTel) throws SQLException {
-		return userDao.tel_check(userTel);
+	public void telCheck(String userTel, HttpServletResponse response) throws SQLException, IOException {
+		PrintWriter out = response.getWriter();
+		out.println(userDao.tel_check(userTel));
+		out.close();
 	}
 	
 	//밴유저 조회
