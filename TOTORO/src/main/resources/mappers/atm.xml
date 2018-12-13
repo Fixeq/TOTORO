@@ -16,9 +16,7 @@
     </sql>
     
     <!-- select list -->
-    <select id="do_retrieve" 
-      parameterType="SearchVO"
-      resultType="AtmVo"  >
+    <select id="do_retrieve" parameterType="SearchVO" resultType="AtmVo"  >
 		SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -46,7 +44,7 @@
     
     
     <!-- 관리자 입금 요청 전체 조회 -->
-    <select id="adDeReqAll" resultType="AtmVo">   		
+    <select id="adDeReqAll" parameterType="SearchVO" resultType="AtmVo" >   		
     	SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -69,12 +67,12 @@
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
 		)Y
-		WHERE dwPs=0
+		WHERE DWPS=0
     	AND dePoint IS NOT NULL      	
     </select>
     
      <!-- 관리자 출금 요청 전체 조회 -->
-    <select id="adWiReqAll" resultType="AtmVo">
+    <select id="adWiReqAll" parameterType="SearchVO" resultType="AtmVo">
     	SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -97,13 +95,13 @@
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
 		)Y
-		WHERE dwPs=0
+		WHERE DWPS=0
     	AND wiPoint IS NOT NULL	
     </select>
     
     
     <!-- 관리자 입금 확인 전체 조회 -->
-    <select id="adDePsAll" resultType="AtmVo">
+    <select id="adDePsAll" parameterType="SearchVO" resultType="AtmVo">
 	   SELECT X.*,Y.*
 		  FROM(
 		SELECT T.dwSeq,                                  
@@ -131,7 +129,7 @@
     </select>
     
      <!-- 관리자 출금 확인 전체 조회 -->
-    <select id="adWiPsAll" resultType="AtmVo">
+    <select id="adWiPsAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -160,7 +158,7 @@
     
     
     <!-- 고객 입금 요청 전체 조회 -->
-    <select id="cusDeReqAll" resultType="AtmVo">
+    <select id="cusDeReqAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -183,13 +181,13 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId} <!-- To do -->
+	     WHERE userId = #{search_word} <!-- To do -->
 	     AND dePoint IS NOT NULL
 	     AND dwPs=0	       
     </select>
     
      <!-- 고객 출금 요청 전체 조회 -->
-    <select id="cusWiReqAll" resultType="AtmVo">
+    <select id="cusWiReqAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -212,13 +210,13 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId}
+	     WHERE userId = #{search_word}
 	     AND wiPoint IS NOT NULL
 	     AND dwPs=0	       
     </select>
     
     <!-- 고객 입금 완료 전체 조회 -->
-    <select id="cusDePsAll" resultType="AtmVo">
+    <select id="cusDePsAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -241,14 +239,14 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId}
+	     WHERE userId = #{search_word}
 	     AND dePoint IS NOT NULL
 	     AND dwPs=1	       
     </select>
     
     
     <!-- 고객 출금 완료 전체 조회 -->
-    <select id="cusWiPsAll" resultType="AtmVo">
+    <select id="cusWiPsAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -271,13 +269,13 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId}
+	     WHERE userId = #{search_word}
 	     AND wiPoint IS NOT NULL
 	     AND dwPs=1	       
     </select>
     
     <!-- 고객 입금 요청,완료 전체 조회 -->
-    <select id="cusDeAll" resultType="AtmVo">
+    <select id="cusDeAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -300,12 +298,12 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId}
+	     WHERE userId = #{search_word}
 	     AND dePoint IS NOT NULL	       
     </select>
     
     <!-- 고객 출금 요청,완료 전체 조회 -->
-    <select id="cusWiAll" resultType="AtmVo">
+    <select id="cusWiAll" parameterType="SearchVO" resultType="AtmVo">
 	    SELECT X.*,Y.*
 		  FROM(
 			SELECT T.dwSeq,                                  
@@ -328,7 +326,7 @@
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
 			)Y
-	     WHERE userId = #{userId}
+	     WHERE userId = #{search_word}
 	     AND wiPoint IS NOT NULL	       
     </select>
     
@@ -365,22 +363,26 @@
     <update id="adWiGet" parameterType="AtmVo">
 	    UPDATE to_users          
 	        SET USERPOINT = USERPOINT - #{wiPoint}           
-	    WHERE userId = #{userId}       
+	    WHERE userId = #{userId}      
     </update>
 	
 	<!-- 종합 단건 삭제 -->
 	<delete id="delete"  parameterType="AtmVo"  >
-		DELETE FROM HR_USERS 
+		DELETE FROM dw_record 
 		WHERE userId = #{userId}
 		  AND dwSeq = #{dwSeq}
 	</delete>
 	
 	<!-- 종합 단건 조회 -->
-	<select id="get" 
-	  parameterType="com.sist.totoro.domain.AtmVo"
-	  resultType="com.sist.totoro.domain.AtmVo"	  >
+	<select id="get" parameterType="AtmVo" resultType="AtmVo">
 	 SELECT                                    
-	     <include refid="allColumns"/>                       
+	 	dwSeq,   
+		userId,  
+		dePoint, 
+		wiPoint,
+		dwPs,
+		TO_CHAR(dwReqday,'YYYY-MM-DD HH24:MI:SS') dwReqday,
+		TO_CHAR(dwGetday,'YYYY-MM-DD HH24:MI:SS') dwGetday                      
 	 FROM dw_record                             
 	 WHERE userId = #{userId}
 	   AND dwSeq = #{dwSeq}
@@ -399,13 +401,13 @@
 		 	#{userId},
 		 	#{dePoint},
 		 	0,
-		 	sysdate             
-		 )                      	
+		 	sysdate
+		 )                        	
 	</insert>
 	
-	<!--입금 요청 등록 -->
+	<!--출금 요청 등록 -->
 	<insert id="wiAdd"  parameterType="AtmVo" >
-		 INSERT INTO dw_record (
+		  INSERT INTO dw_record (
 		 	dwSeq,
 		 	userId,
 		 	wiPoint,
@@ -416,7 +418,7 @@
 		 	#{userId},
 		 	#{wiPoint},
 		 	0,
-		 	sysdate              
+		 	sysdate             
 		 )                      	
 	</insert>
 	

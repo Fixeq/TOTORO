@@ -49,15 +49,26 @@ public class AtmDaoTest {
 	AtmVo  inVO1 = null;
 	AtmVo  inVO2 = null;
 	AtmVo  inVO3 = null;
+	AtmVo  atmDe = new AtmVo();
+	AtmVo  atmWi = new AtmVo();
+	
+	
 	SearchVO searchVO = null;
 	
 	
 	@Before
 	public void setUp() {
-		inVO1 = new AtmVo("11","tester3","10000","0","0","2018-12-12","2018-12-12");
-		inVO2 = new AtmVo("12","tester3","0","20000","0","2018-12-12","2018-12-12");	
-		inVO3 = new AtmVo("13","tester3","30000","0","0","2018-12-12","2018-12-12");	
-	
+		inVO1 = new AtmVo("tester1","tester1","10000",null,"0",null,null);
+		inVO2 = new AtmVo("1","tester","1000",null,"0","2018-12-01 14:52:23",null);
+		
+		atmDe.setDwSeq("66");
+		atmDe.setUserId("dwtester3");
+		atmDe.setDePoint("1000");
+		
+		atmWi.setDwSeq("67");
+		atmWi.setUserId("dwtester3");
+		atmWi.setWiPoint("2000");
+		
 		searchVO = new SearchVO(10,1,"","");
 		
 		LOG.info("context:"+context);
@@ -65,32 +76,182 @@ public class AtmDaoTest {
 		LOG.info("mockMvc:"+mockMvc);
 		LOG.info("atmDao:"+atmDao);
 	}
-	
+
 	@Test
-	@Ignore
-	public void deAdd() throws SQLException, ClassNotFoundException {
-		int flag = atmDao.deAdd(inVO1);
-		LOG.info("flag111111111111111111111111111111111111111(1:성공) : "+flag);
+	public void get() throws SQLException, ClassNotFoundException {
+		AtmVo atmVo = new AtmVo();
+		atmVo.setUserId("tester");
+		atmVo.setDwSeq("1");
+		AtmVo  outVO1 = null;
+		assertThat(atmDao.wiAdd(atmVo),is(1));
 	}
 	
 	@Test
-	@Ignore
-	public void wiAdd() throws SQLException, ClassNotFoundException {
-		int flag = atmDao.wiAdd(inVO1);
+	public void deAdd() throws SQLException, ClassNotFoundException {
+		AtmVo atmVo = new AtmVo();
+		atmVo.setUserId("dwtester3");
+		atmVo.setDePoint("1000");
+		int flag = atmDao.deAdd(atmVo);
 		LOG.info("flag(1:성공) : "+flag);
-	}	
+	}
 	
 	@Test
-	@Ignore
+	public void wiAdd() throws SQLException, ClassNotFoundException {
+		AtmVo atmVo = new AtmVo();
+		atmVo.setUserId("dwtester3");
+		atmVo.setWiPoint("2000");
+		int flag = atmDao.wiAdd(atmVo);
+		LOG.info("flag(1:성공) : "+flag);
+	}
+	
+//	@Test
+//	public void adReqDeGet() throws SQLException, ClassNotFoundException {
+//
+//		int flag = atmDao.adReqDeGet(atmDe);
+//		LOG.info("flag(1:성공) : "+flag);
+//	}
+//	
+//	@Test
+//	public void adReqWiGet() throws SQLException, ClassNotFoundException {
+//	
+//		int flag = atmDao.adReqWiGet(atmWi);
+//		LOG.info("flag(1:성공) : "+flag);
+//	}
+	
+	
+//	@Test
+//	public void adDeGet() throws SQLException, ClassNotFoundException {
+//		
+//		int flag = atmDao.adDeGet(atmDe);
+//		LOG.info("flag(1:성공) : "+flag);
+//	}
+
+//	@Test
+//	public void adWiGet() throws SQLException, ClassNotFoundException {
+//		
+//		int flag = atmDao.adWiGet(atmWi);
+//		LOG.info("flag(1:성공) : "+flag);
+//	}
+
+//	@Test
+//	public void delete() throws SQLException, ClassNotFoundException {
+//		
+//		int flag = atmDao.delete(atmDe);
+//		LOG.info("flag(1:성공) : "+flag);
+//	}
+	
+	
+//	
+//	@Test
+//	public void dePs() throws SQLException, ClassNotFoundException {
+//
+//		//--------------------------------------------
+//		//0.하나씩 처리
+//		//--------------------------------------------
+//		atmDao.adReqDeGet(atmDe);
+//		atmDao.adDeGet(atmDe);
+//		
+//		
+//	}
+//	
+//	@Test
+//	public void wiPs() throws SQLException, ClassNotFoundException {
+//
+//		//--------------------------------------------
+//		//0.하나씩 처리
+//		//--------------------------------------------
+//		atmDao.adReqWiGet(atmWi);
+//		atmDao.adWiGet(atmWi);
+//		
+//	}
+	
+	
+	
+	@Test
 	public void do_retrieve() throws SQLException, ClassNotFoundException {
 		atmDao.do_retrieve(searchVO);
 		LOG.info(" LIST : "+atmDao.do_retrieve(searchVO));
 	}
+
 	
 	@Test
-	public void setUpTest() {
-		LOG.info("setUpTest:");
+	public void adDeReqAll() throws SQLException, ClassNotFoundException {
+		atmDao.adDeReqAll(searchVO);
+		LOG.info(" LIST : "+atmDao.adDeReqAll(searchVO));
 	}
+	
+	@Test
+	public void adWiReqAll() throws SQLException, ClassNotFoundException {
+		atmDao.adWiReqAll(searchVO);
+		LOG.info(" LIST : "+atmDao.adDeReqAll(searchVO));
+	}
+	
+	@Test
+	public void adDePsAll() throws SQLException, ClassNotFoundException {
+		atmDao.adDePsAll(searchVO);
+		LOG.info(" LIST : "+atmDao.adDePsAll(searchVO));
+	}
+	
+	@Test
+	public void adWiPsAll() throws SQLException, ClassNotFoundException {
+		atmDao.adWiReqAll(searchVO);
+		LOG.info(" LIST : "+atmDao.adWiPsAll(searchVO));
+	}
+	
+	@Test
+	public void cusDeReqAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.adWiReqAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusDeReqAll(searchVO));
+	}
+	
+	@Test
+	public void cusWiReqAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.adWiReqAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusWiReqAll(searchVO));
+	}
+	
+	@Test
+	public void cusDePsAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.cusDePsAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusDePsAll(searchVO));
+	}
+	
+	@Test
+	public void cusWiPsAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.cusWiPsAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusWiPsAll(searchVO));
+	}
+	
+	@Test
+	public void cusDeAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.cusDeAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusDeAll(searchVO));
+	}
+	
+	@Test
+	public void cusWiAll() throws SQLException, ClassNotFoundException {
+		searchVO.setSearch_word("dwtester3");
+		atmDao.cusWiAll(searchVO);
+		LOG.info(" LIST : "+atmDao.cusWiAll(searchVO));
+	}
+	
+	@Test
+	public void deleteReset() throws SQLException, ClassNotFoundException {
+
+		//--------------------------------------------
+		//0.모두삭제 : 건건이로 수정
+		//--------------------------------------------
+		atmDao.delete(atmDe);
+		atmDao.delete(atmWi);
+		
+	}
+	
+	
 	
 	
 }
