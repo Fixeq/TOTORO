@@ -43,7 +43,8 @@ public class CrossDaoTest {
 	@Test
 	public void do_selectAdmin() {
 		
-		LOG.info("cross 결과값 : "+crossDao.do_selectAdmin());
+		LOG.info("cross 결과값1 : "+crossDao.do_selectAdminNoResult());
+		LOG.info("cross 결과값2 : "+crossDao.do_selectAdminYesResult());
 	}
 	
 	@Test

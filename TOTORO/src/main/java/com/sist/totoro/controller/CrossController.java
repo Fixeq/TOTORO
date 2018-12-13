@@ -46,8 +46,12 @@ public class CrossController {
 		String connLevel = req.getParameter("level");
 		String returnUrl = null;
 		if(connLevel.equals("1")) {
-			List<CrossVO> list = crossSvc.do_selectAll();
-			model.addAttribute("list", list);
+			List<CrossVO> noList = crossSvc.do_selectNoResult();
+			List<CrossVO> yesList = crossSvc.do_selectYesResult();
+
+			model.addAttribute("noList", noList);
+			model.addAttribute("yesList", yesList);
+			
 			returnUrl =  "/cross/adminView";
 		}else {
 			List<CrossVO> list = crossSvc.do_selectLimit();

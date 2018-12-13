@@ -14,11 +14,12 @@
 			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
  		  FROM CROSS
  		 WHERE GAMEDATE > SYSDATE
- 		   AND GAMERESULT IS NULL
+ 		    OR GAMERESULT IS NULL
  		 ORDER BY GAMEDATE DESC
 	</select>
 	
-	<select id="do_selectAdmin" resultType="com.sist.totoro.domain.CrossVO">
+	<!--  -->
+	<select id="do_selectAdminNoResult" resultType="com.sist.totoro.domain.CrossVO">
 		SELECT GAMESEQ, 
 			   GAMEHOME,
 			   GAMEAWAY,
@@ -27,8 +28,25 @@
 			   GAMEAP,
 			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
  		  FROM CROSS
+         WHERE GAMERESULT IS NULL
  		 ORDER BY GAMEDATE DESC
 	</select>
+	
+	<select id="do_selectAdminYesResult" resultType="com.sist.totoro.domain.CrossVO">
+		SELECT GAMESEQ, 
+			   GAMEHOME,
+			   GAMEAWAY,
+			   GAMEHS,
+			   GAMEAS,
+			   GAMEHP,
+			   GAMEDP,
+			   GAMEAP,
+			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
+ 		  FROM CROSS
+         WHERE GAMERESULT IS NOT NULL
+ 		 ORDER BY GAMEDATE DESC
+ 	</select>
+	
 	
 	<select id="do_selectOne" parameterType="CrossVO">
 		

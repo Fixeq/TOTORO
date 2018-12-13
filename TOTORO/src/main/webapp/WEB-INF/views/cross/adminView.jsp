@@ -14,29 +14,43 @@
 		<thead>
 			<tr>
 					<td class="text-center">홈팀</td>
-					<td class="text-center">홈팀</td>
-					<td class="text-center">무승부</td>
-					<td class="text-right">무승부</td>
+					<td class="text-center">홈팀수</td>
 					<td class="text-center">원정팀</td>
-					<td class="text-center">원정</td>
+					<td class="text-center">원정점수</td>
 					<td class="text-center">경기시간</td>
+					<td class="text-center">종료여부</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
-				<c:when test="${list.size()>0}">
-					<c:forEach items="${list}" var="crossVo">
-								<tr >
-									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${crossVo.gameHome}"></c:out></button></td>
-									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
-									<td class="text-center"><button class="btn btn--stroke full-width">무승부</button></td>
-									<td class="text-right"><c:out value="${crossVo.gameDp}"></c:out></td>
-									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${crossVo.gameAway}"></c:out></button></td>
-									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
-									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
-									<td class="btn btn--primary" class="decideWteamBtn">결과반영</td>
-								</tr id=${crossVO.gameSeq}>
-					</c:forEach>
+				<c:when test="${noList.size()>0}">
+					<c:forEach items="${noList}" var="noVo">
+								<tr id="${crossVO.gameSeq}">
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameHome}"></c:out></button></td>
+									<td class="text-center"><input type="text" name="homeScore"></td>
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameAway}"></c:out></button></td>
+									<td class="text-center"><input type="text" name="awayScore"></td>
+									<td class="text-center"><c:out value="${noVo.gameDate}"></c:out></td>
+									<td class="text-center"><input class="btn btn--primary" type="submit" value="마감"></td>
+								</tr>
+					</c:forEach>					
+				</c:when>
+			
+			</c:choose>
+			
+			
+			<c:choose>
+				<c:when test="${yesList.size()>0}">
+					<c:forEach items="${yesList}" var="yesVo">
+								<tr id="${crossVO.gameSeq}">
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${yesVo.gameHome}"></c:out></button></td>
+									<td class="text-center"><c:out value="${yesVo.gameHs}"></c:out></td>
+									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${yesVo.gameAway}"></c:out></button></td>
+									<td class="text-center"><c:out value="${yesVo.gameAs}"></c:out></td>
+									<td class="text-center"><c:out value="${yesVo.gameDate}"></c:out></td>
+									<td class="text-center">경기종료</td>
+								</tr>
+					</c:forEach>					
 				</c:when>
 				<c:otherwise>
 					<tr>
@@ -44,6 +58,7 @@
 					</tr>
 				</c:otherwise>
 			</c:choose>
+			
 		</tbody>
 	</table>
 	<form action="/totoro/cross/makeGame.do" method="get">
@@ -61,10 +76,18 @@
 	});
 	
 	
-	$("decideWteamBtn").on("click",function(){
-		alert("Btn");
+	$(".decideWteamBtn").on("click",function(){
+		var parent = $(this).parent();
+		
+		var tr = $(parent).parent();
+		
+		tr.after('<tr><td colspan=\"2\">홈팀 점수</td><td colspan=\"2\"><input type=\"text\"/></td><td colspan=\"2\">원정팀 점수</td><td><input type=\"text\"/></td><td><button class=\"endData\">완료</button></td></tr>'); 
 	});
 	
+	$("#endData").on("click",function(){
+		alert("endData");
+	});
+
 </script>
 
 </html>

@@ -49,10 +49,10 @@ public class CrossDaoImple {
 		return this.sqlSession.selectList(statement);
 	}
 	
-	public List<CrossVO> do_selectAdmin(){
+	public List<CrossVO> do_selectAdminNoResult(){
 		//접속자가 사용자면".do_selectUser"
 		//접속자가 관리자면".do_selectAdmin"
-		String statement = NAME_SPACE + ".do_selectAdmin";
+		String statement = NAME_SPACE + ".do_selectAdminNoResult";
 		
 		log.debug("1.statement : \n"+statement);
 		//log.debug("2. param : \n"+userId);
@@ -60,6 +60,16 @@ public class CrossDaoImple {
 		return this.sqlSession.selectList(statement);
 	}
 
+	public List<CrossVO> do_selectAdminYesResult(){
+		//접속자가 사용자면".do_selectUser"
+		//접속자가 관리자면".do_selectAdmin"
+		String statement = NAME_SPACE + ".do_selectAdminYesResult";
+		
+		log.debug("1.statement : \n"+statement);
+		//log.debug("2. param : \n"+userId);
+
+		return this.sqlSession.selectList(statement);
+	}
 	
 	public DTO do_selectOne(CrossVO crossVO) {
 		//팀버튼을 선택하면 해당 경기의 gameSeq, 원정인지 홈인지를 구분해야함.
