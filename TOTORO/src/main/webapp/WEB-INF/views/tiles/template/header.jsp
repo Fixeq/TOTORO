@@ -6,6 +6,7 @@
  
 <%
 	String context = request.getContextPath();//context path
+	String c = (String)session.getAttribute("userId");
 %>
 
     <!-- pageheader
@@ -37,10 +38,10 @@
                 </ul> <!-- end header__social -->
 
                 <a class="header__search-trigger" href="#0"></a>
-
+			
+				<input type="button"  value="로그아웃<%=c%>" onclick="location.href='<%=context%>/user/logout.do'"/>
                 <div class="header__search">
 
-					<input type="button"  value="로그아웃"" onclick="location.href='<%=context%>/user/logout.do'"/>
                     <!-- <form role="search" method="get" class="header__search-form" action="#">
                     
                         <label>
@@ -50,7 +51,7 @@
                         <input type="submit" class="search-submit" value="Search">
                     </form> -->
         
-                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
+                    <!-- <a href="#0" title="Close Search" class="header__overlay-close">Close</a> -->
 
                 </div>  <!-- end header__search -->
 

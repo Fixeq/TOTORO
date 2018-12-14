@@ -121,13 +121,15 @@ public class UserController {
 			session.setAttribute("userPoint",userVO.getUserPoint());
 			
 		}
-		return "/mainhome/main_page";
+//		return "/mainhome/main_page";
+		return "redirect:/mainpage/mainpage.do";
 	}
 	
-	@RequestMapping(value = "/user/logout.do", method = RequestMethod.POST)
-	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/user/logout.do", method = RequestMethod.GET)
+	public String logout(HttpSession session, HttpServletResponse response) throws Exception{
 		session.invalidate();
-		userSvc.logout(response);
+		return "redirect:/user/login.do";
+//		return "/user/login";
 	}
 	
 }

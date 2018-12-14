@@ -261,7 +261,7 @@ public class UserSvc {
 			}
 		} // else
 	}// loginCheck()
-
+/*
 	public void logout(HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -270,7 +270,7 @@ public class UserSvc {
 		out.println("</script>");
 		out.close();
 	}	
-	
+	*/
 	
 	
 	
