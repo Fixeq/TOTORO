@@ -43,7 +43,6 @@
 			.banner-sec{ min-height:500px; border-radius: 0 10px 10px 0; padding:0px 0px 0px 30px;}
 			.container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
 			.carousel-inner{border-radius:0 10px 10px 0;}
-			.carousel-caption{text-align:left; left:5%;}
 			.login-sec{padding: 50px 30px; position:relative;}
 			.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
 			.login-sec .copy-text i{color:#FEB58A;}
@@ -141,14 +140,8 @@
 					</div>
 					<!------------------------------------ login area ------------------------------------>
 					<!------------------------------------ banner ------------------------------------>
-					<div class="col-md-8 banner-sec">
-						<div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
-		            		<div class="carousel-inner" role="listbox">
-								<div class="carousel-item active">
-									<img class="d-block img-fluid" src="<%=cPath%>/resources/images/ban/로고.png">
-								</div>
-		            		</div>	   
-						</div>
+					<div class="col-md-8 banner-sec carousel-inner">
+						<img class="d-block img-fluid" src="<%=cPath%>/resources/images/ban/로고.png">
 					</div>
 					<!------------------------------------ banner ------------------------------------>
 				</div>
