@@ -17,7 +17,7 @@
 
 ![wbs](https://user-images.githubusercontent.com/33131652/49420984-4739dc80-f7d1-11e8-94ca-5a41045ce53e.png)
 
-![image](https://user-images.githubusercontent.com/40379974/49626237-45178e00-fa1c-11e8-94dc-97ab750846ee.png)
+![totoro exerd](https://user-images.githubusercontent.com/33131652/49993549-4ae81300-ffca-11e8-8361-5d68086007bb.JPG)
 
 ## Team
 
