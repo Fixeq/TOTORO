@@ -1,9 +1,9 @@
 package com.sist.totoro.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.service.BetHistorySvcImple;
@@ -34,7 +33,11 @@ public class BetHistoryController {
 	)
 	@ResponseBody
 	public String getBySeq(HttpServletRequest req,Model model) {
-		String userId = "nununanana";
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
+		
+
 		int gameSeq = Integer.parseInt(req.getParameter("ajgameSeq"));
 		
 		log.info("2========================");
@@ -82,8 +85,10 @@ public class BetHistoryController {
 	}
 	
 	@RequestMapping(value="/betHistory.do")
-	public String myBet(Model model) {
-		String userId = "nununanana";
+	public String myBet(Model model , HttpServletRequest req) {
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
 		
 		List<BetHistoryVO> list = betHistorySvc.do_viewByUserId(userId) ;
 		model.addAttribute("list", list);

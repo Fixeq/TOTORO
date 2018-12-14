@@ -94,4 +94,15 @@ INSERT INTO BET_HISTORY (
 )
 </insert>
 
+
+<update id="do_betUpdate" parameterType="java.lang.Integer">
+UPDATE BET_HISTORY
+SET
+    GAMERESULT = (SELECT GAMERESULT
+                    FROM CROSS
+                   WHERE GAMESEQ = #{gameSeq})
+WHERE GAMESEQ = #{gameSeq}
+
+</update>
+
 </mapper>

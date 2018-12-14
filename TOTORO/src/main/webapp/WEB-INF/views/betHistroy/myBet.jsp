@@ -23,13 +23,14 @@
 			<c:choose>
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="myBetVO">
-								<tr>
+								<tr id = "${myBetVO.betSeq}">
 									<td class="text-center"><c:out value="${myBetVO.betSeq}"></c:out></td>
 									<td class="text-center"><c:out value="${myBetVO.betDate}"></c:out></td>
 									<td class="text-center"><c:out value="${myBetVO.betCash}"></c:out></td>
 									<td class="text-center"><c:out value="${myBetVO.betResultString}"></c:out></td>
+									<tr id = "${myBetVO.betSeq}">
+										
 								</tr>
-								<div><table id = "boardList" border = "1"></table></div>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -53,6 +54,8 @@
 		var ajgameSeq = td.eq(0).text();
 		alert("gameSeq : "+ajgameSeq);
 		
+		var itr = tr.attr('id');
+		console.log("itr: "+itr);
 		
 		//ajax 통신
         $.ajax({
@@ -68,17 +71,24 @@
 				
             	console.log(myson);
             	
-        		tmpHtml += "<thead><tr><td>gameSeq</td><td>betSeq</td><td>betChoice</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>gameResult</td></tr></thaed>";
-        		$("#boardList").append(tmpHtml);
-
             	
             	for(var i = 0 ; i <myson.length;i++){
     				var tmpHtml = "";
-            		tmpHtml2 = "<tbody><tr><td>"+myson[i].gameSeq+"</td><td>"+myson[i].getBetSeq+"</td><td>"+myson[i].getBetChoice+"</td><td>"+myson[i].getGameHome+"</td><td>"+myson[i].getGameAway+"</td><td>"+myson[i].getGameHp+"</td><td>"+myson[i].getGameDp+"</td><td>"+myson[i].getGameAp+"</td><td>"+myson[i].getGameResult+"</td></tr></tbody>";
+            		tmpHtml2 = "<tr><td>"+myson[i].gameSeq+"</td><td>"+myson[i].getBetSeq+"</td><td>"+myson[i].getBetChoice+"</td><td>"+myson[i].getGameHome+"</td><td>"+myson[i].getGameAway+"</td><td>"+myson[i].getGameHp+"</td><td>"+myson[i].getGameDp+"</td><td>"+myson[i].getGameAp+"</td><td>"+myson[i].getGameResult+"</td></tr>";
 
-            		$("#boardList").append(tmpHtml2);
+            		$("#"+itr).after(tmpHtml2);
             	
             	}
+
+            	
+            	
+            	
+        		tmpHtml = "<td>gameSeq</td><td>betSeq</td><td>betChoice</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>gameResult</td></tr>";
+        		$("#"+itr).after(tmpHtml);
+
+            	
+            	
+            	
 
 /*             	var myJSON = JSON.stringify(data);
             	console.log(myJSON);

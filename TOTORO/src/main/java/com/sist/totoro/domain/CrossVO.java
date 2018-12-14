@@ -18,8 +18,8 @@ public class CrossVO extends DTO {
 	private int gameAs      ;//원정팀점수
 	private String gameRegId   ;//등록자id
 	private String gameRegDt   ;//등록일
-	private String modRegId   ;//수정자id
-	private String modRegDt   ;//수정일
+	private String gameModId   ;//수정자id
+	private String gameModDt   ;//수정일
 
 	public CrossVO() {}
 
@@ -192,47 +192,36 @@ public class CrossVO extends DTO {
 	}
 
 	/**
-	 * @return the modRegId
+	 * @return the gameModId
 	 */
-	public String getModRegId() {
-		return modRegId;
+	public String getGameModId() {
+		return gameModId;
 	}
 
 	/**
-	 * @param modRegId the modRegId to set
+	 * @param gameModId the gameModId to set
 	 */
-	public void setModRegId(String modRegId) {
-		this.modRegId = modRegId;
+	public void setGameModId(String gameModId) {
+		this.gameModId = gameModId;
 	}
 
 	/**
-	 * @return the modRegDt
+	 * @return the gameModDt
 	 */
-	public String getModRegDt() {
-		return modRegDt;
+	public String getGameModDt() {
+		return gameModDt;
 	}
 
 	/**
-	 * @param modRegDt the modRegDt to set
+	 * @param gameModDt the gameModDt to set
 	 */
-	public void setModRegDt(String modRegDt) {
-		this.modRegDt = modRegDt;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "CrossVO [gameSeq=" + gameSeq + ", gameHome=" + gameHome + ", gameAway=" + gameAway + ", gameHp="
-				+ gameHp + ", gameDp=" + gameDp + ", gameAp=" + gameAp + ", gameDate=" + gameDate + ", gameResult="
-				+ gameResult + ", gameHs=" + gameHs + ", gameAs=" + gameAs + ", gameRegId=" + gameRegId + ", gameRegDt="
-				+ gameRegDt + ", modRegId=" + modRegId + ", modRegDt=" + modRegDt + "]";
+	public void setGameModDt(String gameModDt) {
+		this.gameModDt = gameModDt;
 	}
 
 	public CrossVO(int gameSeq, String gameHome, String gameAway, Double gameHp, Double gameDp, Double gameAp,
 			String gameDate, int gameResult, int gameHs, int gameAs, String gameRegId, String gameRegDt,
-			String modRegId, String modRegDt) {
+			String gameModId, String gameModDt) {
 		super();
 		this.gameSeq = gameSeq;
 		this.gameHome = gameHome;
@@ -246,8 +235,19 @@ public class CrossVO extends DTO {
 		this.gameAs = gameAs;
 		this.gameRegId = gameRegId;
 		this.gameRegDt = gameRegDt;
-		this.modRegId = modRegId;
-		this.modRegDt = modRegDt;
+		this.gameModId = gameModId;
+		this.gameModDt = gameModDt;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "CrossVO [gameSeq=" + gameSeq + ", gameHome=" + gameHome + ", gameAway=" + gameAway + ", gameHp="
+				+ gameHp + ", gameDp=" + gameDp + ", gameAp=" + gameAp + ", gameDate=" + gameDate + ", gameResult="
+				+ gameResult + ", gameHs=" + gameHs + ", gameAs=" + gameAs + ", gameRegId=" + gameRegId + ", gameRegDt="
+				+ gameRegDt + ", gameModId=" + gameModId + ", gameModDt=" + gameModDt + "]";
 	}
 
 
