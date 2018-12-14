@@ -13,26 +13,31 @@
 	<table id = "betTable">
 		<thead>
 			<tr>
-					<td class="text-center">홈팀</td>
-					<td class="text-center">홈팀수</td>
-					<td class="text-center">원정팀</td>
-					<td class="text-center">원정점수</td>
-					<td class="text-center">경기시간</td>
-					<td class="text-center">종료여부</td>
+					<th class="text-center">홈팀</th>
+					<th class="text-center">홈팀수</th>
+					<th class="text-center">원정팀</th>
+					<th class="text-center">원정점수</th>
+					<th class="text-center">경기시간</th>
+					<th class="text-center">종료여부</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:choose>
 				<c:when test="${noList.size()>0}">
-					<c:forEach items="${noList}" var="noVo">
-								<tr id="${crossVO.gameSeq}">
+				<script>
+					var list =[];
+				</script>
+					<c:forEach items="${noList}" var="noVo">	
+						<form id="${noVo.gameSeq}"  action="/totoro/cross/close.do"  method="post" >
+								<tr>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameHome}"></c:out></button></td>
-									<td class="text-center"><input type="text" name="homeScore"></td>
+									<td class="text-center"><input type="text" name="homeScore" ></td>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><input type="text" name="awayScore"></td>
 									<td class="text-center"><c:out value="${noVo.gameDate}"></c:out></td>
-									<td class="text-center"><input class="btn btn--primary" type="submit" value="마감"></td>
+									<td><input id="${noVo.gameSeq}" type="button" value="마감1" onclick="closeCross(this)"/><input type="hidden" value="${noVo.gameSeq}"></td>
 								</tr>
+						</form>
 					</c:forEach>					
 				</c:when>
 			
@@ -42,7 +47,7 @@
 			<c:choose>
 				<c:when test="${yesList.size()>0}">
 					<c:forEach items="${yesList}" var="yesVo">
-								<tr id="${crossVO.gameSeq}">
+								<tr>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${yesVo.gameHome}"></c:out></button></td>
 									<td class="text-center"><c:out value="${yesVo.gameHs}"></c:out></td>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${yesVo.gameAway}"></c:out></button></td>
@@ -67,26 +72,68 @@
 		</div>
 	</form>
 </section> <!-- s-content -->
-
+s
 </body>
 
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("cross");
+		alert("6");
 	});
 	
-	
-	$(".decideWteamBtn").on("click",function(){
-		var parent = $(this).parent();
+	function closeCross(e){
+		var td = $(e).parent();
+		var tr = $(td).parent();
+
+		console.log(tr);
 		
-		var tr = $(parent).parent();
+		var varNum = $(tr).find("td").eq(1).find(":input:text").val();
+		console.log("varNum : "+varNum);
 		
-		tr.after('<tr><td colspan=\"2\">홈팀 점수</td><td colspan=\"2\"><input type=\"text\"/></td><td colspan=\"2\">원정팀 점수</td><td><input type=\"text\"/></td><td><button class=\"endData\">완료</button></td></tr>'); 
-	});
+		var varNum2 = $(tr).find("td").eq(3).find(":input:text").val();
+		console.log("varNum2 : "+varNum2);
+		
+		var varId = $(tr).find("td").eq(5).find(":input:button").attr('id');
+		console.log("varId : "+varId);
+
+		if(varNum =="" ||varNum2 ==""){
+			alert("공백은 허용하지 않습니다");
+			return ;
+		}
+		
+		if(!isNaN(varNum) && !isNaN(varNum2)){
+			console.log("varNum: " + varNum);
+			console.log("varNum2: " + varNum2);
+			
+			console.log("숫자입니다.");
+
+		}else{
+			console.log("varNum: " + varNum);
+			console.log("varNum2: " + varNum2);
+
+			alert("숫자를 입력하세요.");
+			return;
+		}
+		
+		if((varNum*10)%10==0 && (varNum2*10)%10==0 ){
+			console.log("정수입니다.");
+		}else{
+			alert("정수를 입력하세요");
+			return;
+		}
+		
+		if((varNum>=0) && (varNum2>=0)){
+			console.log("양수입니다.");
+			
+		}else{
+			alert("양수를 입력하세요");
+			return ;
+		}
+		
+		console.log("로직이 정상수행되었습니다.");
+		
+		$( "#"+varId ).submit();
+	};	
 	
-	$("#endData").on("click",function(){
-		alert("endData");
-	});
 
 </script>
 

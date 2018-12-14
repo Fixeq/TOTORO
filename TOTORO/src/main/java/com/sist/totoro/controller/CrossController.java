@@ -41,6 +41,18 @@ public class CrossController {
 		return "/cross/adminView";
 	}
 */	
+	@RequestMapping(value="/cross/close.do")
+	public String close(Model model,ServletRequest req) {
+		String hscore = req.getParameter("homeScore");
+		String ascore = req.getParameter("awayScore");
+		int hs = Integer.parseInt(hscore);
+		int as = Integer.parseInt(ascore);
+		
+		CrossVO inVO = new CrossVO();
+		return null;
+	}
+	
+	
 	@RequestMapping(value="/cross/view.do")
 	public String view(Model model,ServletRequest req) {
 		String connLevel = req.getParameter("level");
