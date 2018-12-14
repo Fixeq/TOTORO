@@ -120,8 +120,14 @@ public class UserController {
 			session.setAttribute("userAdmin",userVO.getUserAdmin());
 			session.setAttribute("userPoint",userVO.getUserPoint());
 			
-			return "/mainpage/mainpage.do";
 		}
+		return "/mainhome/main_page";
+	}
+	
+	@RequestMapping(value = "/user/logout.do", method = RequestMethod.POST)
+	public void logout(HttpSession session, HttpServletResponse response) throws Exception{
+		session.invalidate();
+		userSvc.logout(response);
 	}
 	
 }

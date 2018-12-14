@@ -257,10 +257,31 @@ public class UserSvc {
 				out.println("<script>");
 				out.println("alert('TOTORO WORLD에 오신걸 환영합니다.');");
 				out.println("</script>");
-				out.close();
 				return userVO;
 			}
 		} // else
 	}// loginCheck()
 
+	public void logout(HttpServletResponse response) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.println("<script>");
+		out.println("location.href=document.referrer;");
+		out.println("</script>");
+		out.close();
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }// UserSvc class

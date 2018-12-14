@@ -40,13 +40,15 @@
 
                 <div class="header__search">
 
-                    <form role="search" method="get" class="header__search-form" action="#">
+					<input type="button"  value="로그아웃"" onclick="location.href='<%=context%>/user/logout.do'"/>
+                    <!-- <form role="search" method="get" class="header__search-form" action="#">
+                    
                         <label>
                             <span class="hide-content">Search for:</span>
                             <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
                         </label>
                         <input type="submit" class="search-submit" value="Search">
-                    </form>
+                    </form> -->
         
                     <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
