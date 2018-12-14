@@ -30,6 +30,10 @@
 	
 	
 	<!--로그인 :아이디 체크(1:성공, 이 외 실패)-->
+	<select id="id_login" parameterType="String" resultType="UserVO">
+		SELECT * FROM to_users WHERE userId=#{userId}
+	</select>
+	
 	<!--회원가입 : 아이디 중복검사 체크 (0:성공, 이 외 실패)  -->
 	<select id="id_check" parameterType="String" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM to_users WHERE userId=#{userId}
@@ -164,7 +168,7 @@
 		     ,userModId =#{userModId}
 		     ,userModDt =SYSDATE
 		     ,userAppStt =#{userAppStt}
-		 WHERE userId=#{userId};		
+		 WHERE userId=#{userId}		
 	</update>
 	
 	<!--회원탈퇴 -->

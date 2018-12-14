@@ -220,9 +220,11 @@ public class UserSvc {
 			out.close();
 			return null;
 		} else {
-
+			String pw = userVO.getUserPw();
+			userVO = userDao.id_login(userVO.getUserId());
+			
 			// 비밀번호가 다를 경우
-			if (userDao.pw_check(userVO) == 0) {
+			if (!userVO.getUserPw().equals(pw)) {
 				out.println("<script>");
 				out.println("alert('비밀번호를 잘못 입력하셨습니다.');");
 				out.println("history.go(-1);");

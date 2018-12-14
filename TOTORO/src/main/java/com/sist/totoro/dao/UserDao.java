@@ -29,6 +29,14 @@ public class UserDao {
 	
 	public UserDao() {	}
 
+	public UserVO id_login(String userId) throws SQLException {
+		String statement = NAME_SPACE+".id_login";
+		log.debug("1.statement : \n"+statement);
+		log.debug("2.param"+userId);
+		return this.sqlSession.selectOne(statement, userId);
+		
+	}
+	
 	//TODO String으로 받을까?
 	public int id_check(String userId) throws SQLException {
 		String statement = NAME_SPACE+".id_check";

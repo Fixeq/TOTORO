@@ -120,18 +120,14 @@
 					    <form class="login-form" action="<%=cPath%>/user/loginCheck.do" method="post">
 		  					<div class="form-group">
 							    <label for="userId" class="text-uppercase">id</label>
-							    <input type="text"  id="userId" class="form-control " />
+							    <input type="text"  id="userId" name="userId" class="form-control " />
 		  					</div>
 							<div class="form-group">
 								<label for="userPw" class="text-uppercase">Password</label>
-								<input type="password" id="userPw" class="form-control" />
+								<input type="password" id="userPw" name="userPw" class="form-control" />
 							</div>
 		    
 							<div class="form-check">
-								<!-- <input type="reset" class="btn btn--stroke float-rigt"  value="Reset"/>
-								<input type="button" onclick="history.go(-1);" class="btn btn--stroke full-width" value="Cancel"/>
-								<input class="btn--primary full-width" type="submit" value="Submit" id="joinBtn">
-								<button type="submit" class="btn btn-login float-right">Submit</button> -->
 								<input type="button" class="btn float-left" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
 								<input type="submit" class="btn float-right" value="로그인"/>
 							</div>

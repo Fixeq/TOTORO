@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -107,23 +108,19 @@ public class UserController {
 	public String moveBan() {
 		return "/user/ban";
 	}
-	@RequestMapping(value = "/user/loginCheck.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/user/loginCheck.do", method = RequestMethod.POST)
 	public String loginCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response) throws Exception{
-		PrintWriter out=response.getWriter();
-
 		userVO = userSvc.loginCheck(userVO, response);
+		
 		if(null == userVO) {
-			out.println("<script>");
-			out.println("alert('잘못된 접근입니다. (controller)');");
-			out.println("</script>");
-			out.close();
 			return "";
 		}else {
 			session.setAttribute("userVO", userVO);
 			session.setAttribute("userId",userVO.getUserId());
 			session.setAttribute("userAdmin",userVO.getUserAdmin());
 			session.setAttribute("userPoint",userVO.getUserPoint());
-			return "/mainhome/main_page";
+			
+			return "/mainpage/mainpage.do";
 		}
 	}
 	
