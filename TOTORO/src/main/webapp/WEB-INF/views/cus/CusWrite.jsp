@@ -39,32 +39,66 @@
 <body>
   <section class="s-content">
   onclick="javascript:do_save();
-    <form name="cForm" id="cForm" method="get" action="save.do">
+    <form name="cForm" id="cForm" method="post" action="update.do">
+    
                     <fieldset>
 
-                        <div class="form-field">
-                            <input name="cName" type="text" id="cName" class="full-width" placeholder="Title" value="">
+                        <div class="text">
+                            <input name="cName" type="text" id="cusTitle" class="full-width" placeholder="Title" value="">
                         </div>
+                        
+                        
 
+						   
+						   
                         <div class="message form-field">
-                        <textarea name="cMessage" id="cMessage" class="full-width" placeholder="voice of Customer" ></textarea>
+                        <textarea name="cMessage" id="cusContent" class="full-width" placeholder="voice of Customer" ></textarea>
                         </div>
                          </fieldset>
 	 </form> <!-- end form -->
                         <input type="submit" class="submit btn btn--primary full-width" value="글작성하기" id="save_btn" onclick="javascript:do_save();"/>
 
-                   
+                   		
   </section>
     <script type="text/javascript">
 
-	function do_save() {		
-		if (false == confirm("저장 하시겠습니까?"))
-			return;
-		var frm = document.frm;
-		frm.action = "save.do";
-		frm.submit();
-	}
- 
+
+	$("#save_btn").on("click",function(){
+		//alert("do_save");
+		var upsert_div = $("#upsert_div").val();
+		console.log("upsert_div:"+upsert_div);
+		
+
+		if(false==confirm("등록 하시겠습니까?"))return;
+		 
+		$.ajax({
+	         type:"POST",
+	         url:"update.do",
+	         dataType:"html",// JSON
+	         data:{
+	         	"upsert_div": upsert_div,
+	         	"cusTitle": $("#cusTitle").val(),
+	         	"cusContent": $("#cusContent").val()
+	  
+	         },
+	         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+	             var parseData = $.parseJSON(data);
+	         	 if(parseData.flag=="1"){
+	         		 alert(parseData.message);
+	         		 doSearch();
+	         	 }else{
+	         		alert(parseData.message);
+	         	 }				          
+	         },
+	         complete: function(data){//무조건 수행
+	          
+	         },
+	         error: function(xhr,status,error){
+	          
+	         }
+	    });//--ajax
+		
+	});//--do_save
 
     </script>
 </body>

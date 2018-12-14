@@ -96,7 +96,7 @@
     		<h1>사용자관리</h1>
     	</div>
     	<!--// Title영역 -->
-        <form  name="frm" id="frm" action="search.do" method="get" class="form-inline">
+        <form  name="frm" id="frm" action="search.do" method="post" class="form-inline">
      	 <input type="hidden" name="page_num" id="page_num">
 		<!-- 검색영역 -->
 		<div class="row">

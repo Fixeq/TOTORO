@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+
 import com.sist.totoro.code.CodeSvc;
 import com.sist.totoro.code.CodeVO;
 import com.sist.totoro.common.SearchVO;
@@ -135,49 +136,7 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(value="/cus/update.do",method=RequestMethod.POST
-	        ,produces="application/json;charset=utf8"  
-	)
-	@ResponseBody
-	public String update(@ModelAttribute CustomerVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		String upsert_div = req.getParameter("upsert_div");
-		
-		log.info("2========================");
-		log.info("invo="+invo);
-		log.info("upsert_div="+upsert_div);
-		
-		log.info("2========================");	
-		
-		int flag = 0;
-		//수정
-		
-		//등록
-		if("update".equals(upsert_div)) {
-			flag = customerSvc.update(invo);
-			log.info("3update=================");	
-		}else {
-			flag = customerSvc.add(invo);
-			log.info("3add=================");	
-		}
-		
-		 
-		JSONObject object=new JSONObject();
-		
-		if(flag>0) {
-			object.put("flag", flag);
-			object.put("message", "등록 되었습니다.");
-		}else {
-			object.put("flag", flag);
-			object.put("message", "등록 실패^^.");			
-		}
-		
-		String jsonData = object.toJSONString();
-		
-		log.info("3========================");
-		log.info("jsonData="+jsonData);
-		log.info("3========================");			
-		return jsonData;
-	}	 
+	 
 	
 
 	
@@ -215,7 +174,7 @@ public class CustomerController {
 			}
 	
 	
-	@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.POST)
 	public String board(Locale locale, Model model) {
 		log.info("Welcome home! The client locale is {}.", locale);
 
@@ -269,5 +228,49 @@ public class CustomerController {
 		model.addAttribute("list",list);
 		return "/cus/CusList";  
 	}
-
+	
+	
+	@RequestMapping(value="/cus/update.do",method=RequestMethod.POST
+	        ,produces="application/json;charset=utf8"  
+	)
+	@ResponseBody
+	public String update(@ModelAttribute CustomerVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		String upsert_div = req.getParameter("upsert_div");
+		
+		log.info("2========================");
+		log.info("invo="+invo);
+		log.info("upsert_div="+upsert_div);
+		
+		log.info("2========================");	
+		
+		int flag = 0;
+		//수정
+		
+		//등록
+		if("update".equals(upsert_div)) {
+			flag = customerSvc.update(invo);
+			log.info("3update=================");	
+		}else {
+			flag = customerSvc.add(invo);
+			log.info("3add=================");	
+		}
+		
+		 
+		JSONObject object=new JSONObject();
+		
+		if(flag>0) {
+			object.put("flag", flag);
+			object.put("message", "등록 되었습니다.");
+		}else {
+			object.put("flag", flag);
+			object.put("message", "등록 실패^^.");			
+		}
+		
+		String jsonData = object.toJSONString();
+		
+		log.info("3========================");
+		log.info("jsonData="+jsonData);
+		log.info("3========================");			
+		return jsonData;
+	}	 
 }
