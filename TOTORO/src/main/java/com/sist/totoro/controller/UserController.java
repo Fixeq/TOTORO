@@ -1,6 +1,7 @@
 package com.sist.totoro.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -108,12 +109,22 @@ public class UserController {
 	}
 	@RequestMapping(value = "/user/loginCheck.do", method = RequestMethod.GET)
 	public String loginCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response) throws Exception{
+		PrintWriter out=response.getWriter();
+
 		userVO = userSvc.loginCheck(userVO, response);
-		session.setAttribute("userVO", userVO);
-		session.setAttribute("userId",userVO.getUserId());
-		session.setAttribute("userAdmin",userVO.getUserAdmin());
-		session.setAttribute("userPoint",userVO.getUserPoint());
-		return "/mainhome/main_page";
+		if(null == userVO) {
+			out.println("<script>");
+			out.println("alert('잘못된 접근입니다. (controller)');");
+			out.println("</script>");
+			out.close();
+			return "";
+		}else {
+			session.setAttribute("userVO", userVO);
+			session.setAttribute("userId",userVO.getUserId());
+			session.setAttribute("userAdmin",userVO.getUserAdmin());
+			session.setAttribute("userPoint",userVO.getUserPoint());
+			return "/mainhome/main_page";
+		}
 	}
 	
 }

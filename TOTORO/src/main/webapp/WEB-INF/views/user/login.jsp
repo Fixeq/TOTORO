@@ -16,137 +16,143 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>로그인</title>
+	<head>
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <style type="text/css" media="screen">
+		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-		.dohyeon {
-			font-family: 'Do Hyeon', sans-serif;
-			font-size: 30px;
-		}
-		
-		.nanum{
-			font-family: 'Nanum Gothic', sans-serif;
-		}
 
-            	        
-		/* -------------------------------------------------------------------
-		 * ## subscribe form
-		 * ------------------------------------------------------------------- */
-		.s-footer__subscribe .subscribe-form {
-		   margin: 0;
-		   padding: 0;
-/* 		   position: relative; */
-		}
-		
-		.s-footer__subscribe #mc-form {
-		   width: 100%;
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"] {
-		   width: 100%;
-		   height: 5.4rem;
-		   font-size: 1.5rem;
-		   padding: 1.2rem 100px 1.2rem 60px;
-		   background: url(../images/icons/icon-mail.svg) 20px center no-repeat, rgba(0, 0, 0, 0.1);
-		   background-size: 24px 16px, auto;
-		   margin-bottom: 1.8rem;
-		   color: rgba(255, 255, 255, 0.5);
-		   border-radius: 3px;
-		   border: none;
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"]:hover, 
-		.s-footer__subscribe #mc-form input[type="email"]:focus {
-		   color: #FFFFFF;
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"]::-webkit-input-placeholder {
-		   color: rgba(255, 255, 255, 0.2);
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"]:-moz-placeholder {
-		   color: rgba(255, 255, 255, 0.2);  /* Firefox 18- */
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"]::-moz-placeholder {
-		   color: rgba(255, 255, 255, 0.2);  /* Firefox 19+ */
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"]:-ms-input-placeholder {
-		   color: rgba(255, 255, 255, 0.2);
-		}
-		
-		.s-footer__subscribe #mc-form input[type="email"].placeholder {
-		   color: rgba(255, 255, 255, 0.2) !important;
-		}
-		
-		.s-footer__subscribe #mc-form input[type=submit] {
-		   /* position: absolute; */
-		   top: 0;
-		   right: 0;
-		   color: #FFFFFF;
-		   background: #0054a5;
-		   border-color: #0054a5;
-		   padding: 0 15px;
-		   border-radius: 0 3px 3px 0;
-		}
-		
-		.s-footer__subscribe #mc-form label {
-		   color: #FFFFFF;
-		   font-family: "metropolis-regular", sans-serif, sans-serif;
-		   font-size: 1.3rem;
-		   padding: 0 2rem;
-		}
-		
-		.s-footer__subscribe #mc-form label i {
-		   padding-right: 6px;
-		}
-		
-		.login-vertical {
-			vertical-align: middle;
-		}
-		
-     </style> 
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>로그인</title>
+
+	    <style type="text/css" media="screen">
+			
+			.login-block{
+				background: #DE6262;  /* fallback for old browsers */
+				background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+				background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+				float:left;
+				width:100%;
+				padding : 50px 0;
+			}
+			
+			.banner-sec{ min-height:500px; border-radius: 0 10px 10px 0; padding:0px 0px 0px 30px;}
+			.container{background:#fff; border-radius: 10px; box-shadow:15px 20px 0px rgba(0,0,0,0.1);}
+			.carousel-inner{border-radius:0 10px 10px 0;}
+			.carousel-caption{text-align:left; left:5%;}
+			.login-sec{padding: 50px 30px; position:relative;}
+			.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+			.login-sec .copy-text i{color:#FEB58A;}
+			.login-sec .copy-text a{color:#E36262;}
+			.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
+			.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
+			
+			/* 미사용
+			 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
+			.banner-text h2{color:#fff; font-weight:600;}
+			.banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
+			.banner-text p{color:#fff;}
+			*/
+			
+			.dohyeon {
+				font-family: 'Do Hyeon', sans-serif;
+				font-size: 30px;
+			}
+			
+			.nanum{
+				font-family: 'Nanum Gothic', sans-serif;
+			}
+	
+	            	        
+	        .s-styles { 
+	            background: #f2f2f2;
+	            padding-top: 12rem;
+	            padding-bottom: 12rem;
+	        }
+	
+	        .s-styles .section-intro h1 {
+	            margin-top: 0;
+	        }
+			
+			input[type=button] {
+			    font-weight:600;
+			    cursor:pointer;
+				border:0 none;
+			    border-radius: 10px;
+			
+				color:#DE6262;
+			    background-color:rgba(255,255,255,1.0);
+			}
+
+			input[type=submit] {
+			    font-weight:600;
+			    cursor:pointer;
+   				border:0 none;
+			    border-radius: 10px;
+
+				color:#DE6262;
+			    background-color:rgba(255,255,255,1.0);
+			}
+			
+ 			input[type=button]:hover {
+			    color:rgba(255,255,255,1.0);
+			    background-color:#DE6262;
+			}
+ 			input[type=submit]:hover {
+			    color:rgba(255,255,255,1.0);
+			    background-color:#DE6262;
+			}			
+			
+	     </style> 
      
-</head>
-<body>
- <!-- pageheader
-    ================================================== -->
-    
-
-    <!-- s-footer
-    ================================================== -->
-    <div class="s-footer login-vertical">
-    	<div class ="row narrow section-intro add-bottom text-center login-vertical">
-			<div class="col-twelve tab-full md-full end s-footer__subscribe login-vertical"> 
-				<div class="subscribe-form login-vertical">
-				    <br/><br/><br/><br/><br/>
-				    <form id="mc-form" class="group" novalidate="true">
-				
-				        <input type="email" name="EMAIL" class="email" id="mc-email" placeholder="Email Address" required="">
-						<input type="text" name="userId" class="userId" id="userId" placeholder="아이디" required="">	
-				
-				        <label for="mc-email" class="subscribe-message"></label>
-				        <input type="submit" name="subscribe" value="로그인">
-				
-				    </form>
-				</div>					
-				<p>
-				    <a class="btn btn--primary full-width" href="#0">로그인</a>
-				    <a class="btn btn--stroke full-width" href="<%=cPath%>/user/join.do">회원가입</a>
-				</p>
+	</head>
+	<body>
+	
+		<section class="login-block">
+			<div class="container">
+				<div class="row">
+					<!------------------------------------ login area ------------------------------------>
+					<div class="col-md-4 login-sec dohyeon">
+					    <h2 class="text-center">로그인</h2>
+					    <form class="login-form" action="<%=cPath%>/user/loginCheck.do" method="post">
+		  					<div class="form-group">
+							    <label for="userId" class="text-uppercase">id</label>
+							    <input type="text"  id="userId" class="form-control " />
+		  					</div>
+							<div class="form-group">
+								<label for="userPw" class="text-uppercase">Password</label>
+								<input type="password" id="userPw" class="form-control" />
+							</div>
+		    
+							<div class="form-check">
+								<!-- <input type="reset" class="btn btn--stroke float-rigt"  value="Reset"/>
+								<input type="button" onclick="history.go(-1);" class="btn btn--stroke full-width" value="Cancel"/>
+								<input class="btn--primary full-width" type="submit" value="Submit" id="joinBtn">
+								<button type="submit" class="btn btn-login float-right">Submit</button> -->
+								<input type="button" class="btn float-left" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
+								<input type="submit" class="btn float-right" value="로그인"/>
+							</div>
+						</form>
+						<div class="copy-text">평생을 당신과 같이 가겠습니다..<i class="fa fa-heart"></i></div>
+					</div>
+					<!------------------------------------ login area ------------------------------------>
+					<!------------------------------------ banner ------------------------------------>
+					<div class="col-md-8 banner-sec">
+						<div id="carouselExampleIndicators" class="carousel" data-ride="carousel">
+		            		<div class="carousel-inner" role="listbox">
+								<div class="carousel-item active">
+									<img class="d-block img-fluid" src="<%=cPath%>/resources/images/ban/로고.png">
+								</div>
+		            		</div>	   
+						</div>
+					</div>
+					<!------------------------------------ banner ------------------------------------>
+				</div>
 			</div>
-		</div>
-        
-
-
-    </div> <!-- end s-footer -->
-
-                
-
-
-</body>
+		</section>
+	</body>
 </html>
