@@ -110,7 +110,7 @@ public class CrossController {
 		if(flag == 0) {
 			
 		}
-		return "redirect:/cross/adminView.do";
+		return "redirect:/cross/view.do?level=1";
 		
 	}
 
