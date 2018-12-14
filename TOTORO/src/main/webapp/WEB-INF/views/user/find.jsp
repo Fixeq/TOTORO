@@ -1,26 +1,72 @@
+<%@page import="java.util.List"%>
+<%@page import="org.slf4j.LoggerFactory"%>
+<%@page import="org.slf4j.Logger"%>
+<%@ page import="com.sist.totoro.domain.UserVO"%>
+<%@ page import="com.sist.totoro.code.CodeVO" %>
+<%@ page import="com.sist.totoro.common.StringUtil" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%
+	String cPath = request.getContextPath(); //totoro
+    Logger log = LoggerFactory.getLogger(this.getClass());
+    log.info("cPath:"+cPath);
+
+%>	
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디찾기,비밀번호 찾기</title>
-</head>
-<body>
-	<section class="s-content">
-		<table>
-			<tr>
-				<td>아디비번찾기</td>
-				<td>1</td>
-				<td>2</td>
-			</tr>
-			<tr>
-				<td>웃어?</td>
-				<td>1</td>
-				<td>2</td>
 
-			</tr>
-		</table>
-	</section>
+<script>
+	
+	
+
+
+</script>
+
+
+<title>아이디찾기, 비밀번호찾기</title>
+
+    <style type="text/css" media="screen">
+
+		.dohyeon {
+			font-family: 'Do Hyeon', sans-serif;
+			font-size: 30px;
+		}
+		
+		.nanum{
+			font-family: 'Nanum Gothic', sans-serif;
+		}
+		
+        .s-styles { 
+            background: #f2f2f2;
+            padding-top: 12rem;
+            padding-bottom: 12rem;
+        }
+
+        .s-styles .section-intro h1 {
+            margin-top: 0;
+        }
+     </style> 
+
+
+
+
+</head>
+<body id="top">
+
+<!-- styles
+    ================================================== -->
+
+    <section id="styles" class="s-styles">
+        <div class="row narrow section-intro add-bottom text-center">
+            <div class="col-twelve tab-지full">
+                <h1 class="dohyeon">아이디찾기, 비밀번호찾기</h1>
+            </div>
+        </div>
+    </section> <!-- end styles -->
+
 </body>
 </html>
