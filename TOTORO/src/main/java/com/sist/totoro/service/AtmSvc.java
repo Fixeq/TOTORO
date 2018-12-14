@@ -29,6 +29,16 @@ public interface AtmSvc{
 	
 	List<AtmVo> adDePsAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 
+
+	int do_deleteMulti(List<AtmVo> list) throws RuntimeException, SQLException;
+
+	int delete(AtmVo atmVo);
+
+	int deAdd(AtmVo atmVo);
+	
+	int do_depositMulti(List<AtmVo> list) throws RuntimeException, SQLException;
+
+
 }
 
 

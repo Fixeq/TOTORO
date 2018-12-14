@@ -3,6 +3,8 @@ package com.sist.totoro.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import com.sist.totoro.domain.AtmVo;
 
 @Service
 public class AtmSvcImple implements AtmSvc {
+	private Logger log = LoggerFactory.getLogger(AtmSvcImple.class);
 
 	@Autowired AtmDao atmDao;
 	
@@ -50,5 +53,60 @@ public class AtmSvcImple implements AtmSvc {
 			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
 
 		return atmDao.adDePsAll(searchVO);
+	}
+	
+	
+	@Override
+	public int delete(AtmVo atmVo) {
+	
+		return atmDao.delete(atmVo);
+	}
+	
+	@Override
+	public int deAdd(AtmVo atmVo) {
+		
+		return atmDao.deAdd(atmVo);
+	}
+	
+	@Override
+	public int do_deleteMulti(List<AtmVo> list) throws RuntimeException, SQLException {
+		int flag = 0;
+		try {
+			for(AtmVo vo :list) {
+				flag+=atmDao.delete(vo);
+			}
+			
+		}catch(RuntimeException e) {
+			log.debug("========================");
+			log.debug("RuntimeException: "+e.getMessage());
+			log.debug("========================");			
+			throw e;
+		}
+		log.debug("========================");
+		log.debug("=flag="+flag);
+		log.debug("========================");
+		return flag;
+	}
+
+	@Override
+	public int do_depositMulti(List<AtmVo> list) throws RuntimeException, SQLException {
+		int flag = 0;
+		try {
+			for(AtmVo vo :list) {
+				flag+=atmDao.adDeGet(vo);
+				atmDao.adReqDeGet(vo);
+				
+			}
+			
+		}catch(RuntimeException e) {
+			log.debug("========================");
+			log.debug("RuntimeException: "+e.getMessage());
+			log.debug("========================");			
+			throw e;
+		}
+		log.debug("========================");
+		log.debug("=flag="+flag);
+		log.debug("========================");
+		return flag;
 	}
 }
