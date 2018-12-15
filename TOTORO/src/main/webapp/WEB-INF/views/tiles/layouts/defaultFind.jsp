@@ -19,23 +19,6 @@
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="<%=context%>/resources/css/base.css">
-    <link rel="stylesheet" href="<%=context%>/resources/css/vendor.css">
-    <link rel="stylesheet" href="<%=context%>/resources/css/main.css">
-
-    <!-- script
-    ================================================== -->
-    <script src="<%=context%>/resources/js/modernizr.js"></script>
-    <script src="<%=context%>/resources/js/pace.min.js"></script>
-    
-    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
-    <script src="<%=context%>/resources/js/plugins.js"></script>
-    <script src="<%=context%>/resources/js/main.js"></script>
-
-    
-
     <!-- favicons
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -46,6 +29,5 @@
 </head>
 <body>
                 <tiles:insertAttribute name="body"  />
-                <tiles:insertAttribute name="footer"  />            
 </body>
 </html>

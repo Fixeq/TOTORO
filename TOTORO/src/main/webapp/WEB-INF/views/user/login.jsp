@@ -21,11 +21,6 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>로그인</title>
 
@@ -49,13 +44,6 @@
 			.login-sec .copy-text a{color:#E36262;}
 			.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
 			.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-			
-			/* 미사용
-			 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
-			.banner-text h2{color:#fff; font-weight:600;}
-			.banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
-			.banner-text p{color:#fff;}
-			*/
 			
 			.dohyeon {
 				font-family: 'Do Hyeon', sans-serif;
