@@ -287,109 +287,10 @@
 					
 				});//--do_delete
 			
-			//do_save
-			//등록
-			$("#do_save").on("click",function(){
-				//alert("do_save");
-				var upsert_div = $("#upsert_div").val();
-				console.log("upsert_div:"+upsert_div);
-				var tmpLevel = "BASIC";
-				 
-				if($("#userIntLevel").val()=="1"){
-				     tmpLevel = "BASIC";
-				}else if($("#userIntLevel").val()=="2"){
-				     tmpLevel = "SILVER";
-				}else if($("#userIntLevel").val()=="3"){
-					 tmpLevel = "GOLD";
-				}  
-				 
-				if(false==confirm("등록 하시겠습니까?"))return;
-				 
-				$.ajax({
-			         type:"POST",
-			         url:"update.do",
-			         dataType:"html",// JSON
-			         data:{
-			         	"upsert_div": upsert_div,
-			         	"userId": $("#userId").val(),
-			         	"name": $("#name").val(),
-			         	"password": $("#password").val(),
-			         	"userIntLevel": $("#userIntLevel").val(),
-			         	"login": $("#login").val(),
-			         	"recommend": $("#recommend").val(),
-			         	"email": $("#email").val()
-			         },
-			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-			             var parseData = $.parseJSON(data);
-			         	 if(parseData.flag=="1"){
-			         		 alert(parseData.message);
-			         		 doSearch();
-			         	 }else{
-			         		alert(parseData.message);
-			         	 }				          
-			         },
-			         complete: function(data){//무조건 수행
-			          
-			         },
-			         error: function(xhr,status,error){
-			          
-			         }
-			    });//--ajax
-				
-			});//--do_save
+
 			
 			
-			$("#do_update").on("click",function(){
-				 if(false==confirm("수정 하시겠습니까?"))return;
-				  
-				 var upsert_div = $("#upsert_div").val();
-				 upsert_div = (upsert_div == "")?"update":"";
-				 console.log("upsert_div:"+upsert_div);
-				 var tmpLevel = "BASIC";
-				 
-				 if($("#userIntLevel").val()=="1"){
-					 tmpLevel = "BASIC";
-				 }else if($("#userIntLevel").val()=="2"){
-					 tmpLevel = "SILVER";
-				 }else if($("#userIntLevel").val()=="3"){
-					 tmpLevel = "GOLD";
-				 }
-				 
-				 
-				 
-			     $.ajax({
-			         type:"POST",
-			         url:"update.do",
-			         dataType:"html",// JSON
-			         data:{
-			         	"upsert_div": upsert_div,
-			         	"userId": $("#userId").val(),
-			         	"name": $("#name").val(),
-			         	"password": $("#password").val(),
-			         	"userIntLevel": $("#userIntLevel").val(),
-			         	"login": $("#login").val(),
-			         	"recommend": $("#recommend").val(),
-			         	"email": $("#email").val()
-			         },
-			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-			             var parseData = $.parseJSON(data);
-			         	 if(parseData.flag=="1"){
-			         		 alert(parseData.message);
-			         		 doSearch();
-			         	 }else{
-			         		alert(parseData.message);
-			         	 }
-			         },
-			         complete: function(data){//무조건 수행
-			          
-			         },
-			         error: function(xhr,status,error){
-			          
-			         }
-			        });//--ajax					
-				
-				
-			});//--do_update
+
 			
 			
 			$("#listTable>tbody").on("click","tr",function(){
@@ -397,7 +298,7 @@
 				
 				var tr = $(this);
 				var td = tr.children();
-				var cusSeq = td.eq(2).text();
+				var cusSeq = td.eq(1).text();
 			
 				
 				if(""==cusSeq)return;
@@ -411,16 +312,8 @@
 		            },
 		            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 		              var parseData = $.parseJSON(data);
-		              /* console.log("3 parseData.u_id="+parseData.u_id);
-		              console.log("3 parseData.name="+parseData.name);
-		              console.log("3 parseData.password="+parseData.password);
-		              console.log("3 parseData.login="+parseData.login);
-		              console.log("3 parseData.recommend="+parseData.recommend);
-		              console.log("3 parseData.email="+parseData.email);
-		              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
-		              console.log("3 parseData.regDt="+parseData.regDt); */
+
 		              
-		              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
 		              
 		              $("#cusSeq").val(parseData.cusSeq);
 		              $("#userId").val(parseData.userId);
@@ -431,7 +324,6 @@
 		              $("#cusRegDt").val(parseData.cusRegDt);
 		              
 		              
-		              $("#userId").prop("disabled",true);
 		            },
 		            complete: function(data){//무조건 수행
 		             
