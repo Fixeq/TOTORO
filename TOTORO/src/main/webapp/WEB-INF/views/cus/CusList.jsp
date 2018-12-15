@@ -200,11 +200,7 @@
    	 
     }
 
-    function onReset(){
-   	 $("#upsert_div").val("save");
-   	 $("#userId").prop("disabled",false);
-   	 
-    }
+ 
 	 //check 전체 선택
     function checkAll(){
    	 //alert("checkAll");

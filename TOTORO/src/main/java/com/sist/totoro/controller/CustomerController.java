@@ -140,38 +140,7 @@ public class CustomerController {
 	
 
 	
-	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST
-	        ,produces="application/json;charset=utf8"  
-	)
-			@ResponseBody
-			public String get(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-			String cusSeq = req.getParameter("cusSeq");
-			log.info("2========================");
-			log.info("get=");
-			log.info("2========================");	
-			CustomerVO customerVO=new CustomerVO();
-			customerVO.setCusSeq(cusSeq);
-			
-			//JSON Convertor
-			CustomerVO outVO = customerSvc.get(customerVO);
-			JSONObject object=new JSONObject();   
-			object.put("cusSeq", outVO.getCusSeq());
-			object.put("userId", outVO.getUserId());
-			object.put("cusCat", outVO.getCusCat());
-			object.put("cusTitle", outVO.getCusTitle());   
-			object.put("cusContent", outVO.getCusContent());
-			object.put("cusRegDt", outVO.getCusRegDt());
-			object.put("cusReply", outVO.getCusReply());
 
-			 
-			String jsonData = object.toJSONString();
-			
-			log.info("3========================");
-			log.info("jsonData="+jsonData);
-			log.info("3========================");			
-			model.addAttribute("vo", customerSvc.get(customerVO));
-			return jsonData;
-			}
 	
 	
 	@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.POST)
@@ -272,5 +241,40 @@ public class CustomerController {
 		log.info("jsonData="+jsonData);
 		log.info("3========================");			
 		return jsonData;
-	}	 
+	}	
+	
+	
+	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST
+	        ,produces="application/json;charset=utf8"  
+	)
+	@ResponseBody
+	public String get(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	String cusSeq = req.getParameter("cusSeq");
+	log.info("2========================");
+	log.info("get=");
+	log.info("2========================");	
+	CustomerVO customerVO=new CustomerVO();
+	customerVO.setCusSeq(cusSeq);
+	
+	//JSON Convertor
+	CustomerVO outVO = customerSvc.get(customerVO);
+	JSONObject object=new JSONObject();   
+	object.put("cusSeq", outVO.getCusSeq());
+	object.put("userId", outVO.getUserId());
+	object.put("cusCat", outVO.getCusCat());
+	object.put("cusTitle", outVO.getCusTitle());   
+	object.put("cusContent", outVO.getCusContent());
+	object.put("cusRegDt", outVO.getCusRegDt());
+	object.put("cusModid", outVO.getCusModid());
+	object.put("cusModdt", outVO.getCusModdt());
+	object.put("cusReply", outVO.getCusReply());
+	
+	String jsonData = object.toJSONString();
+
+	log.info("3========================");
+	log.info("jsonData="+jsonData);
+	log.info("3========================");			
+	model.addAttribute("vo", customerSvc.get(customerVO));
+	return jsonData;
+	}
 }
