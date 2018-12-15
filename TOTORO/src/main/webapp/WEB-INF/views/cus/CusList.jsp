@@ -123,8 +123,11 @@
 			</form>
 		  </div>	
 		</div>
-		<!--// 검색영역----------------------------------------------------->
 
+		<form  name="bofrm" id="bofrm" action="do_search_one.do" method="post" class="form-inline">
+			<input type="hidden" name="cusSeq" id="cusSeq">
+		</form>
+		
 		
 		<!-- Grid영역 -->류
 		<div class="table-responsive" >
@@ -293,50 +296,20 @@
 				});//--do_delete
 			
 
-			
-			
-
-			
-			
 			$("#listTable>tbody").on("click","tr",function(){
 				console.log("1 #listTable>tbody");
 				
 				var tr = $(this);
 				var td = tr.children();
 				var cusSeq = td.eq(1).text();
-			
 				
 				if(""==cusSeq)return;
 				
-		        $.ajax({
-		            type:"POST",
-		            url:"do_search_one.do",
-		            dataType:"html",// JSON
-		            data:{
-		            "cusSeq": cusSeq
-		            },
-		            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		              var parseData = $.parseJSON(data);
-
-		              
-		              
-		              $("#cusSeq").val(parseData.cusSeq);
-		              $("#userId").val(parseData.userId);
-		              $("#cusCat").val(parseData.cusCat);
-		              
-		              $("#cusTitle").val(parseData.cusTitle);
-		              $("#cusReply").val(parseData.cusReply);
-		              $("#cusRegDt").val(parseData.cusRegDt);
-		              
-		              
-		            },
-		            complete: function(data){//무조건 수행
-		             
-		            },
-		            error: function(xhr,status,error){
-		             
-		            }
-		       }); //--ajax
+		     	 var frm = document.bofrm;
+		     	 frm.cusSeq.value = cusSeq;
+		     	 frm.action = "do_search_one.do";
+		     	 frm.submit();
+		     	 alert('전송');
 				
 			});//--#listTable>tbody
 			

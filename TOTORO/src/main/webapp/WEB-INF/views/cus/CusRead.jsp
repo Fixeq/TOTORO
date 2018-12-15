@@ -26,20 +26,27 @@
     
                     <fieldset>
 
-                        <div class="text">
-                            <input name="cName" type="text" id="cusTitle" class="full-width" placeholder="Title" value="${customerVo.getCusSeq() }">
-                        </div>
-                        
-                        
+                     <section class="s-content s-content--narrow">
 
-						   
-						   
-                        <div class="message form-field">
-                        <textarea name="cMessage" id="cusContent" class="full-width" placeholder="voice of Customer" ></textarea>
-                        </div>
+        <div class="row">
+
+            <div class="s-content__header col-full">
+                <h1 class="s-content__header-title">
+						<c:out value="${vo.cusTitle}"></c:out>
+                </h1>
+            </div> <!-- end s-content__header -->
+    
+            
+
+            <div class="col-full s-content__main">
+
+                <p class="lead"><c:out value="${vo.cusContent}"></c:out></p>
+                
+                
+                </div>
                          </fieldset>
 	 </form> <!-- end form -->
-                        <input type="submit" class="submit btn btn--primary full-width" value="글작성하기" id="save_btn" onclick="javascript:do_save();"/>
+                        <input type="submit" class="submit btn btn--primary full-width" value="답변작성하기" id="save_btn" onclick="javascript:do_save();"/>
 
                    		
   </section>
