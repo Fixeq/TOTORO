@@ -38,7 +38,7 @@
 </head>
 <body>
   <section class="s-content">
-  onclick="javascript:do_save();
+ 
     <form name="cForm" id="cForm" method="post" action="update.do">
     
                     <fieldset>

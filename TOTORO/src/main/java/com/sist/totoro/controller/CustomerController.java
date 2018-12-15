@@ -132,10 +132,20 @@ public class CustomerController {
 		log.info("3========================");
 		log.info("jsonData="+jsonData);
 		log.info("3========================");			
+		
 		return jsonData;
 	}
 	
-	
+	@RequestMapping(value = "/cus/readpage.do", method = RequestMethod.POST)
+	public String read(Locale locale, Model model) {
+		log.info("Welcome home! The client locale is {}.", locale);
+
+		
+		
+		
+
+		return "/cus/CusRead";
+	}
 	 
 	
 

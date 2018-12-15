@@ -115,7 +115,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
+					<button type="button" class="btn btn-default btn-sm" id="do_readpage" onclick="javascript:doReadPage();">읽기 페이지로</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
 					
 					
@@ -225,6 +225,13 @@
       	 frm.action = "writepage.do";
       	 frm.submit();
        }
+    
+    function doReadPage(){
+     	 var frm = document.frm;
+     	 frm.page_num.value =1;
+     	 frm.action = "readpage.do";
+     	 frm.submit();
+      }
 
      $(document).ready(function(){   
 			//alert("ready");
