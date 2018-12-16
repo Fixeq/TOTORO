@@ -4,18 +4,32 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <style type="text/css" media="screen">
+        .s-styles { 
+            background: #f2f2f2;
+            padding-top: 12rem;
+            padding-bottom: 12rem;
+        }
+
+        .s-styles .section-intro h1 {
+            margin-top: 0;
+        }
+     </style> 
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<section class="s-content">
 
+
+<section class="s-content">
 	<table id = "myBetTable">
 		<thead>
 			<tr>
-					<td class="text-center">게임번호</td>
+					<td class="text-center" >게임번호</td>
 					<td class="text-center">구매일시</td>
-					<td class="text-center">구매금액</td>
+					<td class="text-center" >구매금액</td>
 					<td class="text-center">상태</td>
 			</tr>
 		</thead>
@@ -24,10 +38,10 @@
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="myBetVO">
 								<tr id = "${myBetVO.betSeq}">
-									<td class="text-center"><c:out value="${myBetVO.betSeq}"></c:out></td>
-									<td class="text-center"><c:out value="${myBetVO.betDate}"></c:out></td>
-									<td class="text-center"><c:out value="${myBetVO.betCash}"></c:out></td>
-									<td class="text-center"><c:out value="${myBetVO.betResultString}"></c:out></td>
+									<td class="text-center" width="25%"><c:out value="${myBetVO.betSeq}"></c:out></td>
+									<td class="text-center" width="25%"><c:out value="${myBetVO.betDate}"></c:out></td>
+									<td class="text-center" width="25%"><c:out value="${myBetVO.betCash}"></c:out></td>
+									<td class="text-center" width="25%"><c:out value="${myBetVO.betResultString}"></c:out></td>
 									<tr id = "${myBetVO.betSeq}">
 										
 								</tr>
@@ -74,7 +88,7 @@
             	
             	for(var i = 0 ; i <myson.length;i++){
     				var tmpHtml = "";
-            		tmpHtml2 = "<tr><td>"+myson[i].gameSeq+"</td><td>"+myson[i].getBetSeq+"</td><td>"+myson[i].getBetChoice+"</td><td>"+myson[i].getGameHome+"</td><td>"+myson[i].getGameAway+"</td><td>"+myson[i].getGameHp+"</td><td>"+myson[i].getGameDp+"</td><td>"+myson[i].getGameAp+"</td><td>"+myson[i].getGameResult+"</td></tr>";
+            		tmpHtml2 = "<tr><td>"+myson[i].getBetSeq+"</td><td>"+myson[i].gameSeq+"</td><td>"+myson[i].getGameHome+"</td><td>"+myson[i].getGameAway+"</td><td>"+myson[i].getGameHp+"</td><td>"+myson[i].getGameDp+"</td><td>"+myson[i].getGameAp+"</td><td>"+myson[i].getBetChoice+"</td><td>"+myson[i].getGameResult+"</td></tr>";
 
             		$("#"+itr).after(tmpHtml2);
             	
@@ -83,7 +97,7 @@
             	
             	
             	
-        		tmpHtml = "<td>gameSeq</td><td>betSeq</td><td>betChoice</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>gameResult</td></tr>";
+        		tmpHtml = "<tr><td>betSeq</td><td>gameSeq</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>betChoice</td><td>gameResult</td></tr>";
         		$("#"+itr).after(tmpHtml);
 
             	

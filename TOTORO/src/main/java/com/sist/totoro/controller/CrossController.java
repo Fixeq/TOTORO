@@ -72,18 +72,24 @@ public class CrossController {
 		String userLevel = (String) session.getAttribute("userAdmin");
 		
 		String returnUrl = null;
-		if(userLevel.equals("1")) {
-			List<CrossVO> noList = crossSvc.do_selectNoResult();
-			List<CrossVO> yesList = crossSvc.do_selectYesResult();
-
-			model.addAttribute("noList", noList);
-			model.addAttribute("yesList", yesList);
+		try {
 			
-			returnUrl =  "/cross/adminView";
-		}else {
-			List<CrossVO> list = crossSvc.do_selectLimit();
-			model.addAttribute("list", list);
-			returnUrl = "/cross/userView";
+			if(userLevel.equals("1")) {
+				List<CrossVO> noList = crossSvc.do_selectNoResult();
+				List<CrossVO> yesList = crossSvc.do_selectYesResult();
+	
+				model.addAttribute("noList", noList);
+				model.addAttribute("yesList", yesList);
+				
+				returnUrl =  "/cross/admin";
+			}else{
+				List<CrossVO> list = crossSvc.do_selectLimit();
+				model.addAttribute("list", list);
+				returnUrl = "/cross/user";
+			}
+		}catch(NullPointerException npe) {
+			returnUrl = "/user/login";
+			
 		}
 		return returnUrl;
 	}
@@ -114,8 +120,6 @@ public class CrossController {
 		String userId = (String) session.getAttribute("userId");
 		String userLevel = (String) session.getAttribute("userAdmin");
 
-		
-		String returnPage = "/cross/view";
 		
 		String gameHome =  req.getParameter("gameHome");
 		String varHp =  req.getParameter("gameHp");
