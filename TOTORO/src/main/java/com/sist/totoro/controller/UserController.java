@@ -10,15 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.totoro.code.CodeSvc;
@@ -41,6 +44,7 @@ public class UserController {
 	private CodeSvc codeSvc;
 //	private CodeSvcImple codeSvc;
 	
+	//회원가입 화면 이동
 	@RequestMapping(value = "/user/join.do", method = RequestMethod.GET)
 	public String moveJoin(HttpServletRequest req) {
 		CodeVO  codeVO2=new CodeVO();		
@@ -60,13 +64,35 @@ public class UserController {
 		return "/user/join";
 	}
 	
+	//아이디,비밀번호 화면 이동
 	@RequestMapping(value = "/user/find.do", method = RequestMethod.GET)
-	public String moveFind() {
+	public String moveFind(HttpServletRequest req) {
+		
+		CodeVO  codeVO2=new CodeVO();		
+		codeVO2.setCd_id("C002");
+		//지네릭 이상할 수도 있음.
+		List<CodeVO> cdListC002 = (List<CodeVO>) codeSvc.do_retrieve(codeVO2);
+		//codeVO 쓸것들 할당 필요
+		//C002	비밀번호찾기질문
+		
+		req.setAttribute("cdListC002", cdListC002);
+		
 		return "/user/find";
+	}
+
+	//로그인 화면으로 이동
+	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
+	public String moveLogin() {
+		return "/user/login";
+	}
+	//밴유저 밴화면으로 이동
+	@RequestMapping(value = "/user/ban.do", method = RequestMethod.GET)
+	public String moveBan() {
+		return "/user/ban";
 	}
 	
 	
-	//중복 검사(AJAX)
+	//회원가입 중복 검사(AJAX)
 	@RequestMapping(value = "/user/check_id.do", method = RequestMethod.POST)
 	public void check_id(@RequestParam("userId") String userId, HttpServletResponse response) throws Exception{
 		userSvc.idCheck(userId, response);
@@ -84,12 +110,15 @@ public class UserController {
 		userSvc.accountCheck(userAccount, response);
 	}
 	
+	
+	
 	//이메일 확인 인증
 	@RequestMapping(value="/user/email_verify.do", method = RequestMethod.POST)
 	public void email_verify(@ModelAttribute UserVO userVO, HttpServletResponse response) throws IOException {
 		userSvc.email_verify(userVO, response);
 	}
 	
+	//회원가입하기.
 	@RequestMapping(value="/user/save.do", method=RequestMethod.POST)
 	public void joinUser(@ModelAttribute UserVO userVO, 
 			RedirectAttributes rttr, HttpServletResponse response
@@ -100,14 +129,9 @@ public class UserController {
 		
 	}
 	
-	@RequestMapping(value = "/user/login.do", method = RequestMethod.GET)
-	public String moveLogin() {
-		return "/user/login";
-	}
-	@RequestMapping(value = "/user/ban.do", method = RequestMethod.GET)
-	public String moveBan() {
-		return "/user/ban";
-	}
+
+	
+	//로그인하기 : 세션부여
 	@RequestMapping(value = "/user/loginCheck.do", method = RequestMethod.POST)
 	public String loginCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response) throws Exception{
 		userVO = userSvc.loginCheck(userVO, response);
@@ -125,13 +149,53 @@ public class UserController {
 		return "redirect:/mainpage/mainpage.do";
 	}
 	
+	//로그아웃하기 : 세션 삭제
 	@RequestMapping(value = "/user/logout.do", method = RequestMethod.GET)
-	public String logout(HttpSession session, HttpServletResponse response) throws Exception{
+	public String logOut(HttpSession session, HttpServletResponse response) throws Exception{
 		session.invalidate();
 		return "redirect:/user/login.do";
 //		return "/user/login";
 	}
 	
+	
+	@RequestMapping(value = "/user/find_id.do", method = RequestMethod.POST
+			,produces="application/json;charset=utf8")
+	@ResponseBody
+	public String findId(HttpServletRequest req ) throws Exception {
+		
+		
+		String userEmail = req.getParameter("userEmail");
+		log.info("controller userEmail not yet into service : "+userEmail);
+		
+		String userId = userSvc.findId(userEmail);
+		log.info("controller userId into service return userId: "+userId);
+		
+		JSONObject object = new JSONObject();
+		
+		if(null!=userId) {
+			object.put("userId", userId);
+			object.put("message", "찾기완료.");
+		}else {
+			object.put("userId", userId);
+			object.put("message", "찾기 실패^^.");			
+		}		
+		
+		String jsonData = object.toJSONString();	
+		return jsonData;
+	}	
+
+	@RequestMapping(value = "/user/find_pw.do", method = RequestMethod.POST)
+	public void findPw(@ModelAttribute UserVO userVO, HttpServletResponse res) throws Exception {
+		
+		
+		log.info("controller userVO not yet into service : "+userVO);
+		log.info("controller userId not yet into service : "+userVO.getUserId());
+		log.info("controller getUserFindA not yet into service : "+userVO.getUserFindA());
+		log.info("controller getUserFindQ not yet into service : "+userVO.getUserFindQ());
+		
+		userSvc.findPw(res, userVO);
+		
+	}	
 }
 
 

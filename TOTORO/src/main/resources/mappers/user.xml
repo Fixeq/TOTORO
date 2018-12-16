@@ -64,7 +64,7 @@
 	<!--(기본값)userPoint:1000, userAppStt:false, userAdmin:0 -->
 	
 	
-	<insert id="do_save" parameterType="DTO">
+	<insert id="do_save" parameterType="UserVO">
 	INSERT INTO to_users (
     	userId,    userPw,    userEmail,    userName,    userBank,
     	userAccount,    userTel,    userFindQ,    userFindA,    userAdmin,
@@ -94,18 +94,18 @@
 	</update>
 	
 	<!--관리자 승인 : 이메일 인증 후 관리자가 승인, 인증상태 true 로변경 -->
-	<update id="user_verify" parameterType="DTO">
+	<update id="user_verify" parameterType="UserVO">
 		UPDATE to_users SET userAppStt='true'
 		 WHERE userId=#{userId}
 	</update>
 	
 	<!--정보찾기 : 아이디 찾기 -->
-	<select id="id_find" parameterType="DTO" resultType="String">
+	<select id="id_find" parameterType="String" resultType="String">
 		SELECT userId FROM to_users WHERE userEmail=#{userEmail}
 	</select>
 	
 	<!--정보찾기 : 비밀번호 찾기 확인(1:성공, 이 외 실패)-->
-	<select id="pw_find" parameterType="DTO" resultType="java.lang.Integer">
+	<select id="pw_find" parameterType="UserVO" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM to_users 
 		 WHERE userId=#{userId}
 		   AND userFindQ=#{userFindQ}
@@ -113,7 +113,7 @@
    	</select>
 	
 	<!--정보찾기 : 임시비밀번호로 변경 -->
-	<update id="pw_random_update"  parameterType="DTO">
+	<update id="pw_random_update"  parameterType="UserVO">
 		UPDATE to_users          
 		   SET userPw=#{userPw}
  		 WHERE userId=#{userId}
@@ -128,7 +128,7 @@
 				userAdmin, userPoint, userModId, userAppStt, userAppKey)
 	관리자(read_only :  Id, AppKey)
 	-->
-	<select id="do_selectOne" parameterType="DTO" resultType="UserVO">
+	<select id="do_selectOne" parameterType="UserVO" resultType="UserVO">
 		SELECT userId, userPw, userEmail, userName, userBank,
 				userAccount, userTel, userFindQ, userFindA,
 				userAdmin, userPoint, userRegDt, userModId,
@@ -139,7 +139,7 @@
 
 
 	<!--개인정보 변경 :일반회원   -->
-	<update id="do_update" parameterType="DTO">
+	<update id="do_update" parameterType="UserVO">
 		UPDATE to_users
 		   SET userPw   =#{userPw}
 		     ,userTel   =#{userTel}
@@ -153,7 +153,7 @@
 
  	
 	<!--개인정보 변경 :관리자   -->
-	<update id="do_update_admin" parameterType="DTO">
+	<update id="do_update_admin" parameterType="UserVO">
 		UPDATE to_users
 		   SET userPw =#{userPw}
 		     ,userEmail =#{userEmail}
@@ -172,12 +172,12 @@
 	</update>
 	
 	<!--회원탈퇴 -->
-	<delete id="do_delete" parameterType="DTO">
+	<delete id="do_delete" parameterType="UserVO">
 		DELETE FROM to_users WHERE userId=#{userId}
 	</delete>
 	
 	<!--졸업시키기 -->
-	<update id="user_ban" parameterType="DTO">
+	<update id="user_ban" parameterType="UserVO">
 		UPDATE to_users SET userAppStt='ban' WHERE userId=#{userId}
 	</update>
 	

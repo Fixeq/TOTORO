@@ -11,7 +11,6 @@
 	String cPath = request.getContextPath(); //totoro
     Logger log = LoggerFactory.getLogger(this.getClass());
     log.info("cPath:"+cPath);
-
 %>	
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -45,21 +44,43 @@
 			padding: 0 0 25px;
 		}
 
-		.btn-success {
+		.btn-success-moo {
 			background: #23bab5;
 			border-radius:0;
 			border: 2px solid #23bab5;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
+			padding: 0, 0, 20%, 0;
 		}
 		
-		.btn-success:hover,.btn-success:focus {
+		.btn-success-moo:hover,.btn-success-moo:focus {
 			background: rgba(26, 161, 157, 0);
 			border: 2px solid #1aa19d;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
 			color: #23BAB5;
 		}
+		
+		
+
+		input[type=submit] {
+		    font-weight:600;
+		    cursor:pointer;  
+		    background: #23bab5;
+			border-radius:0;
+			border: 2px solid #23bab5;
+			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
+			transition: all 400ms cubic-bezier(.4,0,.2,1);
+		    
+		}
+		
+		input[type=submit]:hover,input[type=submit]:focus {
+			background: rgba(26, 161, 157, 0);
+			border: 2px solid #1aa19d;
+			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
+			transition: all 400ms cubic-bezier(.4,0,.2,1);
+			color: #23BAB5;
+		}		
 		
 		a {
 			color: #23bab5;
@@ -208,8 +229,70 @@
 				width: 50%;
 			}
 		}
-
-	</style> 
+		
+		
+		
+	</style>
+	
+	<script type="text/javascript">
+	
+	$(document).ready(function(){
+		//alert("i\'m ready");
+		document.getElementById("id_found").style.visibility = "hidden";
+		$("#findId").on("click",function(){
+			
+			if(""==$("#userEmailForFindId").val()){
+				alert("이메일을 입력해주세요.");
+				return;
+			}
+			$.ajax({
+				url : "<%=cPath%>/user/find_id.do",
+				type : "POST",
+				dataType:"html",// JSON
+				data : {
+					"userEmail" : $("#userEmailForFindId").val()
+				},
+				success : function(data) {
+					var parseData = $.parseJSON(data);
+					if(null != parseData.userId){
+						document.getElementById("id_found").style.visibility = "visible";
+						$("#showId").html(parseData.userId);
+					}else{
+						alert("등록된 아이디가 없습니다.");
+					}
+				},
+			})
+		});
+		
+		
+		$("#findPw").on("click",function(){
+					
+					if(""==$("#userIdForFindPw").val()){
+						alert("아이디를 입력해주세요.");
+						return;
+					}
+					if(""==$("#userFindAForFindPw").val()){
+						alert("비밀번호 찾기 답변을 입력해주세요.");
+						return;
+					}
+					$.ajax({
+						url : "<%=cPath%>/user/find_pw.do",
+						type : "POST",
+						data : {
+							userId : $("#userIdForFindPw").val(),
+							userFindQ : $("#userFindQ option:selected").val(),
+							userFindA : $("#userFindAForFindPw").val()
+						},
+						success : function(result) {
+							alert(result);
+						},
+					})
+				});
+		//ajax
+	});
+	//document()
+	</script>
+	
 </head>
 <body>
 	<div class="container">
@@ -228,26 +311,20 @@
 				<div role="tabpanel" class="tab-pane active" id="home">
 					<div class="row">
 						<div class="col-sm-6 mobile-pull">
-							<article role="find">
+							
+ 							<article role="find">
 								<h3 class="text-center dohyeon"><i class="fa fa-lock"></i>  아이디</h3>
-								<!-- 찾았을때 변경?  -->
-								<!-- <h3 class="text-center"><i class="fa fa-unlock"></i>USER</h3> -->
-								
-								
-								<ul class="text-left">
-									<li><i class="fa fa-check nanum"></i>  가입하셨던 이메일을 입력해주세요.</li>
-								</ul>
-								<form class="signup" action="index.html" method="post">
-									
-									<div class="form-group">
-										<input type="email" class="form-control" placeholder="Email Address">
-									</div>
+								<br/><br/>
+								<div class="form-group">
+                       				<label for="userEmailForFindId" class="pull-left nanum"><i class="fa fa-check"></i>Email</label>
+									<input class="form-control" type="email" id="userEmailForFindId" name="userEmailForFindId" >
+								</div>
 
-									<div class="form-group">
-										<input type="submit" class="btn btn-success btn-block dohyeon"  value="아이디 찾기">
-									</div>
-								</form>
-							</article>
+								<div class="form-group">
+									<a id="findId" class="btn btn-success-moo dohyeon">아이디 찾기</a>
+								</div>
+							</article> 							
+							
 						</div>
 
 						<div class="col-sm-6">
@@ -255,15 +332,14 @@
 								<header class="dohyeon">
 								아이디 찾기
 								</header>
-								<ul class="text-left">
-									<li><i class="fa fa-check"></i>  Unlimited  access</li>
-									<li><i class="fa fa-check"></i>  Create Project Lists</li>
-									<li><i class="fa fa-check"></i>  Create Project Lists</li>
-									<li><i class="fa fa-check"></i>  Share Files</li>
-									<li><i class="fa fa-check"></i>   Unlimited  access</li>
-									<li><i class="fa fa-check"></i>  Unlimited  access</li>
-								</ul>
-								<a href="#" class="btn btn-success">SignUp  For Admin</a>
+								<div id="id_found">
+								 <!-- style="visibility: hidden;" -->
+									<h3 class="text-center dohyeon"><i class="fa fa-unlock"></i>아이디</h3>
+									<ul class="text-left">
+										<li><i class="fa fa-check"></i> <span id="showId"></span><br/></li>
+									</ul>
+									<a href="<%=cPath%>/user/login.do" class="btn btn-success-moo dohyeon">로그인 하러가기.</a>
+								</div>
 							</article>
 						</div>
 					</div>
@@ -276,30 +352,32 @@
 						<div class="col-sm-6 mobile-pull">
 							<article role="find">
 								<h3 class="text-center dohyeon"><i class="fa fa-lock"></i> 비밀번호</h3>
-								<form class="signup" action="index.html" method="post">
-									<div class="form-group">
-										<input type="text" class="form-control" placeholder="UserName">
-									</div>
-									<div class="form-group">
-										<input type="email" class="form-control" placeholder="Email Address">
-									</div>
-									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" class="form-control" placeholder="Confirm Password">
-									</div>
-									<div class="form-group">
-										<div class="checkbox">
-											<label>
-												<input type="checkbox"> Please accept the terms and conditions to proceed with your request.
-											</label>
-										</div>
-									</div>
-									<div class="form-group">
-										<input type="submit" class="btn btn-success btn-block"  value="SUBMIT">
-									</div>
-								</form>
+								
+								<!-- 찾았을때 변경?  -->
+								<!-- <h3 class="text-center"><i class="fa fa-unlock"></i> 비밀번호</h3> -->
+								<br/><br/>
+																
+								<div class="form-group">
+                       				<label for="userIdForFindPw" class="pull-left nanum"><i class="fa fa-check"></i>ID</label>
+									<input class="form-control" type="text" id="userIdForFindPw" name="userIdForFindPw" placeholder="ID">
+								</div>
+								<br/>
+								
+								<div class="form-group">
+                       				<label class="pull-left nanum"><i class="fa fa-check"></i>Question</label>
+                       				<div class="cl-custom-select nanum">
+                       					<%=StringUtil.makeSelectBox((List<CodeVO>)request.getAttribute("cdListC002"), "", "userFindQ", false) %>
+                       				</div>
+                      				</div>
+                      				<br/>
+                      				
+                   				<div class="form-group">
+									<label for="userFindAForFindPw" class="pull-left" ><i class="fa fa-check"></i>Answer</label>
+                      					<input class="full-width nanum" type="text"  id="userFindAForFindPw" name="userFindAForFindPw" required>
+								</div>
+								<div class="form-group">
+									<a id="findPw" class="btn btn-success-moo dohyeon">비밀번호 찾기</a>
+								</div>
 							</article>
 						</div>
 
@@ -308,15 +386,14 @@
 								<header class="dohyeon">
 								비밀번호 찾기
 								</header>
-								<ul class="text-left">
-									<li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-									<li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-									<li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-									<li><i class="fa fa-check"></i>  Unlimited Site Access</li>
-									<li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-									<li><i class="fa fa-check"></i>   Unlimited Site Access</li>
-								</ul>
-								<a href="#" class="btn btn-success">SignUp  For User</a>
+								<div id="pw_found">
+								 <!-- style="visibility: hidden;" -->
+									<h3 class="text-center dohyeon"><i class="fa fa-unlock"></i>비밀번호</h3>
+									<ul class="text-left">
+										<li><i class="fa fa-check"></i> 왼쪽의 정보를 입력하시면 이메일로 임시 비밀번호가 발송 됩니다. :)<br/></li>
+									</ul>
+									<a href="<%=cPath%>/user/login.do" class="btn btn-success-moo dohyeon">로그인 하러가기.</a>
+								</div>
 							</article>
 						</div>
 					</div>

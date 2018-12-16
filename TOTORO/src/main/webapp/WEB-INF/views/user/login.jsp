@@ -116,11 +116,11 @@
 							</div>
 		    
 							<div class="form-check">
-								<input type="button" class="btn float-left" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
-								<input type="submit" class="btn float-right" value="로그인"/>
+								<input type="button" class="btn float-left dohyeon" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
+								<input type="submit" class="btn float-right dohyeon" value="로그인"/>
 							</div>
 						</form>
-						<div class="copy-text">평생을 당신과 같이 가겠습니다..<i class="fa fa-heart"></i></div>
+						<div class="copy-text nanum">평생을 당신과 같이 가겠습니다 <i class="fa fa-heart"></i></div>
 					</div>
 					<!------------------------------------ login area ------------------------------------>
 					<!------------------------------------ banner ------------------------------------>
