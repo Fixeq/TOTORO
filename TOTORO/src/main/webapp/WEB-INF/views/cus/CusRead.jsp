@@ -22,8 +22,10 @@
 <body>
   <section class="s-content">
  
-    <form name="cForm" id="cForm" method="post" action="update.do">
-    
+    <form name="frmSave" id="frmSave" method="post" action="updatepage.do">
+    	<input type="hidden" name="cusSeq"  id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>">
+    	<input type="hidden" name="cusTitle" id="cusTitle" value="<c:out value="${vo.cusTitle}"></c:out>">
+    	<input type="hidden" name="cusContent" id="cusContent"  value="<c:out value="${vo.cusContent}"></c:out>">
                     <fieldset>
 
                      <section class="s-content s-content--narrow">
@@ -41,14 +43,36 @@
             <div class="col-full s-content__main">
 
                 <p class="lead"><c:out value="${vo.cusContent}"></c:out></p>
-                
+
                 
                 </div>
                          </fieldset>
 	 </form> <!-- end form -->
-                        <input type="submit" class="submit btn btn--primary full-width" value="답변작성하기" id="save_btn" onclick="javascript:do_save();"/>
-
+                        
+						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">수정페이지로</button>
                    		
   </section>
+  
+  
+  
+  
+   <script type="text/javascript">
+
+    
+   function doUpdatePage(){
+    	 var frm = document.frmSave;
+    	 frm.action = "updatepage.do";
+    	 frm.submit();
+     }
+    
+
+    
+
+
+			
+			
+			
+
+</script>
 </body>
 </html>

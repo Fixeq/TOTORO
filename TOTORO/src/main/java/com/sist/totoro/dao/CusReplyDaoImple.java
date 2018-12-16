@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.sist.totoro.common.DuplicateUserIdException;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.domain.CusReplyVO;
 
 @Repository
@@ -126,6 +127,8 @@ public class CusReplyDaoImple implements CusReplyDao {
 		log.debug("*****************************");
 		return list;	
 	}
+
+
 	
 
 }

@@ -10,6 +10,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sist.totoro.common.DuplicateUserIdException;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.dao.CusReplyDao;
 import com.sist.totoro.domain.CusReplyVO;
 
@@ -41,28 +42,7 @@ public class CusReplySvcImple implements CusReplySvc {
 	public int delete(CusReplyVO cusreplyVO) throws SQLException{
 		return cusreplyDao.delete(cusreplyVO);
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.sist.hr.user.service.UserSvc#update(com.sist.hr.user.domain.UserVO)
-	 */
-	@Override
-	public int update(CusReplyVO cusreplyVO) throws SQLException{
-		return cusreplyDao.update(cusreplyVO);
-	}
-	
-	/* (non-Javadoc)
-	 * @see com.sist.hr.user.service.UserSvc#getCount(java.lang.String)
-	 */
-	@Override
-	public int getCount(String userId) throws SQLException{
-		return cusreplyDao.getCount(userId);
-	}
 
-
-
-	/* (non-Javadoc)
-	 * @see com.sist.hr.user.service.UserSvc#add(com.sist.hr.user.domain.UserVO)
-	 */
 	@Override
 	public int add(CusReplyVO cusreplyVO) throws DuplicateUserIdException{
 		//TODO: return 
@@ -74,19 +54,16 @@ public class CusReplySvcImple implements CusReplySvc {
 	/* (non-Javadoc)
 	 * @see com.sist.hr.user.service.UserSvc#do_retrieve(com.sist.hr.common.SearchVO)
 	 */
-//	@Override
-//	public List<CusReplyVO> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException{
-//		return cusreplyDao.do_retrieve(searchVO);
-//	}
+	@Override
+	public List<CusReplyVO> do_retrieve(CusReplyVO cusreplyVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException{
+		return cusreplyDao.do_retrieve(cusreplyVO);
+	}
 	
 
 	/* (non-Javadoc)
 	 * @see com.sist.hr.user.service.UserSvc#get(com.sist.hr.user.domain.UserVO)
 	 */
-	@Override
-	public CusReplyVO get(CusReplyVO cusreplyVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException{
-		return  cusreplyDao.get(cusreplyVO);
-	}
+
 
 	@Override
 	public int do_deleteMulti(List<CusReplyVO> list) throws RuntimeException, SQLException {
@@ -106,6 +83,13 @@ public class CusReplySvcImple implements CusReplySvc {
 		log.debug("=flag="+flag);
 		log.debug("========================");
 		return flag;
+	}
+
+	@Override
+	public CusReplyVO get(CusReplyVO cusreplyVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
 

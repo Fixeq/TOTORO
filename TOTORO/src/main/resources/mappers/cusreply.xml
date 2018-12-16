@@ -73,6 +73,7 @@ INSERT INTO cus_reply (
 			SELECT cusr.*                                  
 				  ,ROW_NUMBER() OVER(ORDER BY crregdt desc ) AS rnum       
 			  FROM cus_reply cusr
+               WHERE cusSeq = #{cusSeq}
 		  )T
 		  WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -81,8 +82,9 @@ INSERT INTO cus_reply (
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM cus_reply cusr
+             WHERE cusSeq = #{cusSeq}
 		)Y  
-        WHERE cusseq = #{cusSeq}
+       
     </select>
 </mapper>  
 

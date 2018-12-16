@@ -51,7 +51,7 @@ public class CusReplyDaoTest {
 	
 	@Autowired
 	private CusReplyDao cusreplyDao;
-	CusReplyVO  inVO1 = new CusReplyVO("28", "22","1232","123","123","123");
+	CusReplyVO  inVO1 = new CusReplyVO("28", "","","","","");
 	CusReplyVO  inVO2 = null;
 	CusReplyVO  inVO3 = null;
 	SearchVO searchVO = null;
@@ -76,11 +76,7 @@ public class CusReplyDaoTest {
 	}
 	
 	
-	@Test
-	@Ignore
-	public void getCount() throws SQLException, ClassNotFoundException {
-		assertThat(cusreplyDao.getCount("j1"),is(11071));
-	}
+
 	
 	@Test
 	public void add_andget() throws SQLException, ClassNotFoundException {
@@ -99,7 +95,7 @@ public class CusReplyDaoTest {
 
 
 		//다건조회
-		inVO1.setCusSeq("22");
+		inVO1.setCusSeq("28");
 		List<CusReplyVO> getVO2 = cusreplyDao.do_retrieve(inVO1);
 		
 		LOG.info("getVO2:"+getVO2);
