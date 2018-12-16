@@ -24,26 +24,29 @@
   <section class="s-content">
 
 	 
-    <form name="form1" method="post" action="save.do">
-<fieldset>
+    <form name="form2" method="post" action="update.do">
+   
+<fieldset><input type="hidden" name="cusSeq"  id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>">
+    	
+    	
 
                         <div class="form-field">
-                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="" value="${vo.cusTitle}">
+                            <input name="cusTitle" type="text" id="cusTitle" class="full-width"  value="<c:out value="${vo.cusTitle}"></c:out>">
                         </div>
 
                         <div class="form-field">
-                            <input name="userId" type="text" id="userId" class="full-width" placeholder="아이디" value="">
+                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="분류" value="<c:out value="${vo.cusCat}"></c:out>">
                         </div>
 
                         <div class="form-field">
-                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="분류"  value="">
+                            <input name="cusregid" type="text" id="cusregid" class="full-width" placeholder="등록"  value="">
                         </div>
                         <div class="form-field">
-                            <input name="cusReply" type="text" id="cusReply" class="full-width" placeholder="답변여부"  value="">
+                            <input name="cusModid" type="text" id="cusModid" class="full-width" placeholder="수정자"  value="<c:out value="${vo.cusModid}"></c:out>">
                         </div>
 
                         <div class="message form-field">
-                        <textarea name="cusContent" id="cusContent" class="full-width" placeholder="내용을 수정하세요" ></textarea>
+                        <textarea name="cusContent" id="cusContent" class="full-width"  value=""><c:out value="${vo.cusContent}"></c:out></textarea>
                         </div>
 
                       
@@ -78,7 +81,7 @@
 
            
             // 폼에 입력한 데이터를 서버로 전송
-            document.form1.submit();
+            document.form2.submit();
         });
     });
     </script>

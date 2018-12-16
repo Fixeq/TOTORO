@@ -50,6 +50,7 @@
 	 </form> <!-- end form -->
                         
 						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">수정페이지로</button>
+						<button type="button" class="btn btn-default btn-sm" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>
                    		
   </section>
   
@@ -66,10 +67,12 @@
      }
     
 
-    
-
-
-			
+   function detail_delete(){
+  	 var frm = document.frmSave;
+  	 frm.action = "detail_delete.do";
+  	 frm.submit();
+   }
+  
 			
 			
 

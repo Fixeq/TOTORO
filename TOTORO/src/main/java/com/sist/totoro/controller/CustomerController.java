@@ -160,11 +160,18 @@ public class CustomerController {
 	
 	
 	//수정페이지이동
-	
 	@RequestMapping(value = "/cus/updatepage.do", method = RequestMethod.POST)
-	public String updatepage(CustomerVO vo, Model model) {
-		log.info("vo:"+vo);
-	
+	public String updatepage(HttpServletRequest req,Model model)throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		
+		String cusSeq = req.getParameter("cusSeq");
+
+		CustomerVO customerVO=new CustomerVO();
+		customerVO.setCusSeq(cusSeq);
+		CustomerVO list = customerSvc.get(customerVO);
+		
+		
+		model.addAttribute("vo", list);
+		
 		
 
 		return "/cus/CusUpdate";
@@ -178,7 +185,12 @@ public class CustomerController {
 	        return "redirect:search.do";
 	    }
 	 
-	 
+	//상세페이지삭제
+		 @RequestMapping(value="/cus/detail_delete.do", method=RequestMethod.POST)
+		    public String delete(@ModelAttribute CustomerVO vo) throws Exception{
+			 int list = customerSvc.delete(vo);
+		        return "redirect:search.do";
+		    }
 	 
 	 
 	 
