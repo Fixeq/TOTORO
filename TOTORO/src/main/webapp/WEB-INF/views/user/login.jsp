@@ -40,6 +40,7 @@
 			.carousel-inner{border-radius:0 10px 10px 0;}
 			.login-sec{padding: 50px 30px; position:relative;}
 			.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+			.login-sec .find-text{position:absolute; width:80%; bottom:100px; font-size:13px; text-align:center;}
 			.login-sec .copy-text i{color:#FEB58A;}
 			.login-sec .copy-text a{color:#E36262;}
 			.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
@@ -54,7 +55,10 @@
 				font-family: 'Nanum Gothic', sans-serif;
 			}
 	
-	            	        
+			.nanumForFind{
+				font-family: 'Nanum Gothic', sans-serif;
+				font-size:12px;
+			}	            	        
 	        .s-styles { 
 	            background: #f2f2f2;
 	            padding-top: 12rem;
@@ -120,6 +124,7 @@
 								<input type="submit" class="btn float-right dohyeon" value="로그인"/>
 							</div>
 						</form>
+						<div class="find-text nanum"><a href="<%=cPath%>/user/find.do">아이디나 비밀번호가 기억이 안나시나요?</a></div>
 						<div class="copy-text nanum">평생을 당신과 같이 가겠습니다 <i class="fa fa-heart"></i></div>
 					</div>
 					<!------------------------------------ login area ------------------------------------>

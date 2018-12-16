@@ -45,9 +45,9 @@
 		}
 
 		.btn-success-moo {
-			background: #23bab5;
+			background: #DE6262;
 			border-radius:0;
-			border: 2px solid #23bab5;
+			border: 2px solid #DE6262;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
 			padding: 0, 0, 20%, 0;
@@ -58,7 +58,7 @@
 			border: 2px solid #1aa19d;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
-			color: #23BAB5;
+			color: #DE6262;
 		}
 		
 		
@@ -66,9 +66,9 @@
 		input[type=submit] {
 		    font-weight:600;
 		    cursor:pointer;  
-		    background: #23bab5;
+		    background: #DE6262;
 			border-radius:0;
-			border: 2px solid #23bab5;
+			border: 2px solid #DE6262;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
 		    
@@ -79,11 +79,11 @@
 			border: 2px solid #1aa19d;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
-			color: #23BAB5;
+			color: #DE6262;
 		}		
 		
 		a {
-			color: #23bab5;
+			color: #DE6262;
 		}
 		
 		ul {
@@ -115,7 +115,7 @@
 		article[role="find"] h3 {
 			font-size: 26px;
 			font-weight: 300;
-			color: #23bab5;
+			color: #DE6262;
 			margin-bottom: 20px;
 		}
 		
@@ -156,7 +156,7 @@
 		
 		.nav-tab-holder .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
 			color: #FFF;
-			background-color: #23bab5;
+			background-color: #DE6262;
 			border: 0;
 			border-radius: 0;
 		}
@@ -174,7 +174,7 @@
 		}
 		
 		article[role="manufacturer"] header {
-			background: #23bab5;
+			background: #DE6262;
 			color: #fff;
 			padding: 10px;
 			font-size: 18px;
@@ -200,7 +200,7 @@
 		}
 		
 		article[role="manufacturer"] ul li i {
-			color: #23bab5;
+			color: #DE6262;
 		}
 		
 		.find-id-pw {
