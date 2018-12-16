@@ -28,7 +28,7 @@
     	<input type="hidden" name="cusContent" id="cusContent"  value="<c:out value="${vo.cusContent}"></c:out>">
                     <fieldset>
 
-                     <section class="s-content s-content--narrow">
+                     <section class	="s-content s-content--narrow">
 
         <div class="row">
 

@@ -28,7 +28,7 @@
 <fieldset>
 
                         <div class="form-field">
-                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="" value=${vo.cusTitle}>
+                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="" value="${vo.cusTitle}">
                         </div>
 
                         <div class="form-field">
