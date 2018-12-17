@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.sist.totoro.mappers.prizes">
+	
+	
+	
+	<update id="updateBetseq" parameterType="PrizesVO">
+		UPDATE to_users
+		SET
+    		userPoint = userPoint + #{betwPrice}
+    	Where userId = #{userId}
+    		AND
+     			((SELECT betReturn 
+        	FROM bet_history
+        		WHERE betSeq = #{betSeq}
+        		group by betSeq, betReturn)=0)
+        </update>
+        
+        
+    <!--  당첨 여부 수정  -->
+    <update id="updateResult" parameterType="PrizesVO">
+    	update bet_history
+		SET betReturn = '1'
+		where betSeq = #{betSeq}        
+    </update>
+    
+     <!-- select list -->
+    <select id="do_retrieve" 
+      parameterType="SearchVO"
+      resultType="PrizesVO"  >
+		SELECT X.*,Y.*
+		  FROM(
+		SELECT  T1.b1,
+                T1.b2,
+                T1.c1,
+                T1.c2,
+                  T1.b3,
+				T1.rnum AS no                             
+		  FROM(                                          
+			SELECT hr.userId as b1,
+                   hr.betSeq as b2,
+                   hr.betReturn as b3,
+                   TO_CHAR(count(betResult)) as c1,
+                   TO_CHAR(sum (betResult))  as c2,
+				   ROW_NUMBER() OVER(ORDER BY betSeq desc ) AS rnum       
+			  FROM bet_history hr             
+              group by betSeq,userId,betReturn        
+		  )T1
+		 WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
+		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
+            AND T1.c1 = T1.c2
+		)X    
+		NATURAL JOIN
+		(
+		  SELECT COUNT(*) AS total_cnt   
+		    FROM bet_history
+		    where betReturn = 0
+		)Y
+		where b3 = 0 
+    </select>
+</mapper>

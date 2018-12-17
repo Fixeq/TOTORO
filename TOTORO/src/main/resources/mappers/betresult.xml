@@ -3,11 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.sist.totoro.mappers.betresult"><sql id="baseCondition"><where><choose><when test="'10'==search_div">
+<mapper namespace="com.sist.totoro.mappers.betresult">
+<sql id="baseCondition">
+		<where>
+			<choose>
+				<when test="'10'==search_div">
 	    		    hr.gameHome like  #{search_word}||'%'
 	    		</when><when test="'20'==search_div">
 	    		    hr.gameAway like  #{search_word}||'%'
-	    		</when><otherwise/></choose></where></sql><!-- select list --><select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO">
+	    		</when>		    		
+	    		<otherwise></otherwise>
+	    	</choose>
+	 	</where>     
+</sql>
+<!-- select list -->
+<select id="do_retrieve" resultType="BetResultVO" parameterType="BetResultVO">
 		SELECT X.*,Y.*
 		  FROM(
 		SELECT T.gameDate

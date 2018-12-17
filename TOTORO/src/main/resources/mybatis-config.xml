@@ -20,5 +20,6 @@
  	 	<typeAlias alias="BetHistoryVO" type="com.sist.totoro.domain.BetHistoryVO"/>
  	 	<typeAlias alias="CusReplyVO"   type="com.sist.totoro.domain.CusReplyVO"/>
  		<typeAlias alias="CustomerVO"   type="com.sist.totoro.domain.CustomerVO"/>
+ 		<typeAlias alias="PrizesVO"   type="com.sist.totoro.domain.PrizesVO"/>
  	</typeAliases>	
 </configuration>
