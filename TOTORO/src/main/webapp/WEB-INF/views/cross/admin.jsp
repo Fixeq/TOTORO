@@ -35,7 +35,7 @@
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><input type="text" name="awayScore"></td>
 									<td class="text-center"><c:out value="${noVo.gameDate}"></c:out></td>
-									<td><input id="${noVo.gameSeq}" type="button" value="마감1" onclick="closeCross(this)"/><input type="hidden" value="${noVo.gameSeq}"></td>
+									<td><input id="${noVo.gameSeq}" type="button" value="마감1" onclick="closeCross(this)"/><input type="hidden" name= "gameSeq" value="${noVo.gameSeq}"></td>
 								</tr>
 						</form>
 					</c:forEach>					

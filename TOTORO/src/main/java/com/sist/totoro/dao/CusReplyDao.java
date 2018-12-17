@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.sist.totoro.common.DuplicateUserIdException;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.domain.CusReplyVO;
+import com.sist.totoro.domain.CustomerVO;
 
 
 public interface CusReplyDao { 
@@ -19,15 +21,7 @@ public interface CusReplyDao {
 	/**
 	 * 수정
 	 */
-	int update(CusReplyVO cusreplyVO) throws SQLException;
 	
-	/**
-	 * 조회 COUNT
-	 * @throws SQLException 
-	 */
-	int getCount(String cusreplyVO) throws SQLException;
-   
-
 	/**
 	 * 추가:115
 	 * @param userVO
@@ -38,7 +32,7 @@ public interface CusReplyDao {
 	int add(CusReplyVO cusreplyVO) throws DuplicateUserIdException;
 
 	List<CusReplyVO> getAll() throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
-	List<CusReplyVO> do_retrieve(CusReplyVO cusreplyvo) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	List<CusReplyVO> do_retrieve(CusReplyVO cusreplyVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 	
 
 	/**

@@ -66,8 +66,8 @@ public class UserSvc {
 	}
 
 	// 밴유저 조회
-	public int banUserCheck(DTO dto) throws SQLException {
-		return userDao.ban_user_check(dto);
+	public int banUserCheck(UserVO userVO) throws SQLException {
+		return userDao.ban_user_check(userVO);
 	}
 
 	// 회원가입(insert)
@@ -124,7 +124,7 @@ public class UserSvc {
 		} else {
 			userVO.setUserAppKey(create_key());
 			userDao.do_save(userVO);
-			sendEmail(userVO);
+			sendEmail(userVO,"join");
 
 			out.println("<script>");
 			out.println("alert('회원가입이 완료되었습니다.');");
@@ -137,33 +137,48 @@ public class UserSvc {
 	}
 
 	// TODO메일보내기
-	public void sendEmail(UserVO userVO) {
+	public void sendEmail(UserVO userVO, String workDiv) {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "jackpot777bytotoro";
+		String hostSMTPid = "jackpot1224bytotoro";
 		String hostSMTPpwd = "totoro1224";
-
+//		jackpot1224bytotoro
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "jackpot777bytotoro@naver.com";
+		String fromEmail = "jackpot1224bytotoro@naver.com";
 		String fromName = "ADMIN MH";
-		String subject = "TOTORO world 회원가입 인증입니다.";
+		String subject = "";
 		String msg = "";
 
+		
+		if(workDiv.equals("join")) {
 		// 회원가입 메일 내용
-		msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
-		msg += "<h3 style='color: blue;'>";
-		msg += userVO.getUserId() + "님 회원가입을 환영합니다.</h3>";
-		msg += "<h3 style='color: black;'>";
-		msg += "언제나 토토로월드에 기부천사를 맡고있는 박태건입니다! <br>";
-		msg += "매일 자정에 인증 확인을 하오니 참고바랍니다.</h3>";
-		msg += "<div style='font-size: 130%'>";
-		msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
-		msg += "<form method='post' action='http://localhost:8080/totoro/user/email_verify.do'>";
-		msg += "<input type='hidden' name='userEmail' value='" + userVO.getUserEmail() + "'>";
-		msg += "<input type='hidden' name='userAppKey' value='" + userVO.getUserAppKey() + "'>";
-		msg += "<input type='submit' value='인증'></form><br/></div>";
+			
+			subject = "TOTORO world 회원가입 인증입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += userVO.getUserId() + "님 회원가입을 환영합니다.</h3>";
+			msg += "<h3 style='color: black;'>";
+			msg += "언제나 토토로월드에 기부천사를 맡고있는 박태건입니다! <br>";
+			msg += "매일 자정에 인증 확인을 하오니 참고바랍니다.</h3>";
+			msg += "<div style='font-size: 130%'>";
+			msg += "하단의 인증 버튼 클릭 시 정상적으로 회원가입이 완료됩니다.</div><br/>";
+			msg += "<form method='post' action='http://localhost:8080/totoro/user/email_verify.do'>";
+			msg += "<input type='hidden' name='userEmail' value='" + userVO.getUserEmail() + "'>";
+			msg += "<input type='hidden' name='userAppKey' value='" + userVO.getUserAppKey() + "'>";
+			msg += "<input type='submit' value='인증'></form><br/></div>";
+		}else if(workDiv.equals("findPw")) {
+			subject = "TOTORO world 임시 비밀번호 입니다.";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana'>";
+			msg += "<h3 style='color: blue;'>";
+			msg += userVO.getUserId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
+			msg += "<p>임시 비밀번호 : ";
+			msg += userVO.getUserPw() + "</p></div>";
+			msg += "<h3 style='color: black;'>";
+			msg += "태건이처럼 비밀번호 까먹지 마시고 꼭 기억해주세요! <br>";
+		}
 
+		
 		// 받는 사람 E-Mail 주소
 		String mail = userVO.getUserEmail();
 		try {
@@ -271,10 +286,40 @@ public class UserSvc {
 		out.close();
 	}	
 	
+	public String findId(String userEmail) throws Exception{
+		return userDao.id_find(userEmail);
+	}
 	
-	
-	
-	
+	public void findPw(HttpServletResponse response, UserVO userVO) throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		// 아이디가 없으면
+		if(userDao.id_check(userVO.getUserId()) == 0) {
+			out.print("아이디를 확인해주세요.");
+			out.close();
+		}
+		// 가입에 사용한 이메일이 아니면
+		else if(!userVO.getUserFindQ().equals(userDao.id_login(userVO.getUserId()).getUserFindQ())
+				||!userVO.getUserFindA().equals(userDao.id_login(userVO.getUserId()).getUserFindA())){ 
+			out.print("등록하신 질문, 답변이 아닙니다.");
+			out.close();
+		}else {
+			// 임시 비밀번호 생성
+			String tmpPw = create_key();
+			userVO.setUserPw(tmpPw);
+			// 비밀번호 변경
+			userDao.pw_random_update(userVO);
+			
+			//온전한 userVO얻어오기
+			userVO = userDao.id_login(userVO.getUserId());
+			// 비밀번호 변경 메일 발송
+			sendEmail(userVO, "findPw");
+			
+			out.println("이메일로 비밀번호를 발송하였습니다.");
+		}
+		
+	}
 	
 	
 	

@@ -21,11 +21,6 @@
 		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-		<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
-
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>로그인</title>
 
@@ -45,17 +40,11 @@
 			.carousel-inner{border-radius:0 10px 10px 0;}
 			.login-sec{padding: 50px 30px; position:relative;}
 			.login-sec .copy-text{position:absolute; width:80%; bottom:20px; font-size:13px; text-align:center;}
+			.login-sec .find-text{position:absolute; width:80%; bottom:100px; font-size:13px; text-align:center;}
 			.login-sec .copy-text i{color:#FEB58A;}
 			.login-sec .copy-text a{color:#E36262;}
 			.login-sec h2{margin-bottom:30px; font-weight:800; font-size:30px; color: #DE6262;}
 			.login-sec h2:after{content:" "; width:100px; height:5px; background:#FEB58A; display:block; margin-top:20px; border-radius:3px; margin-left:auto;margin-right:auto}
-			
-			/* 미사용
-			 .banner-text{width:70%; position:absolute; bottom:40px; padding-left:20px;}
-			.banner-text h2{color:#fff; font-weight:600;}
-			.banner-text h2:after{content:" "; width:100px; height:5px; background:#FFF; display:block; margin-top:20px; border-radius:3px;}
-			.banner-text p{color:#fff;}
-			*/
 			
 			.dohyeon {
 				font-family: 'Do Hyeon', sans-serif;
@@ -66,7 +55,10 @@
 				font-family: 'Nanum Gothic', sans-serif;
 			}
 	
-	            	        
+			.nanumForFind{
+				font-family: 'Nanum Gothic', sans-serif;
+				font-size:12px;
+			}	            	        
 	        .s-styles { 
 	            background: #f2f2f2;
 	            padding-top: 12rem;
@@ -128,11 +120,12 @@
 							</div>
 		    
 							<div class="form-check">
-								<input type="button" class="btn float-left" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
-								<input type="submit" class="btn float-right" value="로그인"/>
+								<input type="button" class="btn float-left dohyeon" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
+								<input type="submit" class="btn float-right dohyeon" value="로그인"/>
 							</div>
 						</form>
-						<div class="copy-text">평생을 당신과 같이 가겠습니다..<i class="fa fa-heart"></i></div>
+						<div class="find-text nanum"><a href="<%=cPath%>/user/find.do">아이디나 비밀번호가 기억이 안나시나요?</a></div>
+						<div class="copy-text nanum">평생을 당신과 같이 가겠습니다 <i class="fa fa-heart"></i></div>
 					</div>
 					<!------------------------------------ login area ------------------------------------>
 					<!------------------------------------ banner ------------------------------------>

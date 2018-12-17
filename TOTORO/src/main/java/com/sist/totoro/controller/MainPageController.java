@@ -16,7 +16,7 @@ public class MainPageController {
 
 	private static final Logger logger = LoggerFactory.getLogger(MainPageController.class);
 
-	@RequestMapping(value = "/mainpage/mainpage.do", method = RequestMethod.POST)
+	@RequestMapping(value = "/mainpage/mainpage.do", method = RequestMethod.GET)
 	public String mainpage(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 

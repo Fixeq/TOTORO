@@ -112,13 +112,13 @@ public class UserDao {
 	}		
 	
 	//TODO parameter 3갠데  무엇으로 받아야하나?
-	public int ban_user_check(DTO dto) throws SQLException {
+	public int ban_user_check(UserVO userVO) throws SQLException {
 		String statement = NAME_SPACE+".ban_user_check";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		log.debug("1.statement : \n"+statement);
-		log.debug("2.param"+inVO);
+		log.debug("2.param"+userVO);
 		
-		int flag = this.sqlSession.selectOne(statement, inVO);
+		int flag = this.sqlSession.selectOne(statement, userVO);
 		
 		return flag;
 	}	
@@ -140,14 +140,14 @@ public class UserDao {
 	
 	//TODO String?
 	@Transactional
-	public int user_verify(DTO dto) {
+	public int user_verify(UserVO userVO) {
 		String statement = NAME_SPACE+".user_verify";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
@@ -155,29 +155,29 @@ public class UserDao {
 	
 	//TODO 이상해..ㅋㅋ resultType="DTO" 근데 return은 UserVO타입.
 	//너무 내꼴리는대로 DTO받았나.. 테스트내일해봐야지..ㅠ
-	public String id_find(DTO dto) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
+	public String id_find(String userEmail) throws ClassNotFoundException, SQLException,EmptyResultDataAccessException {
 		
 		String statement = NAME_SPACE+".id_find";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		//이거 꼭 찾아가야함 못찾으면 쥐쥐...
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+//		log.debug("2.param: "+inVO);
 		//call하기
-		String userId = this.sqlSession.selectOne(statement, inVO);
+		String userId = this.sqlSession.selectOne(statement, userEmail);
 		log.debug("3.outVO: "+userId);
 		
 		return userId;
 	}	
 	
-	public int pw_find(DTO dto) {
+	public int pw_find(UserVO userVO) {
 		String statement = NAME_SPACE+".pw_find";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.selectOne(statement, inVO);
+		int flag = this.sqlSession.selectOne(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
@@ -186,14 +186,14 @@ public class UserDao {
 	//TODO String 랜덤값 받아야 하는거 아니오? service에서
 	//dao호출할때 랜덤 String uuid값 아니오?
 	@Transactional
-	public int pw_random_update(DTO dto) {
+	public int pw_random_update(UserVO userVO) {
 		String statement = NAME_SPACE+".pw_random_update";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
@@ -201,29 +201,29 @@ public class UserDao {
 	
 
 	//param : string?
-	public UserVO do_selectOne(DTO dto) {
+	public UserVO do_selectOne(UserVO userVO) {
 		String statement = NAME_SPACE+".do_selectOne";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		//이거 꼭 찾아가야함 못찾으면 쥐쥐...
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		//call하기
-		UserVO outVO = this.sqlSession.selectOne(statement, inVO);
+		UserVO outVO = this.sqlSession.selectOne(statement, userVO);
 		log.debug("3.outVO: "+outVO);
 		
 		return outVO;
 	}
 
 	@Transactional
-	public int do_update(DTO dto) {
+	public int do_update(UserVO userVO) {
 		String statement = NAME_SPACE+".do_update";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.delete(statement, inVO);
+		int flag = this.sqlSession.delete(statement, userVO);
 		
 		log.debug("3.flag: "+flag);
 
@@ -231,55 +231,55 @@ public class UserDao {
 	}
 	
 	@Transactional
-	public int do_update_admin(DTO dto) {
+	public int do_update_admin(UserVO userVO) {
 		String statement = NAME_SPACE+".do_update_admin";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 
 		return flag;
 	}
 	
-	public int do_delete(DTO dto) {
+	public int do_delete(UserVO userVO) {
 		String statement = NAME_SPACE+".do_delete";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.delete(statement, inVO);
+		int flag = this.sqlSession.delete(statement, userVO);
 		log.debug("3.flag: "+flag);
 		
 		return flag;
 	}
 
 	@Transactional
-	public int user_ban(DTO dto) {
+	public int user_ban(UserVO userVO) {
 		String statement = NAME_SPACE+".user_ban";
-		UserVO inVO = (UserVO) dto;
+//		UserVO inVO = (UserVO) dto;
 		
 		log.debug("1. statement : "+statement);
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+userVO);
 		
-		int flag = this.sqlSession.update(statement, inVO);
+		int flag = this.sqlSession.update(statement, userVO);
 		log.debug("3.flag: "+flag);
 		
 		return flag;
 	}
 
 	
-	public List<UserVO> do_retrieve(DTO dto) {
+	public List<UserVO> do_retrieve(SearchVO searchVO) {
 		String statement = NAME_SPACE+".do_retrieve";
-		SearchVO inVO = (SearchVO) dto;
+//		SearchVO inVO = (SearchVO) dto;
 		
 		log.debug("1. statement : "+statement);	
-		log.debug("2.param: "+inVO);
+		log.debug("2.param: "+searchVO);
 		
-		return this.sqlSession.selectList(statement, dto);
+		return this.sqlSession.selectList(statement, searchVO);
 	}
 	
 

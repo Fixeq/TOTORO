@@ -96,7 +96,7 @@
 		UPDATE cross
 		   SET GAMEHS = #{gameHs},
 		       GAMEAS = #{gameAs},
-		       GAMEMODID = 'ADMIN' ,
+		       GAMEMODID = #{gameModId},
 		       GAMEMODDT = SYSDATE
 		 WHERE GAMESEQ = #{gameSeq}
 	</update>

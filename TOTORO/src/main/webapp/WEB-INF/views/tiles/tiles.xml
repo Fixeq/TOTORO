@@ -22,14 +22,12 @@
          value="/WEB-INF/views/tiles/template/footer.jsp" />   
     </definition>
  
-    <!-- onlyFooter -->
-	<definition name="onlyFooter" 
-	 template="/WEB-INF/views/tiles/layouts/onlyFooter.jsp">
+    <!-- defaultFind -->
+	<definition name="defaultFind" 
+	 template="/WEB-INF/views/tiles/layouts/defaultFind.jsp">
 	 	<put-attribute name="title" value=""/>
         <put-attribute name="body"
          value="" />
-        <put-attribute name="footer" 
-         value="/WEB-INF/views/tiles/template/footer.jsp" />  
     </definition>
     
 	<!-- tiles 제외 -->
@@ -40,17 +38,17 @@
          value="" />
     </definition>
     
-        
+  	<definition name="/user/find.jsp" extends="defaultFind">
+		<put-attribute name="title" value="TOTORO World"/>
+		<put-attribute name="body" value="/WEB-INF/views/user/find.jsp"></put-attribute>
+    </definition>       
 
  	<definition name="/user/*" extends="empty">
 		<put-attribute name="title" value="TOTORO World"/>
 		<put-attribute name="body" value="/WEB-INF/views/user/{1}.jsp"></put-attribute>
     </definition>   
     
-	<definition name="/user/find.jsp" extends="onlyFooter">
-		<put-attribute name="title" value="TOTORO World"/>
-		<put-attribute name="body" value="/WEB-INF/views/user/find.jsp"></put-attribute>
-    </definition>
+
         
     <!-- user.do -->
     <definition name="/*/*" extends="basede-finition">

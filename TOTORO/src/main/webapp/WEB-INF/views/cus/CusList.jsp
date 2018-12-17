@@ -74,7 +74,7 @@
     <title><tiles:putAttribute name="title"></tiles:putAttribute></title>
 
     <!-- 부트스트랩 -->
-    <link href="<%=context%>/resources/css/bootstrap.min.css" rel="stylesheet">
+ 
 
     <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
     <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -96,7 +96,7 @@
     		<h1>사용자관리</h1>
     	</div>
     	<!--// Title영역 -->
-        <form  name="frm" id="frm" action="search.do" method="get" class="form-inline">
+        <form  name="frm" id="frm" action="search.do" method="post" class="form-inline">
      	 <input type="hidden" name="page_num" id="page_num">
 		<!-- 검색영역 -->
 		<div class="row">
@@ -115,7 +115,6 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
 					
 					
@@ -123,8 +122,11 @@
 			</form>
 		  </div>	
 		</div>
-		<!--// 검색영역----------------------------------------------------->
 
+		<form  name="bofrm" id="bofrm" action="do_search_one.do" method="post" class="form-inline">
+			<input type="hidden" name="cusSeq" id="cusSeq">
+		</form>
+		
 		
 		<!-- Grid영역 -->류
 		<div class="table-responsive" >
@@ -185,9 +187,7 @@
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     
     
-    <script src="<%=context%>/resources/js/jquery.min.js"></script>
-    <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-    <script src="<%=context%>/resources/js/bootstrap.min.js"></script>
+
     <script type="text/javascript">
 
     
@@ -200,11 +200,7 @@
    	 
     }
 
-    function onReset(){
-   	 $("#upsert_div").val("save");
-   	 $("#userId").prop("disabled",false);
-   	 
-    }
+ 
 	 //check 전체 선택
     function checkAll(){
    	 //alert("checkAll");
@@ -229,6 +225,8 @@
       	 frm.action = "writepage.do";
       	 frm.submit();
        }
+    
+ 
 
      $(document).ready(function(){   
 			//alert("ready");
@@ -291,159 +289,21 @@
 					
 				});//--do_delete
 			
-			//do_save
-			//등록
-			$("#do_save").on("click",function(){
-				//alert("do_save");
-				var upsert_div = $("#upsert_div").val();
-				console.log("upsert_div:"+upsert_div);
-				var tmpLevel = "BASIC";
-				 
-				if($("#userIntLevel").val()=="1"){
-				     tmpLevel = "BASIC";
-				}else if($("#userIntLevel").val()=="2"){
-				     tmpLevel = "SILVER";
-				}else if($("#userIntLevel").val()=="3"){
-					 tmpLevel = "GOLD";
-				}  
-				 
-				if(false==confirm("등록 하시겠습니까?"))return;
-				 
-				$.ajax({
-			         type:"POST",
-			         url:"update.do",
-			         dataType:"html",// JSON
-			         data:{
-			         	"upsert_div": upsert_div,
-			         	"userId": $("#userId").val(),
-			         	"name": $("#name").val(),
-			         	"password": $("#password").val(),
-			         	"userIntLevel": $("#userIntLevel").val(),
-			         	"login": $("#login").val(),
-			         	"recommend": $("#recommend").val(),
-			         	"email": $("#email").val()
-			         },
-			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-			             var parseData = $.parseJSON(data);
-			         	 if(parseData.flag=="1"){
-			         		 alert(parseData.message);
-			         		 doSearch();
-			         	 }else{
-			         		alert(parseData.message);
-			         	 }				          
-			         },
-			         complete: function(data){//무조건 수행
-			          
-			         },
-			         error: function(xhr,status,error){
-			          
-			         }
-			    });//--ajax
-				
-			});//--do_save
-			
-			
-			$("#do_update").on("click",function(){
-				 if(false==confirm("수정 하시겠습니까?"))return;
-				  
-				 var upsert_div = $("#upsert_div").val();
-				 upsert_div = (upsert_div == "")?"update":"";
-				 console.log("upsert_div:"+upsert_div);
-				 var tmpLevel = "BASIC";
-				 
-				 if($("#userIntLevel").val()=="1"){
-					 tmpLevel = "BASIC";
-				 }else if($("#userIntLevel").val()=="2"){
-					 tmpLevel = "SILVER";
-				 }else if($("#userIntLevel").val()=="3"){
-					 tmpLevel = "GOLD";
-				 }
-				 
-				 
-				 
-			     $.ajax({
-			         type:"POST",
-			         url:"update.do",
-			         dataType:"html",// JSON
-			         data:{
-			         	"upsert_div": upsert_div,
-			         	"userId": $("#userId").val(),
-			         	"name": $("#name").val(),
-			         	"password": $("#password").val(),
-			         	"userIntLevel": $("#userIntLevel").val(),
-			         	"login": $("#login").val(),
-			         	"recommend": $("#recommend").val(),
-			         	"email": $("#email").val()
-			         },
-			         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-			             var parseData = $.parseJSON(data);
-			         	 if(parseData.flag=="1"){
-			         		 alert(parseData.message);
-			         		 doSearch();
-			         	 }else{
-			         		alert(parseData.message);
-			         	 }
-			         },
-			         complete: function(data){//무조건 수행
-			          
-			         },
-			         error: function(xhr,status,error){
-			          
-			         }
-			        });//--ajax					
-				
-				
-			});//--do_update
-			
-			
+
 			$("#listTable>tbody").on("click","tr",function(){
 				console.log("1 #listTable>tbody");
 				
 				var tr = $(this);
 				var td = tr.children();
-				var cusSeq = td.eq(2).text();
-			
+				var cusSeq = td.eq(1).text();
 				
 				if(""==cusSeq)return;
 				
-		        $.ajax({
-		            type:"POST",
-		            url:"do_search_one.do",
-		            dataType:"html",// JSON
-		            data:{
-		            "cusSeq": cusSeq
-		            },
-		            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		              var parseData = $.parseJSON(data);
-		              /* console.log("3 parseData.u_id="+parseData.u_id);
-		              console.log("3 parseData.name="+parseData.name);
-		              console.log("3 parseData.password="+parseData.password);
-		              console.log("3 parseData.login="+parseData.login);
-		              console.log("3 parseData.recommend="+parseData.recommend);
-		              console.log("3 parseData.email="+parseData.email);
-		              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
-		              console.log("3 parseData.regDt="+parseData.regDt); */
-		              
-		              console.log("3 parseData.userIntLevel="+parseData.userIntLevel);
-		              
-		              $("#cusSeq").val(parseData.cusSeq);
-		              $("#userId").val(parseData.userId);
-		              $("#cusCat").val(parseData.cusCat);
-		              
-		              $("#cusTitle").val(parseData.cusTitle);
-		              $("#cusReply").val(parseData.cusReply);
-		              $("#cusRegDt").val(parseData.cusRegDt);
-		              
-		              
-		              $("#userId").prop("disabled",true);
-		            },
-		            complete: function(data){//무조건 수행
-		             
-		            },
-		            error: function(xhr,status,error){
-		             
-		            }
-		       }); //--ajax
+		     	 var frm = document.bofrm;
+		     	 frm.cusSeq.value = cusSeq;
+		     	 frm.action = "do_search_one.do";
+		     	 frm.submit();
+		     	 alert('전송');
 				
 			});//--#listTable>tbody
 			

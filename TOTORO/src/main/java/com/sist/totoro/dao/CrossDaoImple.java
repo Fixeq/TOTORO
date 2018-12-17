@@ -22,6 +22,7 @@ public class CrossDaoImple {
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.cross";
 
+	
 	public List<CrossVO> do_selectAll(){
 		//접속자가 사용자면".do_selectUser"
 		//접속자가 관리자면".do_selectAdmin"

@@ -19,33 +19,20 @@
     ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- CSS
-    ================================================== -->
-    <link rel="stylesheet" href="<%=context%>/resources/css/base.css">
-    <link rel="stylesheet" href="<%=context%>/resources/css/vendor.css">
-    <link rel="stylesheet" href="<%=context%>/resources/css/main.css">
-
-    <!-- script
-    ================================================== -->
-    <script src="<%=context%>/resources/js/modernizr.js"></script>
-    <script src="<%=context%>/resources/js/pace.min.js"></script>
-    
-    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
-    <script src="<%=context%>/resources/js/plugins.js"></script>
-    <script src="<%=context%>/resources/js/main.js"></script>
-
-    
-
     <!-- favicons
     ================================================== -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+   	<!-- google web font -->
+	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&amp;subset=korean" rel="stylesheet">
+    
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
 </head>
 <body>
                 <tiles:insertAttribute name="body"  />
-                <tiles:insertAttribute name="footer"  />            
 </body>
 </html>

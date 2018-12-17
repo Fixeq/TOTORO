@@ -6,6 +6,8 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,33 +44,52 @@ public class CrossController {
 	}
 */	
 	@RequestMapping(value="/cross/close.do")
-	public String close(Model model,ServletRequest req) {
+	public String close(Model model,HttpServletRequest req) {
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		
+		String gameSeq = req.getParameter("gameSeq");
 		String hscore = req.getParameter("homeScore");
 		String ascore = req.getParameter("awayScore");
+		int gs = Integer.parseInt(gameSeq);
 		int hs = Integer.parseInt(hscore);
 		int as = Integer.parseInt(ascore);
 		
 		CrossVO inVO = new CrossVO();
-		return null;
+		inVO.setGameSeq(gs);
+		inVO.setGameHs(hs);
+		inVO.setGameAs(as);
+		inVO.setGameModId(userId);
+		crossSvc.do_update(inVO);
+		return "redirect:/cross/view.do";
 	}
 	
 	
 	@RequestMapping(value="/cross/view.do")
-	public String view(Model model,ServletRequest req) {
-		String connLevel = req.getParameter("level");
+	public String view(Model model,HttpServletRequest req) {
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
+		
 		String returnUrl = null;
-		if(connLevel.equals("1")) {
-			List<CrossVO> noList = crossSvc.do_selectNoResult();
-			List<CrossVO> yesList = crossSvc.do_selectYesResult();
-
-			model.addAttribute("noList", noList);
-			model.addAttribute("yesList", yesList);
+		try {
 			
-			returnUrl =  "/cross/adminView";
-		}else {
-			List<CrossVO> list = crossSvc.do_selectLimit();
-			model.addAttribute("list", list);
-			returnUrl = "/cross/userView";
+			if(userLevel.equals("1")) {
+				List<CrossVO> noList = crossSvc.do_selectNoResult();
+				List<CrossVO> yesList = crossSvc.do_selectYesResult();
+	
+				model.addAttribute("noList", noList);
+				model.addAttribute("yesList", yesList);
+				
+				returnUrl =  "/cross/admin";
+			}else{
+				List<CrossVO> list = crossSvc.do_selectLimit();
+				model.addAttribute("list", list);
+				returnUrl = "/cross/user";
+			}
+		}catch(NullPointerException npe) {
+			returnUrl = "/user/login";
+			
 		}
 		return returnUrl;
 	}
@@ -76,14 +97,29 @@ public class CrossController {
 
 	
 	@RequestMapping(value="/cross/makeGame.do")
-	public String view(ServletRequest req) {
-		return "/cross/makeGame";
+	public String view(HttpServletRequest req) {
 		
+		
+		String returnUrl = "/cross/makeGame";
+		
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
+
+		if(userLevel.equals("0")) {
+			returnUrl = "redirect:/cross/view.do";
+		}
+		
+		return returnUrl;
 	}
 	
 	@RequestMapping(value="/cross/makeGame.do",method=RequestMethod.POST)
-	public String makeGame(ServletRequest req) {
-		String returnPage = "/cross/view";
+	public String makeGame(HttpServletRequest req) {
+		
+		HttpSession session = req.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
+
 		
 		String gameHome =  req.getParameter("gameHome");
 		String varHp =  req.getParameter("gameHp");
@@ -110,7 +146,7 @@ public class CrossController {
 		if(flag == 0) {
 			
 		}
-		return "redirect:/cross/view.do?level=1";
+		return "redirect:/cross/view.do";
 		
 	}
 

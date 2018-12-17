@@ -155,7 +155,7 @@ public class UserDaoTest {
 	
 	@Test
 	public void id_find() throws SQLException, ClassNotFoundException {
-		assertThat(userDao.id_find(inVO1),is(inVO1.getUserId()));
+		assertThat(userDao.id_find(inVO1.getUserEmail()),is(inVO1.getUserId()));
 	}		
 	
 	@Test
