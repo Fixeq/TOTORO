@@ -55,7 +55,7 @@
 		
 		.btn-success-moo:hover,.btn-success-moo:focus {
 			background: rgba(26, 161, 157, 0);
-			border: 2px solid #1aa19d;
+			border: 2px solid #DE6262;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
 			color: #DE6262;
@@ -76,7 +76,7 @@
 		
 		input[type=submit]:hover,input[type=submit]:focus {
 			background: rgba(26, 161, 157, 0);
-			border: 2px solid #1aa19d;
+			border: 2px solid #DE6262;
 			webkit-transition: all 400ms cubic-bezier(.4,0,.2,1);
 			transition: all 400ms cubic-bezier(.4,0,.2,1);
 			color: #DE6262;

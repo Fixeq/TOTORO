@@ -38,10 +38,14 @@
          value="" />
     </definition>
     
+    
+    
+    
   	<definition name="/user/find.jsp" extends="defaultFind">
 		<put-attribute name="title" value="TOTORO World"/>
 		<put-attribute name="body" value="/WEB-INF/views/user/find.jsp"></put-attribute>
     </definition>       
+
 
  	<definition name="/user/*" extends="empty">
 		<put-attribute name="title" value="TOTORO World"/>
