@@ -75,13 +75,15 @@
 				</div>
 				</form>
 				<tr>
+					<!-- 
 					<div class="form-group">
-						<label class="col-lg-4">입금 요청 금액 : </label>
+						<label class="col-lg-4">출금 요청 금액 : </label>
 						<div>
 							<input type="Number" name="dpoint" id="dpoint" placeholder="1000원 단위로"/>
 							<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
 						</div>
 					</div>
+					 -->
 					
 					<input type="hidden" name="page_num" id="page_num">
 					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
@@ -90,7 +92,7 @@
 						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doReqSearch();">요청 조회</button>
 						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doPsSearch();">완료 조회</button>
 						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
-						<button type="button" class="btn btn-default btn-sm" id="deposit">지급</button>
+						<button type="button" class="btn btn-default btn-sm" id="withdraw">출금</button>
 				</tr>
 				<!-- Grid영역 -->
 				<table id = "betTable">
@@ -171,16 +173,16 @@
          function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="depositreq.do";
-        	 frm.action = "depositreq.do";
+        	 frm.search_word ="withdrawreq.do";
+        	 frm.action = "withdrawreq.do";
         	 frm.submit();
          }
          
          function doPsSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="depositps.do";
-        	 frm.action = "depositps.do";
+        	 frm.search_word ="withdrawps.do";
+        	 frm.action = "withdrawps.do";
         	 frm.submit();
          }
          
@@ -284,7 +286,7 @@
 				
 				
 				
-				$("#deposit").on("click",function(){
+				$("#withdraw").on("click",function(){
 					//alert("do_delete");
 					
 					var items = [];//var items=new Array()
@@ -313,7 +315,7 @@
 						return;
 					}
 					
-					if(false==confirm("지급 하시겠습니까?"))return;
+					if(false==confirm("출금 처리하시겠습니까?"))return;
 					
 					var jsonIdList = JSON.stringify(items);
 					//jsonIdList=["107","108"]
@@ -321,7 +323,7 @@
 					
 			        $.ajax({
 			            type:"POST",
-			            url:"deposit.do",
+			            url:"withdraw.do",
 			            dataType:"html",
 			            data:{
 			            	"userId_list": jsonIdList

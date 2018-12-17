@@ -417,17 +417,17 @@
      <!-- 관리자 입금 처리 -->
     <update id="adDeGet" parameterType="AtmVo">
     	UPDATE to_users          
-	        SET USERPOINT = USERPOINT + #{dePoint}           
+	        SET USERPOINT = USERPOINT+#{dePoint}           
 	    WHERE userId = #{userId}
-	      AND (SELECT dwPS From dw_record Where dwSeq = #{dwSeq})=0
+	      AND (SELECT dwPS From dw_record Where dwSeq = #{dwSeq})='0'
     </update>
     
     <!-- 관리자 출금 처리 -->
     <update id="adWiGet" parameterType="AtmVo">
 	    UPDATE to_users          
-	        SET USERPOINT = USERPOINT - #{wiPoint}           
+	        SET USERPOINT = USERPOINT-#{wiPoint}           
 	    WHERE userId = #{userId}
-	    AND (SELECT dwPS From dw_record Where dwSeq = #{dwSeq})=0      
+	    AND (SELECT dwPS From dw_record Where dwSeq = #{dwSeq})='0'      
     </update>
 	
 	<!-- 종합 단건 삭제 -->

@@ -75,13 +75,15 @@
 				</div>
 				</form>
 				<tr>
+					<!-- 
 					<div class="form-group">
 						<label class="col-lg-4">입금 요청 금액 : </label>
 						<div>
 							<input type="Number" name="dpoint" id="dpoint" placeholder="1000원 단위로"/>
 							<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
 						</div>
-					</div>
+					</div> 
+					-->
 					
 					<input type="hidden" name="page_num" id="page_num">
 					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>

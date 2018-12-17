@@ -27,7 +27,23 @@ public interface AtmSvc{
 
 	List<AtmVo> adDeReqAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 	
+	List<AtmVo> adWiReqAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
 	List<AtmVo> adDePsAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> adWiPsAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> cusWiAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> cusDeAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+
+	List<AtmVo> cusDeReqAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> cusWiReqAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> cusDePsAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	List<AtmVo> cusWiPsAll(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
 
 
 	int do_deleteMulti(List<AtmVo> list) throws RuntimeException, SQLException;
@@ -39,6 +55,11 @@ public interface AtmSvc{
 	int wiAdd(AtmVo atmVo);
 	
 	int do_depositMulti(List<AtmVo> list) throws RuntimeException, SQLException;
+	
+	int do_withdrawMulti(List<AtmVo> list) throws RuntimeException, SQLException;
+
+
+
 
 
 }

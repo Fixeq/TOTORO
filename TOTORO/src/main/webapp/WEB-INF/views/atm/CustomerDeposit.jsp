@@ -64,81 +64,97 @@
     width: auto;
   }
 </style>
-
-
-
-<table>
-	고객 입금 신청 페이지
-			<tr>
-				<div class="form-group">	
-				<td class="text-center"><input type="text" id="point" name="point" maxlength=8></td>
-				<td class="text-center"><button type="button" id="do_save">요청</button></td>
-				</div>	
-			</tr>
-			<tr>
-				<div class="form-group">	
-				<td class="text-center"><button type="button" onclick="javascript:doSearch();">조회</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_excel">엑셀저장</button>
-					</td>
-				</div>	
-			</tr>
-			
-			<!-- Grid영역 -->
-				<div class="table-responsive" >
-					<table id="listTable" class="table table-striped table-bordered table-hover">
-						<thead class="bg-primary">
-						    <tr>
-						        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								 <th class="">번호</th>
-								 <th class="text-center">ID</th>
-								 <th class="text-center">신청 포인트</th>
-								 <th class="text-center">신청날짜</th>
-								 <th class="text-center">충전날짜</th>
-								 <th class="text-center">처리상태</th>
-	
+	<div class="page-header">
+	    		<h2>입금 신청 페이지</h2>
+	</div>
+	<form  name="frm" id="frm" action="customerdeposit.do" method="get" class="form-inline">
+		<input type="hidden" name="page_num" id="page_num">
+			<form action="#" class="form-inline">
+				<div class="form-group">
+						<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
+				</div>
+				</form>
+				<tr>
+					<div class="form-group">
+						<label class="col-lg-4">입금 요청 금액 : </label>
+						<div>
+							<input type="Number" name="dpoint" id="dpoint" placeholder="1000원 단위로"/>
+							<button type="button" class="btn btn-default btn-sm" id="do_save">신청</button>
+						</div>
+					</div> 
+					
+					<input type="hidden" name="page_num" id="page_num">
+					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
+					<td class="text-center">
+						<button type="button" onclick="javascript:doSearch();"> 전체 조회</button>
+						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doReqSearch();">요청 조회</button>
+						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doPsSearch();">완료 조회</button>
+						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
+				</tr>
+				<!-- Grid영역 -->
+				<table id = "betTable">
+						<thead>
+							<tr>
+									<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
+									 <th class="">번호</th>
+									 <th class="text-center">요청번호</th>
+									 <th class="text-center">ID</th>
+									 <th class="text-center">신청 포인트</th>
+									 <th class="text-center">신청날짜</th>
+									 <th class="text-center">충전날짜</th>
+									 <th class="text-center">처리상태</th>
 							</tr>
 						</thead>
-						<tbody>  
-						<c:choose>
-							<c:when test="${list.size()>0}">
-								<c:forEach var="atmVo" items="${list}">
+						<tbody>
+							<c:choose>
+								<c:when test="${list.size()>0}">
+									<c:forEach var="AtmVo" items="${list}">
+										
+										<tr>
+										   <td class="text-center"><input type="checkbox" id="check" name="check"></td>
+											<td class="text-center"><c:out value="${AtmVo.no}"></c:out></td>
+											<td class="hidden"><c:out value="${AtmVo.dwSeq}"></c:out></td>
+											<td class="text-left"><c:out value="${AtmVo.userId}"></c:out></td>
+											<td class="text-left"><c:out value="${AtmVo.dePoint}"></c:out></td>
+											<td class="text-right"><c:out value="${AtmVo.dwReqday}"></c:out></td>
+											<td class="text-right"><c:out value="${AtmVo.dwGetday}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.dwPs}"></c:out></td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
 									<tr>
-									   <td class="text-center"><input type="checkbox" id="check" name="check"></td>
-										<td class="text-center"><c:out value="${AtmVo.no}"></c:out></td>
-										<td class="text-left"><c:out value="${AtmVo.userId}"></c:out></td>
-										<td class="text-left"><c:out value="${AtmVo.name}"></c:out></td>
-										<td class="text-right"><c:out value="${AtmVo.userLevel}"></c:out></td>
-										<td class="text-right"><c:out value="${AtmVo.recommend}"></c:out></td>
-										<td class="text-center"><c:out value="${AtmVo.regDt}"></c:out></td>
-									</tr>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<tr>
-								    <td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
-								</tr>					
-							</c:otherwise>
-						</c:choose>						
+									    <td class="text-center" colspan="99">등록된 게시글이 없습니다.</td>
+									</tr>					
+								</c:otherwise>
+							</c:choose>
 						</tbody>
 					</table>
-				</div>
+	
+					<div class="form-inline text-center">
+						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_word, "search_page") %>
+					</div>
+					
+				</form>
 			<!--// Grid영역 ---------------------------------------------------->
-		</table>
 		</section>
 		<script type="text/javascript">
     
-    
-         function search_page(url,page_num){
-        	 //alert(url+":search_page:"+page_num);
-        	 var frm = document.frm;
-        	 frm.page_num.value = page_num;
-        	 frm.action = url;
-        	 frm.submit();
-        	 
-         }
+		function search_page(url,page_num){
+       	 //alert(url+":search_page:"+page_num);
+       	 var frm = document.frm;
+       	 frm.page_num.value = page_num;
+       	 frm.action = url;
+       	 frm.submit();
+       	 
+        }
+        function doSearch(){
+       	 var frm = document.frm;
+       	 frm.page_num.value =1;
+       	 frm.search_word ="customerdeposit.do";
+       	 frm.action = "customerdeposit.do";
+       	 frm.submit();
+        }
          
     	 //check 전체 선택
          function checkAll(){
@@ -151,12 +167,123 @@
         	   
          }
          
-         function doSearch(){
+         function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.action = "search.do";
+        	 frm.search_word ="cusdepositreq.do";
+        	 frm.action = "cusdepositreq.do";
         	 frm.submit();
          }
+         
+         function doPsSearch(){
+        	 var frm = document.frm;
+        	 frm.page_num.value =1;
+        	 frm.search_word ="cusdepositps.do";
+        	 frm.action = "cusdepositps.do";
+        	 frm.submit();
+         }
+         
+         $(document).ready(function(){   
+				//alert("ready");
+				
+				//var items = [];
+				//$('input:checkbox[type=checkbox]:checked').each(function () {
+				//    items.push($(this).val());
+				//});
+				//do_save
+				//등록
+				$("#do_save").on("click",function(){
+					//alert("do_save"); 
+					 
+					if(false==confirm("등록 하시겠습니까?"))return;
+					 
+					$.ajax({
+				         type:"POST",
+				         url:"request.do",
+				         dataType:"html",// JSON
+				         data:{
+				         	"dpoint": $("#dpoint").val(),
+				         },
+				         success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+				             var parseData = $.parseJSON(data);
+				         	 if(parseData.flag=="1"){
+				         		 alert(parseData.message);
+				         		 doSearch();
+				         	 }else{
+				         		alert(parseData.message);
+				         	 }				          
+				         },
+				         complete: function(data){//무조건 수행
+				          
+				         },
+				         error: function(xhr,status,error){
+				          
+				         }
+				    });//--ajax
+					
+				});//--do_save
+				
+				
+				$("#do_delete").on("click",function(){
+					//alert("do_delete");
+					
+					var items = [];//var items=new Array(); 
+					$( "input[name='check']:checked" ).each(function( index,row ) {
+						console.log("index="+index);
+						//console.log("row="+row);
+						var record = $(row).parents("tr");
+						var userId = $(record).find("td").eq(3).text();
+						var dwseq = $(record).find("td").eq(2).text();
+						console.log("userId="+userId);
+						console.log("dwseq="+dwseq);
+						
+						items.push(dwseq);
+						items.push(userId);
+					});
+					console.log("items.length="+items.length);
+					if(items.length<=0){
+						alert("삭제할 데이터를 선택 하세요.")
+						return;
+					}
+					
+					if(false==confirm("삭제 하시겠습니까?"))return;
+					
+					var jsonIdList = JSON.stringify(items);
+					//jsonIdList=["107","108"]
+					console.log("jsonIdList="+jsonIdList);
+					
+			        $.ajax({
+			            type:"POST",
+			            url:"delete.do",
+			            dataType:"html",
+			            data:{
+			            	"userId_list": jsonIdList
+			            },
+			            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+				             var parseData = $.parseJSON(data);
+			                 console.log("parseData.flag="+parseData.flag);
+			                 console.log("parseData.message="+parseData.message);
+				         	 if(parseData.flag > 0){
+				         		alert(parseData.message);
+				         		doSearch();
+				         	 }else{
+				         		alert(parseData.message);
+				         		
+				         	 }				             
+			            },
+			            complete: function(data){//무조건 수행
+			             
+			            },
+			            error: function(xhr,status,error){
+			             
+			            }
+			         });//--ajax
+					
+				});//--do_delete
+				
+				
+         });
+         
          
          
 	</script>

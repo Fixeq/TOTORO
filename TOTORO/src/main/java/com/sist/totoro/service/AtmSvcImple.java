@@ -47,6 +47,12 @@ public class AtmSvcImple implements AtmSvc {
 
 		return atmDao.adDeReqAll(searchVO);
 	}
+	@Override
+	public List<AtmVo> adWiReqAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		
+		return atmDao.adWiReqAll(searchVO);
+	}
 
 	@Override
 	public List<AtmVo> adDePsAll(SearchVO searchVO)
@@ -54,6 +60,56 @@ public class AtmSvcImple implements AtmSvc {
 
 		return atmDao.adDePsAll(searchVO);
 	}
+	
+	@Override
+	public List<AtmVo> adWiPsAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.adWiPsAll(searchVO);
+	}
+	
+	@Override
+	public List<AtmVo> cusWiAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.cusWiAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> cusDeAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.cusDeAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> cusDeReqAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.cusDeReqAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> cusWiReqAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.cusWiReqAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> cusDePsAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+
+		return atmDao.cusDePsAll(searchVO);
+	}
+
+	@Override
+	public List<AtmVo> cusWiPsAll(SearchVO searchVO)
+			throws ClassNotFoundException, SQLException, EmptyResultDataAccessException {
+		
+		return atmDao.cusWiPsAll(searchVO);
+	}
+
 	
 	
 	@Override
@@ -115,6 +171,32 @@ public class AtmSvcImple implements AtmSvc {
 		log.debug("========================");
 		return flag;
 	}
+
+	@Override
+	public int do_withdrawMulti(List<AtmVo> list) throws RuntimeException, SQLException {
+		int flag = 0;
+		try {
+			for(AtmVo vo :list) {
+				flag+=atmDao.adWiGet(vo);
+				atmDao.adReqWiGet(vo);
+				
+			}
+			
+		}catch(RuntimeException e) {
+			log.debug("========================");
+			log.debug("RuntimeException: "+e.getMessage());
+			log.debug("========================");			
+			throw e;
+		}
+		log.debug("========================");
+		log.debug("=flag="+flag);
+		log.debug("========================");
+		return flag;
+	}
+
+	
+
+	
 
 	
 }
