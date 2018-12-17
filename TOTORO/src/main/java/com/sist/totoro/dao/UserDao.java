@@ -11,9 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sist.totoro.common.DTO;
 import com.sist.totoro.common.SearchVO;
-import com.sist.totoro.common.WorkDiv;
 import com.sist.totoro.domain.UserVO;
 
 @Repository

@@ -40,21 +40,21 @@
 	
 	.input-group-addon
 	{
-	    background-color: rgb(50, 118, 177);
-	    border-color: rgb(40, 94, 142);
+	    background-color: #DE6262;
+	    border-color: #C90000;
 	    color: rgb(255, 255, 255);
 	}
 	.form-control:focus
 	{
-	    background-color: rgb(50, 118, 177);
-	    border-color: rgb(40, 94, 142);
-	    color: rgb(255, 255, 255);
+	    background-color: #DE6262;
+	    border-color: #C90000;
+	    color: #FFFFFF;
 	}
 	.panel-default {
 	opacity: 0.8;
 	/*margin-top:30px;*/
 	}
-	.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid rgb(50, 118, 177); }
+	.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid #DE6262; }
 	.fullscreen_bg {
 	    position: fixed;
 	    top: 0;
@@ -75,9 +75,14 @@
 	
 	.dohyeonForCheck {
 		font-family: 'Do Hyeon', sans-serif;
+		font-size: 16px;
 		
 	}
 	
+	input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus{
+	    color: #FFFFFF;
+	}	
+
 	.nanum{
 		font-family: 'Nanum Gothic', sans-serif;
 	}	  
@@ -135,7 +140,7 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#id_check").css("color", "red");
-						$("#id_check").html('<span class="glyphicon glyphicon-exclamation-sign"></span>'+" 이미 사용중이거나 탈퇴한 아이디입니다.");
+						$("#id_check").html('<span class="fa fa-warning"></span>'+" 이미 사용중이거나 탈퇴한 아이디입니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if( (0<=$("#userId").val().length && $("#userId").val().length<6) 
 							|| $("#userId").val().length>12){
@@ -162,7 +167,7 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#email_check").css("color", "red");
-						$("#email_check").html("이미 사용되고 있는 이메일입니다.");
+						$("#email_check").html('<span class="fa fa-warning"></span>'+" 이미 사용되고 있는 이메일입니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userEmail").val().length !=0) {
 						$("#email_check").html("");
@@ -183,11 +188,11 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#tel_check").css("color", "red");
-						$("#tel_check").html("이미 사용되고 있는 전화번호입니다..");
+						$("#tel_check").html('<span class="fa fa-warning"></span>'+"이미 사용되고 있는 전화번호입니다..");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userTel").val().length>10) {
 						$("#tel_check").css("color", "#6DD66D");
-						$("#tel_check").html("사용가능한 전화번호입니다.");
+						$("#tel_check").html('<span class="glyphicon glyphicon-ok"></span>'+"사용가능한 전화번호입니다.");
 						$("#joinBtn").removeAttr("disabled");
 					}
 				},
@@ -205,7 +210,7 @@
 				success : function(result) {
 					if (result > 0) {
 						$("#account_check").css("color", "red");
-						$("#account_check").html("중복된 계좌번호가 있습니다.");
+						$("#account_check").html('<span class="fa fa-warning"></span>'+"중복된 계좌번호가 있습니다.");
 						$("#joinBtn").attr("disabled", "disabled");
 					}else if(result ==0 && $("#userAccount").val().length !=0) {
 						$("#account_check").html("");
@@ -216,14 +221,10 @@
 		});
 		
 	});
-	
-
 
 </script>
 
-
 <title>TOTORO 회원가입</title>
-
 
 </head>
 <body>
@@ -242,14 +243,13 @@
 	                    	<h3 class="text-center dohyeon">
 	                        	회원가입</h3>
                         	<form id="joinForm" action="<%=cPath%>/user/save.do" class="form form-signup" role="form" method="post">
-							<!-- <form class="form form-signup" role="form"> -->		
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-user"></span>
 										</span>
-										<input class="form-control onlynumeng nanum" type="text"  id="userId" name="userId" 
-										required placeholder="숫자 영문 조합 6~12자 입력해주세요.">
+										<input class="form-control onlynumeng " type="text"  id="userId" name="userId" 
+										required placeholder="아이디 (숫자 영문 조합 6~12자 입력해주세요)">
 									</div>
 									<span id="id_check" class="pull-left dohyeonForCheck" ></span><br/>
 								</div>
@@ -259,9 +259,10 @@
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-lock"></span>
 										</span>
-										<input class="form-control userPw nanum" type="password"  id="userPw" name="userPw" 
-			                        	required placeholder="8~15자 영문 대 소문자,숫자,특수문자를 사용하세요." oninput="pw_check()">
+										<input class="form-control userPw " type="password"  id="userPw" name="userPw" 
+			                        	required placeholder="비밀번호 (8~15자 영문 대 소문자,숫자,특수문자를 사용하세요)" oninput="pw_check()">
 									</div>
+									<br/>
 								</div>
 								
 								<div class="form-group">
@@ -269,35 +270,30 @@
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-lock"></span>
 										</span>
-										<input class="form-control userPw nanum" type="password"  id="userPwCF"  
+										<input class="form-control userPw " type="password"  id="userPwCF"  
 			                        	required placeholder="비밀번호를 한번 더 입력해주세요." oninput="pw_check()">
 									</div>
 									<span id="pw_check" class="pull-left dohyeonForCheck" ></span><br/>
 								</div>								
-
-                    <div>
-                        <label for="userEmail" class="pull-left" >Email</label>
-                        <input class="full-width nanum" type="email"  id="userEmail" name="userEmail" required placeholder="이메일 인증 후 관리자 승인 후 로그인이 가능합니다." >
-                        <span id="email_check" class="pull-left nanum" ></span><br/>  
-                    </div>
-			
 								
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-envelope"></span>
 										</span>
-										<input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="Email" />
+										<input type="email" id="userEmail" name="userEmail" class="form-control" placeholder="이메일 (관리자 승인 후 로그인이 가능합니다)" />
 									</div>
+									<span id="email_check" class="pull-left dohyeonForCheck" ></span><br/>
 								</div>
 		                    
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-lock"></span>
+											<span class="glyphicon glyphicon-earphone"></span>
 										</span>
-		                            	<input type="password" class="form-control" placeholder="Password" />
+		                            	<input type="text" class="form-control" id="userTel" name="userTel" required placeholder="휴대폰 (숫자만 입력가능합니다)"  />
 									</div>
+									<span id="tel_check" class="pull-left dohyeonForCheck" style="color:red"></span><br/> 
 								</div>
 		                    
 								<div class="form-group">
@@ -305,29 +301,32 @@
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-home"></span>
 										</span>
-										<input type="text" class="form-control" placeholder="Address" />
+										<input type="text" class="form-control"  id="userName" name="userName" required placeholder="예금주" />
 									</div>
+									<br/>
 								</div>
-		                    
+
+                    
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
-											<span class="glyphicon glyphicon-calendar"></span>
+											<span class="fa fa-dollar"></span>
 										</span>
-										<input type="text" class="form-control" placeholder="Age" />
+										<%=StringUtil.makeSelectBox((List<CodeVO>)request.getAttribute("cdListC003"), "", "userBank", false) %>
 									</div>
+									<br/>
 								</div>
-		                    
+               
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-credit-card"></span>
 										</span>
-										<input type="text" class="form-control" placeholder="Credit card" />
+										<input type="text" class="form-control"  id="userAccount" name="userAccount" required placeholder="계좌번호(숫자만 입력가능합니다)" />
 									</div>
+									<span id="account_check" class="pull-left dohyeonForCheck" style="color:red"></span><br/>
 								</div>
-								<a href="http://www.jquery2dotnet.com" class="btn btn-sm btn-primary btn-block" role="button">
-								SUBMIT</a>
+								<input class="btn--primary full-width" type="submit" value="Submit" id="joinBtn">
 							</form>
 						</div>
 					</div>
@@ -336,150 +335,8 @@
 		</div>
 	</form>
 </div> 
-
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<%-- 
-
-
-
-
-
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-
-    <section id="styles" class="s-styles">
-        
-        <div class="row narrow section-intro add-bottom text-center">
-            <div class="col-twelve tab-full">
-                <h1 class="dohyeon">회원가입</h1>
-                <!-- TODO 전부다 밸리데이션 설정해야함 -->
-                <form id="joinForm" action="<%=cPath%>/user/save.do" method="post">
-                
-                    <div>
-                        <label for="userId" class="pull-left" >ID</label>
-                        <input class="full-width onlynumeng nanum" type="text"  id="userId" name="userId" required placeholder="숫자 영문 조합 6~12자 입력해주세요.">
-                        <span id="id_check" class="pull-left nanum" ></span><br/>  
-                    </div>
-                    <br/>
-                    
-                    
-                    <div>
-                        <label for="userPw" class="pull-left" >PassWord</label>
-                        <input class="full-width userPw nanum" type="password"  id="userPw" name="userPw" 
-                        required placeholder="8~15자 영문 대 소문자,숫자,특수문자를 사용하세요." oninput="pw_check()">
-                    </div>
-                    <div>
-                        <label for="userPw2" class="pull-left" >PW Confirm</label>
-                        <input class="full-width userPw nanum" type="password"  id="userPwCF" 
-                        required placeholder="비밀번호를 한번 더 입력해주세요." oninput="pw_check()">
-                        <span id="pw_check" class="pull-left nanum" ></span><br/>
-                    </div>   
-                    <div>
-                        <label for="userEmail" class="pull-left" >Email</label>
-                        <input class="full-width nanum" type="email"  id="userEmail" name="userEmail" required placeholder="이메일 인증 후 관리자 승인 후 로그인이 가능합니다." >
-                        <span id="email_check" class="pull-left nanum" ></span><br/>  
-                    </div>
-         			<div>
-                        <label for="userTel" class="pull-left" >Cell Phone Number</label>
-                        <input class="full-width onlynum nanum" type="text"  id="userTel" name="userTel" required placeholder="(-)를 제외한 번호를 입력해주세요" >
-                        <span id="tel_check" class="pull-left nanum" style="color:red"></span><br/>  
-                    </div>
-                    <div>
-                        <label for="userName" class="pull-left" >Account Holder</label>
-                        <input class="full-width nanum" type="text"  id="userName" name="userName" required placeholder="예금주" >
-                    </div>
-                    <div>
-                        <label for="userBank" class="pull-left ">Bank</label>
-                        <div class="cl-custom-select nanum">
-							<%=StringUtil.makeSelectBox((List<CodeVO>)request.getAttribute("cdListC003"), "", "userBank", false) %>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="userAccount" class="pull-left" >Account Number</label>
-                        <input class="full-width onlynum nanum" type="text"  id="userAccount" name="userAccount" required placeholder="(-)를 제외한 번호를 입력해주세요" >
-                        <span id="account_check" class="pull-left nanum" style="color:red"></span><br/>  
-                    </div>
-                    <div>
-                        <label for="userFindQ" class="pull-left nanum">Password Find Question</label>
-                        <div class="cl-custom-select nanum">
-                        	<%=StringUtil.makeSelectBox((List<CodeVO>)request.getAttribute("cdListC002"), "", "userFindQ", false) %>
-                        </div>
-                    </div>                                           
-                    <div>
-                        <label for="userFindA" class="pull-left" >Password Find Answer</label>
-                        <input class="full-width nanum" type="text"  id="userFindA" name="userFindA" required placeholder="기억할 수 있는 것으로 하세요.^^" >
-                    </div>
-                    <input class="btn--primary full-width" type="submit" value="Submit" id="joinBtn">
-                    <input type="reset" class="btn btn--stroke full-width"  value="Reset"/>
-                    <input type="button" onclick="history.go(-1);" class="btn btn--stroke full-width" value="Cancel"/>
-                </form>
-            </div>
-        </div>
-    </section> <!-- end styles -->
-</body>
-</html> --%>
-
-
-
-
-
-
-
-
 
 
 

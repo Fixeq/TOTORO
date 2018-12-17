@@ -190,7 +190,7 @@ public class StringUtil {
 //			<option value="50" <%if(page_size.equals("50"))out.print("selected='selected'"); %> >50</option>
 //		</select>
 		StringBuilder sb=new StringBuilder();
-		sb.append("<select name='"+selectNm+"' id='"+selectNm+"' class='full-width nanum'>\n");		
+		sb.append("<select name='"+selectNm+"' id='"+selectNm+"' class='full-width dohyeonForCheck'>\n");		
 		//전체
 		if(true == allYN){
 			sb.append("<option value=''>::전체::</option> \n");
