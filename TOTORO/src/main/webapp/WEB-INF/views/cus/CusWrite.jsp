@@ -32,7 +32,8 @@
                         </div>
 
                         <div class="form-field">
-                            <input name="userId" type="text" id="userId" class="full-width" placeholder="아이디" value="">
+                        		<input name="userId" type="hidden" id="userId" class="full-width" placeholder="아이디" value="${userId}">
+                            <!-- <input name="userId" type="text" id="userId" class="full-width" placeholder="아이디" value=""> -->
                         </div>
 
                         <div class="form-field">

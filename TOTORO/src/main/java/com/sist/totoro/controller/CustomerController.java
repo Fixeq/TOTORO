@@ -204,23 +204,16 @@ public class CustomerController {
 	//답변저장
 		 @RequestMapping(value="/cus/rsave.do", method=RequestMethod.POST)
 		    public String insertReply(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws Exception{
-			 String cusSeq = req.getParameter("cusSeq");
-				log.info("cusSeq : "+cusSeq);
-			 CusReplyVO cusvo = new CusReplyVO();
-			 cusvo.setCusSeq(cusSeq);
-			 model.addAttribute("param",invo);
 			 int list = cusreplysvc.add(invo);
-			 log.info("list : "+list);
-			 model.addAttribute("list", list);
-			 
-			 return "/cus/CusRead";
+		        return "redirect:search.do";
 		    }
 	 
 	//상세페이지삭제
 		 @RequestMapping(value="/cus/detail_delete.do", method=RequestMethod.POST)
 		    public String delete(@ModelAttribute CustomerVO vo) throws Exception{
+			 
 			 int list = customerSvc.delete(vo);
-		        return "redirect:search.do";
+		        return "redirect:do_search_one.do";
 		    }
 	 
 	 

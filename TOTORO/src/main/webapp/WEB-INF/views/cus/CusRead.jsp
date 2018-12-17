@@ -1,6 +1,7 @@
 <%@page import="com.sist.totoro.common.SearchVO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.sist.totoro.code.CodeVO"%>
+<%@page import="com.sist.totoro.domain.UserVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.totoro.common.StringUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -114,7 +115,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
   </section>
   
   
-  
+   <% UserVO vo1 = (UserVO)session.getAttribute("UserId");%>
   
    <script type="text/javascript">
 
