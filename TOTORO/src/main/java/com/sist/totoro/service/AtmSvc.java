@@ -36,6 +36,8 @@ public interface AtmSvc{
 
 	int deAdd(AtmVo atmVo);
 	
+	int wiAdd(AtmVo atmVo);
+	
 	int do_depositMulti(List<AtmVo> list) throws RuntimeException, SQLException;
 
 

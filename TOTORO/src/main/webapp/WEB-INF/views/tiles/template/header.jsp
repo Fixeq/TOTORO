@@ -67,10 +67,10 @@
                         <li class="has-children">
                             <a href="#0" title="">입금/출금</a>
                             <ul class="sub-menu">
-                            <li><a href="/totoro/customerdeposit/customerdeposit.do">입금</a></li>
-                            <li><a href="/totoro/customerwithdraw/customerwithdraw.do">출금</a></li>
-                            <li><a href="/totoro/admindeposit/admindeposit.do">관리자 입금</a></li>
-                            <li><a href="/totoro/adminwithdraw/adminwithdraw.do">관리자 출금</a></li>
+                            <li><a href="/totoro/atm/customerdeposit.do">입금</a></li>
+                            <li><a href="/totoro/atm/customerwithdraw.do">출금</a></li>
+                            <li><a href="/totoro/atm/admindeposit.do">관리자 입금</a></li>
+                            <li><a href="/totoro/atm/adminwithdraw.do">관리자 출금</a></li>
                             <li><a href="/totoro/givepay/givepay.do">당첨금 지급페이지</a></li>
                             </ul>
                         </li>

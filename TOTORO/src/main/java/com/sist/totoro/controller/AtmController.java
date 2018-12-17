@@ -208,6 +208,46 @@ public class AtmController {
 		return "/atm/AdminDeposit";
 	}
 	
+	@RequestMapping(value = "/atm/adminwithdraw.do", method = RequestMethod.GET)
+	public String adminwithdraw(@ModelAttribute SearchVO invo, Locale locale, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		logger.info("Welcome home! The client locale is {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+
+		String formattedDate = dateFormat.format(date);
+		
+		if(invo.getPage_size() == 0) {
+			invo.setPage_size(10);
+		}
+		
+		if(invo.getPage_num() == 0) {
+			invo.setPage_num(1);
+		}
+		
+		if(null == invo.getSearch_div()) {
+			invo.setSearch_div("");
+		}
+		
+		if(null == invo.getSearch_word()) {
+			invo.setSearch_word("");
+		}
+		
+		List<AtmVo> list = atmSvc.adWiAll(invo);
+		int total_cnt = 0;
+		if(null != list && list.size()>0) {
+			total_cnt = list.get(0).getTotalCnt();
+		}
+		
+		model.addAttribute("total_cnt",total_cnt);
+		model.addAttribute("list",list);
+		model.addAttribute("list", list);
+
+		model.addAttribute("serverTime", formattedDate);
+
+		return "/atm/AdminWithdraw";
+	}
+	
 	@RequestMapping(value="/atm/delete.do",method=RequestMethod.POST,consumes= {"text/plain", "application/*"},produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String delete(HttpServletRequest req,Model model) throws RuntimeException, SQLException{
@@ -267,6 +307,32 @@ public class AtmController {
 		return jsonData;
 	}
 	
+	@RequestMapping(value="/atm/wirequest.do",method=RequestMethod.POST,consumes= {"text/plain", "application/*"},produces="application/json;charset=UTF-8")
+	@ResponseBody
+	public String wirequest(HttpServletRequest req,Model model) throws RuntimeException, SQLException{
+		String wiPoint = req.getParameter("dpoint");
+
+		AtmVo vo =new AtmVo();
+		vo.setUserId("dwtester3");
+		vo.setWiPoint(wiPoint);
+
+		
+		int flag = this.atmSvc.wiAdd(vo);
+		
+		JSONObject object=new JSONObject();
+		
+		if(flag>0) {
+			object.put("flag", flag);
+			object.put("message", "요청 되었습니다.\n("+flag+"건 등록.)");
+		}else {
+			object.put("flag", flag);
+			object.put("message", "요청 실패^^.");			
+		}		
+		String jsonData = object.toJSONString();
+			
+		return jsonData;
+	}
+	
 	@RequestMapping(value="/atm/deposit.do",method=RequestMethod.POST,consumes= {"text/plain", "application/*"},produces="application/json;charset=UTF-8")
 	@ResponseBody
 	public String deposit(HttpServletRequest req,Model model) throws RuntimeException, SQLException{
@@ -301,45 +367,7 @@ public class AtmController {
 		return jsonData;
 	}
 	
-	@RequestMapping(value = "/atm/adminwithdraw.do", method = RequestMethod.GET)
-	public String adminwithdraw(@ModelAttribute SearchVO invo, Locale locale, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		logger.info("Welcome home! The client locale is {}.", locale);
 
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-		
-		if(invo.getPage_size() == 0) {
-			invo.setPage_size(10);
-		}
-		
-		if(invo.getPage_num() == 0) {
-			invo.setPage_num(1);
-		}
-		
-		if(null == invo.getSearch_div()) {
-			invo.setSearch_div("");
-		}
-		
-		if(null == invo.getSearch_word()) {
-			invo.setSearch_word("");
-		}
-		
-		List<AtmVo> list = atmSvc.adWiAll(invo);
-		int total_cnt = 0;
-		if(null != list && list.size()>0) {
-			total_cnt = list.get(0).getTotalCnt();
-		}
-		
-		model.addAttribute("total_cnt",total_cnt);
-		model.addAttribute("list",list);
-		model.addAttribute("list", list);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		return "/atm/AdminWithdraw";
-	}
 	
 	@RequestMapping(value = "/givepay/givepay.do", method = RequestMethod.GET)
 	public String givepay(Locale locale, Model model) {

@@ -69,6 +69,12 @@ public class AtmSvcImple implements AtmSvc {
 	}
 	
 	@Override
+	public int wiAdd(AtmVo atmVo) {
+		
+		return atmDao.wiAdd(atmVo);
+	}
+	
+	@Override
 	public int do_deleteMulti(List<AtmVo> list) throws RuntimeException, SQLException {
 		int flag = 0;
 		try {
@@ -109,4 +115,6 @@ public class AtmSvcImple implements AtmSvc {
 		log.debug("========================");
 		return flag;
 	}
+
+	
 }
