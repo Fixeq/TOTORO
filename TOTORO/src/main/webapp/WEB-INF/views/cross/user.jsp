@@ -10,9 +10,8 @@
 <body>
 <section class="s-content">
 <div class="row">
-
 	<div class="col-ten tab-full">
-
+	<form method="get" id="betForm" action="/totoro/cross/save.do">
 	<table id = "betTable">
 		<thead>
 			<tr>
@@ -34,15 +33,17 @@
 									<td class="text-center"><button class="btn btn--stroke full-width" id="${crossVo.gameAp}"><c:out value="${crossVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
- --%>									
-									<td class="text-center"><input type="radio" id="${crossVo.gameHome}" name="${crossVo.gameSeq}" value="${crossVo.gameHp}" onclick="clickGet(this)"><c:out value="${crossVo.gameHome}"></c:out></td>
+ --%>								
+ 									<td id="betSeq"></td>
+	 								<td class="text-center"><input type="radio" id="${crossVo.gameHome}" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
-									<td class="text-center"><input type="radio" id="${crossVo.gameDp}" name="${crossVo.gameSeq}" value="${crossVo.gameDp}" onclick="clickGet(this)">무승부</td>
+									<td class="text-center"><input type="radio" id="무승부" name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
 									<td class="text-center"><c:out value="${crossVo.gameDp}"></c:out></td>
-									<td class="text-center"><input type="radio" id="${crossVo.gameAway}" name="${crossVo.gameSeq}" value="${crossVo.gameAp}" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
+									<td class="text-center"><input type="radio" id="${crossVo.gameAway}" name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
-								</tr>
+								
+ 								</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
@@ -51,6 +52,7 @@
 					</tr>
 				</c:otherwise>
 			</c:choose>
+				<input type="submit" value="베팅하기">
 		</tbody>
 	</table>
 		</div>
@@ -64,34 +66,76 @@
 					<th>BETTING</th>
 				</thead>
 				<tbody id="betCheck">
-					<tr id="totalBetCount"></tr>
+					<tr id="totalBetCount">
+						<script>
+							var first = 1;
+						</script>
+					</tr>
+					<tr id="sumPoint">
+						<tr>
+							<td>return : </td><td id="sum"></td>
+						</tr>
+					</tr>
+					<tr><td><h4>Money</h4></td> <td><input type="text" id="money" name="money"></td></tr>
+					
 				</tbody>
 			</table>
+			<input type="submit" value="betting">
 		</div>
 </div>
-	
+	</form>
 </section> <!-- s-content -->
 </body>
-
+<script>
+	var varGameSeq = new Array();
+</script>
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("cross1");
+		alert("cross777");
+		
+		$("#money").keyup(function(){
+			var t1 = $("#money").val();
+			console.log(t1);
+			t1 = t1 * first;
+			
+			$("#sum").text(t1);
+		});
 	});
 	
 	function clickGet(a){
+		
 		varName = a.name;
 		varId = a.id;
 		console.log(varName);
 		console.log(varId);
 		
-		var sum = 1000;
+		varGameSeq.push(varName);
+		console.log("varGameSeq : " + varGameSeq);
+		console.log("val[] : " + varGameSeq[0]);
+		console.log("val[] : " + varGameSeq[1]);
+		console.log("length : " + varGameSeq.length);
+
+
+		var radioPercent = $("input[name='"+varName+"']:checked").val();
+		console.log(radioPercent);
 		
-		var radioValue = $("input[name='"+varName+"']:checked").val();
-		console.log(radioValue);
-		$("#betCheck").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+radioValue+"</td></tr>");
-		sum = sum * radioValue;
-		$("#totalBetCount").append("<tr><td>"+sum +"</td></tr>")
+		first = first * radioPercent;
+
+		
+		console.log(first);
+		
+		$("#totalBetCount").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+radioPercent+"</td></tr>");
+		$("#sumPoint").append("<tr><td>"+first +"</td></tr>");
+		
 	}
+	
+	$("#betForm").on("submit",function(){
+		for(var i = 0 ; i < varGameSeq.length;i++){
+
+			$("#betSeq").append("<tr><td><input type=\"hidden\" name=\"varSeq\" value=\""+varGameSeq[i]+"\"></td></tr>");
+
+		}
+	});
 
 </script>
 

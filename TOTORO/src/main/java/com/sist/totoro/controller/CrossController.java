@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.domain.CrossVO;
 import com.sist.totoro.service.CrossSvcImple;
 
@@ -43,6 +44,32 @@ public class CrossController {
 		return "/cross/adminView";
 	}
 */	
+	@RequestMapping(value="/cross/save.do")
+	public String save(Model model,HttpServletRequest req) {
+		String[] varSeq = req.getParameterValues("varSeq");
+		log.info("varSeq : "+varSeq);
+		for(int i = 0 ; i < varSeq.length;i++) {
+			log.info("varParse[i] : " + varSeq[i]); 
+			
+			String reqSeq = req.getParameter(varSeq[i]); 
+			log.info(reqSeq);
+			
+			String money = req.getParameter("money");
+			log.info(money);
+			
+			BetHistoryVO inVO = new BetHistoryVO();
+			inVO.setGameSeq(Integer.parseInt(varSeq[i]));
+			inVO.setBetCash(Integer.parseInt(money));
+			inVO.setBetChoice(Integer.parseInt(reqSeq));
+		}
+		
+		
+		
+		return null;
+	}
+
+	
+	
 	@RequestMapping(value="/cross/close.do")
 	public String close(Model model,HttpServletRequest req) {
 		HttpSession session = req.getSession(true);
