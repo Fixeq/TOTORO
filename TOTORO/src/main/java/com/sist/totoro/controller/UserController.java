@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sist.totoro.code.CodeSvc;
 import com.sist.totoro.code.CodeVO;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.domain.UserVO;
 import com.sist.totoro.service.UserSvc;
 
@@ -208,16 +209,58 @@ public class UserController {
 
 		log.info("controller userVO not yet into service : "+userVO);
 		userSvc.checkPw(response, userVO);
-		
-/*		return "redirect:/mainpage/mainpage.do";*/
 	}
 	
 	
-	
-	
-	
-	
-	
+	/*
+	//유저리스트 화면으로 이동
+	@RequestMapping(value = "mypage/moveUserList", method = RequestMethod.GET)
+	public String moveUserList() {
+		return "/mypage/user_list";
+	}
+	 */
+	@RequestMapping(value="/mypage/userList.do")
+	public String do_retrieve(@ModelAttribute SearchVO searchVO, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		log.info("controller searchVO not yet into service : "+searchVO);
+		
+		//param을 add해서 view로 고고
+		//view로 넘어가기전 searchVO init
+		if(searchVO.getPage_size() == 0)		{searchVO.setPage_size(10);		}
+		if(searchVO.getPage_num() == 0)			{searchVO.setPage_num(1);		}
+		if(null == searchVO.getSearch_div())	{searchVO.setSearch_div("");	}
+		if(null == searchVO.getSearch_word())	{searchVO.setSearch_word("");	}		
+		
+		//model에 searchVO 객체 담기
+		model.addAttribute("param", searchVO);
+		
+		//user 목록 리스트로 담아내기.
+		List<UserVO> list = userSvc.do_retrieve(searchVO);
+		
+		//총 글 수 체크
+		int total_cnt = 0;
+		//user 목록을 가져왔는데 하나라도 있다면 total_cnt값 적용
+		if(null != list && list.size()>0) {
+			//모든 list iterator에 totalcnt값있으니 그냥 첫번째 it에서 꺼내옴
+			total_cnt = list.get(0).getTotalCnt();
+			log.info("total_cnt : "+total_cnt);
+		}
+		
+		CodeVO codePage = new CodeVO();
+		CodeVO userInfo = new CodeVO();
+		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건)
+		codePage.setCd_id("C001");
+		codePage.setCd_id("C007");
+		
+		// cd_id(C001,C005)값을 가지고 페이징 관련 데이터들을 model에 담음.
+		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
+		model.addAttribute("user_info",codeSvc.do_retrieve(userInfo));
+		model.addAttribute("total_cnt",total_cnt);
+		model.addAttribute("list",list);
+		
+//		return "/mypage/moveUserList.do";
+//		return "redirect:/mypage/moveUserList.do";
+		return "/mypage/user_list";
+	}
 	
 	
 	

@@ -3,6 +3,7 @@ package com.sist.totoro.service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
@@ -11,9 +12,11 @@ import org.apache.commons.mail.HtmlEmail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.sist.totoro.common.DTO;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.dao.UserDao;
 import com.sist.totoro.domain.UserVO;
 
@@ -338,7 +341,7 @@ public class UserSvc {
 		} else { // 성공시
 			out.println("<script>");
 			out.println("alert('확인되었습니다.')");
-			out.println("location.href='http://localhost:8080/totoro/cross/view.do';");
+			out.println("location.href='http://localhost:8080/totoro/mypage/userList.do';");
 			out.println("</script>");
 			out.close();
 		}
@@ -346,6 +349,31 @@ public class UserSvc {
 	}
 	
 	//-----------------------------------------------개인정보확인-----------------------------------------------
+	//-----------------------------------------------마이페이지-----------------------------------------------
 	
+	//관리자 유저 정보 조회
+	public List<UserVO> do_retrieve(SearchVO searchVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException{
+		return userDao.do_retrieve(searchVO);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//-----------------------------------------------마이페이지-----------------------------------------------
 	
 }// UserSvc class
