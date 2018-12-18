@@ -65,11 +65,6 @@ public class UserController {
 	}
 
 	
-	
-	
-	
-	
-	
 	//아이디,비밀번호 화면 이동
 	@RequestMapping(value = "/user/find.do", method = RequestMethod.GET)
 	public String moveFind(HttpServletRequest req) {
@@ -91,6 +86,7 @@ public class UserController {
 	public String moveLogin() {
 		return "/user/login";
 	}
+	
 	//밴유저 밴화면으로 이동
 	@RequestMapping(value = "/user/ban.do", method = RequestMethod.GET)
 	public String moveBan() {
@@ -151,7 +147,6 @@ public class UserController {
 			session.setAttribute("userPoint",userVO.getUserPoint());
 			
 		}
-//		return "/mainhome/main_page";
 		return "redirect:/mainpage/mainpage.do";
 	}
 	
@@ -164,6 +159,7 @@ public class UserController {
 	}
 	
 	
+	//아이디찾기
 	@RequestMapping(value = "/user/find_id.do", method = RequestMethod.POST
 			,produces="application/json;charset=utf8")
 	@ResponseBody
@@ -190,6 +186,7 @@ public class UserController {
 		return jsonData;
 	}	
 
+	//비밀번호 찾기
 	@RequestMapping(value = "/user/find_pw.do", method = RequestMethod.POST)
 	public void findPw(@ModelAttribute UserVO userVO, HttpServletResponse res) throws Exception {
 		
@@ -201,7 +198,46 @@ public class UserController {
 		
 		userSvc.findPw(res, userVO);
 		
-	}	
+	}
+	
+	//본인인증
+	@RequestMapping(value = "/user/check_pw.do", method = RequestMethod.POST)
+	public String pwCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
+
+		session = request.getSession(true);
+		userVO.setUserId((String)session.getAttribute("userId"));
+		
+		if(null == userVO) {
+			return "";
+		}else {
+			
+		}
+		return "redirect:/mainpage/mainpage.do";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

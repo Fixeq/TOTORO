@@ -1736,7 +1736,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: #DE6262;
+   background-color: #000000;
    opacity: .95;
 }
 
@@ -1901,7 +1901,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 }
 
 .header__search-form::after {
-   content: "Press Enter to begin your search.";
+   content: "본인 인증을 위해 비밀번호를 입력해주세요";
    display: block;
    letter-spacing: 0.6px;
    font-size: 1.6rem;
@@ -1910,9 +1910,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
    color: rgba(255, 255, 255, 0.5);
 }
 
-.header__search-form input[type="search"] {
+.header__search-form input[type="password"] {
    background-color: transparent;
-   color: #000000;
+   color: #eeeeec;
    height: auto;
    width: 100%;
    font-family: "metropolis-semibold", sans-serif;
@@ -1926,37 +1926,37 @@ button::-moz-focus-inner, input::-moz-focus-inner {
    margin: 0 auto;
 }
 
-.header__search-form input[type="search"]::-webkit-input-placeholder {
+.header__search-form input[type="password"]::-webkit-input-placeholder {
    color: #FFFFFF;
    text-align: center !important;
    opacity: 1;
 }
 
-.header__search-form input[type="search"]:-moz-placeholder {
+.header__search-form input[type="password"]:-moz-placeholder {
    color: #FFFFFF;
    text-align: center !important;
    opacity: 1;
 }
 
-.header__search-form input[type="search"]::-moz-placeholder {
+.header__search-form input[type="password"]::-moz-placeholder {
    color: #FFFFFF;
    text-align: center !important;
    opacity: 1;
 }
 
-.header__search-form input[type="search"]:-ms-input-placeholder {
+.header__search-form input[type="password"]:-ms-input-placeholder {
    color: #FFFFFF;
    text-align: center !important;
    opacity: 1;
 }
 
-.header__search-form input[type="search"].placeholder {
+.header__search-form input[type="password"].placeholder {
    color: #FFFFFF;
    text-align: center !important;
    opacity: 1;
 }
 
-.header__search-form input[type="search"]:focus {
+.header__search-form input[type="password"]:focus {
    outline: none;
 }
 
@@ -2007,12 +2007,20 @@ body.search-is-visible {
 .header-moo {
    height: 21px;
    min-width: 21px;
-   position: absolute right center;
+   position: absolute;
    right: 20px;
    top: 15px;
+   background-image: url();
+   background-repeat: no-repeat;
+   background-position: right;
+   background-size: contain;
 }
 
  .header-moo::before {
+   height: 21px;
+   min-width: 21px;
+   position: absolute;
+   right: 20px;
    font-family: "metropolis-semibold", sans-serif;
    font-size: 12px;
    text-transform: uppercase;
@@ -2084,7 +2092,7 @@ body.search-is-visible {
       font-size: 1.5rem;
    }
 
-   .header__search-form input[type="search"] {
+   .header__search-form input[type="password"] {
       max-width: none;
       width: 80%;
       font-size: 4.2rem;
@@ -2110,7 +2118,7 @@ body.search-is-visible {
       top: 6px;
    }
 
-   .header__search-form input[type="search"] {
+   .header__search-form input[type="password"] {
       font-size: 3.4rem;
    }
 
@@ -2138,7 +2146,7 @@ body.search-is-visible {
       top: 3px;
    }
 
-   .header__search-form input[type="search"] {
+   .header__search-form input[type="password"] {
       font-size: 2.6rem;
    }
 

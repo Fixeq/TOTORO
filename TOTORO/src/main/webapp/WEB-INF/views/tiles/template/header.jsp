@@ -14,7 +14,7 @@
 
     <!-- pageheader
     ================================================== -->
-    <div class="s-pageheader s-pageheader--home">
+    <div class="s-pageheader">
 
         <header class="header">
             <div class="header__content row">
@@ -51,12 +51,12 @@
                             <ul class="sub-menu">
                             <c:choose>
                             	<c:when test="${userAdmin=='1'}">
-		                            <!-- <li><a href="/totoro/mypage/">회원관리</a></li> -->
-		                            <li><a href="#" class="header__search-trigger">회원관리</a></li>
+                            		<li><a href="#">point: ${userPoint}</a></li>
+		                            <li><a href="/totoro/mypage/" class="header__search-trigger">회원관리</a></li>
 		                            <li><a href="/totoro/user/logout.do">로그아웃</a></li>
 	                            </c:when>
 	                            <c:otherwise>
-	                            	<li><a href="#">point:${userPoint}점</a></li>
+	                            	<li><a href="#">point: ${userPoint}</a></li>
 		                            <li><a href="/totoro/mypage/" class="header__search-trigger">개인정보수정</a></li>
 		                            <li><a href="/totoro/user/logout.do">로그아웃</a></li>
 	                            </c:otherwise>
@@ -67,13 +67,14 @@
 				</div>		
 							
 <!--                 <a class="header__search-trigger" href="#0" style="color: white">ddddddddd</a> -->
-r
+
                 <div class="header__search">
 
-                    <form role="search" method="get" class="header__search-form" action="#">
+                    <form  method="post" class="header__search-form" action="<%=context%>/user/check_pw.do">
                         <label>
-                            <span class="hide-content">Search for:</span>
-                            <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
+                            <span class="hide-content">비밀번호</span>
+                            <input type="password" class="search-field" placeholder="Input Here" value="" name="s" title="본인 인증" >
+                            <!-- autocomplete="off" -->
                         </label>
                         <input type="submit" class="search-submit" value="Search">
                     </form>
@@ -94,7 +95,14 @@ r
                         <li><a href="/totoro/mainpage/mainpage.do" title="">홈</a></li>
                         <li><a href="/totoro/cross/view.do" title="">크로스</a></li>
                         <li class="has-children">
-                            <a href="#0" title="">입금/출금</a>
+                            <c:choose>
+                            	<c:when test="${userAdmin=='1'}">
+                            		<a href="#0" title="">입출금 관리</a>
+                           		</c:when>
+                           		<c:otherwise>
+                           			<a href="#0" title="">입금/출금</a>
+                           		</c:otherwise>
+                       		</c:choose>
                             <ul class="sub-menu">
                             <c:choose>
                             	<c:when test="${userAdmin=='1'}">
@@ -112,15 +120,12 @@ r
                         <li class="has-children current">
                             <a href="#0" title="">배팅</a>
                             <ul class="sub-menu">
-                            <li><a href="/totoro/bethistory/bethistory.do">배팅내역</a></li>
-                            <li><a href="/totoro/betrule/betrule.do">배팅규정</a></li>
-                            <li><a href="/totoro/betresult/betresult.do">경기결과</a></li>
-                           
+	                            <li><a href="/totoro/bethistory/bethistory.do">배팅내역</a></li>
+	                            <li><a href="/totoro/betrule/betrule.do">배팅규정</a></li>
+	                            <li><a href="/totoro/betresult/betresult.do">경기결과</a></li>
                             </ul>
-                            
                         </li>
                         <li><a href="/totoro/cus/search.do" title="">게시판</a></li>
-                        <li><a href="/totoro/mypage/mypage.do" title="">마이페이지</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
