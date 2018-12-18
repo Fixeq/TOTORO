@@ -139,7 +139,7 @@
 					<c:when test="${list.size()>0}">
 						<c:forEach var="customerVo" items="${list}">
 							<tr>
-							    <td class="text-center"><input type="checkbox" id="check" name="check"></td>
+							    <td class="text-center"><input type="checkbox" id="check" name="check" onclick='event.cancelBubble=true;'​></td>
 								<td class="text-center"><c:out value="${customerVo.cusSeq}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.cusCat}"></c:out></td>
@@ -272,10 +272,15 @@
 					
 				});//--do_delete
 			
+			
 
+
+	
+				
+				
 			$("#listTable>tbody").on("click","tr",function(){
 				console.log("1 #listTable>tbody");
-				
+				 
 				var tr = $(this);
 				var td = tr.children();
 				var cusSeq = td.eq(1).text();

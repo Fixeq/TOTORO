@@ -129,6 +129,17 @@ public class CustomerDaoImple implements CustomerDao {
 		log.debug("*****************************");
 		return list;	
 	}
+
+	@Override
+	public int repupdate(CustomerVO customerVO) throws SQLException {
+		String statement = NAME_SPACE+".replyupdate";
+		log.debug("1.statement: "+statement);		
+		log.debug("2.param: "+customerVO);
+		int flag  = this.sqlSession.update(statement, customerVO);
+		log.debug("3.flag: "+flag);
+		
+		return flag;
+	}
 	
 
 }

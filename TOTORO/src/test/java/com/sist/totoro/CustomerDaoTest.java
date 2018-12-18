@@ -59,7 +59,7 @@ public class CustomerDaoTest {
 	public void setUp() {
 		inVO1 = new CustomerVO("15", "asdasdasd", "asdasdasd", "sdd", "fs", "", "", "", "n");
 		inVO2 = new CustomerVO("65", "sdfsdf", "sdfsdf", "sdfsd", "sdfs", "", "", "", "n");
-		inVO3 = new CustomerVO("76", "sdfsdf", "sdfsdf", "sdfsd", "sdfs", "", "", "", "n");
+		inVO3 = new CustomerVO("104", "", "", "", "", "", "", "", "");
 	
 		searchVO = new SearchVO(10,1,"","");
 		  
@@ -89,7 +89,7 @@ public class CustomerDaoTest {
 		//--------------------------------------------
 		//1. 단건 추가
 		//--------------------------------------------
-		customerDao.add(inVO1);
+		//customerDao.add(inVO1);
 		//삭제
 		//customerDao.delete(inVO1);
 		
@@ -99,11 +99,16 @@ public class CustomerDaoTest {
 //		inVO1.setCusTitle("감사해요");
 //		inVO1.setCusContent("asdf");
 //		inVO1.setCusModid("sdf");
-//		inVO1.setCusSeq("15");
-////
-//////	
+//		inVO1.setCusSeq("74");
+//////
+////////	
 //		customerDao.update(inVO1);
 		
+		//답변유무 수정
+		inVO3.setCusSeq("100");
+		inVO3.setCusReply("a");
+//		
+		customerDao.repupdate(inVO3);
 		//단건조회
 //		CustomerVO getVO = customerDao.get(inVO1);
 //		LOG.info("getVO:"+getVO);

@@ -92,7 +92,6 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
-								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
 							</tr>
 						</c:forEach>
 					</c:when>

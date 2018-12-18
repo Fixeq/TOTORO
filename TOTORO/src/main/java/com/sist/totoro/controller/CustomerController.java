@@ -205,24 +205,28 @@ public class CustomerController {
 	    }
 	 
 	 
-	//답변쓰기 
-		 @RequestMapping(value="/cus/rsave.do", method=RequestMethod.POST)
-		    public String insertReply(@ModelAttribute CusReplyVO invo,Model model) throws Exception{
-			 log.info("=====================================");
-			 log.info("=====================================");
-			 log.info("=====================================");
-			 log.info("=====================================");
-			 log.info("=====================================");
-			 log.info("=====================================");
-			 
-			 log.info("CusReplyVO:"+invo);
-			 int list = cusreplysvc.add(invo);
-			 model.addAttribute("vou", list);
-		        return "redirect:search.do";
-		    }
-	 
-	
 
+	 
+		//답변쓰기 
+	 @RequestMapping(value="/cus/rsave.do", method=RequestMethod.POST)
+	    public String insertReply(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws Exception{
+		 log.info("=====================================");
+		 log.info("=====================================");
+		 log.info("=====================================");
+		 log.info("=====================================");
+		 log.info("=="+invo.getCusSeq());
+		 log.info("=====================================");
+		 CustomerVO cuvo = new CustomerVO();
+
+		 
+		 cuvo.setCusSeq(invo.getCusSeq());
+		 cuvo.setCusReply("Y");
+		
+		 int replyupdate = customerSvc.repupdate(cuvo);
+		 int list = cusreplysvc.add(invo);
+		 model.addAttribute("vou", list);
+	        return "redirect:search.do";
+	    }
 	//수정
 	 @RequestMapping(value="/cus/update.do", method=RequestMethod.POST)
 	    public String update(@ModelAttribute CustomerVO vo,Model model) throws Exception{

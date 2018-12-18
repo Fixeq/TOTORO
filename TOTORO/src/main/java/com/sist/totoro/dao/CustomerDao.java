@@ -23,6 +23,8 @@ public interface CustomerDao {
 	 */
 	int update(CustomerVO customerVO) throws SQLException;
 	
+	int repupdate(CustomerVO customerVO) throws SQLException;
+	
 	/**
 	 * 조회 COUNT
 	 * @throws SQLException 
@@ -50,5 +52,7 @@ public interface CustomerDao {
 	 * @throws SQLException 
 	 */
 	CustomerVO get(CustomerVO customerVO) throws ClassNotFoundException, SQLException, EmptyResultDataAccessException;
+	
+	
 
 }

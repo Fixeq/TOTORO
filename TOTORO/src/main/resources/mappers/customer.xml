@@ -56,6 +56,16 @@
 	    WHERE cusSeq    = #{cusSeq}            
 	</update>
 	
+	
+	
+	<update id="replyupdate"  parameterType="CustomerVO" >
+     UPDATE cus_service        
+        SET   cusReply= #{cusReply}    
+	    WHERE cusSeq    = #{cusSeq}
+    </update>
+    
+    
+    
 <!-- 단건 조회 -->
 	<select id="get" 
 	  parameterType="CustomerVO"

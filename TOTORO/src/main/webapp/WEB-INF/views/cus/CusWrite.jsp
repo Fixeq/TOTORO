@@ -39,9 +39,7 @@
                         <div class="form-field">
                             <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="분류"  value="">
                         </div>
-                        <div class="form-field">
-                            <input name="cusReply" type="text" id="cusReply" class="full-width" placeholder="답변여부"  value="">
-                        </div>
+
 
                         <div class="message form-field">
                         <textarea name="cusContent" id="cusContent" class="full-width" placeholder="내용을 입력하세요" ></textarea>

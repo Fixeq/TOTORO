@@ -27,6 +27,8 @@ public interface CustomerSvc {
 	 */
 	int update(CustomerVO userVO) throws SQLException;
 
+	
+	int repupdate(CustomerVO customerVO) throws SQLException;
 	/**
 	 * 조회 COUNT
 	 * @throws SQLException 

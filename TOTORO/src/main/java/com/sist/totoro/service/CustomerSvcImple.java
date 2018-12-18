@@ -109,6 +109,12 @@ public class CustomerSvcImple implements CustomerSvc {
 		log.debug("========================");
 		return flag;
 	}
+
+	@Override
+	public int repupdate(CustomerVO customerVO) throws SQLException {
+		return customerDao.repupdate(customerVO);
+
+	}
 }
 
 
