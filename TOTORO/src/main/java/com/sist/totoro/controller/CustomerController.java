@@ -96,8 +96,7 @@ public class CustomerController {
 	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST)
 	public String get(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		
-		
-		log.debug("search : "+invo);
+		log.info("search : "+invo);
 		
 		String cusSeq = req.getParameter("cusSeq");
 		log.info("cusSeq : "+cusSeq);
@@ -123,12 +122,20 @@ public class CustomerController {
 			totalCnt = list.get(0).getTotalCnt();		
 		}
 		
+		log.info("====================================");
+		log.info("====================================");
+		log.info("=====================================");
+		log.info("totalCnt : "+totalCnt);
+		log.info("====================================");
+		log.info("====================================");
+		log.info("====================================");
+		
 		CustomerVO customerVO = new CustomerVO();
 		customerVO.setCusSeq(cusSeq);
 		CustomerVO outVO = customerSvc.get(customerVO);
 		
 		model.addAttribute("vo",outVO);
-		model.addAttribute("vo2",totalCnt);
+		model.addAttribute("totalCnt",totalCnt);
 	return "/cus/CusRead";
 	}
 	
@@ -262,18 +269,11 @@ public class CustomerController {
 			customerVO.setCusSeq(cusSeq);
 			CustomerVO list = customerSvc.get(customerVO);
 			
-			
 			model.addAttribute("vo", list);
-
-			
 
 			return "/cus/CusUpdate";
 		}
-	 
-	 
-
-	
-	
+		
 	
 	
 }

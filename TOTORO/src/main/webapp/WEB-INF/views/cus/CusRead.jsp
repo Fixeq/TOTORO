@@ -67,9 +67,10 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
  
     <form name="frmSave" id="frmSave" method="post" action="updatepage.do">
     	<input type="hidden" name="page_num" id="page_num">
+    	<input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
                     <fieldset>
 		
-                     <section class	="s-content s-content--narrow">
+                    
 
         <div class="row">
 
@@ -104,7 +105,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		
 		<!--pagenation ---------------------------------------------------->
 		<div class="form-inline text-center">
-			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "search.do", "search_page") %>
+			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "do_search_one.do", "search_page") %>
 		</div>
                          </fieldset>
 	 </form> <!-- end form -->
