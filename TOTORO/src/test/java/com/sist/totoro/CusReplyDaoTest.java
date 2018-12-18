@@ -51,7 +51,7 @@ public class CusReplyDaoTest {
 	
 	@Autowired
 	private CusReplyDao cusreplyDao;
-	CusReplyVO  inVO1 = new CusReplyVO("28", "","","","","");
+	CusReplyVO  inVO1 = new CusReplyVO("143", "104","sdf","sdf","sdfsdf","");
 	CusReplyVO  inVO2 = null;
 	CusReplyVO  inVO3 = null;
 	SearchVO searchVO = null;
@@ -87,7 +87,7 @@ public class CusReplyDaoTest {
 		//--------------------------------------------
 		//cusreplyDao.add(inVO1);
 		//삭제
-		//cusreplyDao.delete(inVO1);
+		cusreplyDao.delete(inVO1);
 		
 		
 

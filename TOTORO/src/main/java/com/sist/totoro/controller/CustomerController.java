@@ -2,9 +2,7 @@ package com.sist.totoro.controller;
 
 
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
-
 import com.sist.totoro.code.CodeSvc;
 import com.sist.totoro.code.CodeVO;
 import com.sist.totoro.common.SearchVO;
@@ -123,7 +120,7 @@ public class CustomerController {
 		model.addAttribute("list",list);
 		int totalCnt = 0;
 		if(null != list  &&  list.size()>0) {
-			totalCnt = list.get(1).getTotalCnt();		
+			totalCnt = list.get(0).getTotalCnt();		
 		}
 		
 		CustomerVO customerVO = new CustomerVO();
