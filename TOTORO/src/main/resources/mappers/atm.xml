@@ -66,6 +66,7 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
+		    WHERE dePoint IS NOT NULL
 		)Y
     </select>
     
@@ -93,6 +94,7 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
+		    WHERE wiPoint IS NOT NULL
 		)Y
     </select>
     
@@ -122,6 +124,8 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
+		    WHERE DWPS=0
+    		 AND dePoint IS NOT NULL
 		)Y
 		      	
     </select>
@@ -151,6 +155,8 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
+		    WHERE DWPS=0
+    		  AND wiPoint IS NOT NULL	
 		)Y
 		
     </select>
@@ -181,6 +187,8 @@
 		(
 		  SELECT COUNT(*) AS total_cnt   
 		    FROM dw_record
+		    WHERE dwPs=1
+    		  AND dePoint IS NOT NULL
 		)Y
     	
     </select>
@@ -210,6 +218,8 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE dwPs=1
+    			  AND wiPoint IS NOT NULL
 			)Y
     </select>
     
@@ -240,6 +250,9 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE userId = #{search_word} <!-- To do -->
+			     AND dePoint IS NOT NULL
+			     AND dwPs=0	
 			)Y 
     </select>
     
@@ -269,6 +282,9 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE userId = #{search_word}
+	     		  AND wiPoint IS NOT NULL
+	    		  AND dwPs=0
 			)Y
 	     	       
     </select>
@@ -299,6 +315,9 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE userId = #{search_word}
+			     AND dePoint IS NOT NULL
+			     AND dwPs=1	
 			)Y
 	            
     </select>
@@ -330,6 +349,9 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			     WHERE userId = #{search_word}
+				  AND wiPoint IS NOT NULL
+	     		  AND dwPs=1	
 			)Y
 	            
     </select>
@@ -359,6 +381,8 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE userId = #{search_word}
+	     		  AND dePoint IS NOT NULL
 			)Y
 	     	       
     </select>
@@ -388,6 +412,8 @@
 			(
 			  SELECT COUNT(*) AS total_cnt   
 			    FROM dw_record
+			    WHERE userId = #{search_word}
+	             AND wiPoint IS NOT NULL
 			)Y
 	     	       
     </select>

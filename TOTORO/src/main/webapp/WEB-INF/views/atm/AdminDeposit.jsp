@@ -16,6 +16,7 @@
 	String page_num  ="1";//page_num
 	String search_div ="";//검색구분
 	String search_word="";//검색어
+	String search_url="";//url
 	
 	int totalCnt      =0;
 	int bottomCount   =10;
@@ -138,7 +139,7 @@
 					</table>
 	
 					<div class="text-center">
-						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_word, "search_page") %>
+						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_url, "search_page") %>
 					</div>
 				</form>
 			<!--// Grid영역 ---------------------------------------------------->
@@ -156,7 +157,7 @@
         function doSearch(){
        	 var frm = document.frm;
        	 frm.page_num.value =1;
-       	 frm.search_word ="admindeposit.do";
+       	 frm.search_url ="admindeposit.do";
        	 frm.action = "admindeposit.do";
        	 frm.submit();
         }
@@ -175,7 +176,7 @@
          function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="depositreq.do";
+        	 frm.search_url ="depositreq.do";
         	 frm.action = "depositreq.do";
         	 frm.submit();
          }
@@ -183,7 +184,7 @@
          function doPsSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="depositps.do";
+        	 frm.search_url ="depositps.do";
         	 frm.action = "depositps.do";
         	 frm.submit();
          }

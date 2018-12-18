@@ -16,6 +16,7 @@
 	String page_num  ="1";//page_num
 	String search_div ="";//검색구분
 	String search_word="";//검색어
+	String search_url="";//url
 	
 	int totalCnt      =0;
 	int bottomCount   =10;
@@ -130,7 +131,7 @@
 					</table>
 	
 					<div class="form-inline text-center">
-						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_word, "search_page") %>
+						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_url, "search_page") %>
 					</div>
 					
 				</form>
@@ -149,7 +150,7 @@
         function doSearch(){
        	 var frm = document.frm;
        	 frm.page_num.value =1;
-       	 frm.search_word ="adminwithdraw.do";
+       	 frm.search_url ="adminwithdraw.do";
        	 frm.action = "adminwithdraw.do";
        	 frm.submit();
         }
@@ -168,7 +169,7 @@
          function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="withdrawreq.do";
+        	 frm.search_url ="withdrawreq.do";
         	 frm.action = "withdrawreq.do";
         	 frm.submit();
          }
@@ -176,7 +177,7 @@
          function doPsSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="withdrawps.do";
+        	 frm.search_url ="withdrawps.do";
         	 frm.action = "withdrawps.do";
         	 frm.submit();
          }

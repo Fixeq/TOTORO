@@ -16,6 +16,7 @@
 	String page_num  ="1";//page_num
 	String search_div ="";//검색구분
 	String search_word="";//검색어
+	String search_url="";//url
 	
 	int totalCnt      =0;
 	int bottomCount   =10;
@@ -72,7 +73,7 @@
 						<div class="col-twelve" >
 							<ul class="stats-tabs" >
 								<li><label ><mark>출금</mark> 요청 금액 : </label></li>
-                            <li><input type="Number" name="dpoint" id="dpoint" placeholder="10000원 단위로"/></li>
+                            <li><input type="Number" step=10000 min=0 max=1000000 name="dpoint" id="dpoint" placeholder="10000원 단위로" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="width:200px;"/></li>
                             <li><button type="button" class="btn btn--primary btn-sm" id="do_save">신청</button></li>
 								<li><button type="button" class ="btn--stroke full-width" onclick="javascript:doSearch();"> 전체 조회</button></li>
 								<li><button type="button" class="btn--stroke full-width" onclick="javascript:doReqSearch();">요청 조회</button></li>
@@ -123,7 +124,7 @@
 					</table>
 	
 					<div class="form-inline text-center">
-						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_word, "search_page") %>
+						<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, search_url, "search_page") %>
 					</div>
 					
 				</form>
@@ -142,7 +143,7 @@
         function doSearch(){
        	 var frm = document.frm;
        	 frm.page_num.value =1;
-       	 frm.search_word ="customerwithdraw.do";
+       	 frm.search_url ="customerwithdraw.do";
        	 frm.action = "customerwithdraw.do";
        	 frm.submit();
         }
@@ -161,7 +162,7 @@
          function doReqSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="cuswithdrawreq.do";
+        	 frm.search_url ="cuswithdrawreq.do";
         	 frm.action = "cuswithdrawreq.do";
         	 frm.submit();
          }
@@ -169,7 +170,7 @@
          function doPsSearch(){
         	 var frm = document.frm;
         	 frm.page_num.value =1;
-        	 frm.search_word ="cuswithdrawps.do";
+        	 frm.search_url ="cuswithdrawps.do";
         	 frm.action = "cuswithdrawps.do";
         	 frm.submit();
          }
@@ -187,6 +188,11 @@
 					//alert("do_save"); 
 					 
 					if(false==confirm("등록 하시겠습니까?"))return;
+					
+					if($("#dpoint").val()%10000>0){
+						alert("1만원 단위로 입력해주세요")
+						return;
+					}
 					 
 					$.ajax({
 				         type:"POST",
