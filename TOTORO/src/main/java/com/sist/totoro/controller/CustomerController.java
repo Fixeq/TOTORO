@@ -95,8 +95,48 @@ public class CustomerController {
 	}
 	
 	
+	//상세보기
+	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST)
+	public String get(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+		
+		
+		log.debug("search : "+invo);
+		
+		String cusSeq = req.getParameter("cusSeq");
+		log.info("cusSeq : "+cusSeq);
+		
+		if(invo.getPage_size() == 0) {
+			invo.setPage_size(5);
+		}
+		if(invo.getPage_num() == 0){
+			invo.setPage_num(1);
+		}
+		if(null == invo.getSearch_div()) {
+			invo.setSearch_div("");
+		}
+		if(null == invo.getSearch_word()) {
+			invo.setSearch_word("");
+		}
+		model.addAttribute("param",invo);
+		List<CusReplyVO> list = cusreplysvc.do_retrieve(invo);
+		log.info("list size : "+list.size());
+		model.addAttribute("list",list);
+		int totalCnt = 0;
+		if(null != list  &&  list.size()>0) {
+			totalCnt = list.get(1).getTotalCnt();		
+		}
+		
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setCusSeq(cusSeq);
+		CustomerVO outVO = customerSvc.get(customerVO);
+		
+		model.addAttribute("vo",outVO);
+		model.addAttribute("vo2",totalCnt);
+	return "/cus/CusRead";
+	}
 	
-	//삭제
+	
+	//다건삭제
 	@RequestMapping(value="/cus/delete.do",method=RequestMethod.POST
 			,consumes= {"text/plain", "application/*"}
 			,produces="application/json;charset=UTF-8")
@@ -140,44 +180,20 @@ public class CustomerController {
 	}
 	
 
-	 
+	//상세페이지삭제
+	 @RequestMapping(value="/cus/detail_delete.do", method=RequestMethod.POST)
+	    public String delete(HttpServletRequest req,@ModelAttribute CustomerVO vo) throws Exception{
+		 String cusSeq = req.getParameter("cusSeq");
+			CustomerVO customerVO = new CustomerVO();
+			customerVO.setCusSeq(cusSeq);
+		 int list = customerSvc.delete(vo);
+	        return "redirect:search.do";
+	    }
 	
 
-	
-
-	//쓰기페이지이동
-	
-	@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.POST)
-	public String board(Locale locale, Model model) {
-		log.info("Welcome home! The client locale is {}.", locale);
-
-		
-		
-		
-
-		return "/cus/CusWrite";
-	}
-	
-	//답쓰기페이지이동
-	
-	@RequestMapping(value = "/cus/rwritepage.do", method = RequestMethod.POST)
-	public String rwritepage(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		String cusSeq = req.getParameter("cusSeq");
-		CustomerVO customerVO = new CustomerVO();
-		customerVO.setCusSeq(cusSeq);
-		CustomerVO outVO = customerSvc.get(customerVO);
-		
-		model.addAttribute("vo3",outVO);
-
-
-		return "/cus/CusReplyWrite";
-	}
-	
-	
 
 	
-	
-	//저장
+	//글쓰기 
 	 @RequestMapping(value="/cus/save.do", method=RequestMethod.POST)
 	    public String insert(@ModelAttribute CustomerVO vo) throws Exception{
 		 int list = customerSvc.add(vo);
@@ -185,28 +201,25 @@ public class CustomerController {
 	    }
 	 
 	 
-	//답변저장
+	//답변쓰기 
 		 @RequestMapping(value="/cus/rsave.do", method=RequestMethod.POST)
-		    public String insertReply(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws Exception{
+		    public String insertReply(@ModelAttribute CusReplyVO invo,Model model) throws Exception{
+			 log.info("=====================================");
+			 log.info("=====================================");
+			 log.info("=====================================");
+			 log.info("=====================================");
+			 log.info("=====================================");
+			 log.info("=====================================");
+			 
+			 log.info("CusReplyVO:"+invo);
 			 int list = cusreplysvc.add(invo);
+			 model.addAttribute("vou", list);
 		        return "redirect:search.do";
 		    }
 	 
-	//상세페이지삭제
-		 @RequestMapping(value="/cus/detail_delete.do", method=RequestMethod.POST)
-		    public String delete(@ModelAttribute CustomerVO vo) throws Exception{
-			 
-			 int list = customerSvc.delete(vo);
-		        return "redirect:do_search_one.do";
-		    }
-	 
-	 
-	 
-	 
-	 
-	 
-	//수정
 	
+
+	//수정
 	 @RequestMapping(value="/cus/update.do", method=RequestMethod.POST)
 	    public String update(@ModelAttribute CustomerVO vo,Model model) throws Exception{
 		 int list = customerSvc.update(vo);
@@ -214,7 +227,33 @@ public class CustomerController {
 	        return "redirect:search.do";
 	    }
 	
-	 
+		//쓰기페이지이동
+		
+		@RequestMapping(value = "/cus/writepage.do", method = RequestMethod.POST)
+		public String board(Locale locale, Model model) {
+			log.info("Welcome home! The client locale is {}.", locale);
+
+			
+			
+			
+
+			return "/cus/CusWrite";
+		}
+		
+		//답쓰기페이지이동
+		
+		@RequestMapping(value = "/cus/rwritepage.do", method = RequestMethod.POST)
+		public String rwritepage(CusReplyVO vo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+			String cusSeq = req.getParameter("cusSeq");
+			CusReplyVO cusreplyVO = new CusReplyVO();
+			cusreplyVO.setCusSeq(cusSeq);
+			
+			
+			model.addAttribute("vo3",cusreplyVO);
+
+
+			return "/cus/CusReplyWrite";
+		}
 	 
 		//수정페이지이동
 		@RequestMapping(value = "/cus/updatepage.do", method = RequestMethod.POST)
@@ -235,45 +274,7 @@ public class CustomerController {
 		}
 	 
 	 
-	//상세보
-	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST)
-	public String get(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		
-		
-		log.debug("search : "+invo);
-		
-		String cusSeq = req.getParameter("cusSeq");
-		log.info("cusSeq : "+cusSeq);
-		
-		if(invo.getPage_size() == 0) {
-			invo.setPage_size(5);
-		}
-		if(invo.getPage_num() == 0){
-			invo.setPage_num(1);
-		}
-		if(null == invo.getSearch_div()) {
-			invo.setSearch_div("");
-		}
-		if(null == invo.getSearch_word()) {
-			invo.setSearch_word("");
-		}
-		model.addAttribute("param",invo);
-		List<CusReplyVO> list = cusreplysvc.do_retrieve(invo);
-		log.info("list size : "+list.size());
-		model.addAttribute("list",list);
-		int totalCnt = 0;
-		if(null != list  &&  list.size()>0) {
-			totalCnt = list.get(1).getTotalCnt();		
-		}
-		
-		CustomerVO customerVO = new CustomerVO();
-		customerVO.setCusSeq(cusSeq);
-		CustomerVO outVO = customerSvc.get(customerVO);
-		
-		model.addAttribute("vo",outVO);
-		model.addAttribute("vo2",totalCnt);
-	return "/cus/CusRead";
-	}
+
 	
 	
 	

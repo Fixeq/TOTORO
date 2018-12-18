@@ -56,6 +56,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 </head>
 <body>
   <section class="s-content">
+  <!-- 히든으로 값을 받아서 넘겨주기 -->
   <form name="bofrm" id="bofrm" action="rwritepage.do" method="post" class="form-inline">
 		 <input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
 		 <input type="hidden" name="cusTitle" id="cusTitle" />
@@ -118,7 +119,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
   
    <script type="text/javascript">
 
-    
+    //수정페이지로 이동 
    function doUpdatePage(){
 	   var cusContent = $('.cusContentValue').text();
 	   	 alert(cusContent);
@@ -135,16 +136,23 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
     	 frm.submit();
      }
     
+   // 댓글쓰기 페이지로 이동 
    function doWritePage(){
   	 var frm = document.bofrm;
+  	 frm.cusSeq.value = $("#cusSeq").val();
   	 frm.action = "rwritepage.do";
   	 frm.submit();
    }
+   
+   
+   // 상세페이지에서 삭제 
    function detail_delete(){
-  	 var frm = document.frmSave;
+  	 var frm = document.bofrm;
   	 frm.action = "detail_delete.do";
   	 frm.submit();
    }
+   
+   
    function search_page(url,page_num){
 	   	 alert(url+":search_page:"+page_num);
 	   	 var frm = document.frmSave;

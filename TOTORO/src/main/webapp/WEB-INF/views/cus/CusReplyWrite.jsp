@@ -22,33 +22,17 @@
 </head>
 <body>
   <section class="s-content">
-
+	
+	
 	 
-    <form name="form1" method="post" action="rsave.do">
-<fieldset>
-<c:out value="${vo3.cusSeq}"></c:out>
-                        <div class="form-field">
-                            <input name="cusSeq" type="text" id="cusSeq" class="full-width" placeholder="게시글 번호" value="">
-                        </div>
-
-                        <div class="form-field">
-                        		<input name="userId" type="hidden" id="userId" class="full-width" placeholder="아이디" value="${userId}">
-                            <!-- <input name="userId" type="text" id="userId" class="full-width" placeholder="아이디" value=""> -->
-                        </div>
-
-                        <div class="form-field">용
-                            <input name="crContent" type="text" id="crContent" class="full-width" placeholder="댓글내용"  value="">
-                        </div>
-                
-                          <div class="form-field">
-                            <input name="crregId" type="hidden" id="crregId" class="full-width" placeholder="등록자"  value="${userId}">
-                        </div>
-                        <div class="form-field">
-                            <input name="crregDt" type="hidden" id="crregDt" class="full-width" placeholder="댓글등록일"  value="">
-                        </div>
-
-                        <div class="message form-field">
-                        <textarea name="cusContent" id="cusContent" class="full-width" placeholder="내용을 입력하세요" ></textarea>
+    <form name="bofrm" id="bofrm" action="rsave.do" method="post" class="form-inline">
+	<fieldset>
+			
+						<input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo3.cusSeq}"></c:out>" />
+						<input type="hidden" name="userId" id="userId" value="${userId}" />
+						<input type="hidden" name="crregId" id="crregId" value="${userId}" />
+                        <div class="crContent">
+                        <textarea name="crContent" id="crContent" class="full-width" placeholder="내용을 입력하세요" ></textarea>
                         </div>
 
                       
@@ -58,7 +42,7 @@
     
 
     <div style="width:650px; text-align: center;">
-        <button type="submit" class="submit btn btn--primary full-width" id="btnSave">저장</button>
+        <button type="submit" class="submit btn btn--primary full-width" id="btnSave" onclick="javascript:doReplyWrite();">저장</button>
         <button type="reset">취소</button>
     </div>
 </form>
@@ -67,24 +51,15 @@
   </section>
     <script type="text/javascript">
 
+	
 
-
-    $(document).ready(function(){
-        $("#btnSave").click(function(){
-
-        	var cusSeq = $("#cusSeq").val();
-            var crSeq = $("#crSeq").val();
-            
-            var userId = $("#userId").val();
-            var crContent = $("#crContent").val();
-            var crregId = $("#crregId").val();
-            var crregDt = $("#crregDt").val();
-
-           
-            // 폼에 입력한 데이터를 서버로 전송
-            document.form1.submit();
-        });
-    });
+    function doReplyWrite(){
+	
+ 	  	 var frm = document.bofrm;
+     	 alert(frm.cusSeq.value);
+     	 frm.action = "rsave.do";
+     	 frm.submit();
+      }
     </script>
 </body>
 </html>
