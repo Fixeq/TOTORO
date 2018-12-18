@@ -1722,9 +1722,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
  * ------------------------------------------------------------------- */
 .s-pageheader {
    min-height: 174px;
-   background-image: url(../images/hero-bg.jpg);
+   /* background-image: url(../images/hero-bg.jpg);
    background-repeat: no-repeat;
-   background-position: center center;
+   background-position: center center; */
    position: relative;
 }
 
@@ -1736,7 +1736,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: #151515;
+   background-color: #DE6262;
    opacity: .95;
 }
 
@@ -1977,7 +1977,7 @@ body.search-is-visible {
 /* -------------------------------------------------------------------
  * ## header search trigger
  * ------------------------------------------------------------------- */
-.header__search-trigger {
+/*  .header__search-trigger {
    height: 21px;
    min-width: 21px;
    position: absolute;
@@ -2000,7 +2000,30 @@ body.search-is-visible {
    color: #FFFFFF;
    float: left;
    padding-right: 33px;
+} */
+ 
+ 
+
+.header-moo {
+   height: 21px;
+   min-width: 21px;
+   position: absolute right center;
+   right: 20px;
+   top: 15px;
 }
+
+ .header-moo::before {
+   font-family: "metropolis-semibold", sans-serif;
+   font-size: 12px;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   line-height: 21px;
+   content: "";
+   display: block;
+   color: #FFFFFF;
+   float: left;
+   padding-right: 33px;
+} 
 
 /* ------------------------------------------------------------------- 
  * responsive:

@@ -24,15 +24,18 @@
     <link rel="stylesheet" href="<%=context%>/resources/css/base.css">
     <link rel="stylesheet" href="<%=context%>/resources/css/vendor.css">
     <link rel="stylesheet" href="<%=context%>/resources/css/main.css">
-
+   <%-- 
+    <!-- Java Script
+    ================================================== -->
+    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="<%=context%>/resources/js/plugins.js"></script>
+    <script src="<%=context%>/resources/js/main.js"></script>
+     --%>
+    
     <!-- script
     ================================================== -->
     <script src="<%=context%>/resources/js/modernizr.js"></script>
     <script src="<%=context%>/resources/js/pace.min.js"></script>
-    
-    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
-    <script src="<%=context%>/resources/js/plugins.js"></script>
-    <script src="<%=context%>/resources/js/main.js"></script>
 
 	<!-- google web font -->
 	<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">

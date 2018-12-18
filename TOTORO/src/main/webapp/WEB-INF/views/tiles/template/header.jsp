@@ -6,22 +6,27 @@
  
 <%
 	String context = request.getContextPath();//context path
-	/* String c = (String)session.getAttribute("userId"); */
 %>
+
+
+
+
 
     <!-- pageheader
     ================================================== -->
-    <div class="s-pageheader">
+    <div class="s-pageheader s-pageheader--home">
 
         <header class="header">
             <div class="header__content row">
 
                 <div class="header__logo">
                     <a class="logo" href="/totoro/mainpage/mainpage.do">
-                        <img src="<%=context%>/resources/images/logo.svg" alt="Homepage">
+                        <img src="<%=context%>/resources/images/ban/로고메인.png" alt="Homepage">
                     </a>
                 </div> <!-- end header__logo -->
 
+
+				
                 <ul class="header__social">
                     <li>
                         <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -37,23 +42,46 @@
                     </li>
                 </ul> <!-- end header__social -->
 
-                <a class="header__search-trigger" href="#0"></a>
-			
-				<input type="button"  value="로그아웃${userId}" onclick="location.href='<%=context%>/user/logout.do'"/>
+				<%-- <input type="button"  value="로그아웃${userId}" onclick="location.href='<%=context%>/user/logout.do'"/> --%>
+				
+				<div class="header-moo">
+					<ul class="header__nav">
+                        <li class="has-children">
+                            <a href="#0" title="">${userVO.getUserName()}님</a>
+                            <ul class="sub-menu">
+                            <c:choose>
+                            	<c:when test="${userAdmin=='1'}">
+		                            <!-- <li><a href="/totoro/mypage/">회원관리</a></li> -->
+		                            <li><a href="#" class="header__search-trigger">회원관리</a></li>
+		                            <li><a href="/totoro/user/logout.do">로그아웃</a></li>
+	                            </c:when>
+	                            <c:otherwise>
+	                            	<li><a href="#">point:${userPoint}점</a></li>
+		                            <li><a href="/totoro/mypage/" class="header__search-trigger">개인정보수정</a></li>
+		                            <li><a href="/totoro/user/logout.do">로그아웃</a></li>
+	                            </c:otherwise>
+                            </c:choose>
+                            </ul>
+                        </li>
+                    </ul> <!-- end header__nav -->				
+				</div>		
+							
+<!--                 <a class="header__search-trigger" href="#0" style="color: white">ddddddddd</a> -->
+r
                 <div class="header__search">
 
-                    <!-- <form role="search" method="get" class="header__search-form" action="#">
-                    
+                    <form role="search" method="get" class="header__search-form" action="#">
                         <label>
                             <span class="hide-content">Search for:</span>
                             <input type="search" class="search-field" placeholder="Type Keywords" value="" name="s" title="Search for:" autocomplete="off">
                         </label>
                         <input type="submit" class="search-submit" value="Search">
-                    </form> -->
+                    </form>
         
-                    <!-- <a href="#0" title="Close Search" class="header__overlay-close">Close</a> -->
+                    <a href="#0" title="Close Search" class="header__overlay-close">Close</a>
 
                 </div>  <!-- end header__search -->
+
 
 
                 <a class="header__toggle-menu" href="#0" title="Menu"><span>Menu</span></a>
@@ -68,15 +96,21 @@
                         <li class="has-children">
                             <a href="#0" title="">입금/출금</a>
                             <ul class="sub-menu">
-                            <li><a href="/totoro/atm/customerdeposit.do">입금</a></li>
-                            <li><a href="/totoro/atm/customerwithdraw.do">출금</a></li>
-                            <li><a href="/totoro/atm/admindeposit.do">관리자 입금</a></li>
-                            <li><a href="/totoro/atm/adminwithdraw.do">관리자 출금</a></li>
-                            <li><a href="/totoro/atm/givepay.do">당첨금 지급페이지</a></li>
+                            <c:choose>
+                            	<c:when test="${userAdmin=='1'}">
+		                            <li><a href="/totoro/atm/admindeposit.do">입금관리</a></li>
+		                            <li><a href="/totoro/atm/adminwithdraw.do">출금관리</a></li>
+		                            <li><a href="/totoro/atm/givepay.do">당첨금 지급관리</a></li>
+	                            </c:when>
+	                            <c:otherwise>
+		                            <li><a href="/totoro/atm/customerdeposit.do">입금신청</a></li>
+		                            <li><a href="/totoro/atm/customerwithdraw.do">출금신청</a></li>
+	                            </c:otherwise>
+                            </c:choose>
                             </ul>
                         </li>
                         <li class="has-children current">
-                            <a href="#0" title="">카테고리</a>
+                            <a href="#0" title="">배팅</a>
                             <ul class="sub-menu">
                             <li><a href="/totoro/bethistory/bethistory.do">배팅내역</a></li>
                             <li><a href="/totoro/betrule/betrule.do">배팅규정</a></li>
@@ -97,3 +131,11 @@
         </header> <!-- header -->
 
     </div> <!-- end s-pageheader -->
+    
+    <!-- Java Script
+    ================================================== -->
+    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="<%=context%>/resources/js/plugins.js"></script>
+    <script src="<%=context%>/resources/js/main.js"></script>
+    
+  

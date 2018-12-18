@@ -34,12 +34,6 @@
     <script src="<%=context%>/resources/js/plugins.js"></script>
     <script src="<%=context%>/resources/js/main.js"></script>
 
-    
-
-    <!-- favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 
 
 	<!-- google web font -->

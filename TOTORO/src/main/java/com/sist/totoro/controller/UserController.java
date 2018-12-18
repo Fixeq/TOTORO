@@ -70,44 +70,6 @@ public class UserController {
 	
 	
 	
-	
-	//회원가입 화면 이동
-	@RequestMapping(value = "/user/join2.do", method = RequestMethod.GET)
-	public String moveJoin2(HttpServletRequest req) {
-		CodeVO  codeVO2=new CodeVO();		
-		CodeVO  codeVO3=new CodeVO();		
-		codeVO2.setCd_id("C002");
-		codeVO3.setCd_id("C003");
-		//지네릭 이상할 수도 있음.
-		List<CodeVO> cdListC002 = (List<CodeVO>) codeSvc.do_retrieve(codeVO2);
-		List<CodeVO> cdListC003 = (List<CodeVO>) codeSvc.do_retrieve(codeVO3);
-		//codeVO 쓸것들 할당 필요
-		//C002	비밀번호찾기질문
-		//C003	은행명
-		
-		req.setAttribute("cdListC002", cdListC002);
-		req.setAttribute("cdListC003", cdListC003);
-		
-		return "/user/join2";
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	//아이디,비밀번호 화면 이동
 	@RequestMapping(value = "/user/find.do", method = RequestMethod.GET)
 	public String moveFind(HttpServletRequest req) {
