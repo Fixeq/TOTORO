@@ -269,7 +269,10 @@ public class CustomerController {
 			customerVO.setCusSeq(cusSeq);
 			CustomerVO list = customerSvc.get(customerVO);
 			
+			
 			model.addAttribute("vo", list);
+
+			
 
 			return "/cus/CusUpdate";
 		}

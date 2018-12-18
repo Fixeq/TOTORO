@@ -67,7 +67,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
  
     <form name="frmSave" id="frmSave" method="post" action="updatepage.do">
     	<input type="hidden" name="page_num" id="page_num">
-    	<input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
+    			 <input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
                     <fieldset>
 		
                     
@@ -91,6 +91,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 							<tr>
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
+								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
 							</tr>
 						</c:forEach>
