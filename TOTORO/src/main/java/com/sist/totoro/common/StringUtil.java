@@ -122,7 +122,7 @@ public class StringUtil {
 		   if (nowBlockNo > 1 && nowBlockNo <= maxBlockNo) {
 			   
 		    html.append("<li>");
-		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
+		    html.append("<a class=\"pgn__num current\" href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
 		    html.append("&laquo;   \n");
 		    html.append("</a>      \n");
 		    html.append("</li>");
@@ -133,7 +133,7 @@ public class StringUtil {
 		   
 		   if (startPageNo > bottomCount) {
 		    html.append("<li>");
-		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
+		    html.append("<a class=\"pgn__prev\" href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
 		    html.append("<        \n");
 		    html.append("</a>     \n");
 		    html.append("</li>");
@@ -146,7 +146,7 @@ public class StringUtil {
 		    
 		    if (inx == currPageNo) {
 		     html.append("<li class=\"active\">");   
-		     html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "('" + url + "'," + inx+ ");\" >" + inx + "</a> &nbsp;&nbsp; \n");
+		     html.append("<a class=\"pgn__num current\" href=\"javascript:" + scriptName + "('" + url + "'," + inx+ ");\" >" + inx + "</a> &nbsp;&nbsp; \n");
 		     html.append("</li>");
 		    } else {
 		     html.append("<li>");
@@ -158,7 +158,7 @@ public class StringUtil {
 		   // >
 		   if (maxPageNo >= inx) {
 		    html.append("<li>"); 
-		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
+		    html.append("<a class=\"pgn__next\" href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
 		    html.append(">                       \n");
 		    html.append("</a>              \n");
 		    html.append("</li>");

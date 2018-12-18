@@ -41,7 +41,6 @@
 	
 	List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
-			 	out.print("<context!!!!!!!!>"+context);
 %>    
 
 <%-- 
@@ -77,7 +76,10 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" href="<%=context%>/resources/css/base.css">
+    <link rel="stylesheet" href="<%=context%>/resources/css/vendor.css">
+    <link rel="stylesheet" href="<%=context%>/resources/css/main.css">
 
  
     
