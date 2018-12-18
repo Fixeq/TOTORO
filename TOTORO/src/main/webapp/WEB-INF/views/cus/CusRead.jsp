@@ -13,7 +13,7 @@
 <%
 String context = request.getContextPath();//context path
 
-String page_size ="10";//page_size
+String page_size ="5";//page_size
 String page_num  ="1";//page_num
 String search_div ="";//검색구분
 String search_word="";//검색어
@@ -27,12 +27,12 @@ SearchVO vo =  (SearchVO)request.getAttribute("param");
 if(null !=vo ){
 	search_div  = StringUtil.nvl(vo.getSearch_div(), ""); 
 	search_word = StringUtil.nvl(vo.getSearch_word(), ""); 
-	page_size   = StringUtil.nvl(vo.getPage_size(), "10"); 
+	page_size   = StringUtil.nvl(vo.getPage_size(), "5"); 
 	page_num   = StringUtil.nvl(vo.getPage_num(), "1"); 
 }else{ 
 	search_div  = StringUtil.nvl(request.getParameter("search_div"), ""); 
 	search_word = StringUtil.nvl(request.getParameter("search_word"), "");
-	page_size = StringUtil.nvl(request.getParameter("page_size"), "10");
+	page_size = StringUtil.nvl(request.getParameter("page_size"), "5");
 	page_num = StringUtil.nvl(request.getParameter("page_num"), "1");
 }
 
@@ -41,7 +41,7 @@ if(null !=vo ){
 int oPageSize = Integer.parseInt(page_size);
 int oPageNum  = Integer.parseInt(page_num);
 
-String iTotalCnt = (null == request.getAttribute("total_cnt"))?"0":request.getAttribute("total_cnt").toString();
+String iTotalCnt = (null == request.getAttribute("totalCnt"))?"0":request.getAttribute("totalCnt").toString();
 totalCnt = Integer.parseInt(iTotalCnt);
 
 List<CodeVO> code_page = (null == request.getAttribute("code_page"))
@@ -56,29 +56,28 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 </head>
 <body>
   <section class="s-content">
+  <form name="bofrm" id="bofrm" action="rwritepage.do" method="post" class="form-inline">
+		 <input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
+		 <input type="hidden" name="cusTitle" id="cusTitle" />
+		 <input type="hidden" name="cusContent" id="cusContent" />
+		  <input type="hidden" name="userId" id="userId" value="${userId}" />
+	</form>
+  	
  
     <form name="frmSave" id="frmSave" method="post" action="updatepage.do">
-    	<form  name="bofrm" id="bofrm" action="rwritepage.do" method="post" class="form-inline">
-			<input type="hidden" name="cusSeq" id="cusSeq">
-  		
+    	<input type="hidden" name="page_num" id="page_num">
                     <fieldset>
-
+		
                      <section class	="s-content s-content--narrow">
 
         <div class="row">
 
             <div class="s-content__header col-full">
-                <h1 class="s-content__header-title">
+                <h1 class="s-content__header-title cusTitleValue">
 						<c:out value="${vo.cusTitle}"></c:out>
                 </h1>
             </div> <!-- end s-content__header -->
-    
-            
-
-            <div class="col-full s-content__main">
-
-                <p class="lead"><c:out value="${vo.cusContent}"></c:out></p>
- 			
+					<p class="cusContentValue"><c:out value="${vo.cusContent}"></c:out></p>
                 
                 </div>
              	<table id="listTable" class="table table-striped table-bordered table-hover">
@@ -89,7 +88,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 						<c:forEach var="cusReplyVo" items="${list}">
 							<tr>
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
-								<td class="text-center"><c:out value="${cusReplyVo.crregId}"></c:out></td>
+								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
 							</tr>
 						</c:forEach>
@@ -115,19 +114,29 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
   </section>
   
   
-   <% UserVO vo1 = (UserVO)session.getAttribute("UserId");%>
+ 
   
    <script type="text/javascript">
 
     
    function doUpdatePage(){
-    	 var frm = document.frmSave;
+	   var cusContent = $('.cusContentValue').text();
+	   	 alert(cusContent);
+	   	 var cusTitle = $('.cusTitleValue').text();
+	   	 alert(cusTitle);
+	   	 
+	  	 var frm = document.bofrm;
+    	 alert(frm.cusSeq.value);
+    	 alert(frm.userId.value);
+    	 frm.cusTitle.value = cusTitle;
+    	 frm.cusContent.value = cusContent;
+    	 
     	 frm.action = "updatepage.do";
     	 frm.submit();
      }
     
    function doWritePage(){
-  	 var frm = document.frmSave;
+  	 var frm = document.bofrm;
   	 frm.action = "rwritepage.do";
   	 frm.submit();
    }
@@ -138,7 +147,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    }
    function search_page(url,page_num){
 	   	 alert(url+":search_page:"+page_num);
-	   	 var frm = document.frm;
+	   	 var frm = document.frmSave;
 	   	 frm.page_num.value = page_num;
 	   	 frm.action = url;
 	   	 frm.submit();

@@ -161,11 +161,11 @@ public class CustomerController {
 	//답쓰기페이지이동
 	
 	@RequestMapping(value = "/cus/rwritepage.do", method = RequestMethod.POST)
-	public String rwritepage(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	public String rwritepage(HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		String cusSeq = req.getParameter("cusSeq");
-		CusReplyVO cusreplyVO = new CusReplyVO();
-		cusreplyVO.setCusSeq(cusSeq);
-		List<CusReplyVO> outVO = cusreplysvc.do_retrieve(cusreplyVO);
+		CustomerVO customerVO = new CustomerVO();
+		customerVO.setCusSeq(cusSeq);
+		CustomerVO outVO = customerSvc.get(customerVO);
 		
 		model.addAttribute("vo3",outVO);
 
@@ -174,23 +174,7 @@ public class CustomerController {
 	}
 	
 	
-	//수정페이지이동
-	@RequestMapping(value = "/cus/updatepage.do", method = RequestMethod.POST)
-	public String updatepage(HttpServletRequest req,Model model)throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
-		
-		String cusSeq = req.getParameter("cusSeq");
 
-		CustomerVO customerVO=new CustomerVO();
-		customerVO.setCusSeq(cusSeq);
-		CustomerVO list = customerSvc.get(customerVO);
-		
-		
-		model.addAttribute("vo", list);
-		
-		
-
-		return "/cus/CusUpdate";
-	}
 	
 	
 	//저장
@@ -224,11 +208,33 @@ public class CustomerController {
 	//수정
 	
 	 @RequestMapping(value="/cus/update.do", method=RequestMethod.POST)
-	    public String update(@ModelAttribute CustomerVO vo) throws Exception{
+	    public String update(@ModelAttribute CustomerVO vo,Model model) throws Exception{
 		 int list = customerSvc.update(vo);
+			model.addAttribute("vou", list);
 	        return "redirect:search.do";
 	    }
 	
+	 
+	 
+		//수정페이지이동
+		@RequestMapping(value = "/cus/updatepage.do", method = RequestMethod.POST)
+		public String updatepage(HttpServletRequest req,Model model)throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+			
+			String cusSeq = req.getParameter("cusSeq");
+
+			CustomerVO customerVO=new CustomerVO();
+			customerVO.setCusSeq(cusSeq);
+			CustomerVO list = customerSvc.get(customerVO);
+			
+			
+			model.addAttribute("vo", list);
+
+			
+
+			return "/cus/CusUpdate";
+		}
+	 
+	 
 	//상세보
 	@RequestMapping(value="/cus/do_search_one.do",method=RequestMethod.POST)
 	public String get(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {

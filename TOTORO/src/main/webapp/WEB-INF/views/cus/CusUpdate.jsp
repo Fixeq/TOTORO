@@ -31,7 +31,7 @@
     	
 
                         <div class="form-field">
-                            <input name="cusTitle" type="text" id="cusTitle" class="full-width"  value="<c:out value="${vo.cusTitle}"></c:out>">
+                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="제목" value="<c:out value="${vo.cusTitle}"></c:out>">
                         </div>
 
                         <div class="form-field">
@@ -39,11 +39,9 @@
                         </div>
 
                         <div class="form-field">
-                            <input name="cusregid" type="text" id="cusregid" class="full-width" placeholder="등록"  value="">
+                            <input name="cusregid" type="text" id="cususerId" class="full-width" placeholder="등목록"  value="">
                         </div>
-                        <div class="form-field">
-                            <input name="cusModid" type="text" id="cusModid" class="full-width" placeholder="수정자"  value="<c:out value="${vo.cusModid}"></c:out>">
-                        </div>
+
 
                         <div class="message form-field">
                         <textarea name="cusContent" id="cusContent" class="full-width"  value=""><c:out value="${vo.cusContent}"></c:out></textarea>
@@ -67,23 +65,21 @@
 
 
 
-    $(document).ready(function(){
-        $("#btnUpdate").click(function(){
-            //var title = document.form1.title.value; ==> name속성으로 처리할 경우
-            //var content = document.form1.content.value;
-            //var writer = document.form1.writer.value;
-            var title = $("#cusTitle").val();
-            var content = $("#cusContent").val();
-            var userId = $("#cusModid").val();
-            var cusCat = $("#cusCat").val();
-            var cusReply = $("#cusReply").val();
-
-
-           
-            // 폼에 입력한 데이터를 서버로 전송
-            document.form2.submit();
-        });
-    });
+    function update(){
+	   	 var cusContent = $('.lead').text();
+	   	 alert(cusContent);
+	   	 var cusTitle = $('.cusTitleValue').text();
+	   	 alert(cusTitle);
+	   	 
+	  	 var frm = document.bofrm;
+   	 alert(frm.cusSeq.value);
+   	 alert(frm.userId.value);
+   	 frm.cusTitle.value = cusTitle;
+   	 frm.cusContent.value = cusContent;
+   	 
+   	 frm.action = "update.do";
+   	 frm.submit();
+    }
     </script>
 </body>
 </html>

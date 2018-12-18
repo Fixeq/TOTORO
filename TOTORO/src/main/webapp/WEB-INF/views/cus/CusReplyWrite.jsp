@@ -26,7 +26,7 @@
 	 
     <form name="form1" method="post" action="rsave.do">
 <fieldset>
-
+<c:out value="${vo3.cusSeq}"></c:out>
                         <div class="form-field">
                             <input name="cusSeq" type="text" id="cusSeq" class="full-width" placeholder="게시글 번호" value="">
                         </div>
