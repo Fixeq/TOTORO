@@ -22,6 +22,12 @@ public class BetHistoryDaoimple {
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.betHistory";
 	
+	public int do_countSeq() {
+		String statement = NAME_SPACE + ".do_countSeq";
+		
+		return this.sqlSession.selectOne(statement);
+	}
+	
 	public int do_betUpdate(int gameSeq){
 		//리스트의 사이즈만큼 반복시키면서 다시 수행해야함.
 		String statement = NAME_SPACE + ".do_betUpdate";

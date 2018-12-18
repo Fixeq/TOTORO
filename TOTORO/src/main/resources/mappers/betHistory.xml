@@ -4,6 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sist.totoro.mappers.betHistory">
+<select id="do_countSeq" resultType="java.lang.Integer">
+SELECT BETSEQ.NEXTVAL FROM DUAL
+</select>
+
+
 <select id="do_viewByUserId" parameterType="String" resultType="BetHistoryVO">
 <!-- SELECT BETSEQ
 FROM BET_HISTORY
@@ -95,13 +100,13 @@ INSERT INTO BET_HISTORY (
     BETP,
     BETCASH
 ) VALUES (
-    #{gameSeq},
-    #{userId},
-    #{betSeq},
-    #{betChoice},
+    #{gameSeq},	  <!-- 게임 시퀀스는 웹에서 데이터 받아옴 6 -->
+    #{userId},	  <!-- 사용자 아이디 : 세션에서 가져옴 5-->
+    #{betSeq},	  <!-- 베팅 시퀀스 : 시퀀스 처리 자동 증 1-->	 
+    #{betChoice}, <!-- 사용자선택 2-->
     SYSDATE,
-    #{betP},
-    #{betCash}
+    #{betP},	  <!-- 전체 베팅율 3-->	
+    #{betCash}	  <!-- 사용자 베팅금액 4-->
 )
 </insert>
 

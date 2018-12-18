@@ -11,7 +11,7 @@
 <section class="s-content">
 <div class="row">
 	<div class="col-ten tab-full">
-	<form method="get" id="betForm" action="/totoro/cross/save.do">
+	<form method="get" id="betForm" action="/totoro/cross/makeUserBet.do">
 	<table id = "betTable">
 		<thead>
 			<tr>
@@ -35,11 +35,11 @@
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
  --%>								
  									<td id="betSeq"></td>
-	 								<td class="text-center"><input type="radio" id="${crossVo.gameHome}" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
+	 								<td class="text-center"><input type="radio" id="${crossVo.gameHp}" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
-									<td class="text-center"><input type="radio" id="무승부" name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
+									<td class="text-center"><input type="radio" id="${crossVo.gameDp}" name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
 									<td class="text-center"><c:out value="${crossVo.gameDp}"></c:out></td>
-									<td class="text-center"><input type="radio" id="${crossVo.gameAway}" name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
+									<td class="text-center"><input type="radio" id="${crossVo.gameAp}" name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
 								
@@ -86,9 +86,12 @@
 	</form>
 </section> <!-- s-content -->
 </body>
+
 <script>
 	var varGameSeq = new Array();
+	var finalNum = 1;
 </script>
+
 <script type="text/javascript">
 	$(document).ready(function(){   
 		alert("cross777");
@@ -107,34 +110,34 @@
 		varName = a.name;
 		varId = a.id;
 		console.log(varName);
-		console.log(varId);
+		console.log("varId = " + varId);
 		
 		varGameSeq.push(varName);
 		console.log("varGameSeq : " + varGameSeq);
 		console.log("val[] : " + varGameSeq[0]);
 		console.log("val[] : " + varGameSeq[1]);
 		console.log("length : " + varGameSeq.length);
-
-
-		var radioPercent = $("input[name='"+varName+"']:checked").val();
-		console.log(radioPercent);
 		
-		first = first * radioPercent;
+		finalNum = finalNum * varId ;
+
+		console.log("finalNum : " + finalNum);
+		
+/* 		first = first * radioPercent;
 
 		
 		console.log(first);
+ 		
+ */		$("#totalBetCount").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+finalNum+"</td></tr>");
+ 		$("#sumPoint").append("<tr><td>"+finalNum +"</td></tr>");
 		
-		$("#totalBetCount").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+radioPercent+"</td></tr>");
-		$("#sumPoint").append("<tr><td>"+first +"</td></tr>");
-		
-	}
+ 	}
 	
 	$("#betForm").on("submit",function(){
 		for(var i = 0 ; i < varGameSeq.length;i++){
 
 			$("#betSeq").append("<tr><td><input type=\"hidden\" name=\"varSeq\" value=\""+varGameSeq[i]+"\"></td></tr>");
-
 		}
+		$("#betSeq").append("<tr><td><input type=\"hidden\" name=\"finalbetPercent\" value=\""+finalNum+"\"></td></tr>");
 	});
 
 </script>

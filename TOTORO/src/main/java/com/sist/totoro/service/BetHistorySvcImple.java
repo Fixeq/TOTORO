@@ -18,6 +18,14 @@ public class BetHistorySvcImple {
 	
 	@Autowired
 	private BetHistoryDaoimple betHistoryDao;
+	
+	public int do_countSeq() {
+		return betHistoryDao.do_countSeq();
+	}
+	
+	public int do_makeUserBet(BetHistoryVO inVO) {
+		return betHistoryDao.do_betInsert(inVO);
+	}
 
 	public List<BetHistoryResultVO> do_viewByBetSeq(BetHistoryVO inVO){
 		return betHistoryDao.do_viewByBetSeq(inVO);

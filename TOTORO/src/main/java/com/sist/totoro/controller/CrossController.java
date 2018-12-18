@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.domain.CrossVO;
+import com.sist.totoro.service.BetHistorySvcImple;
 import com.sist.totoro.service.CrossSvcImple;
 
 @Controller
@@ -29,6 +30,8 @@ public class CrossController {
 	
 	@Autowired
 	private CrossSvcImple crossSvc;
+	@Autowired
+	private BetHistorySvcImple betHistorySvc;
 	
 	/*@RequestMapping(value="/cross/userView.do")
 	public String userView(Model model) {
@@ -44,23 +47,42 @@ public class CrossController {
 		return "/cross/adminView";
 	}
 */	
-	@RequestMapping(value="/cross/save.do")
+	@RequestMapping(value="/cross/makeUserBet.do")
 	public String save(Model model,HttpServletRequest req) {
+		
+		HttpSession session = req.getSession();
+		String userId = (String) session.getAttribute("userId");
+		
+		double finalPercent = Double.parseDouble(req.getParameter("finalbetPercent"));
+		String money = req.getParameter("money"); // 돈 얼마 걸었는
 		String[] varSeq = req.getParameterValues("varSeq");
-		log.info("varSeq : "+varSeq);
+
+		log.info("finalPercent : " + finalPercent);
+		for(int i = 0 ; i < varSeq.length;i++) {
+			log.info("varSeq : "+varSeq);
+		}
+		log.info(money);
+		
+		int betSeq = betHistorySvc.do_countSeq();
+		
+		
 		for(int i = 0 ; i < varSeq.length;i++) {
 			log.info("varParse[i] : " + varSeq[i]); 
 			
-			String reqSeq = req.getParameter(varSeq[i]); 
-			log.info(reqSeq);
+			String whichWinTeam = req.getParameter(varSeq[i]); // 시퀀스 번호로 승패 점수 얻어내기
+			log.info(whichWinTeam);
 			
-			String money = req.getParameter("money");
-			log.info(money);
 			
 			BetHistoryVO inVO = new BetHistoryVO();
+			inVO.setBetSeq(betSeq);
 			inVO.setGameSeq(Integer.parseInt(varSeq[i]));
 			inVO.setBetCash(Integer.parseInt(money));
-			inVO.setBetChoice(Integer.parseInt(reqSeq));
+			inVO.setBetChoice(Integer.parseInt(whichWinTeam));
+			inVO.setBetP(finalPercent);
+			inVO.setUserId(userId);
+			int flag = betHistorySvc.do_makeUserBet(inVO);
+			
+			log.info(flag+"개 생성하였습니다.");
 		}
 		
 		
