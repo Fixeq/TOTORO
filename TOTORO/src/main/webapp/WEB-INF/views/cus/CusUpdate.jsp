@@ -30,21 +30,19 @@
     	
     	
 
-                        <div class="form-field">
-                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="제목" value="<c:out value="${vo.cusTitle}"></c:out>">
+                        <div class="titleform">
+                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="<c:out value="${vo.cusTitle}"></c:out>" value=""></input>
                         </div>
 
-                        <div class="form-field">
-                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="분류" value="<c:out value="${vo.cusCat}"></c:out>">
+                        <div class="catfrom">
+                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="<c:out value="${vo.cusCat}"></c:out>" value=""></input>
                         </div>
 
-                        <div class="form-field">
-                            <input name="cusregid" type="text" id="cususerId" class="full-width" placeholder="등목록"  value="">
-                        </div>
+                       
 
 
-                        <div class="message form-field">
-                        <textarea name="cusContent" id="cusContent" class="full-width"  value=""><c:out value="${vo.cusContent}"></c:out></textarea>
+                        <div class="contentform">
+                        <textarea name="cusContent" id="cusContent" class="full-width"  placeholder="<c:out value="${vo.cusContent}"></c:out>" value=""></textarea>
                         </div>
 
                       
@@ -54,7 +52,7 @@
     
 
     <div style="width:650px; text-align: center;">
-        <button type="submit" class="submit btn btn--primary full-width" id="btnUpdate">수정</button>
+        <button type="submit" class="submit btn btn--primary full-width" id="btnUpdate" onclick="javascript:update();">수정</button>
         <button type="reset">취소</button>
     </div>
 </form>
@@ -65,20 +63,13 @@
 
 
 
-    function update(){
-	   	 var cusContent = $('.lead').text();
-	   	 alert(cusContent);
-	   	 var cusTitle = $('.cusTitleValue').text();
-	   	 alert(cusTitle);
-	   	 
-	  	 var frm = document.bofrm;
-   	 alert(frm.cusSeq.value);
-   	 alert(frm.userId.value);
-   	 frm.cusTitle.value = cusTitle;
-   	 frm.cusContent.value = cusContent;
+    function update(){ 	 
+	  	 var form2 = document.form2;
+
+
    	 
-   	 frm.action = "update.do";
-   	 frm.submit();
+   	form2.action = "update.do";
+   	form2.submit();
     }
     </script>
 </body>
