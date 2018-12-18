@@ -172,9 +172,19 @@
 		
 		<!--// pagenation영역 ----------------------------------------------->
 	</form>
-	<div class="form-inline text-center">
-			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "betresult.do", "search_page") %>
-		</div>	
+		<div class="row">
+       	<div class="col-full">
+          		<nav class="pgn">
+					<ul>
+					<li>
+						<a class="pgn__num">
+							<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "betresult.do", "search_page") %>
+						</a>
+					</li>
+				   	</ul>
+				</nav>
+			</div>
+		</div>
 		<!-- 입력 Form영역---- ----------------------------------------------->
 		
 		<!--// 입력 Form영역---- ----------------------------------------------->				  
