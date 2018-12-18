@@ -4,24 +4,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean" rel="stylesheet">
+<style>
+.doHyeon{
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.jua{
+font-family: 'Jua', sans-serif;
+}
+
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	int myPoint = (Integer)session.getAttribute("userPoint");
+%>
+<script>
+	var myPoint = <%=myPoint%>
+</script>
 <section class="s-content">
 <div class="row">
 	<div class="col-ten tab-full">
 	<form method="get" id="betForm" action="/totoro/cross/makeUserBet.do">
 	<table id = "betTable">
-		<thead>
+		<thead class="doHyeon">
 			<tr>
 					<th colspan="2" class="text-center">HOME</th>
 					<th colspan="2" class="text-center">DRAW</th>
 					<th colspan="2" class="text-center">AWAY</th>
-					<th class="text-center">경기시간</th>
+					<th colspan="2" class="text-center">경기시간</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="jua">
 			<c:choose>
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="crossVo">
@@ -34,7 +52,6 @@
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
  --%>								
- 									<td id="betSeq"></td>
 	 								<td class="text-center"><input type="radio" id="${crossVo.gameHp}" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
 									<td class="text-center"><input type="radio" id="${crossVo.gameDp}" name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
@@ -42,30 +59,30 @@
 									<td class="text-center"><input type="radio" id="${crossVo.gameAp}" name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 									<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
+ 									<td id="betSeq"></td>
 								
  								</tr>
 					</c:forEach>
 				</c:when>
 				<c:otherwise>
-					<tr>
+					<tr class="jua">
 						<td colspan="99">진행중인 게임이 없습니다.</td>
 					</tr>
 				</c:otherwise>
 			</c:choose>
-				<input type="submit" value="베팅하기">
 		</tbody>
 	</table>
 		</div>
 	
-		<div class="col-two tab-full">
+		<div class="col-two tab-full doHyeon">
 			구매내역확인
-			<table>
-				<thead>
+			<table class="doHyeon">
+				<thead class="doHyeon">
 					<th>NO</th>
 					<th>CHOICE</th>
 					<th>BETTING</th>
 				</thead>
-				<tbody id="betCheck">
+				<tbody id="betCheck" class="jua">
 					<tr id="totalBetCount">
 						<script>
 							var first = 1;
@@ -76,7 +93,7 @@
 							<td>return : </td><td id="sum"></td>
 						</tr>
 					</tr>
-					<tr><td><h4>Money</h4></td> <td><input type="text" id="money" name="money"></td></tr>
+					<tr><td><h4 class="jua">Money</h4></td> <td><input type="text" id="money" name="money" class="jua"></td></tr>
 					
 				</tbody>
 			</table>
@@ -90,6 +107,7 @@
 <script>
 	var varGameSeq = new Array();
 	var finalNum = 1;
+	var t1 = 0;
 </script>
 
 <script type="text/javascript">
@@ -97,10 +115,13 @@
 		alert("cross777");
 		
 		$("#money").keyup(function(){
-			var t1 = $("#money").val();
+			t1 = $("#money").val();
 			console.log(t1);
-			t1 = t1 * first;
-			
+			if(t1>myPoint){
+				alert("가지고 있는 포인트보다 많은 금액입니다.");
+				$("input[type=text][name=money]").val("");
+				return;
+			}
 			$("#sum").text(t1);
 		});
 	});
@@ -133,9 +154,16 @@
  	}
 	
 	$("#betForm").on("submit",function(){
-		for(var i = 0 ; i < varGameSeq.length;i++){
+		t1 = $("#money").val();
+		if(t1<1){
+			alert("올바르지 않습니다.");
+			return false;
+		}
 
+		
+		for(var i = 0 ; i < varGameSeq.length;i++){
 			$("#betSeq").append("<tr><td><input type=\"hidden\" name=\"varSeq\" value=\""+varGameSeq[i]+"\"></td></tr>");
+			
 		}
 		$("#betSeq").append("<tr><td><input type=\"hidden\" name=\"finalbetPercent\" value=\""+finalNum+"\"></td></tr>");
 	});

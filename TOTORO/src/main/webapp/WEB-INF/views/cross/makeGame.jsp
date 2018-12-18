@@ -3,13 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean" rel="stylesheet">
+<style>
+.doHyeon{
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.jua{
+font-family: 'Jua', sans-serif;
+}
+
+</style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 
-<section class="s-content">
+<section class="s-content jua">
 
 		<form action="/totoro/cross/makeGame.do" method="post">
 	        <div class="col-six">

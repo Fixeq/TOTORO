@@ -6,6 +6,15 @@
 <head>
 
     <style type="text/css" media="screen">
+    
+.doHyeon{
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.jua{
+font-family: 'Jua', sans-serif;
+}
+    
         .s-styles { 
             background: #f2f2f2;
             padding-top: 12rem;
@@ -25,7 +34,7 @@
 
 <section class="s-content">
 	<table id = "myBetTable">
-		<thead>
+		<thead class="doHyeon">
 			<tr>
 					<td class="text-center" >게임번호</td>
 					<td class="text-center">구매일시</td>
@@ -33,7 +42,7 @@
 					<td class="text-center">상태</td>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="jua">
 			<c:choose>
 				<c:when test="${list.size()>0}">
 					<c:forEach items="${list}" var="myBetVO">
@@ -59,7 +68,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		alert("betHistory");
+		alert("betHistory112");
 	});
 	
 	$("#myBetTable>tbody").on("click","tr",function(){
@@ -97,7 +106,7 @@
             	
             	
             	
-        		tmpHtml = "<tr><td>betSeq</td><td>gameSeq</td><td>gameHome</td><td>gameAway</td><td>gameHp</td><td>gameDp</td><td>gameAp</td><td>betChoice</td><td>gameResult</td></tr>";
+        		tmpHtml = "<tr><th>betSeq</th><th>gameSeq</th><th>gameHome</th><th>gameAway</th><th>gameHp</th><th>gameDp</th><th>gameAp</th><th>betChoice</th><th>gameResult</th></tr>";
         		$("#"+itr).after(tmpHtml);
 
             	

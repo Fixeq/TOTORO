@@ -33,38 +33,35 @@ public class CrossController {
 	@Autowired
 	private BetHistorySvcImple betHistorySvc;
 	
-	/*@RequestMapping(value="/cross/userView.do")
-	public String userView(Model model) {
-		List<CrossVO> list = crossSvc.do_selectAll();
-		model.addAttribute("list", list);
-		return "/cross/userView";
-	}
-	
-	@RequestMapping(value="/cross/adminView.do")
-	public String adminView(Model model) {
-		List<CrossVO> list = crossSvc.do_selectAll();
-		model.addAttribute("list", list);
-		return "/cross/adminView";
-	}
-*/	
 	@RequestMapping(value="/cross/makeUserBet.do")
 	public String save(Model model,HttpServletRequest req) {
 		
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("userId");
+		//아이디 뽑아내기
 		
 		double finalPercent = Double.parseDouble(req.getParameter("finalbetPercent"));
+		//배당률 뽑아내기
 		String money = req.getParameter("money"); // 돈 얼마 걸었는
-		String[] varSeq = req.getParameterValues("varSeq");
-
+		//배당금 뽑아내기
+		String[] gameSeq = req.getParameterValues("varSeq");
+		//게임시퀀스[] 뽑아내기
 		log.info("finalPercent : " + finalPercent);
-		for(int i = 0 ; i < varSeq.length;i++) {
-			log.info("varSeq : "+varSeq);
+		
+		
+		for(int i = 0 ; i < gameSeq.length;i++) {
+			log.info("gameSeq : "+gameSeq);
 		}
 		log.info(money);
 		
 		int betSeq = betHistorySvc.do_countSeq();
+		//베팅 시퀀스 증가시키기.
 		
+		
+		betHistorySvc.do_makeUserBet(req, userId, finalPercent, money, gameSeq, betSeq);
+		
+		
+/*		int count = 0;
 		
 		for(int i = 0 ; i < varSeq.length;i++) {
 			log.info("varParse[i] : " + varSeq[i]); 
@@ -81,13 +78,13 @@ public class CrossController {
 			inVO.setBetP(finalPercent);
 			inVO.setUserId(userId);
 			int flag = betHistorySvc.do_makeUserBet(inVO);
-			
-			log.info(flag+"개 생성하였습니다.");
+			count ++;
 		}
 		
 		
-		
-		return null;
+		log.info(count+"개 생성하였습니다.");
+*/		
+		return "redirect:/cross/view.do";
 	}
 
 	

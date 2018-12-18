@@ -4,6 +4,19 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Do+Hyeon&amp;subset=korean" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Jua&amp;subset=korean" rel="stylesheet">
+<style>
+.doHyeon{
+	font-family: 'Do Hyeon', sans-serif;
+}
+
+.jua{
+font-family: 'Jua', sans-serif;
+}
+
+</style>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -11,7 +24,7 @@
 <section class="s-content">
 
 	<table id = "betTable">
-		<thead>
+		<thead class="doHyeon">
 			<tr>
 					<th class="text-center">홈팀</th>
 					<th class="text-center">홈팀수</th>
@@ -21,7 +34,7 @@
 					<th class="text-center">종료여부</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="jua">
 			<c:choose>
 				<c:when test="${noList.size()>0}">
 				<script>
@@ -35,7 +48,7 @@
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameAway}"></c:out></button></td>
 									<td class="text-center"><input type="text" name="awayScore"></td>
 									<td class="text-center"><c:out value="${noVo.gameDate}"></c:out></td>
-									<td><input id="${noVo.gameSeq}" type="button" value="마감1" onclick="closeCross(this)"/><input type="hidden" name= "gameSeq" value="${noVo.gameSeq}"></td>
+									<td><input id="${noVo.gameSeq}" class="btn btn--primary full-width" type="button" value="마감" onclick="closeCross(this)"/><input type="hidden" name= "gameSeq" value="${noVo.gameSeq}"></td>
 								</tr>
 						</form>
 					</c:forEach>					

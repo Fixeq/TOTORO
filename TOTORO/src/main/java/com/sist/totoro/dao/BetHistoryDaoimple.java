@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
+import com.sist.totoro.domain.UserVO;
 
 @Repository
 public class BetHistoryDaoimple {
@@ -21,6 +22,16 @@ public class BetHistoryDaoimple {
 	private SqlSession sqlSession;
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.betHistory";
+	
+	public int do_updateUserPoint(UserVO inVO) {
+		//크로스 구매시 베팅금액만큼 포인트 제거
+		String statement = NAME_SPACE + ".do_updateUserPoint";
+		
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+inVO);
+
+		return this.sqlSession.update(statement, inVO);
+	}
 	
 	public int do_countSeq() {
 		String statement = NAME_SPACE + ".do_countSeq";
