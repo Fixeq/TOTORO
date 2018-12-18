@@ -73,6 +73,8 @@ public class StringUtil {
 	 * @param scriptNm*(호출 자바 스크립트 이름)
 	 * @return html
 	 */
+	
+	
 	public static String renderPaging(int totalCnt,int pageNum,int pageSize
 			,int bottomCnt,String url_i,String scriptNm){
 		int maxNum     = 0;
@@ -111,17 +113,16 @@ public class StringUtil {
 		
 		StringBuilder html =new StringBuilder();
 		
-		   html.append("<table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">   \n");
-		   html.append("<tr>                       \n");
-		   html.append("<td align=\"center\">                                                                    \n");
-		   //html.append("<ul class=\"pagination pagination-sm\">                                                  \n");
-		   html.append("<nav aria-label=\"Page navigation\">");
-		   html.append("<ul class=\"pagination\">");
-		   // <<
 		   
+		   // <<
+		html.append("<div class=\"row\">");
+		html.append("<div class=\"col-full\">");
+		html.append("<nav class=\"pgn\"> ");
+		html.append("<ul>");
 		   if (nowBlockNo > 1 && nowBlockNo <= maxBlockNo) {
+			   
 		    html.append("<li>");
-		    html.append("<a href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
+		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "( '" + url+ "', 1 );\">  \n");
 		    html.append("&laquo;   \n");
 		    html.append("</a>      \n");
 		    html.append("</li>");
@@ -132,7 +133,7 @@ public class StringUtil {
 		   
 		   if (startPageNo > bottomCount) {
 		    html.append("<li>");
-		    html.append("<a href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
+		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "( '" + url + "'," + (startPageNo - 1)+ ");\"> \n");
 		    html.append("<        \n");
 		    html.append("</a>     \n");
 		    html.append("</li>");
@@ -145,7 +146,7 @@ public class StringUtil {
 		    
 		    if (inx == currPageNo) {
 		     html.append("<li class=\"active\">");   
-		     html.append("<a href=\"javascript:" + scriptName + "('" + url + "'," + inx+ ");\" >" + inx + "</a> &nbsp;&nbsp; \n");
+		     html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "('" + url + "'," + inx+ ");\" >" + inx + "</a> &nbsp;&nbsp; \n");
 		     html.append("</li>");
 		    } else {
 		     html.append("<li>");
@@ -157,7 +158,7 @@ public class StringUtil {
 		   // >
 		   if (maxPageNo >= inx) {
 		    html.append("<li>"); 
-		    html.append("<a href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
+		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "('" + url + "',"+ ((nowBlockNo * bottomCount) + 1) + ");\"> \n");
 		    html.append(">                       \n");
 		    html.append("</a>              \n");
 		    html.append("</li>");
@@ -166,17 +167,16 @@ public class StringUtil {
 		   // >>
 		   if (maxPageNo >= inx) {
 		    html.append("<li>");
-		    html.append("<a href=\"javascript:" + scriptName + "('" + url + "'," + maxPageNo+ ");\">      \n");
+		    html.append("<a class=\"pgn__num\" href=\"javascript:" + scriptName + "('" + url + "'," + maxPageNo+ ");\">      \n");
 		    html.append("&raquo;     \n");
 		    html.append("</a>    \n");
 		    html.append("</li>");
 		   }
 
-		   html.append("</td>   \n");
-		   html.append("</tr>   \n");
 		   html.append("</ul>");
 		   html.append("</nav>");
-		   html.append("</table>   \n");      
+		   html.append("</div>");
+			html.append("</div>");
 
 		   return html.toString();
 		  

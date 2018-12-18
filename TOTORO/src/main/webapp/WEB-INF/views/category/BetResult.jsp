@@ -19,7 +19,6 @@
 	int bottomCount   =5;
     
 	SearchVO vo =  (SearchVO)request.getAttribute("param");
-	out.print("vo1111111111111111111:"+vo);
 	
 	if(null !=vo ){
 		search_div  = StringUtil.nvl(vo.getSearch_div(), ""); 
@@ -33,7 +32,6 @@
 		page_num = StringUtil.nvl(request.getParameter("page_num"), "1");
 	}
 	
-	out.print("page_size:"+page_size);
 	
 	int oPageSize = Integer.parseInt(page_size);
 	int oPageNum  = Integer.parseInt(page_num);
@@ -45,6 +43,7 @@
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
 	
 %>    
+
 <%-- 
   /**
   * @Class Name  : user.jsp
@@ -80,8 +79,22 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <!-- CSS ================================================== -->
+    <link rel="stylesheet" href="<%=context%>/resources/css/base.css">
+    <link rel="stylesheet" href="<%=context%>/resources/css/vendor.css">
+    <link rel="stylesheet" href="<%=context%>/resources/css/main.css">
 
+    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="<%=context%>/resources/js/plugins.js"></script>
+    <script src="<%=context%>/resources/js/main.js"></script>
+    
+      <!-- Java Script
+    ================================================== -->
+    <script src="<%=context%>/resources/js/jquery-3.2.1.min.js"></script>
+    <script src="<%=context%>/resources/js/plugins.js"></script>
+    <script src="<%=context%>/resources/js/main.js"></script>
+    
+    
   </head>
   <body>
   <section class="s-content">
@@ -89,7 +102,7 @@
     <div class="container-fluid">
     	<!-- Title영역 -->
     	<div class="page-header">
-    		<h1>사용자관리</h1>
+    		<h1>경기결과</h1>
     	</div>
     	<!--// Title영역 -->
         <form  name="frm" id="frm" action="betresult.do" method="get" class="form-inline">
@@ -98,11 +111,6 @@
         <!-- 검색영역 -->
 		<div class="row">
 		  <div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<form action="#" class="form-inline">
-				<div class="form-group">
-					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
-				</div>
-			</form>
 				<div class="form-group">
 					<select name="search_div" id="search_div" class="form-control input-sm">
 					    <option value="" >::전체::</option>
@@ -112,11 +120,6 @@
 					<input type="text" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_save">등록</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_update">수정</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_excel">엑셀저장</button>
-					
 				</div>					
 			
 		  </div>	
@@ -134,7 +137,7 @@
 					<td class="text-center">홈팀</td>
 					<td class="text-center"></td>
 					<td class="text-right">원정팀</td>
-					<td class="text-center">홈스코betresult어</td>
+					<td class="text-center">홈스코어</td>
 					<td class="text-center"></td>
 					<td class="text-center">원정스코어</td>
 					<td class="text-center">경기결과</td>
@@ -172,18 +175,14 @@
 		
 		<!--// pagenation영역 ----------------------------------------------->
 	</form>
-		<div class="row">
-       	<div class="col-full">
-          		<nav class="pgn">
-					<ul>
-					<li>
-						<a class="pgn__num">
-							<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "betresult.do", "search_page") %>
-						</a>
-					</li>
-				   	</ul>
-				</nav>
-			</div>
+	<div class="row">
+            <div class="col-full">
+                <nav class="pgn">
+                <ul>
+			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "betresult.do", "search_page") %>
+		</ul>
+		</nav>
+		</div>
 		</div>
 		<!-- 입력 Form영역---- ----------------------------------------------->
 		
