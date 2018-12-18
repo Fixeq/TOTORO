@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.dao.PrizesDao;
+import com.sist.totoro.domain.AtmVo;
 import com.sist.totoro.domain.PrizesVO;
 
 @Service
@@ -39,5 +40,22 @@ public class PrizesSvcImple implements PrizesSvc{
 		public int updateResult(PrizesVO prizesVO) throws SQLException {
 			// TODO Auto-generated method stub
 			return prizesDao.updateBetseq(prizesVO);
+		}
+
+		@Override
+		public int do_GiveMulti(List<PrizesVO> list) throws RuntimeException, SQLException {
+			int flag = 0;
+			try {
+				for(PrizesVO vo :list) {
+					flag+=prizesDao.updateBetseq(vo);
+					prizesDao.updateResult(vo);
+					
+				}
+				
+			}catch(RuntimeException e) {		
+				throw e;
+			}
+
+			return flag;
 		}
 	}

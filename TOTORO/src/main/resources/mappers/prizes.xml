@@ -33,21 +33,23 @@
       resultType="PrizesVO"  >
 		SELECT X.*,Y.*
 		  FROM(
-		SELECT  T1.b1,
-                T1.b2,
+		SELECT  T1.userId,
+                T1.betSeq,
                 T1.c1,
                 T1.c2,
-                  T1.b3,
+                T1.betReturn,
+                T1.betwPrice,
 				T1.rnum AS no                             
 		  FROM(                                          
-			SELECT hr.userId as b1,
-                   hr.betSeq as b2,
-                   hr.betReturn as b3,
+			SELECT hr.userId as userId,
+                   hr.betSeq as betSeq,
+                   hr.betReturn as betReturn,
+                   hr.betwPrice as betwPrice,
                    TO_CHAR(count(betResult)) as c1,
                    TO_CHAR(sum (betResult))  as c2,
 				   ROW_NUMBER() OVER(ORDER BY betSeq desc ) AS rnum       
 			  FROM bet_history hr             
-              group by betSeq,userId,betReturn        
+              group by betSeq,userId,betReturn,betwPrice        
 		  )T1
 		 WHERE rnum BETWEEN (#{page_size} * (#{page_num}-1)+1) 
 		    AND (#{page_size} * (#{page_num}-1)+#{page_size})
@@ -56,9 +58,19 @@
 		NATURAL JOIN
 		(
 		  SELECT COUNT(*) AS total_cnt   
-		    FROM bet_history
-		    where betReturn = 0
+		    FROM (                                          
+			SELECT hr.userId as userId,
+                   hr.betSeq as betSeq,
+                   hr.betReturn as betReturn,
+                   hr.betwPrice as betwPrice,
+                   TO_CHAR(count(betResult)) as c1,
+                   TO_CHAR(sum (betResult))  as c2,
+				   ROW_NUMBER() OVER(ORDER BY betSeq desc ) AS rnum       
+			  FROM bet_history hr             
+              group by betSeq,userId,betReturn,betwPrice        
+		  )T1
+		  Where T1.c1 = T1.c2
 		)Y
-		where b3 = 0 
+		where betReturn = 0 
     </select>
 </mapper>
