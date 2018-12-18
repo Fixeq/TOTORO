@@ -72,7 +72,7 @@
                             <li><a href="/totoro/atm/customerwithdraw.do">출금</a></li>
                             <li><a href="/totoro/atm/admindeposit.do">관리자 입금</a></li>
                             <li><a href="/totoro/atm/adminwithdraw.do">관리자 출금</a></li>
-                            <li><a href="/totoro/givepay/givepay.do">당첨금 지급페이지</a></li>
+                            <li><a href="/totoro/atm/givepay.do">당첨금 지급페이지</a></li>
                             </ul>
                         </li>
                         <li class="has-children current">
