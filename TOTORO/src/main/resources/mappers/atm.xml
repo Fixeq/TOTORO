@@ -220,11 +220,11 @@
 		  FROM(
 			SELECT T.dwSeq,                                  
 					T.userId,                                  
-					T.dePoint,                                                             
-					T.dwPs,                                 
+					T.dePoint,
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
-					T.rnum AS no                             
+					T.rnum AS no                                  
 			  FROM(                                          
 				SELECT dw.*                                  
 					  ,ROW_NUMBER() OVER(ORDER BY dwReqday desc ) AS rnum       
@@ -250,7 +250,7 @@
 			SELECT T.dwSeq,                                  
 					T.userId,                                                                
 					T.wiPoint,                               
-					T.dwPs,                                 
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
 					T.rnum AS no                             
@@ -280,7 +280,7 @@
 			SELECT T.dwSeq,                                  
 					T.userId,                                  
 					T.dePoint,                                                            
-					T.dwPs,                                 
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
 					T.rnum AS no                             
@@ -311,7 +311,7 @@
 			SELECT T.dwSeq,                                  
 					T.userId,                                                               
 					T.wiPoint,                               
-					T.dwPs,                                 
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
 					T.rnum AS no                             
@@ -341,7 +341,7 @@
 			SELECT T.dwSeq,                                  
 					T.userId,                                  
 					T.dePoint,                                                             
-					T.dwPs,                                 
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
 					T.rnum AS no                             
@@ -370,7 +370,7 @@
 			SELECT T.dwSeq,                                  
 					T.userId,                                                                
 					T.wiPoint,                               
-					T.dwPs,                                 
+					DECODE(T.dwPs,'1','완료','대기') dwPs,                                 
 					TO_CHAR(T.dwReqday,'YYYY-MM-DD') dwReqday,                             
 					TO_CHAR(T.dwGetday,'YYYY-MM-DD') dwGetday,                                   
 					T.rnum AS no                             

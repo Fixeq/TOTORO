@@ -56,47 +56,38 @@
 <body>
 <section class="s-content">
 
-<style>
-  table, th, td {
-    border: 1px solid #bcbcbc;
-  }
-  table {
-    width: auto;
-  }
-</style>
 	<div class="page-header">
-	    		<h2>출금 신청 페이지</h2>
+	    		<h2 align="center"><mark>출금</mark> 신청 페이지</h2>
 	</div>
 	<form  name="frm" id="frm" action="customerdeposit.do" method="get" class="form-inline">
 		<input type="hidden" name="page_num" id="page_num">
 			<form action="#" class="form-inline">
 				<div class="form-group">
-						<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
+					<%-- <%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %> --%>
 				</div>
 				</form>
-				<tr>
-					<div class="form-group">
-						<label class="col-lg-4">출금 요청 금액 : </label>
-						<div>
-							<input type="Number" name="dpoint" id="dpoint" placeholder="1000원 단위로"/>
-							<button type="button" class="btn btn-default btn-sm" id="do_save">신청</button>
-						</div>
-					</div>
-					
 					<input type="hidden" name="page_num" id="page_num">
-					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
-					<td class="text-center">
-						<button type="button" onclick="javascript:doSearch();"> 전체 조회</button>
-						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doReqSearch();">요청 조회</button>
-						<button type="button" class="btn btn-default btn-sm" onclick="javascript:doPsSearch();">완료 조회</button>
-						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
-				</tr>
+					<%-- <%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %> --%>
+					<div class="row half-bottom ">
+						<div class="col-twelve" >
+							<ul class="stats-tabs" >
+								<li><label ><mark>출금</mark> 요청 금액 : </label></li>
+                            <li><input type="Number" name="dpoint" id="dpoint" placeholder="10000원 단위로"/></li>
+                            <li><button type="button" class="btn btn--primary btn-sm" id="do_save">신청</button></li>
+								<li><button type="button" class ="btn--stroke full-width" onclick="javascript:doSearch();"> 전체 조회</button></li>
+								<li><button type="button" class="btn--stroke full-width" onclick="javascript:doReqSearch();">요청 조회</button></li>
+								<li><button type="button" class="btn--stroke full-width" onclick="javascript:doPsSearch();">완료 조회</button></li>
+								<li><button type="button" class="btn btn--primary btn-sm" id="do_delete">삭제</button></li>
+							</ul>
+						</div>	
+					</div>
+
 				<!-- Grid영역 -->
 				<table id = "betTable">
 						<thead>
 							<tr>
 									<th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-									 <th class="">번호</th>
+									 <th class="text-center">번호</th>
 									 <th class="text-center">요청번호</th>
 									 <th class="text-center">ID</th>
 									 <th class="text-center">신청 포인트</th>
@@ -113,11 +104,11 @@
 										<tr>
 										   <td class="text-center"><input type="checkbox" id="check" name="check"></td>
 											<td class="text-center"><c:out value="${AtmVo.no}"></c:out></td>
-											<td class="hidden"><c:out value="${AtmVo.dwSeq}"></c:out></td>
-											<td class="text-left"><c:out value="${AtmVo.userId}"></c:out></td>
-											<td class="text-left"><c:out value="${AtmVo.wiPoint}"></c:out></td>
-											<td class="text-right"><c:out value="${AtmVo.dwReqday}"></c:out></td>
-											<td class="text-right"><c:out value="${AtmVo.dwGetday}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.dwSeq}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.userId}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.wiPoint}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.dwReqday}"></c:out></td>
+											<td class="text-center"><c:out value="${AtmVo.dwGetday}"></c:out></td>
 											<td class="text-center"><c:out value="${AtmVo.dwPs}"></c:out></td>
 										</tr>
 									</c:forEach>
