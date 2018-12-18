@@ -117,7 +117,7 @@ public class StringUtil {
 		   // <<
 		html.append("<div class=\"row\">");
 		html.append("<div class=\"col-full\">");
-		html.append("<nav class=\"pgn\"> ");
+		html.append("<nav class=\"pgn\">");
 		html.append("<ul>");
 		   if (nowBlockNo > 1 && nowBlockNo <= maxBlockNo) {
 			   
