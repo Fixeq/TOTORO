@@ -276,7 +276,8 @@ public class UserSvc {
 			}
 		} // else
 	}// loginCheck()
-
+	// -------------------------------------------------로그인---------------------------------------------------
+	// -------------------------------------------------로그아웃 ---------------------------------------------------
 	public void logout(HttpServletResponse response) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -285,7 +286,8 @@ public class UserSvc {
 		out.println("</script>");
 		out.close();
 	}	
-	
+	// -------------------------------------------------로그아웃---------------------------------------------------
+	// -------------------------------------------------아디비번찾기---------------------------------------------------
 	public String findId(String userEmail) throws Exception{
 		return userDao.id_find(userEmail);
 	}
@@ -320,13 +322,30 @@ public class UserSvc {
 		}
 		
 	}
+	// -------------------------------------------------아디비번찾기---------------------------------------------------
 	
+	//-----------------------------------------------개인정보확인-----------------------------------------------
+	public void checkPw(HttpServletResponse response, UserVO userVO) throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (userDao.pw_check(userVO) == 0) { // 비밀번호가 틀릴경우
+			out.println("<script>");
+			out.println("alert('비밀번호를 확인해주세요.')");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		} else { // 성공시
+			out.println("<script>");
+			out.println("alert('확인되었습니다.')");
+			out.println("location.href='http://localhost:8080/totoro/cross/view.do';");
+			out.println("</script>");
+			out.close();
+		}
+		
+	}
 	
-	
-	
-	
-	
-	
+	//-----------------------------------------------개인정보확인-----------------------------------------------
 	
 	
 }// UserSvc class

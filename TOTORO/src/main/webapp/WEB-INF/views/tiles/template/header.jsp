@@ -27,7 +27,7 @@
 
 
 				
-                <ul class="header__social">
+ <!--                <ul class="header__social">
                     <li>
                         <a href="#0"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     </li>
@@ -40,9 +40,8 @@
                     <li>
                         <a href="#0"><i class="fa fa-pinterest" aria-hidden="true"></i></a>
                     </li>
-                </ul> <!-- end header__social -->
+                </ul> end header__social -->
 
-				<%-- <input type="button"  value="로그아웃${userId}" onclick="location.href='<%=context%>/user/logout.do'"/> --%>
 				
 				<div class="header-moo">
 					<ul class="header__nav">
@@ -70,10 +69,10 @@
 
                 <div class="header__search">
 
-                    <form  method="post" class="header__search-form" action="<%=context%>/user/check_pw.do">
+                    <form class="header__search-form" action="<%=context%>/user/check_pw.do" method="post">
                         <label>
                             <span class="hide-content">비밀번호</span>
-                            <input type="password" class="search-field" placeholder="Input Here" value="" name="s" title="본인 인증" >
+                            <input type="password"  id="userPw" name="userPw" class="search-field" placeholder="Input Here" title="본인 인증" >
                             <!-- autocomplete="off" -->
                         </label>
                         <input type="submit" class="search-submit" value="Search">

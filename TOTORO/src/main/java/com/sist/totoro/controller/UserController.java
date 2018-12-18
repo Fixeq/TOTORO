@@ -145,7 +145,6 @@ public class UserController {
 			session.setAttribute("userId",userVO.getUserId());
 			session.setAttribute("userAdmin",userVO.getUserAdmin());
 			session.setAttribute("userPoint",userVO.getUserPoint());
-			
 		}
 		return "redirect:/mainpage/mainpage.do";
 	}
@@ -202,17 +201,15 @@ public class UserController {
 	
 	//본인인증
 	@RequestMapping(value = "/user/check_pw.do", method = RequestMethod.POST)
-	public String pwCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
-
+	public void pwCheck(@ModelAttribute UserVO userVO, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws Exception{
+		
 		session = request.getSession(true);
 		userVO.setUserId((String)session.getAttribute("userId"));
+
+		log.info("controller userVO not yet into service : "+userVO);
+		userSvc.checkPw(response, userVO);
 		
-		if(null == userVO) {
-			return "";
-		}else {
-			
-		}
-		return "redirect:/mainpage/mainpage.do";
+/*		return "redirect:/mainpage/mainpage.do";*/
 	}
 	
 	
