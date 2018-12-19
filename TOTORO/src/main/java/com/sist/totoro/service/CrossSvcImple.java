@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.dao.BetHistoryDaoimple;
 import com.sist.totoro.dao.CrossDaoImple;
 import com.sist.totoro.domain.CrossVO;
@@ -31,8 +32,8 @@ public class CrossSvcImple {
 	}
 
 	
-	public List<CrossVO> do_selectLimit(){
-		return crossDao.do_selectUser();
+	public List<CrossVO> do_selectLimit(SearchVO inVO){
+		return crossDao.do_selectUser(inVO);
 	}
 	
 	public int do_insert(CrossVO inVO) {

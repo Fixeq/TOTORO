@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.sist.totoro.common.DTO;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.common.WorkDiv;
 import com.sist.totoro.domain.CrossVO;
 
@@ -39,15 +40,15 @@ public class CrossDaoImple {
 	 * 크로스 페이지 View
 	 * @return
 	 */
-	public List<CrossVO> do_selectUser(){
+	public List<CrossVO> do_selectUser(SearchVO inVO){
 		//접속자가 사용자면".do_selectUser"
 		//접속자가 관리자면".do_selectAdmin"
 		String statement = NAME_SPACE + ".do_selectUser";
 		
 		log.debug("1.statement : \n"+statement);
-		//log.debug("2. param : \n"+userId);
+		log.debug("2. param : \n"+inVO);
 
-		return this.sqlSession.selectList(statement);
+		return this.sqlSession.selectList(statement,inVO);
 	}
 	
 	public List<CrossVO> do_selectAdminNoResult(){

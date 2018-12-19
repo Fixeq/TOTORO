@@ -45,7 +45,7 @@ GROUP BY BETSEQ -->
 SELECT  BETSEQ
 		,MAX(BETDATE) AS BETDATE
 		,AVG(BETCASH) AS BETCASH
-		,CASE AVG(BETRESULT) WHEN 1    THEN '적중'
+		,CASE AVG(NVL(BETRESULT,-99)) WHEN 1    THEN '적중'
                             WHEN 0    THEN '실패'
                                       ELSE '대기중' 
         END "BETRESULTSTRING"

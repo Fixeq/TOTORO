@@ -1,8 +1,10 @@
 package com.sist.totoro.service;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sist.totoro.dao.BetHistoryDaoimple;
+import com.sist.totoro.dao.UserDao;
 import com.sist.totoro.domain.BetHistoryResultVO;
 import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.domain.UserVO;
@@ -21,6 +24,8 @@ public class BetHistorySvcImple {
 	
 	@Autowired
 	private BetHistoryDaoimple betHistoryDao;
+	@Autowired
+	private UserDao userDao;
 	
 	public int do_updateUserPoint(UserVO inVO) {
 		return betHistoryDao.do_updateUserPoint(inVO);
@@ -30,7 +35,7 @@ public class BetHistorySvcImple {
 		return betHistoryDao.do_countSeq();
 	}
 	
-	public int do_makeUserBet(HttpServletRequest req, String userId, double percent, String money, String[] gameSeq, int betSeq) {
+	public int do_makeUserBet(HttpServletRequest req, String userId, double percent, String money, String[] gameSeq, int betSeq) throws SQLException {
 		
 		UserVO inVO2 = new UserVO();
 		inVO2.setUserId(userId);
@@ -55,11 +60,13 @@ public class BetHistorySvcImple {
 			inVO.setBetP(percent);
 			inVO.setUserId(userId);
 			
-			count +=betHistoryDao.do_betInsert(inVO);
+			count += betHistoryDao.do_betInsert(inVO);
 			
 		}
+		userId = inVO2.getUserId();
 		
-		
+		HttpSession session = req.getSession();
+		session.setAttribute("userPoint", userDao.id_login(userId).getUserPoint());
 		log.info(count+"개 생성하였습니다.");
 
 		

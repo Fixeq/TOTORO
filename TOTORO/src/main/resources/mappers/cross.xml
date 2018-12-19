@@ -4,18 +4,26 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sist.totoro.mappers.cross">
-	<select id="do_selectUser" resultType="com.sist.totoro.domain.CrossVO">
-		SELECT GAMESEQ, 
-			   GAMEHOME,
-			   GAMEAWAY,
-			   GAMEHP,
-			   GAMEDP,
-			   GAMEAP,
-			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
- 		  FROM CROSS
- 		 WHERE GAMEDATE > SYSDATE
- 		    OR GAMERESULT IS NULL
- 		 ORDER BY GAMEDATE DESC
+	<select id="do_selectUser" resultType="CrossVO" parameterType="SearchVO">
+SELECT T2.TOTALCNT,
+       T1.GAMESEQ,
+       T1.GAMEHOME,
+       T1.GAMEAWAY,
+       T1.GAMEHP,
+       T1.GAMEDP,
+       T1.GAMEAP,
+       TO_CHAR(T1.GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE,
+       T1.NO      
+  FROM (SELECT cross.* ,
+               ROW_NUMBER() OVER(ORDER BY GAMEDATE) AS NO
+          FROM CROSS cross
+         WHERE GAMEDATE > SYSDATE 
+            OR GAMERESULT IS NULL
+         ) T1,(SELECT COUNT(*) AS TOTALCNT
+                 FROM CROSS
+                WHERE GAMEDATE > SYSDATE
+                   OR GAMERESULT IS NULL)T2 
+ WHERE NO BETWEEN ((#{page_size} * (#{page_num}-1))+1) AND (#{page_size} * (#{page_num}-1))+#{page_size}
 	</select>
 	
 	<!--  -->

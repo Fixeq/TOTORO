@@ -1,5 +1,6 @@
 package com.sist.totoro.controller;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,10 +15,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sist.totoro.code.CodeSvc;
+import com.sist.totoro.code.CodeVO;
+import com.sist.totoro.common.SearchVO;
 import com.sist.totoro.domain.BetHistoryVO;
 import com.sist.totoro.domain.CrossVO;
 import com.sist.totoro.service.BetHistorySvcImple;
@@ -31,10 +36,12 @@ public class CrossController {
 	@Autowired
 	private CrossSvcImple crossSvc;
 	@Autowired
+	private CodeSvc codeSvc;	
+	@Autowired
 	private BetHistorySvcImple betHistorySvc;
 	
 	@RequestMapping(value="/cross/makeUserBet.do")
-	public String save(Model model,HttpServletRequest req) {
+	public String save(Model model,HttpServletRequest req) throws SQLException {
 		
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("userId");
@@ -112,7 +119,23 @@ public class CrossController {
 	
 	
 	@RequestMapping(value="/cross/view.do")
-	public String view(Model model,HttpServletRequest req) {
+	public String view(@ModelAttribute SearchVO inVO,Model model,HttpServletRequest req) {
+		
+		log.info("SearchVO: "+inVO);
+		//param -> view
+		
+		if(inVO.getPage_size() == 0) {
+			inVO.setPage_size(10);
+		}
+		
+		if(inVO.getPage_num() == 0) {
+			inVO.setPage_num(1);
+		}
+		
+		model.addAttribute("param",inVO);
+		
+		
+		
 		HttpSession session = req.getSession(true);
 		String userId = (String) session.getAttribute("userId");
 		String userLevel = (String) session.getAttribute("userAdmin");
@@ -129,7 +152,22 @@ public class CrossController {
 				
 				returnUrl =  "/cross/admin";
 			}else{
-				List<CrossVO> list = crossSvc.do_selectLimit();
+				List<CrossVO> list = crossSvc.do_selectLimit(inVO);
+				log.info("list:"+ list);
+				//총글수
+
+				int total_cnt = 0;
+				if(null != list && list.size()>0) {
+					total_cnt = list.get(0).getTotalCnt();
+					log.info("total_cnt: "+total_cnt);
+				}
+				
+				CodeVO codePage=new CodeVO();
+				codePage.setCd_id("C001");
+
+				
+				model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
+				model.addAttribute("total_cnt",total_cnt);
 				model.addAttribute("list", list);
 				returnUrl = "/cross/user";
 			}

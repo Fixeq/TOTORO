@@ -33,13 +33,13 @@ public class CrossDaoTest {
 		crossVO= new CrossVO();
 	}
 	
-	@Test
+/*	@Test
 	public void do_selectUser() {
 		
 		LOG.info("cross 결과값 : "+crossDao.do_selectUser());
 		
 	}
-
+*/
 	@Test
 	public void do_selectAdmin() {
 		
