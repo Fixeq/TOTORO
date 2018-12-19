@@ -1,3 +1,5 @@
+<%@page import="com.sist.totoro.domain.UserVO"%>
+<%@page import="org.springframework.ui.Model"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sist.totoro.code.CodeVO"%>
 <%@page import="java.util.List"%>
@@ -49,7 +51,9 @@
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
 	List<CodeVO> user_info = (null == request.getAttribute("user_info"))
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("user_info");
-			     
+    List<CodeVO> user_status = (null == request.getAttribute("user_status"))
+					     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("user_status");			     
+			     		     
 %>
 <!DOCTYPE html>
 <html>
@@ -84,7 +88,7 @@
 			-------------------------------------------------- */
 		thead{
 		    background-color: #DE6262;
-		    font-color: #FFF;		
+		    font-color: #FFF;
 		}	
 		
 		.panel {
@@ -118,6 +122,9 @@
 		}
 		.table-filter tr td:nth-child(2) {
 			width: 35px;
+		}
+		.media{
+			width:250%; 
 		}
 		.table-filter .media-body {
 		    display: block;
@@ -154,13 +161,54 @@
 			font-size: 14px;
 		}	
 	
+
 	
-	
-	
-	
-	
-	
-	
+		button, .btn {
+			margin-bottom: 1.0rem;
+		}
+
+		.btn,
+		button,
+		input[type="submit"],
+		input[type="reset"],
+		input[type="button"] {
+			display: inline-block;
+			font-family: 'Do Hyeon', sans-serif;
+		   font-size: 1.35rem;
+		   text-transform: uppercase;
+		   height: 3.4rem;
+		   padding: 0 3rem;
+		   margin: 0 .3rem 1.2rem 0;
+		   color: #000000;
+		   text-decoration: none;
+		   text-align: center;
+		   white-space: nowrap;
+		   border-radius: 8px;
+		   cursor: pointer;
+		   -webkit-transition: all 0.3s ease-in-out;
+		   transition: all 0.3s ease-in-out;
+		   background-color: #FFF;
+		   border: .2rem solid #DE6262;
+		}
+		
+
+		
+		.btn:hover,
+		button:hover,
+		input[type="submit"]:hover,
+		input[type="reset"]:hover,
+		input[type="button"]:hover,
+		.btn:focus,
+		button:focus,
+		input[type="submit"]:focus,
+		input[type="reset"]:focus,
+		input[type="button"]:focus {
+		   background-color: #DE6262;
+		   border-color: #DE6262;
+		   color: #FFF;
+		   outline: 0;
+		}
+		
 	</style>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -195,20 +243,32 @@
 								<table id="listTable" class="table table-filter">
 									<thead>
 									    <tr>
-									        <th class="text-center">  
-										    	<input type="checkbox" id="checkAll" name="checkAll" onclick="javascript:checkAllUser();">
-									    	</th>						        
-											<th ></th>
+											<th></th>
+											<th></th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>  
 										<c:choose>
 											<c:when test="${list.size()>0}">
+												<%int i=0; %>
 												<c:forEach var="userVO" items="${list}">
 													<tr>
-													    <td class="text-center"> 
-													    	<input type="checkbox" id="${userVO.userId}" name="check">
-												    	</td>
+														<td>
+															<%
+																List list = (List)(request.getAttribute("list"));
+																UserVO userVO= (UserVO)list.get(i);
+																String userAppStt= userVO.getUserAppStt();
+																i++;
+															%>
+															<div class="pull-right">
+																<%=StringUtil.makeSelectBoxForBootStrap(user_status, userAppStt, "userAppStt", false) %>
+																<p>
+																	<a href="#" onclick="#" class="pull-right"><span class="glyphicon glyphicon-ok "></span> 적용</a>
+																	<!-- <input type="button" class="pull-right applyStt " value=""></span>/> -->
+																</p>
+															</div>
+														</td>
 														<td>
 															<div class="media">
 																<div class="media-body">
@@ -220,12 +280,15 @@
 																	<p class="email"> ${userVO.userEmail} </p>
 																</div>
 															</div>
-														</td>									    	
+														</td>
+														<td>
+															<input type="button" class="pull-right" value="수정"/>
+														</td>	    	
 													</tr>
 												</c:forEach>
 											</c:when>
 											<c:otherwise>
-												<tr>
+												<tr class="pull-right">
 												    <td class="text-center" colspan="99">회원이 없습니다.ㅠㅠ 분발합시다</td>
 												</tr>					
 											</c:otherwise>

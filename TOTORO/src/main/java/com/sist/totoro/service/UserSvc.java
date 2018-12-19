@@ -144,15 +144,15 @@ public class UserSvc {
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
-		String hostSMTPid = "jackpot1224bytotoro";
-		String hostSMTPpwd = "totoro1224";
+		String hostSMTPid = "y~64@naver.com";
+		String hostSMTPpwd = "y~v0~3";
 //		jackpot1224bytotoro
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "jackpot1224bytotoro@naver.com";
+		String fromEmail = "y~64@naver.com";
 		String fromName = "ADMIN MH";
 		String subject = "";
 		String msg = "";
-
+		//TODO 이메일 넣어야함 환경설정도
 		
 		if(workDiv.equals("join")) {
 		// 회원가입 메일 내용

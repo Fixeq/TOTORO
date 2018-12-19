@@ -61,7 +61,6 @@ public class UserController {
 		
 		req.setAttribute("cdListC002", cdListC002);
 		req.setAttribute("cdListC003", cdListC003);
-		
 		return "/user/join";
 	}
 
@@ -146,6 +145,12 @@ public class UserController {
 			session.setAttribute("userId",userVO.getUserId());
 			session.setAttribute("userAdmin",userVO.getUserAdmin());
 			session.setAttribute("userPoint",userVO.getUserPoint());
+			
+			//뒤로가기 세션 제거
+			response.setHeader("Cache-Control","no-cache");
+			response.setHeader("Cache-Control","no-store");
+			response.setHeader("Pragma","no-store");
+			response.setDateHeader("Expires",0);
 		}
 		return "redirect:/mainpage/mainpage.do";
 	}
@@ -244,16 +249,20 @@ public class UserController {
 			total_cnt = list.get(0).getTotalCnt();
 			log.info("total_cnt : "+total_cnt);
 		}
-		
-		CodeVO codePage = new CodeVO();
-		CodeVO userInfo = new CodeVO();
-		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건)
+		log.info("list :"+list); 
+		CodeVO codePage  = new CodeVO();
+		CodeVO userInfo  = new CodeVO();
+		CodeVO userStatus=new CodeVO();		
+	
+		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건, C005:유저상태)
 		codePage.setCd_id("C001");
 		userInfo.setCd_id("C007");
+		userStatus.setCd_id("C005");
 		
 		// cd_id(C001,C005)값을 가지고 페이징 관련 데이터들을 model에 담음.
 		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
 		model.addAttribute("user_info",codeSvc.do_retrieve(userInfo));
+		model.addAttribute("user_status",codeSvc.do_retrieve(userStatus));
 		model.addAttribute("total_cnt",total_cnt);
 		model.addAttribute("list",list);
 		
