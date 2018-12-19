@@ -54,16 +54,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-
+ 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+	<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
+ 
 	<style type="text/css">
-			
+		
 		body {
 			font-family: 'Open Sans', sans-serif;
 			color: #353535;
 		}
+		
+		
 		.content h1 {
 			text-align: center;
 		}
@@ -80,6 +82,11 @@
 		/*	--------------------------------------------------
 			:: Table Filter
 			-------------------------------------------------- */
+		thead{
+		    background-color: #DE6262;
+		    font-color: #FFF;		
+		}	
+		
 		.panel {
 			border: 1px solid #ddd;
 			background-color: #fcfcfc;
@@ -112,60 +119,6 @@
 		.table-filter tr td:nth-child(2) {
 			width: 35px;
 		}
-		.ckbox {
-			position: relative;
-		}
-		.ckbox input[type="checkbox"] {
-			opacity: 0;
-		}
-		.ckbox label {
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
-		.ckbox label:before {
-			content: '';
-			top: 1px;
-			left: 0;
-			width: 18px;
-			height: 18px;
-			display: block;
-			position: absolute;
-			border-radius: 2px;
-			border: 1px solid #bbb;
-			background-color: #fff;
-		}
-		.ckbox input[type="checkbox"]:checked + label:before {
-			border-color: #2BBCDE;
-			background-color: #2BBCDE;
-		}
-		.ckbox input[type="checkbox"]:checked + label:after {
-			top: 3px;
-			left: 3.5px;
-			content: '\e013';
-			color: #fff;
-			font-size: 11px;
-			font-family: 'Glyphicons Halflings';
-			position: absolute;
-		}
-		.table-filter .star {
-			color: #ccc;
-			text-align: center;
-			display: block;
-		}
-		.table-filter .star.star-checked {
-			color: #F0AD4E;
-		}
-		.table-filter .star:hover {
-			color: #ccc;
-		}
-		.table-filter .star.star-checked:hover {
-			color: #F0AD4E;
-		}
-		.table-filter .media-photo {
-			width: 35px;
-		}
 		.table-filter .media-body {
 		    display: block;
 		    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
@@ -175,7 +128,7 @@
 			color: #999;
 		}
 		.table-filter .media .title {
-			color: #2BBCDE;
+			color: #DE6262;
 			font-size: 14px;
 			font-weight: bold;
 			line-height: normal;
@@ -185,16 +138,19 @@
 			font-size: .8em;
 			margin-right: 20px;
 		}
-		.table-filter .media .title span.pagado {
+		.table-filter .media .title span.true {
 			color: #5cb85c;
 		}
-		.table-filter .media .title span.pendiente {
+		.table-filter .media .title span.wait {
 			color: #f0ad4e;
 		}
-		.table-filter .media .title span.cancelado {
+		.table-filter .media .title span.ban {
 			color: #d9534f;
 		}
-		.table-filter .media .summary {
+		.table-filter .media .title span.false {
+			color: #000000;
+		}
+		.table-filter .media .email {
 			font-size: 14px;
 		}	
 	
@@ -211,87 +167,85 @@
 	<title></title>
 </head>
 <body>
-	<section class="s-content">
-    	<!-- contents -------------------------------------------------------->
-    	<div class="container-fluid">
-   			<!-- Title영역 -->
-    		<div class="page-header">
-    			<h1>유저목록</h1>
-    		</div>
-			<!--// Title영역 -->
-			<form  name="frm" id="frm" action="<%=cPath%>/mypage/userList.do" method="post" class="form-inline">
-				<input type="hidden" name="page_num" id="page_num">
-				<!-- 검색영역 -->
-				<div class="row">
-					<div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
-						<!-- <form action="#" class="form-inline"> -->
-							<div class="form-group">
-								<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
-							</div>
-							<div class="form-group">
-								<%=StringUtil.makeSelectBox(user_info, "", "search_div", false) %>
-								<input type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
-							</div>					
+
+<div class="container">
+	<div class="row">
+		<section class="content">
+			<h1 style="color:#DE6262;">회원 관리</h1>
+			<div class="col-md-8 col-md-offset-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<form name="frm" id="frm" action="<%=cPath%>/mypage/userList.do" method="post" class="form-inline">
+							<input type="hidden" name="page_num" id="page_num">
+							<!-- 검색영역 -->
+							<div class="row">
+								<div class="pull-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
+									<div class="form-group pull-right aaaaa">
+										<%=StringUtil.makeSelectBoxForBootStrap(code_page, page_size, "page_size", false) %>
+										<%=StringUtil.makeSelectBoxForBootStrap(user_info, "", "search_div", false) %>
+										<input type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="btn btn--stroke btn-sm" onclick="javascript:doSearch();">조회</button>
+									</div>					
+									<br/>
 						<!-- </form> -->
-					</div>	
-				</div>
-<!-- 				<form  name="bofrm" id="bofrm" action="do_search_one.do" method="post" class="form-inline">
-					<input type="hidden" name="cusSeq" id="cusSeq">
-				</form> -->
-		
-		
-				<!-- Grid영역 -->
-				<div class="table-responsive" >
-					<table id="listTable" class="table table-striped table-bordered table-hover">
-						<thead class="bg-primary">
-						
-						    <tr>
-						        <th class="text-center"><input type="checkbox" id="checkAll" name="checkAll" onclick="checkAll();" ></th> 
-								<th class="text-center">아이디</th>
-								<th class="text-center">이메일</th>
-								<th class="text-center">예금주</th>
-								<th class="text-center">상태</th>
-								<th class="text-center">포인트</th>
-								<th class="text-center">가입일</th>
-							</tr>
-						</thead>
-						<tbody>  
-							<c:choose>
-								<c:when test="${list.size()>0}">
-									<c:forEach var="userVO" items="${list}">
-										<tr>
-										    <td class="text-center"><input type="checkbox" id="check" name="check"></td>
-											<td class="text-center"><c:out value="${userVO.userId}"></c:out></td>
-											<td class="text-center"><c:out value="${userVO.userEmail}"></c:out></td>
-											<td class="text-center"><c:out value="${userVO.userName}"></c:out></td>
-											<td class="text-center"><c:out value="${userVO.userAppStt}"></c:out></td>
-											<td class="text-center"><c:out value="${userVO.userPoint}"></c:out></td>
-											<td class="text-center"><c:out value="${userVO.userRegDt}"></c:out></td>
+								</div>	
+							</div>
+							<div class="table-container" >
+								<table id="listTable" class="table table-filter">
+									<thead>
+									    <tr>
+									        <th class="text-center">  
+										    	<input type="checkbox" id="checkAll" name="checkAll" onclick="javascript:checkAllUser();">
+									    	</th>						        
+											<th ></th>
 										</tr>
-									</c:forEach>
-								</c:when>
-								<c:otherwise>
-									<tr>
-									    <td class="text-center" colspan="99">회원이 없습니다.ㅠㅠ 분발합시다</td>
-									</tr>					
-								</c:otherwise>
-							</c:choose>						
-						</tbody>
-					</table>
+									</thead>
+									<tbody>  
+										<c:choose>
+											<c:when test="${list.size()>0}">
+												<c:forEach var="userVO" items="${list}">
+													<tr>
+													    <td class="text-center"> 
+													    	<input type="checkbox" id="${userVO.userId}" name="check">
+												    	</td>
+														<td>
+															<div class="media">
+																<div class="media-body">
+																	<span class="media-meta pull-right">${userVO.userRegDt}</span>
+																	<h4 class="title">
+																		${userVO.userId}(${userVO.userName}) <span style="color:black;">- ${userVO.userPoint}Point</span>
+																		<span class="pull-right ${userVO.userAppStt}">${userVO.userAppStt}</span>
+																	</h4>
+																	<p class="email"> ${userVO.userEmail} </p>
+																</div>
+															</div>
+														</td>									    	
+													</tr>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+												<tr>
+												    <td class="text-center" colspan="99">회원이 없습니다.ㅠㅠ 분발합시다</td>
+												</tr>					
+											</c:otherwise>
+										</c:choose>						
+									</tbody>
+								</table>
+							</div>
+							<!--// Grid영역 ---------------------------------------------------->
+							<!--pagenation ---------------------------------------------------->
+							<div class="form-inline text-center">
+								<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "userList.do", "search_page") %>
+							</div>
+							<!--// pagenation영역 ----------------------------------------------->
+						</form>	
+					</div>
 				</div>
-				<!--// Grid영역 ---------------------------------------------------->
-			
-			
-				<!--pagenation ---------------------------------------------------->
-				<div class="form-inline text-center">
-					<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "search.do", "search_page") %>
-				</div>
-				<!--// pagenation영역 ----------------------------------------------->
-			</form>	
-		</div>
-	</section>
+			</div>
+		</section>
+	</div>
+</div>
 	
     
 <script type="text/javascript">
@@ -305,10 +259,9 @@
 		frm.submit();
 	}
 
- 
 	 //check 전체 선택
-	function checkAll(){
-		//alert("checkAll");
+	function checkAllUser(){
+//		alert("checkAll");
 		if($("#checkAll").is(':checked') == true  ){
 			$("input[name='check']").prop("checked",true);
 		}else{
@@ -316,11 +269,11 @@
 		}
    
 	}
-
+ 
 	function doSearch(){
 		var frm = document.frm;
 		frm.page_num.value =1;
-		frm.action = "<%=cPath%>/mypage/userList.do";
+		frm.action = "userList.do";
 		frm.submit();
 	}
 
@@ -331,30 +284,9 @@
 		frm.submit();
 	}
 	
-/* 
-$(document).ready(function () {
 
-		$('.star').on('click', function () {
-	      $(this).toggleClass('star-checked');
-	    });
-
-	    $('.ckbox label').on('click', function () {
-	      $(this).parents('tr').toggleClass('selected');
-	    });
-
-	    $('.btn-filter').on('click', function () {
-	      var $target = $(this).data('target');
-	      if ($target != 'all') {
-	        $('.table tr').css('display', 'none');
-	        $('.table tr[data-status="' + $target + '"]').fadeIn('slow');
-	      } else {
-	        $('.table tr').css('display', 'none').fadeIn('slow');
-	      }
-	    });
-
-	 });
-*/
- 	$(document).ready(function(){   
+ 	$(document).ready(function(){
+ 		
 		$("#do_delete").on("click",function(){
 			//alert("do_delete");
 				

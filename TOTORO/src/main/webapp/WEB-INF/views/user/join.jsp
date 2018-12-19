@@ -51,7 +51,7 @@
 	    color: #FFFFFF;
 	}
 	.panel-default {
-	opacity: 0.86;
+	opacity: 0.93;
 	/*margin-top:30px;*/
 	}
 	.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid #DE6262; }
@@ -350,7 +350,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>R
 		</div>
 	</div>
 </body>
