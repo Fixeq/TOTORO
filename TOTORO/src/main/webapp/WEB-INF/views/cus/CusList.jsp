@@ -108,7 +108,15 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
+				<c:choose>
+        						<c:when test="${userAdmin=='1'}">
+        						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
+        						</c:when>
+        			<c:otherwise>
+					</c:otherwise>
+
+				</c:choose>
+					
 					
 					
 				</div>					
@@ -233,7 +241,8 @@
 		
 			
 		$("#do_delete").on("click",function(){
-					//alert("do_delete");
+			
+			
 					
 					var items = [];//var items=new Array(); 
 		

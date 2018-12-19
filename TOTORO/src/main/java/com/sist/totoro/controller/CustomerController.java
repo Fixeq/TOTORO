@@ -114,6 +114,7 @@ public class CustomerController {
 			invo.setSearch_word("");
 		}
 		model.addAttribute("param",invo);
+		
 		List<CusReplyVO> list = cusreplysvc.do_retrieve(invo);
 		log.info("list size : "+list.size());
 		model.addAttribute("list",list);

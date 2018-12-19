@@ -90,7 +90,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 				<c:choose>
 					<c:when test="${list.size()>0}">
 						<c:forEach var="cusReplyVo" items="${list}">
-							<tr>
+							<tr class="trclass">
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
@@ -167,8 +167,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    // 상세페이지에서 삭제 
    function detail_delete(){
 	   
-	   
-	   
+
   	 var frm = document.bofrm;
   	 frm.action = "detail_delete.do";
   	 frm.submit();
@@ -183,26 +182,26 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 	   	 
 	    }
 			
+   
+   //댓글삭제
    $(".doDelete").on("click",function(){
 				
 		var crSeq = $(this).val();
 	  	var cusSeq = $("#cusSeq").val();
 	  	
-	  	alert(cusSeq);
-		alert(crSeq);
+	  	var tr = $(this).parents(".trclass");
+	  	
+	  	//등록된 아이디 값 뽑아오는 방법!!
+		var rid = $(tr).find("td").eq(1).text();
 		
-		if(false==confirm("삭제 하시겠습니까?"))return;
-		var tr = $(this);
-		var td = tr.children();
-		var rid = $("#userid").val();
-		alert(rid)
 		var sessionid = <%="\""%><%=user%><%="\""%>;
 		var adminid = <%="\""%><%=admin%><%="\""%>;
-		
-		
 		if(rid == sessionid || adminid =='1'){
-			alert('rid');
-			alert('sessionid');
+		
+		if(false==confirm("삭제 하시겠습니까?"))return;
+		
+		
+	
 	
         $.ajax({
             type:"POST",
