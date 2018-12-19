@@ -53,14 +53,19 @@
 
     <div style="width:650px; text-align: center;">
         <button type="submit" class="submit btn btn--primary full-width" id="btnSave">저장</button>
-        <button type="reset">취소</button>
+        <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:doListPage();">이전</button>
     </div>
 </form>
 
                    		
   </section>
     <script type="text/javascript">
-
+    
+    function doListPage(){
+     	 var frm = document.form1;
+     	 frm.action = "search.do";
+     	 frm.submit();
+      }
 
 
     $(document).ready(function(){

@@ -63,11 +63,10 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		 <input type="hidden" name="cusContent" id="cusContent" />
 		  <input type="hidden" name="userId" id="userId" value="${userId}" />
 	</form>
-  	
- 
-    <form name="frmSave" id="frmSave" method="post" action="updatepage.do">
+
+    <form name="frmSave" id="frmSave" method="post" action="update.do">
     	<input type="hidden" name="page_num" id="page_num">
-    			 <input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
+    			 
                     <fieldset>
 		
                     
@@ -92,6 +91,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
+								<td class="text-center"><button type="button" class="doDelete btn btn-danger btn-sm" value="${cusReplyVo.crSeq}">삭제하기</button></td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -108,6 +108,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "do_search_one.do", "search_page") %>
 		</div>
                          </fieldset>
+                          <input type="hidden" name="crSeq" id="crSeq" value="" />
 	 </form> <!-- end form -->
                         <button type="button" class="btn btn-default btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">댓글쓰기페이지</button>
 						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">수정페이지로</button>
@@ -115,7 +116,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                    		
   </section>
   
-  
+
  
   
    <script type="text/javascript">
@@ -153,7 +154,6 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
   	 frm.submit();
    }
    
-   
    function search_page(url,page_num){
 	   	 alert(url+":search_page:"+page_num);
 	   	 var frm = document.frmSave;
@@ -163,8 +163,43 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 	   	 
 	    }
 			
-			
+   $(".doDelete").on("click",function(){
+				
+		var crSeq = $(this).val();
+	  	var cusSeq = $("#cusSeq").val();
+	  	
+	  	alert(cusSeq);
+		alert(crSeq);
+		
+		if(false==confirm("삭제 하시겠습니까?"))return;
 
+        $.ajax({
+            type:"POST",
+            url:"rdelete.do",
+            dataType:"json",// JSON
+            data:{
+            "crSeq": crSeq,
+            "cusSeq":cusSeq
+            },
+            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+
+            },
+            complete: function(data){//무조건 수행
+             
+            },
+            error: function(xhr,status,error){
+             
+            }
+            
+       }); //--ajax
+       
+        alert('삭제성공');
+      	 var frm = document.bofrm;
+     	 	     frm.cusSeq.value = $("#cusSeq").val();
+     		 	  frm.action = "do_search_one.do";
+     	 	     frm.submit();
+		
+	});//--do_delete
 </script>
 </body>
 </html>

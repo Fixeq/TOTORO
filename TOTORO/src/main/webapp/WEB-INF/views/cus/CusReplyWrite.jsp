@@ -43,14 +43,18 @@
 
     <div style="width:650px; text-align: center;">
         <button type="submit" class="submit btn btn--primary full-width" id="btnSave" onclick="javascript:doReplyWrite();">저장</button>
-        <button type="reset">취소</button>
+        <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:readpage();">이전</button>
     </div>
 </form>
 
                    		
   </section>
     <script type="text/javascript">
-
+    function readpage(){
+   	 var frm = document.bofrm;
+   	 frm.action = "do_search_one.do";
+   	 frm.submit();
+    }
 	
 
     function doReplyWrite(){

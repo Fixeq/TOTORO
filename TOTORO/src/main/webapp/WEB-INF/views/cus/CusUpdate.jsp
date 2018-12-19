@@ -53,14 +53,18 @@
 
     <div style="width:650px; text-align: center;">
         <button type="submit" class="submit btn btn--primary full-width" id="btnUpdate" onclick="javascript:update();">수정</button>
-        <button type="reset">취소</button>
+        <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:readpage();">이전</button>
     </div>
 </form>
 
                    		
   </section>
     <script type="text/javascript">
-
+    function readpage(){
+    	 var frm = document.form2;
+    	 frm.action = "do_search_one.do";
+    	 frm.submit();
+     }
 
 
     function update(){ 	 

@@ -103,7 +103,7 @@
 						<option value="10" <%if(search_div.equals("10"))out.print("selected='selected'"); %> >등록자</option>
 						<option value="20" <%if(search_div.equals("20"))out.print("selected='selected'"); %> >분류</option>					
 					</select>
-					<input type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
+					<input  type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
@@ -201,10 +201,12 @@
     }
     
     function doSearch(){
+
    	 var frm = document.frm;
    	 frm.page_num.value =1;
    	 frm.action = "search.do";
    	 frm.submit();
+
     }
     
     function doWritePage(){
@@ -217,6 +219,13 @@
  
 
      $(document).ready(function(){   
+	
+	
+	$("#search_word").keydown(function(key) {
+		if (key.keyCode == 13) {
+			doSearch();
+		}
+	});
 		
 			
 		$("#do_delete").on("click",function(){

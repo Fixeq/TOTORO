@@ -193,6 +193,21 @@ public class CustomerController {
 		 int list = customerSvc.delete(vo);
 	        return "redirect:search.do";
 	    }
+	 
+	 
+	 
+		//댓글삭제 
+	 @RequestMapping(value="/cus/rdelete.do", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	 @ResponseBody
+	    public String rdelete(HttpServletRequest req,@ModelAttribute CusReplyVO vo) throws Exception{
+		 String crSeq = req.getParameter("crSeq");
+		 String cusSeq = req.getParameter("cusSeq");
+			CusReplyVO cusreplyVO = new CusReplyVO();
+			cusreplyVO.setCrSeq(crSeq);
+			cusreplyVO.setCusSeq(cusSeq);
+		 int list = cusreplysvc.delete(cusreplyVO);
+	        return "삭제완료";
+	    }
 	
 
 
