@@ -340,7 +340,6 @@ public class UserSvc {
 			out.close();
 		} else { // 성공시
 			out.println("<script>");
-			out.println("alert('확인되었습니다.')");
 			out.println("location.href='http://localhost:8080/totoro/mypage/userList.do';");
 			out.println("</script>");
 			out.close();

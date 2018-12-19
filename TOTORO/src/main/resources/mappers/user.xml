@@ -9,20 +9,17 @@
 	<sql id="baseCondition">
 		<where>
 			<choose>
-				<when test="'10'==search_div">
+				<when test="'userId'==search_div">
 					to_users.userId like  #{search_word}||'%'
 				</when>
-				<when test="'20'==search_div">
-					to_users.userName like  #{search_word}||'%'
-				</when>
-				<when test="'30'==search_div">
+				<when test="'userEmail'==search_div">
 					to_users.userEmail like  #{search_word}||'%'
 				</when>
-				<when test="'40'==search_div">
-					to_users.userAppStt ='ban'
+				<when test="'userName'==search_div">
+					to_users.userName like  #{search_word}||'%'
 				</when>
-				<when test="'50'==search_div">
-					to_users.userAppStt ='wait'
+				<when test="'userAccount'==search_div">
+					to_users.userAccount #{search_word}||'%'
 				</when>
 			</choose>
 		</where>

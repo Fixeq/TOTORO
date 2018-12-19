@@ -249,7 +249,7 @@ public class UserController {
 		CodeVO userInfo = new CodeVO();
 		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건)
 		codePage.setCd_id("C001");
-		codePage.setCd_id("C007");
+		userInfo.setCd_id("C007");
 		
 		// cd_id(C001,C005)값을 가지고 페이징 관련 데이터들을 model에 담음.
 		model.addAttribute("code_page",codeSvc.do_retrieve(codePage));
