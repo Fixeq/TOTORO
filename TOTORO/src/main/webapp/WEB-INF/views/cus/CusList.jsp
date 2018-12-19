@@ -86,7 +86,7 @@
     <div class="container-fluid">
     	<!-- Title영역 -->
     	<div class="page-header">
-    		<h1>사용자관리</h1>
+    		<h1>고객센터 게시판</h1>
     	</div>
     	<!--// Title영역 -->
         <form  name="frm" id="frm" action="search.do" method="post" class="form-inline">
@@ -201,6 +201,7 @@
    	   
     }
     
+	 //검색
     function doSearch(){
 
    	 var frm = document.frm;
@@ -210,6 +211,7 @@
 
     }
     
+    //글쓰기 페이지 이동 
     function doWritePage(){
       	 var frm = document.frm;
       	 frm.page_num.value =1;
@@ -222,6 +224,7 @@
      $(document).ready(function(){   
 	
 	
+	//검색영역 엔터키 이벤트 처리
 	$("#search_word").keydown(function(key) {
 		if (key.keyCode == 13) {
 			doSearch();
@@ -233,6 +236,7 @@
 					//alert("do_delete");
 					
 					var items = [];//var items=new Array(); 
+		
 					$( "input[name='check']:checked" ).each(function( index,row ) {
 						console.log("index="+index);
 						//console.log("row="+row);
@@ -241,7 +245,10 @@
 						console.log("userId="+userId);
 						items.push(userId);
 					});
+					
+			
 					console.log("items.length="+items.length);
+					//
 					if(items.length<=0){
 						alert("삭제할 데이터를 선택 하세요.")
 						return;

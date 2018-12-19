@@ -46,6 +46,9 @@ totalCnt = Integer.parseInt(iTotalCnt);
 
 List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
+		     
+		 	String user = (String)session.getAttribute("userId");
+			String admin = (String)session.getAttribute("userAdmin");
 
 %>
 <!DOCTYPE html>
@@ -79,7 +82,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                 </h1>
             </div> <!-- end s-content__header -->
 					<p class="cusContentValue"><c:out value="${vo.cusContent}"></c:out></p>
-                
+                <p class="rId"><c:out value="${vo.userId}"></c:out></p>
                 </div>
              	<table id="listTable" class="table table-striped table-bordered table-hover">
 			
@@ -109,6 +112,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		</div>
                          </fieldset>
                           <input type="hidden" name="crSeq" id="crSeq" value="" />
+                          
 	 </form> <!-- end form -->
                         <button type="button" class="btn btn-default btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">댓글쓰기페이지</button>
 						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">수정페이지로</button>
@@ -127,15 +131,28 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 	   	 alert(cusContent);
 	   	 var cusTitle = $('.cusTitleValue').text();
 	   	 alert(cusTitle);
-	   	 
-	  	 var frm = document.bofrm;
-    	 alert(frm.cusSeq.value);
-    	 alert(frm.userId.value);
-    	 frm.cusTitle.value = cusTitle;
-    	 frm.cusContent.value = cusContent;
-    	 
-    	 frm.action = "updatepage.do";
-    	 frm.submit();
+	   	var rId = $('.rId').text();
+	   	var sessionid = <%="\""%><%=user%><%="\""%>;
+		var adminid = <%="\""%><%=admin%><%="\""%>;
+		alert(sessionid);
+		
+		
+		
+		if(rId == sessionid || adminid =='1'){
+			var frm = document.bofrm;
+	    	 alert(frm.cusSeq.value);
+	    	 alert(frm.userId.value);
+	    	 frm.cusTitle.value = cusTitle;
+	    	 frm.cusContent.value = cusContent;
+	    	 
+	    	 frm.action = "updatepage.do";
+	    	 frm.submit();
+			return;
+		} else {
+			alert('작성자 본인의 글만 수정 가능합니다.')
+		}  
+		
+	
      }
     
    // 댓글쓰기 페이지로 이동 
@@ -149,6 +166,9 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    
    // 상세페이지에서 삭제 
    function detail_delete(){
+	   
+	   
+	   
   	 var frm = document.bofrm;
   	 frm.action = "detail_delete.do";
   	 frm.submit();
@@ -172,7 +192,18 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		alert(crSeq);
 		
 		if(false==confirm("삭제 하시겠습니까?"))return;
-
+		var tr = $(this);
+		var td = tr.children();
+		var rid = $("#userid").val();
+		alert(rid)
+		var sessionid = <%="\""%><%=user%><%="\""%>;
+		var adminid = <%="\""%><%=admin%><%="\""%>;
+		
+		
+		if(rid == sessionid || adminid =='1'){
+			alert('rid');
+			alert('sessionid');
+	
         $.ajax({
             type:"POST",
             url:"rdelete.do",
@@ -198,6 +229,10 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
      	 	     frm.cusSeq.value = $("#cusSeq").val();
      		 	  frm.action = "do_search_one.do";
      	 	     frm.submit();
+     	 	     
+		} else{
+			alert('본인 답변만 삭제할수있습니다.')
+		}
 		
 	});//--do_delete
 </script>
