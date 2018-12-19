@@ -45,7 +45,8 @@
 	
 	List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
-	
+	String user = (String)session.getAttribute("userId");
+	String admin = (String)session.getAttribute("userAdmin");
 %>    
 <%-- 
   /**
@@ -141,7 +142,7 @@
 							<tr>
 							    <td class="text-center"><input type="checkbox" id="check" name="check" onclick='event.cancelBubble=true;'​></td>
 								<td class="text-center"><c:out value="${customerVo.cusSeq}"></c:out></td>
-								<td class="text-center"><c:out value="${customerVo.userId}"></c:out></td>
+								<td class="text-center" value="${customerVo.userId}"><c:out value="${customerVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.cusCat}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.cusTitle}"></c:out></td>
 								<td class="text-center"><c:out value="${customerVo.cusReply}"></c:out></td>
@@ -293,14 +294,32 @@
 				var tr = $(this);
 				var td = tr.children();
 				var cusSeq = td.eq(1).text();
-				
+				var rid = td.eq(2).text();
+				var sessionid = <%="\""%><%=user%><%="\""%>;
+				var adminid = <%="\""%><%=admin%><%="\""%>;
+				console.log("cusSeq ; "+cusSeq);
+				console.log("id ; "+rid);
+				console.log("id ; "+sessionid);
 				if(""==cusSeq)return;
+
 				
-		     	 var frm = document.bofrm;
+				
+ 				if(rid == sessionid || adminid =='1'){
+ 					 var frm = document.bofrm;
+ 			     	 frm.cusSeq.value = cusSeq;
+ 			     	 frm.action = "do_search_one.do";
+ 			     	 frm.submit();
+					return;
+				} else {
+					alert('작성자 본인의 글만 조회가 가능합니다.')
+				}  
+				
+/*   		     	 var frm = document.bofrm;
 		     	 frm.cusSeq.value = cusSeq;
 		     	 frm.action = "do_search_one.do";
 		     	 frm.submit();
-		     	 alert('전송');
+		     	 alert('전송');  
+		     	 */
 				
 			});//--#listTable>tbody
 			
