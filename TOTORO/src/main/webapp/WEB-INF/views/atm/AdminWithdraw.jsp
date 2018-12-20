@@ -86,7 +86,7 @@
 							<button type="button" class="btn btn-default btn-sm" onclick="javascript:doReqSearch();">요청 조회</button>
 							<button type="button" class="btn btn-default btn-sm" onclick="javascript:doPsSearch();">완료 조회</button>
 							<button type="button" class="btn btn--stroke" id="do_delete">삭제</button>
-							<button type="button" class="btn btn--primary btn-sm" id="deposit">지급</button>
+							<button type="button" class="btn btn--primary btn-sm" id="withdraw">지급</button>
 						</td>
 					</tr>
 				</table>
