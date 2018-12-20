@@ -262,14 +262,14 @@
 																i++;
 															%>
 															<div class="pull-right">
-																<%=StringUtil.makeSelectBoxForBootStrap(user_status, userAppStt, "userAppStt", false) %>
+																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, "userAppStt", false) %>
 																<p>
 																	<a href="#" onclick="#" class="pull-right"><span class="glyphicon glyphicon-ok "></span> 적용</a>
 																	<!-- <input type="button" class="pull-right applyStt " value=""></span>/> -->
 																</p>
 															</div>
 														</td>
-														<td>
+														<td class="user_infos">
 															<div class="media">
 																<div class="media-body">
 																	<span class="media-meta pull-right">${userVO.userRegDt}</span>
@@ -282,7 +282,8 @@
 															</div>
 														</td>
 														<td>
-															<input type="button" class="pull-right" value="수정"/>
+															<button type="button" class="pull-right do_update_user">수정</button>
+															<!-- <input type="button" class="pull-right" value="수정"/> -->
 														</td>	    	
 													</tr>
 												</c:forEach>
@@ -296,7 +297,7 @@
 									</tbody>
 								</table>
 							</div>
-							<!--// Grid영역 ---------------------------------------------------->
+							<!--// Gr	영역 ---------------------------------------------------->
 							<!--pagenation ---------------------------------------------------->
 							<div class="form-inline text-center">
 								<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "userList.do", "search_page") %>
@@ -349,6 +350,17 @@
 	
 
  	$(document).ready(function(){
+ 		
+ 		$(".do_update_user").on("click",function(){
+ 			var btn = $(this);
+ 			var tr = btn.parent.parent();
+ 			var tdinfos = tr.eq(1).text();
+ 			
+ 			colsole.log("맞냐 td잘찾앗냐?"+tdinfos);
+ 			
+ 			
+ 		});
+ 		
  		
 		$("#do_delete").on("click",function(){
 			//alert("do_delete");

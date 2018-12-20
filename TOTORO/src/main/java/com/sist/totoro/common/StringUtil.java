@@ -242,7 +242,38 @@ public class StringUtil {
 		sb.append("</select> \n");
 		return sb.toString();
 	}
+
+	public static String makeSelectBoxForUserList(List<CodeVO> list,String selectCode,String selectNm,boolean allYN){
 		
+//		<select name="page_size" id="page_size">
+//			<option value="10" <%if(page_size.equals("10"))out.print("selected='selected'"); %> >10</option>
+//			<option value="20" <%if(page_size.equals("20"))out.print("selected='selected'"); %> >20</option>
+//			<option value="50" <%if(page_size.equals("50"))out.print("selected='selected'"); %> >50</option>
+//		</select>
+		StringBuilder sb=new StringBuilder();
+		sb.append("<select name='"+selectNm+"' class='form-control input-sm dohyeonForCheck'>\n");		
+		//전체
+		if(true == allYN){
+			sb.append("<option value=''>::전체::</option> \n");
+		}
+		//내용
+		for(DTO in:list){
+			CodeVO dto = (CodeVO) in;
+			sb.append("<option value='"+dto.getD_id()+"'"   );
+			//selected
+			if(selectCode.equals(dto.getD_id())){
+				sb.append(" selected='selected' ");
+			}
+			sb.append(">");
+			sb.append(dto.getD_nm());
+			sb.append("</option> \n");
+				
+		}
+		
+		sb.append("</select> \n");
+		return sb.toString();
+	}
+	
 	/**
 	 * String NVL(str,defVal)
 	 * @param str
