@@ -46,7 +46,14 @@
 	List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 			     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("code_page");
 	
-%> 
+%>
+<%
+	int myPoint = (Integer)session.getAttribute("userPoint");
+%>
+<script>
+	var myPoint = <%=myPoint%>
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,10 +191,21 @@
 				//});
 				//do_save
 				//등록
+
+				
 				$("#do_save").on("click",function(){
-					//alert("do_save"); 
+					//alert("do_save");
+					
 					 
 					if(false==confirm("등록 하시겠습니까?"))return;
+					
+					t1 = $("#dpoint").val();
+					console.log(t1);
+					
+					if(t1>myPoint){
+						alert("가지고 있는 포인트보다 많은 금액입니다.");
+						return;
+					}
 					
 					if($("#dpoint").val()%10000>0){
 						alert("1만원 단위로 입력해주세요")
