@@ -94,7 +94,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
-								<td class="text-center"><button type="button" class="doDelete btn btn-danger btn-sm" value="${cusReplyVo.crSeq}">삭제하기</button></td>
+								<td class="text-center"><button type="button" class="btn btn--stroke" value="${cusReplyVo.crSeq}">삭제하기</button></td>
 							</tr>
 						</c:forEach>
 					</c:when>
@@ -114,9 +114,9 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                           <input type="hidden" name="crSeq" id="crSeq" value="" />
                           
 	 </form> <!-- end form -->
-                        <button type="button" class="btn btn-default btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">댓글쓰기페이지</button>
-						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">수정페이지로</button>
-						<button type="button" class="btn btn-default btn-sm" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>
+                        <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>
+						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>
+						<button type="button" class="btn btn--stroke" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>
                    		
   </section>
   

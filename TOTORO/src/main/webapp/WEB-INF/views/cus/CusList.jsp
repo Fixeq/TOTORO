@@ -85,9 +85,9 @@
     <!-- contents -------------------------------------------------------->
     <div class="container-fluid">
     	<!-- Title영역 -->
-    	<div class="page-header">
-    		<h1>고객센터 게시판</h1>
-    	</div>
+    		<div class="page-header">
+	    		<h2 align="center">고객 문의사항 페이지</h2>
+			</div>
     	<!--// Title영역 -->
         <form  name="frm" id="frm" action="search.do" method="post" class="form-inline">
      	 <input type="hidden" name="page_num" id="page_num">
@@ -105,18 +105,25 @@
 						<option value="20" <%if(search_div.equals("20"))out.print("selected='selected'"); %> >분류</option>	
 						<option value="30" <%if(search_div.equals("30"))out.print("selected='selected'"); %> >제목</option>								
 					</select>
+					
+					<table align="center"><!--  -->
+					<tr> 					<!--  -->
+					<td class="text-center" ><!--  -->
 					<input  type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
-					<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
+					<button type="button" class="btn btn--primary btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
 				<c:choose>
         						<c:when test="${userAdmin=='1'}">
-        						<button type="button" class="btn btn-default btn-sm" id="do_delete">삭제</button>
+        						<button type="button" class="btn btn--stroke" id="do_delete">삭제</button>
         						</c:when>
         			<c:otherwise>
 					</c:otherwise>
 
 				</c:choose>
+					</td><!--  -->
+					</tr><!--  -->
+					</table><!--  -->
 					
 					
 					

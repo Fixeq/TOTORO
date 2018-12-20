@@ -42,8 +42,8 @@
     
 
     <div style="width:650px; text-align: center;">
-        <button type="submit" class="submit btn btn--primary full-width" id="btnSave" >저장</button>
-        <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:readpage();">이전</button>
+        <button type="submit" class="btn btn--primary btn-sm" id="btnSave" >답글저장</button>
+        <button type="submit" class="btn btn--stroke" onclick="javascript:readpage();">이전</button>
     </div>
 </form>
 
