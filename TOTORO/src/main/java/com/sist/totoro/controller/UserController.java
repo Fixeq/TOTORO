@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.sist.totoro.code.CodeSvc;
 import com.sist.totoro.code.CodeVO;
 import com.sist.totoro.common.SearchVO;
+import com.sist.totoro.domain.CustomerVO;
 import com.sist.totoro.domain.UserVO;
 import com.sist.totoro.service.UserSvc;
 
@@ -217,13 +218,6 @@ public class UserController {
 	}
 	
 	
-	/*
-	//유저리스트 화면으로 이동
-	@RequestMapping(value = "mypage/moveUserList", method = RequestMethod.GET)
-	public String moveUserList() {
-		return "/mypage/user_list";
-	}
-	 */
 	@RequestMapping(value="/mypage/userList.do")
 	public String do_retrieve(@ModelAttribute SearchVO searchVO, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		log.info("controller searchVO not yet into service : "+searchVO);
@@ -257,6 +251,7 @@ public class UserController {
 		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건, C005:유저상태)
 		codePage.setCd_id("C001");
 		userInfo.setCd_id("C007");
+		
 		userStatus.setCd_id("C005");
 		
 		// cd_id(C001,C005)값을 가지고 페이징 관련 데이터들을 model에 담음.
@@ -272,18 +267,33 @@ public class UserController {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@RequestMapping(value="/mypage/userSelectOne.do", method = RequestMethod.GET)
+	public String doSelectOne(@RequestParam("userId") String userId,@ModelAttribute UserVO userVO ,HttpServletRequest req, HttpServletResponse response, Model model) throws Exception{
+		log.info("userId 값 :"+userId);
+		
+		UserVO userVO1 = userSvc.getUserInfo(userId);
+		CodeVO userStatus=new CodeVO();
+		CodeVO findPw=new CodeVO();		
+		CodeVO bankList=new CodeVO();
+		CodeVO adminList=new CodeVO();
+		
+		userStatus.setCd_id("C005");
+		findPw.setCd_id("C002");
+		bankList.setCd_id("C003");
+		adminList.setCd_id("C008");
+		
+		model.addAttribute("userVO1", userVO1);
+		model.addAttribute("user_status",codeSvc.do_retrieve(userStatus));
+		model.addAttribute("find_pw",codeSvc.do_retrieve(findPw));
+		model.addAttribute("bank_list",codeSvc.do_retrieve(bankList));
+		model.addAttribute("admin_list",codeSvc.do_retrieve(adminList));
+		
+		log.info("userVO1 : "+userVO1);
+		
+		
+		
+		return "/mypage/userSelectOne";
+	}
 	
 	
 	

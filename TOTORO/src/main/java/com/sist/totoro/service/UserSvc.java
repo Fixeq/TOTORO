@@ -355,7 +355,10 @@ public class UserSvc {
 		return userDao.do_retrieve(searchVO);
 	}
 	
-	
+	public UserVO getUserInfo(String userId)  throws ClassNotFoundException, SQLException, EmptyResultDataAccessException{
+		
+		return userDao.id_login(userId);
+	}
 	
 	
 	

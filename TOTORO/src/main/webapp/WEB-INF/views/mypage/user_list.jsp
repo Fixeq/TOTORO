@@ -10,9 +10,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@taglib prefix="tiles"  
     uri="http://tiles.apache.org/tags-tiles" %>   	
-<%@taglib prefix="tiles"  
-    uri="http://tiles.apache.org/tags-tiles" %>    	
-	
 	
 <%
 
@@ -264,7 +261,7 @@
 															<div class="pull-right">
 																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, "userAppStt", false) %>
 																<p>
-																	<a href="#" onclick="#" class="pull-right"><span class="glyphicon glyphicon-ok "></span> 적용</a>
+																	<a href="#" class="pull-right"><span class="glyphicon glyphicon-ok "></span> 적용</a> 
 																	<!-- <input type="button" class="pull-right applyStt " value=""></span>/> -->
 																</p>
 															</div>
@@ -281,8 +278,9 @@
 																</div>
 															</div>
 														</td>
-														<td>
+														<td id="${userVO.userId}" >
 															<button type="button" class="pull-right do_update_user">수정</button>
+															<%-- <input type="hidden" id="${userId}" value="${userId}" /> --%>
 															<!-- <input type="button" class="pull-right" value="수정"/> -->
 														</td>	    	
 													</tr>
@@ -316,23 +314,13 @@
 
     
 	function search_page(url,page_num){
-		alert(url+":search_page:"+page_num);
+//		alert(url+":search_page:"+page_num);
 		var frm = document.frm;
 		frm.page_num.value = page_num;
 		frm.action = url;
 		frm.submit();
 	}
 
-	 //check 전체 선택
-	function checkAllUser(){
-//		alert("checkAll");
-		if($("#checkAll").is(':checked') == true  ){
-			$("input[name='check']").prop("checked",true);
-		}else{
-			$("input[name='check']").prop("checked",false);
-		}
-   
-	}
  
 	function doSearch(){
 		var frm = document.frm;
@@ -352,15 +340,35 @@
  	$(document).ready(function(){
  		
  		$(".do_update_user").on("click",function(){
- 			var btn = $(this);
- 			var tr = btn.parent.parent();
- 			var tdinfos = tr.eq(1).text();
+			var frm = document.frm;
  			
- 			colsole.log("맞냐 td잘찾앗냐?"+tdinfos);
- 			
- 			
+			var btn = $(this);
+ 			 
+ 			var userId = btn.parent().attr('id');
+ 			console.log("맞냐 userId잘찾앗냐? : "+userId);
+ 
+ 			$.ajax({
+				url : "<%=cPath%>/mypage/userSelectOne.do",
+				type : "GET",
+				data : {
+					userId : userId
+				},
+				success : function(result) {
+				
+					/* location.href = 'userSelectOne.do'; */
+					location.href = "userSelectOne.do?userId="+userId;
+					
+				}
+			
+			})
  		});
+ 			
  		
+/* 
+	     	frm.action = "userSelectOne.do";
+	     	frm.submit(); 		 */	
+ 			
+/*  		
  		
 		$("#do_delete").on("click",function(){
 			//alert("do_delete");
@@ -415,26 +423,7 @@
 			});//--ajax
 				
 		});//--do_delete
-		
-
-		$("#listTable>tbody").on("click","tr",function(){
-			console.log("1 #listTable>tbody");
-			
-			var tr = $(this);
-			var td = tr.children();
-			var cusSeq = td.eq(1).text();
-			
-			if(""==cusSeq)return;
-			
-			var frm = document.bofrm;
-	     	frm.cusSeq.value = cusSeq;
-	     	frm.action = "do_search_one.do";
-	     	frm.submit();
-	     	alert('전송');
-		});//--#listTable>tbody
-		
-		
-		
+		 */
 });  
 </script>
 </body>
