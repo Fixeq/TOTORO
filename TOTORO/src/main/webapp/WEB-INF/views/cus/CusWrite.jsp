@@ -24,7 +24,7 @@
   <section class="s-content">
 
 	 
-    <form name="form1" method="post" action="save.do">
+    <form name="form1" method="post" >
 <fieldset>
 
                         <div class="form-field">
@@ -77,13 +77,14 @@
 
    
   
-        	if(cusTitle ==null || cusContent == null){
+        	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){
         		alert('제목이나 내용은 공란일수없습니다.')
-           
+           	return;
       
             
         	} else {
         		  // 폼에 입력한 데이터를 서버로 전송
+        		   document.form1.action = "save.do";
         		 document.form1.submit();
         	}
         });

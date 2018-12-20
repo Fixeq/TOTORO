@@ -218,6 +218,14 @@ public class CustomerController {
 	    public String insert(@ModelAttribute CustomerVO vo) throws Exception{
 		 
 		 int list = customerSvc.add(vo);
+		 
+		 
+		 
+		 
+		 
+		 
+		 
+		 
 	        return "redirect:search.do";
 	    }
 	 
@@ -241,8 +249,55 @@ public class CustomerController {
 		 cuvo.setCusReply("Y");
 		
 		 int replyupdate = customerSvc.repupdate(cuvo);
-		 int list = cusreplysvc.add(invo);
-		 model.addAttribute("vou", list);
+		 int list2 = cusreplysvc.add(invo);
+		 model.addAttribute("vou", list2);
+		 
+		 ////////////////////////////////////////////////////
+		 
+		 log.info("search : "+invo);
+			
+			String cusSeq = req.getParameter("cusSeq");
+			log.info("cusSeq : "+cusSeq);
+			
+			if(invo.getPage_size() == 0) {
+				invo.setPage_size(5);
+			}
+			if(invo.getPage_num() == 0){
+				invo.setPage_num(1);
+			}
+			if(null == invo.getSearch_div()) {
+				invo.setSearch_div("");
+			}
+			if(null == invo.getSearch_word()) {
+				invo.setSearch_word("");
+			}
+			model.addAttribute("param",invo);
+			
+			List<CusReplyVO> list = cusreplysvc.do_retrieve(invo);
+			log.info("list size : "+list.size());
+			model.addAttribute("list",list);
+			int totalCnt = 0;
+			if(null != list  &&  list.size()>0) {
+				totalCnt = list.get(0).getTotalCnt();		
+			}
+			
+			log.info("====================================");
+			log.info("====================================");
+			log.info("=====================================");
+			log.info("totalCnt : "+totalCnt);
+			log.info("====================================");
+			log.info("====================================");
+			log.info("====================================");
+			
+			CustomerVO customerVO = new CustomerVO();
+			customerVO.setCusSeq(cusSeq);
+			CustomerVO outVO = customerSvc.get(customerVO);
+			
+			model.addAttribute("vo",outVO);
+			model.addAttribute("totalCnt",totalCnt);
+		 
+		 
+		 
 	        return "/cus/CusRead";
 	    }
 	//수정

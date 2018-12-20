@@ -25,7 +25,7 @@
 	
 	
 	 
-    <form name="bofrm" id="bofrm" action="rsave.do" method="post" class="form-inline">
+    <form name="bofrm" id="bofrm"  method="post" class="form-inline">
 	<fieldset>
 			
 						<input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo3.cusSeq}"></c:out>" />
@@ -42,7 +42,7 @@
     
 
     <div style="width:650px; text-align: center;">
-        <button type="submit" class="submit btn btn--primary full-width" id="btnSave" onclick="javascript:doReplyWrite();">저장</button>
+        <button type="submit" class="submit btn btn--primary full-width" id="btnSave" >저장</button>
         <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:readpage();">이전</button>
     </div>
 </form>
@@ -57,13 +57,31 @@
     }
 	
 
-    function doReplyWrite(){
+    /**function doReplyWrite(){
 	
  	  	 var frm = document.bofrm;
      	 alert(frm.cusSeq.value);
      	 frm.action = "rsave.do";
      	 frm.submit();
-      }
+      }*/
+
+    $(document).ready(function(){
+        $("#btnSave").click(function(){
+
+   
+  
+        	if( $("#crContent").val() == ""){
+        		alert(' 내용은 공란일수없습니다.')
+           	return;
+      
+            
+        	} else {
+        		  // 폼에 입력한 데이터를 서버로 전송
+        		   document.bofrm.action = "rsave.do";
+        		 document.bofrm.submit();
+        	}
+        });
+    });
     </script>
 </body>
 </html>

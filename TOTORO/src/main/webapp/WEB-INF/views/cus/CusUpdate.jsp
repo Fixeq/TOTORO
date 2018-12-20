@@ -24,7 +24,7 @@
   <section class="s-content">
 
 	 
-    <form name="form2" method="post" action="update.do">
+    <form name="form2" method="post" >
    
 <fieldset><input type="hidden" name="cusSeq"  id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>">
 
@@ -51,7 +51,7 @@
     
 
     <div style="width:650px; text-align: center;">
-        <button type="submit" class="submit btn btn--primary full-width" id="btnUpdate" onclick="javascript:update();">수정</button>
+        <button type="submit" class="submit btn btn--primary full-width" id="btnUpdate" >수정</button>
         <button type="submit" class="submit btn btn--primary full-width" onclick="javascript:readpage();">이전</button>
     </div>
 </form>
@@ -66,14 +66,38 @@
      }
 
 
-    function update(){ 	 
+    /**function update(){ 	 
 	  	 var form2 = document.form2;
 
 
    	 
    	form2.action = "update.do";
    	form2.submit();
-    }
+    }*/
+    
+    
+    
+    
+    
+    
+    
+    $(document).ready(function(){
+        $("#btnUpdate").click(function(){
+
+   
+  
+        	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){
+        		alert('제목이나 내용은 공란일수없습니다.')
+           	return;
+      
+            
+        	} else {
+        		  // 폼에 입력한 데이터를 서버로 전송
+        		   document.form2.action = "update.do";
+        		 document.form2.submit();
+        	}
+        });
+    });
     </script>
 </body>
 </html>
