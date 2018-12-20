@@ -69,7 +69,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 
     <form name="frmSave" id="frmSave" method="post" action="update.do">
     	<input type="hidden" name="page_num" id="page_num">
-    			 
+    			  <input type="hidden" name="cusSeq" id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>" />
                     <fieldset>
 		
                     

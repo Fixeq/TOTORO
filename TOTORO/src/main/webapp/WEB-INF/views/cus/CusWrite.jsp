@@ -36,9 +36,13 @@
                             <!-- <input name="userId" type="text" id="userId" class="full-width" placeholder="아이디" value=""> -->
                         </div>
 
-                        <div class="form-field">
-                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="분류"  value="">
-                        </div>
+                        <div>
+								<label>분류&nbsp;</label><select name="cusCat" id="cusCat">
+									<option value="입출금" selected="selected">입출금</option>
+									<option value="배팅">배팅</option>
+									<option value="기타">기타</option>
+								</select>
+							</div>
 
 
                         <div class="message form-field">
@@ -49,7 +53,7 @@
 
                     </fieldset>
  
-    
+    						
 
     <div style="width:650px; text-align: center;">
         <button type="submit" class="submit btn btn--primary full-width" id="btnSave">저장</button>
@@ -70,19 +74,18 @@
 
     $(document).ready(function(){
         $("#btnSave").click(function(){
-            //var title = document.form1.title.value; ==> name속성으로 처리할 경우
-            //var content = document.form1.content.value;
-            //var writer = document.form1.writer.value;
-            var title = $("#cusTitle").val();
-            var content = $("#cusContent").val();
-            var userId = $("#userId").val();
-            var cusCat = $("#cusCat").val();
-            var cusReply = $("#cusReply").val();
+
+   
   
-            
+        	if(cusTitle ==null || cusContent == null){
+        		alert('제목이나 내용은 공란일수없습니다.')
            
-            // 폼에 입력한 데이터를 서버로 전송
-            document.form1.submit();
+      
+            
+        	} else {
+        		  // 폼에 입력한 데이터를 서버로 전송
+        		 document.form1.submit();
+        	}
         });
     });
     </script>

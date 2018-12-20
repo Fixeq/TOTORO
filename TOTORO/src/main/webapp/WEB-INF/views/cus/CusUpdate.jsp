@@ -27,19 +27,18 @@
     <form name="form2" method="post" action="update.do">
    
 <fieldset><input type="hidden" name="cusSeq"  id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>">
-    	
-    	
 
                         <div class="titleform">
                             <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="<c:out value="${vo.cusTitle}"></c:out>" value=""></input>
                         </div>
 
-                        <div class="catfrom">
-                            <input name="cusCat" type="text" id="cusCat" class="full-width" placeholder="<c:out value="${vo.cusCat}"></c:out>" value=""></input>
-                        </div>
-
-                       
-
+                       <div>
+								<label>분류&nbsp;</label><select name="cusCat" id="cusCat">
+									<option value="입출금" selected="selected">입출금</option>
+									<option value="배팅" <c:if test="${vo.cusCat == '1'}" >selected='selected'</c:if> >배팅</option>
+									<option value="기타" <c:if test="${vo.cusCat == '1'}" >selected='selected'</c:if> >기타</option>
+								</select>
+							</div>
 
                         <div class="contentform">
                         <textarea name="cusContent" id="cusContent" class="full-width"  placeholder="<c:out value="${vo.cusContent}"></c:out>" value=""></textarea>
@@ -48,7 +47,7 @@
                       
 
                     </fieldset>
- 
+
     
 
     <div style="width:650px; text-align: center;">

@@ -102,7 +102,8 @@
 					<select name="search_div" id="search_div" class="form-control input-sm">
 					    <option value="" >::전체::</option>
 						<option value="10" <%if(search_div.equals("10"))out.print("selected='selected'"); %> >등록자</option>
-						<option value="20" <%if(search_div.equals("20"))out.print("selected='selected'"); %> >분류</option>					
+						<option value="20" <%if(search_div.equals("20"))out.print("selected='selected'"); %> >분류</option>	
+						<option value="30" <%if(search_div.equals("30"))out.print("selected='selected'"); %> >제목</option>								
 					</select>
 					<input  type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

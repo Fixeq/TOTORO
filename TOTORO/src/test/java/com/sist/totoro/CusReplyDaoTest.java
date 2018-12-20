@@ -51,7 +51,7 @@ public class CusReplyDaoTest {
 	
 	@Autowired
 	private CusReplyDao cusreplyDao;
-	CusReplyVO  inVO1 = new CusReplyVO("143", "104","sdf","sdf","sdfsdf","");
+	CusReplyVO  inVO1 = new CusReplyVO("", "140","sdf","sdf","sdfsdf","");
 	CusReplyVO  inVO2 = null;
 	CusReplyVO  inVO3 = null;
 	SearchVO searchVO = null;
@@ -85,9 +85,9 @@ public class CusReplyDaoTest {
 		//--------------------------------------------
 		//1. 단건 추가
 		//--------------------------------------------
-		//cusreplyDao.add(inVO1);
+		cusreplyDao.add(inVO1);
 		//삭제
-		cusreplyDao.delete(inVO1);
+		//cusreplyDao.delete(inVO1);
 		
 		
 

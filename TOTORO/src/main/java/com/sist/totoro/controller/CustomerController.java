@@ -216,6 +216,7 @@ public class CustomerController {
 	//글쓰기 
 	 @RequestMapping(value="/cus/save.do", method=RequestMethod.POST)
 	    public String insert(@ModelAttribute CustomerVO vo) throws Exception{
+		 
 		 int list = customerSvc.add(vo);
 	        return "redirect:search.do";
 	    }
@@ -226,6 +227,7 @@ public class CustomerController {
 		//답변쓰기 
 	 @RequestMapping(value="/cus/rsave.do", method=RequestMethod.POST)
 	    public String insertReply(@ModelAttribute CusReplyVO invo,HttpServletRequest req,Model model) throws Exception{
+
 		 log.info("=====================================");
 		 log.info("=====================================");
 		 log.info("=====================================");
@@ -233,7 +235,7 @@ public class CustomerController {
 		 log.info("=="+invo.getCusSeq());
 		 log.info("=====================================");
 		 CustomerVO cuvo = new CustomerVO();
-
+		
 		 
 		 cuvo.setCusSeq(invo.getCusSeq());
 		 cuvo.setCusReply("Y");
@@ -241,7 +243,7 @@ public class CustomerController {
 		 int replyupdate = customerSvc.repupdate(cuvo);
 		 int list = cusreplysvc.add(invo);
 		 model.addAttribute("vou", list);
-	        return "redirect:search.do";
+	        return "/cus/CusRead";
 	    }
 	//수정
 	 @RequestMapping(value="/cus/update.do", method=RequestMethod.POST)

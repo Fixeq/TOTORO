@@ -57,7 +57,7 @@ public class CustomerDaoTest {
 
 	@Before
 	public void setUp() {
-		inVO1 = new CustomerVO("15", "asdasdasd", "asdasdasd", "sdd", "fs", "", "", "", "n");
+		inVO1 = new CustomerVO("", "tester1", "기타", "태건아", "fs", "", "", "", "");
 		inVO2 = new CustomerVO("65", "sdfsdf", "sdfsdf", "sdfsd", "sdfs", "", "", "", "n");
 		inVO3 = new CustomerVO("104", "", "", "", "", "", "", "", "");
 	
@@ -95,20 +95,23 @@ public class CustomerDaoTest {
 		
 		//수정
 
-//		inVO1.setCusCat("안녕하세요");
-//		inVO1.setCusTitle("감사해요");
-//		inVO1.setCusContent("asdf");
-//		inVO1.setCusModid("sdf");
-//		inVO1.setCusSeq("74");
-//////
-////////	
-//		customerDao.update(inVO1);
+		inVO1.setCusSeq("140");
+		inVO1.setUserId("tester1");
+		inVO1.setCusContent("가나다");
+		inVO1.setCusModid("sd라f");
+		inVO1.setCusCat("asdfasdf");
+	
+		inVO1.setCusTitle("asfsadf");
+		inVO1.setCusReply("N");
+////
+//////	
+		customerDao.update(inVO1);
 		
-		//답변유무 수정
-		inVO3.setCusSeq("100");
-		inVO3.setCusReply("a");
+//		//답변유무 수정
+//		inVO3.setCusSeq("140");
+//		inVO3.setUserId("tester1");
 //		
-		customerDao.repupdate(inVO3);
+		//customerDao.repupdate(inVO3);
 		//단건조회
 //		CustomerVO getVO = customerDao.get(inVO1);
 //		LOG.info("getVO:"+getVO);
