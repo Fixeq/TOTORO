@@ -74,16 +74,7 @@
            <p>3 .경기가 중단 되거나 조건을 충족하지 못했더라도 경기단체의 규정에 의해 승부 </p>
            <p>&nbsp;결과 발표가 있을때는 경기 단체와 동일하게 결과를 인정한다.</p>
 
-               <p class="s-content__tags">
-                   <span>Post Tags</span>
-
-                   <span class="s-content__tag-list">
-                       <a href="#0">orci</a>
-                       <a href="#0">lectus</a>
-                       <a href="#0">varius</a>
-                       <a href="#0">turpis</a>
-                   </span>
-               </p> <!-- end s-content__tags -->
+               
 
            </div> <!-- end s-content__main -->
 
@@ -96,30 +87,21 @@
 
    </section> <!-- s-content -->
 
+				<p class="s-content__tags">
+                   <span>Post Tags</span>
 
+                   <span class="s-content__tag-list">
+                       <a href="#0">orci</a>
+                       <a href="#0">lectus</a>
+                       <a href="#0">varius</a>
+                       <a href="#0">turpis</a>
+                   </span>
+               </p> <!-- end s-content__tags -->
    <!-- s-extra
    ================================================== -->
    <section class="s-extra">
 
-       <div class="row bottom tags-wrap">
-           <div class="col-full tags">
-               <h3>Tags</h3>
-
-               <div class="tagcloud">
-                   <a href="index.jsp">Home</a>
-                   <a href="#0">Recipe</a>
-                   <a href="#0">Places</a>
-                   <a href="#0">Tips</a>
-                   <a href="#0">Friends</a>
-                   <a href="#0">Travel</a>
-                   <a href="#0">Exercise</a>
-                   <a href="#0">Reading</a>
-                   <a href="#0">Running</a>
-                   <a href="#0">Self-Help</a>
-                   <a href="#0">Vacation</a>
-               </div> <!-- end tagcloud -->
-           </div> <!-- end tags -->
-       </div> <!-- end tags-wrap -->
+      
 
    </section> <!-- end s-extra -->
 </body>

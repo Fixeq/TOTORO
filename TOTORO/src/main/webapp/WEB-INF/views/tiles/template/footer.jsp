@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <% String context = request.getContextPath(); %>
 
  <!-- s-footer
@@ -32,10 +34,12 @@
                 
                 <div class="col-five md-full end s-footer__subscribe">
                         
-                    <h4>TOTORO</h4>
-
-                    <p>"Ssangyong is the best new betting site Totoro. The new site is currently showing a large number of soccer games. Please use the high dividend rate and 100% credit that other sites can not see."
+                    <h4>고객센터 이용시간</h4>
+                    <p>AM09:00 ~ PM18:00
                     </p>
+                        
+                    <h4>전용 계좌</h4>
+                    <p>쌍용 1102-654-458859</p>
 
                 </div> <!-- end s-footer__subscribe -->
 
@@ -46,7 +50,7 @@
             <div class="row">
                 <div class="col-full">
                     <div class="s-footer__copyright">
-                        <span>� Copyright Ssang-Young TOTORO 2018</span> 
+                        <span>© Copyright Ssang-Young TOTORO 2018</span> 
                         <span>Team by <a href="https://colorlib.com/">TOTORO</a></span>
                     </div>
 

@@ -84,7 +84,7 @@ public class BetHistoryController {
     		return jsonData;
 	}
 	
-	@RequestMapping(value="/betHistory.do")
+	@RequestMapping(value="/bethistory/bethistory.do")
 	public String myBet(Model model , HttpServletRequest req) {
 		HttpSession session = req.getSession(true);
 		String userId = (String) session.getAttribute("userId");

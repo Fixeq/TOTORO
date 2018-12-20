@@ -32,19 +32,7 @@ public class CategoryController {
 	@Autowired
 	private CodeSvc codeSvc;	
 	
-	@RequestMapping(value = "/bethistory/bethistory.do", method = RequestMethod.GET)
-	public String bethistory(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-
-		return "/category/BetHistory";
-	}
+	
 	
 	@RequestMapping(value = "/betresult/betresult.do", method = RequestMethod.GET)
 	public String betresult(@ModelAttribute BetResultVO invo,Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
