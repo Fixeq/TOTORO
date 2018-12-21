@@ -24,6 +24,38 @@ public class CrossDaoImple {
 	private final String NAME_SPACE = "com.sist.totoro.mappers.cross";
 	
 	
+	public CrossVO do_ViewHp(CrossVO inVO){
+		// 홈팀 배당률
+		String statement = NAME_SPACE + ".do_ViewHp";
+		
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+inVO);
+
+		return this.sqlSession.selectOne(statement,inVO);
+	}
+	
+	public CrossVO do_ViewDp(CrossVO inVO){
+		// 무승부 배당률
+		String statement = NAME_SPACE + ".do_ViewDp";
+		
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+inVO);
+
+		return this.sqlSession.selectOne(statement,inVO);
+	}
+	
+	public CrossVO do_ViewAp(CrossVO inVO){
+		// 원정팀 배당률 
+		String statement = NAME_SPACE + ".do_ViewAp";
+		
+		log.debug("1.statement : \n"+statement);
+		log.debug("2. param : \n"+inVO);
+
+		return this.sqlSession.selectOne(statement,inVO);
+	}
+
+	
+	
 	public List<CrossVO> do_selectAll(){
 		//접속자가 사용자면".do_selectUser"
 		//접속자가 관리자면".do_selectAdmin"

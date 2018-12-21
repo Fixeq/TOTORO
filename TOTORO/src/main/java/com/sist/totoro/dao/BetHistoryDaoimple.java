@@ -23,6 +23,12 @@ public class BetHistoryDaoimple {
 	
 	private final String NAME_SPACE = "com.sist.totoro.mappers.betHistory";
 	
+	
+	
+	
+	
+	
+	
 	public int do_updateUserPoint(UserVO inVO) {
 		//크로스 구매시 베팅금액만큼 포인트 제거
 		String statement = NAME_SPACE + ".do_updateUserPoint";

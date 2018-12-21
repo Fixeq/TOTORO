@@ -4,6 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.sist.totoro.mappers.cross">
+
+<select id="do_ViewHp" parameterType="CrossVO" resultType="CrossVO">
+SELECT GAMEHP
+  FROM
+    CROSS
+ WHERE GAMESEQ = #{gameSeq}
+</select>
+
+<select id="do_ViewDp" parameterType="CrossVO" resultType="CrossVO">
+SELECT GAMEDP
+  FROM
+    CROSS
+ WHERE GAMESEQ = #{gameSeq}
+</select>
+
+<select id="do_ViewAp" parameterType="CrossVO" resultType="CrossVO">
+SELECT GAMEAP
+  FROM
+    CROSS
+ WHERE GAMESEQ = #{gameSeq}
+</select>	
+	
 	<select id="do_selectUser" resultType="CrossVO" parameterType="SearchVO">
 SELECT T2.TOTALCNT,
        T1.GAMESEQ,

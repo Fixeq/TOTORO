@@ -97,11 +97,11 @@ font-family: 'Jua', sans-serif;
 										<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
 	 --%>								
 		 								<td class="text-center"> <c:out value="${crossVo.no}"></c:out></td>
-		 								<td class="text-center"><input type="radio" id="${crossVo.gameHp}" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
+		 								<td class="text-center"><input type="radio" name="${crossVo.gameSeq}" value="1" onclick="clickGet(this)"> <c:out value="${crossVo.gameHome}"></c:out></td>
 										<td class="text-center"><c:out value="${crossVo.gameHp}"></c:out></td>
-										<td class="text-center"><input type="radio" id="${crossVo.gameDp}" name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
+										<td class="text-center"><input type="radio"  name="${crossVo.gameSeq}" value="2" onclick="clickGet(this)">무승부</td>
 										<td class="text-center"><c:out value="${crossVo.gameDp}"></c:out></td>
-										<td class="text-center"><input type="radio" id="${crossVo.gameAp}" name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
+										<td class="text-center"><input type="radio"  name="${crossVo.gameSeq}" value="3" onclick="clickGet(this)"><c:out value="${crossVo.gameAway}"></c:out></td>
 										<td class="text-center"><c:out value="${crossVo.gameAp}"></c:out></td>
 										<td class="text-center"><c:out value="${crossVo.gameDate}"></c:out></td>
 	 									<td id="betSeq"></td>
@@ -164,7 +164,7 @@ font-family: 'Jua', sans-serif;
 
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("cross777");
+		alert("cross999");
 		
 		$("#money").keyup(function(){
 			t1 = $("#money").val();
@@ -217,8 +217,8 @@ font-family: 'Jua', sans-serif;
 		
 		console.log(first);
  		
- */		$("#totalBetCount").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+finalNum+"</td></tr>");
- 		$("#sumPoint").append("<tr><td>"+finalNum +"</td></tr>");
+ */		/* $("#totalBetCount").append("<tr><td>"+varName+"</td><td>"+varId+"</td><td>"+finalNum+"</td></tr>");
+ 		$("#sumPoint").append("<tr><td>"+finalNum +"</td></tr>"); */
 		
  	}
 	

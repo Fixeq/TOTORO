@@ -47,12 +47,15 @@ public class CrossController {
 		String userId = (String) session.getAttribute("userId");
 		//아이디 뽑아내기
 		
-		double finalPercent = Double.parseDouble(req.getParameter("finalbetPercent"));
-		//배당률 뽑아내기
-		String money = req.getParameter("money"); // 돈 얼마 걸었는
-		//배당금 뽑아내기
 		String[] gameSeq = req.getParameterValues("varSeq");
 		//게임시퀀스[] 뽑아내기
+		//[1,2,3,4,5]
+		
+		double finalPercent = crossSvc.do_ViewPoint(gameSeq, req);
+		
+		
+		String money = req.getParameter("money"); // 돈 얼마 걸었는
+		//배당금 뽑아내기
 		log.info("finalPercent : " + finalPercent);
 		
 		
