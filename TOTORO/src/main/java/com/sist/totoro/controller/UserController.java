@@ -251,7 +251,6 @@ public class UserController {
 		//C001 <- paging 관련 코드	(C002 : 질의응답, C007 : 검색조건, C005:유저상태)
 		codePage.setCd_id("C001");
 		userInfo.setCd_id("C007");
-		
 		userStatus.setCd_id("C005");
 		
 		// cd_id(C001,C005)값을 가지고 페이징 관련 데이터들을 model에 담음.
@@ -289,8 +288,6 @@ public class UserController {
 		model.addAttribute("admin_list",codeSvc.do_retrieve(adminList));
 		
 		log.info("userVO1 : "+userVO1);
-		
-		
 		
 		return "/mypage/userSelectOne";
 	}

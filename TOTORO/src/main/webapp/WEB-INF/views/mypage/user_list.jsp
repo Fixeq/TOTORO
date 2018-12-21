@@ -222,6 +222,7 @@
 					<div class="panel-body">
 						<form name="frm" id="frm" action="<%=cPath%>/mypage/userList.do" method="post" class="form-inline">
 							<input type="hidden" name="page_num" id="page_num">
+							<input type="hidden" name="userId" value=""/>
 							<!-- 검색영역 -->
 							<div class="row">
 								<div class="pull-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -280,7 +281,7 @@
 														</td>
 														<td id="${userVO.userId}" >
 															<button type="button" class="pull-right do_update_user">수정</button>
-															<%-- <input type="hidden" id="${userId}" value="${userId}" /> --%>
+															<%-- <input type="hidden" id="${userId}" value="${userId}""/> --%>
 															<!-- <input type="button" class="pull-right" value="수정"/> -->
 														</td>	    	
 													</tr>
@@ -340,7 +341,6 @@
  	$(document).ready(function(){
  		
  		$(".do_update_user").on("click",function(){
-			var frm = document.frm;
  			
 			var btn = $(this);
  			 
@@ -348,83 +348,24 @@
  			console.log("맞냐 userId잘찾앗냐? : "+userId);
  
  			$.ajax({
-				url : "<%=cPath%>/mypage/userSelectOne.do",
+				url : "/totoro/mypage/userSelectOne.do",
 				type : "GET",
+				dataType:"html",
 				data : {
 					userId : userId
 				},
 				success : function(result) {
-				
-					/* location.href = 'userSelectOne.do'; */
 					location.href = "userSelectOne.do?userId="+userId;
-					
-				}
-			
-			})
- 		});
- 			
- 		
-/* 
-	     	frm.action = "userSelectOne.do";
-	     	frm.submit(); 		 */	
- 			
-/*  		
- 		
-		$("#do_delete").on("click",function(){
-			//alert("do_delete");
-				
-			var items = [];//var items=new Array(); 
-			$( "input[name='check']:checked" ).each(function( index,row ) {
-				console.log("index="+index);
-				//console.log("row="+row);
-				var record = $(row).parents("tr");
-				var userId = $(record).find("td").eq(1).text()
-				console.log("userId="+userId);
-				items.push(userId);
-			});
-			
-			console.log("items.length="+items.length);
-			if(items.length<=0){
-				alert("삭제할 데이터를 선택 하세요.")
-				return;
-			}
-				
-			if(false==confirm("삭제 하시겠습니까?"))return;
-				
-			var jsonIdList = JSON.stringify(items);
-			//jsonIdList=["107","108"]
-			console.log("jsonIdList="+jsonIdList);
-				
-	        $.ajax({
-	            type:"POST",
-	            url:"delete.do",
-	            dataType:"html",
-	            data:{
-	            	"cusSeq": jsonIdList
-	            },
-	            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
-		             var parseData = $.parseJSON(data);
-	                 console.log("parseData.flag="+parseData.flag);
-	                 console.log("parseData.message="+parseData.message);
-		         	 if(parseData.flag > 0){
-		         		alert(parseData.message);
-		         		doSearch();
-		         	 }else{
-		         		alert(parseData.message);
-		         		
-		         	 }				             
-	            },
+				},
 	            complete: function(data){//무조건 수행
-	             
+	            	console.log("맞냐 data잘찾앗냐? : "+data);
 	            },
 	            error: function(xhr,status,error){
-	             
-				}
-			});//--ajax
-				
-		});//--do_delete
-		 */
-});  
+	            	console.log("맞냐 error잘찾앗냐? : "+error);
+	            }
+			})
+		});
+	});  
 </script>
 </body>
 </html>
