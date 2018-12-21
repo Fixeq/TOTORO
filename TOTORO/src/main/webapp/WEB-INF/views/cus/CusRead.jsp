@@ -54,8 +54,11 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 <!DOCTYPE html>
 <html>
 <head>
+
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ 
 </head>
 <body>
   <section class="s-content">
@@ -70,6 +73,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
     <form name="frmSave" id="frmSave" method="post" action="update.do">
     	<input type="hidden" name="page_num" id="page_num">
     			  <input type="hidden" name="cusSeq" id="cusSeq2" value="<c:out value="${vo.cusSeq}"></c:out>" />
+    			  
                     <fieldset>
 		
                     
@@ -85,31 +89,83 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                 <p class="rId"><c:out value="${vo.userId}"></c:out></p>
                 </div>
                 <br><br><br>
-                 <div class="alert-box alert-box--error hideit">
-             	<table id="listTable" class="table table-striped table-bordered table-hover">
-			
-				<tbody>  
-				
-				<c:choose>
+
+
+
+                 <div class="comments-wrap">
+
+            <div id="comments" class="row">
+                <div class="col-full">
+
+                    
+
+                    <!-- commentlist -->
+                    <ol class="commentlist">
+                    <c:choose>
 				
 					<c:when test="${list.size()>0}">
 					
-						<c:forEach var="cusReplyVo" items="${list}">
-						
-							<tr class="trclass">
-								<td class="text-center">작성자 : <c:out value="${cusReplyVo.userId}"></c:out></td>
-								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
-								<td class="text-center">작성일 : <c:out value="${cusReplyVo.crregDt}"></c:out></td>
-								<td class="text-center"><button type="button" class="btn btn--stroke" value="${cusReplyVo.crSeq}">삭제하기</button></td>
-							</tr>
-						</c:forEach>
+					<c:forEach var="cusReplyVo" items="${list}">
+
+                        <li class="depth-1 comment"> <!-- 반복 -->
+
+                            
+
+                            <div class="comment__content">
+
+                                <div class="comment__info">
+                                    <cite >작성자 :<c:out value="${cusReplyVo.userId}"></c:out></cite>
+                                    
+                                    <div class="comment__meta">
+                                        <time class="comment__time">작성일 : <c:out value="${cusReplyVo.crregDt}"></c:out></time>
+                                        
+                                        
+                                        
+                                        	<c:choose>
+        			<c:when test="${userAdmin=='1'}">
+        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="">댓글삭제</a>
+        			</c:when>
+        			
+        			<c:otherwise>
+					</c:otherwise>
+
+			</c:choose>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="comment__text">
+                                <p><c:out value="${cusReplyVo.crContent}"></c:out></p>
+                                </div>
+
+                            </div>
+
+                        </li> <!-- 반복 -->
+
+                       </c:forEach>
 					</c:when>
 					
-				</c:choose>						
-				</tbody>
-				
-			</table>
-			</div>
+				</c:choose>		
+
+                    </ol> <!-- end commentlist -->
+
+
+                    <!-- respond
+                    ================================================== -->
+
+
+                </div> <!-- end col-full -->
+
+            </div> <!-- end row comments -->
+        </div> <!-- end comments-wrap -->
+			
 			</div>
 
 
@@ -122,10 +178,12 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                          </fieldset>
                           <input type="hidden" name="crSeq" id="crSeq" value="" />
                           
+        
 	 </form> <!-- end form -->
-                        <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>
-						<button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>
-						<button type="button" class="btn btn--stroke" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>
+                      <center>  <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>   
+						   <button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>   
+						   <button type="button" class="btn btn--stroke" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>  
+						     </center>
                    		
   </section>
   
@@ -137,20 +195,19 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
     //수정페이지로 이동 
    function doUpdatePage(){
 	   var cusContent = $('.cusContentValue').text();
-	   	 alert(cusContent);
+
 	   	 var cusTitle = $('.cusTitleValue').text();
-	   	 alert(cusTitle);
+	  
 	   	var rId = $('.rId').text();
 	   	var sessionid = <%="\""%><%=user%><%="\""%>;
 		var adminid = <%="\""%><%=admin%><%="\""%>;
-		alert(sessionid);
+
 		
 		
 		
 		if(rId == sessionid || adminid =='1'){
 			var frm = document.bofrm;
-	    	 alert(frm.cusSeq.value);
-	    	 alert(frm.userId.value);
+	
 	    	 frm.cusTitle.value = cusTitle;
 	    	 frm.cusContent.value = cusContent;
 	    	 
@@ -175,7 +232,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    
    // 상세페이지에서 삭제 
    function detail_delete(){
-	   
+	   alert('삭제하시겠습니까?')
 
   	 var frm = document.bofrm;
   	 frm.action = "detail_delete.do";
@@ -194,55 +251,57 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    
    //댓글삭제
    $(".doDelete").on("click",function(){
-				
-		var crSeq = $(this).val();
+		alert('댓글삭제클릭');
+
+		var crSeq = $(this).attr('id'); //버튼값의 아이디를 가져온다 .
+		//애초에 세션의 비교없이 관리자 아이디가 아니면 삭제 버튼을 사라지게 한다 .
+		alert(crSeq);
+		
 	  	var cusSeq = $("#cusSeq").val();
 	  	
 	  	var tr = $(this).parents(".trclass");
 	  	
 	  	//등록된 아이디 값 뽑아오는 방법!!
-		var rid = $(tr).find("td").eq(1).text();
+		var rid = $(this).attr('id');
+	  	alert(rid)
 		
-		var sessionid = <%="\""%><%=user%><%="\""%>;
-		var adminid = <%="\""%><%=admin%><%="\""%>;
-		if(rid == sessionid || adminid =='1'){
+		
+		
 		
 		if(false==confirm("삭제 하시겠습니까?"))return;
 		
 		
 	
 	
-        $.ajax({
-            type:"POST",
-            url:"rdelete.do",
-            dataType:"json",// JSON
-            data:{
-            "crSeq": crSeq,
-            "cusSeq":cusSeq
-            },
-            success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
+       $.ajax({
+           type:"POST",
+           url:"rdelete.do",
+           dataType:"json",// JSON
+           data:{
+           "crSeq": crSeq,
+           "cusSeq":cusSeq
+           },
+           success: function(data){//통신이 성공적으로 이루어 졌을때 받을 함수
 
-            },
-            complete: function(data){//무조건 수행
-             
-            },
-            error: function(xhr,status,error){
-             
-            }
+           },
+           complete: function(data){//무조건 수행
             
-       }); //--ajax
-       
-        alert('삭제성공');
-      	 var frm = document.bofrm;
-     	 	     frm.cusSeq.value = $("#cusSeq").val();
-     		 	  frm.action = "do_search_one.do";
-     	 	     frm.submit();
-     	 	     
-		} else{
-			alert('본인 답변만 삭제할수있습니다.')
-		}
+           },
+           error: function(xhr,status,error){
+            
+           }
+           
+      }); //--ajax
+      
+       alert('삭제성공');
+     	 var frm = document.bofrm;
+    	 	     frm.cusSeq.value = $("#cusSeq").val();
+    		 	  frm.action = "do_search_one.do";
+    	 	     frm.submit();
+    	 	     
+		
 		
 	});//--do_delete
-</script>
+	</script>
 </body>
 </html>

@@ -41,10 +41,10 @@
  
     
 
-    <div style="width:650px; text-align: center;">
+    <center>
         <button type="submit" class="btn btn--primary btn-sm" id="btnSave" >답글저장</button>
         <button type="submit" class="btn btn--stroke" onclick="javascript:readpage();">이전</button>
-    </div>
+   </center>
 </form>
 
                    		

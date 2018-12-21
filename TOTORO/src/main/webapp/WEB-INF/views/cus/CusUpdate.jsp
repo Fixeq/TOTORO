@@ -50,10 +50,10 @@
 
     
 
-    <div style="width:650px; text-align: center;">
+    <center>
         <button type="submit" class="btn btn--primary btn-sm" id="btnUpdate" >수정</button>
         <button type="submit" class="btn btn--stroke" onclick="javascript:readpage();">이전</button>
-    </div>
+    </center>
 </form>
 
                    		
@@ -83,7 +83,7 @@
     
     $(document).ready(function(){
         $("#btnUpdate").click(function(){
-
+				alert('수정하시겠습니까?')
    
   
         	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){

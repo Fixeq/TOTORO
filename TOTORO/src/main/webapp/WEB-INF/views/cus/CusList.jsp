@@ -92,13 +92,14 @@
         <form  name="frm" id="frm" action="search.do" method="post" class="form-inline">
      	 <input type="hidden" name="page_num" id="page_num">
 		<!-- 검색영역 -->
+	
 		<div class="row">
 		  <div class="text-right col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<form action="#" class="form-inline">
-				<div class="form-group">
+			
 					<%=StringUtil.makeSelectBox(code_page, page_size, "page_size", false) %>
-				</div>
-				<div class="form-group">
+				
+				
 					<select name="search_div" id="search_div" class="form-control input-sm">
 					    <option value="" >::전체::</option>
 						<option value="10" <%if(search_div.equals("10"))out.print("selected='selected'"); %> >등록자</option>
@@ -106,38 +107,39 @@
 						<option value="30" <%if(search_div.equals("30"))out.print("selected='selected'"); %> >제목</option>								
 					</select>
 					
-					<table align="center"><!--  -->
-					<tr> 					<!--  -->
-					<td class="text-center" ><!--  -->
+				
+									
+					
 					<input  type="text-center" name="search_word" id="search_word" value="${param.search_word}"  class="form-control input-sm" placeholder="검색어" />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="btn btn-default btn-sm" onclick="javascript:doSearch();">조회</button>
 					<button type="button" class="btn btn--primary btn-sm" id="do_writepage" onclick="javascript:doWritePage();">문의사항 작성 페이지로</button>
-				<c:choose>
-        						<c:when test="${userAdmin=='1'}">
-        						<button type="button" class="btn btn--stroke" id="do_delete">삭제</button>
-        						</c:when>
+			<c:choose>
+        			<c:when test="${userAdmin=='1'}">
+        			<button type="button" class="btn btn--stroke" id="do_delete">삭제</button>
+        			</c:when>
+        			
         			<c:otherwise>
 					</c:otherwise>
 
-				</c:choose>
-					</td><!--  -->
-					</tr><!--  -->
-					</table><!--  -->
+			</c:choose>
 					
 					
 					
-				</div>					
+					
+					
+					
+					
 			</form>
 		  </div>	
 		</div>
-
+	
 		<form  name="bofrm" id="bofrm" action="do_search_one.do" method="post" class="form-inline">
 			<input type="hidden" name="cusSeq" id="cusSeq">
 		</form>
 		
 		
-		<!-- Grid영역 -->류
+		<!-- Grid영역 -->
 		<div class="table-responsive" >
 			<table id="listTable" class="table table-striped table-bordered table-hover">
 				<thead class="bg-primary">
@@ -289,7 +291,7 @@
 			                 console.log("parseData.flag="+parseData.flag);
 			                 console.log("parseData.message="+parseData.message);
 				         	 if(parseData.flag > 0){
-				         		alert(parseData.message);
+				         		//alert(parseData.message);
 				         		doSearch();
 				         	 }else{
 				         		alert(parseData.message);
