@@ -41,7 +41,7 @@ font-family: 'Jua', sans-serif;
 					var list =[];
 				</script>
 					<c:forEach items="${noList}" var="noVo">	
-						<form id="${noVo.gameSeq}"  action="/totoro/cross/close.do"  method="post" >
+						<form id="${noVo.gameSeq}a"  action="/totoro/cross/close.do"  method="post" >
 								<tr>
 									<td class="text-center"><button class="btn btn--stroke full-width"><c:out value="${noVo.gameHome}"></c:out></button></td>
 									<td class="text-center"><input type="text" name="homeScore" ></td>
@@ -144,7 +144,7 @@ s
 		
 		console.log("로직이 정상수행되었습니다.");
 		
-		$( "#"+varId ).submit();
+		$( "#"+varId+"a" ).submit();
 	};	
 	
 
