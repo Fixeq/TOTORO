@@ -13,7 +13,11 @@
     Logger log = LoggerFactory.getLogger(this.getClass());
     log.info("cPath:"+cPath);
 	
-    UserVO userVO1 = (UserVO)request.getAttribute("userVO1");
+    UserVO userVO1 = (UserVO)(request.getAttribute("userVO1"));
+    String userBank = userVO1.getUserBank();
+    String userAppStt = userVO1.getUserAppStt();
+    String userFindQ = userVO1.getUserFindQ();
+    String userAdmin = userVO1.getUserAdmin();
     log.info("userSelectOne.jsp > userVO1 get : "+userVO1);
 	List<CodeVO> user_status = (null == request.getAttribute("user_status"))
 		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("user_status");
@@ -105,6 +109,7 @@
 
 		//이메일 중복검사
 		$("#userEmail").keyup(function() {
+			var reqEmail = <%="\""%><%=userVO1.getUserEmail()%><%="\""%>;
 			$.ajax({
 				url : "<%=cPath%>/user/check_email.do",
 				type : "POST",
@@ -113,10 +118,14 @@
 				},
 				success : function(result) {
 					if (result > 0) {
-						$("#email_check").css("color", "red");
-						$("#email_check").html(" 이미 사용되고 있는 이메일입니다.");
-						$("#joinBtn").attr("disabled", "disabled");
-					}else if(result ==0 && $("#userEmail").val().length !=0) {
+						if($("#userEmail").val()==reqEmail){
+							$("#joinBtn").removeAttr("disabled");
+						}else{
+							$("#email_check").css("color", "red");
+							$("#email_check").html(" 이미 사용되고 있는 이메일입니다.");
+							$("#joinBtn").attr("disabled", "disabled");
+						}
+					}else if(result ==0) {
 						$("#email_check").html("");
 						$("#joinBtn").removeAttr("disabled");
 					}
@@ -126,6 +135,7 @@
 
 		//전화번호 중복검사
 		$("#userTel").keyup(function() {
+			var reqTel = <%="\""%><%=userVO1.getUserTel()%><%="\""%>;
 			$.ajax({
 				url : "<%=cPath%>/user/check_tel.do",
 				type : "POST",
@@ -134,9 +144,13 @@
 				},
 				success : function(result) {
 					if (result > 0) {
-						$("#tel_check").css("color", "red");
-						$("#tel_check").html("이미 사용되고 있는 전화번호입니다..");
-						$("#joinBtn").attr("disabled", "disabled");
+						if($("#userTel").val()==reqTel){
+							$("#joinBtn").removeAttr("disabled");							
+						}else{
+							$("#tel_check").css("color", "red");
+							$("#tel_check").html("이미 사용되고 있는 전화번호입니다..");
+							$("#joinBtn").attr("disabled", "disabled");
+						}
 					}else if(result ==0 && $("#userTel").val().length>10) {
 						$("#tel_check").css("color", "#6DD66D");
 						$("#tel_check").html("사용가능한 전화번호입니다.");
@@ -148,6 +162,7 @@
 		
 		//계좌번호 중복검사
 		$("#userAccount").keyup(function() {
+			var reqAccount = <%="\""%><%=userVO1.getUserAccount()%><%="\""%>;
 			$.ajax({
 				url : "<%=cPath%>/user/check_account.do",
 				type : "POST",
@@ -156,9 +171,13 @@
 				},
 				success : function(result) {
 					if (result > 0) {
-						$("#account_check").css("color", "red");
-						$("#account_check").html(+"중복된 계좌번호가 있습니다.");
-						$("#joinBtn").attr("disabled", "disabled");
+						if($("#userAccount").val()==reqAccount){
+							$("#joinBtn").removeAttr("disabled");							
+						}else{						
+							$("#account_check").css("color", "red");
+							$("#account_check").html("중복된 계좌번호가 있습니다.");
+							$("#joinBtn").attr("disabled", "disabled");
+						}
 					}else if(result ==0 && $("#userAccount").val().length !=0) {
 						$("#account_check").html("");
 						$("#joinBtn").removeAttr("disabled");
@@ -203,7 +222,7 @@
                     <div>
                         <label for="userEmail" class="dohyeonForCheck">이메일</label>
                         <input class="full-width" type="email" id="userEmail" name="userEmail" value="${userVO1.userEmail}">
-                        <br>
+                        <span id="email_check" class="pull-right dohyeonForCheck" ></span><br/>
                     </div>
                     <div>
                         <label for="userPoint" class="dohyeonForCheck">포인트</label>
@@ -218,24 +237,25 @@
                     </div>
                     <div>
                         <label for="userBank" class="dohyeonForCheck">은행</label>
-                        <%-- <%=StringUtil.makeSelectBox(user_status, (String)request.getAttribute(userVO1.getUserBank()), "userBank", false) %> --%>
+                         <%=StringUtil.makeSelectBox(bank_list, userBank, "userBank", false) %> 
                         <br>
                     </div>
                     <div>
                         <label for="userAccount" class="dohyeonForCheck">계좌번호</label>
-                        <input class="full-width"  id="userAccount" name="userAccount"
-                        onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" type="text" value="${userVO1.userAccount}">
+                        <input class="full-width" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" 
+                         value="${userVO1.userAccount}" id="userAccount" name="userAccount">
                         <span id="account_check" class="pull-right dohyeonForCheck" style="color:red"></span><br/>
                     </div>
                     <div>
                         <label for="userTel" class="dohyeonForCheck">핸드폰 번호</label>
                         <input class="full-width" type="text" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"
                         value="${userVO1.userTel}" id="userTel" name="userTel" >
+                        <span id="tel_check" class="pull-right dohyeonForCheck" style="color:red"></span><br/>
                         <br>
                     </div>
                     <div>
                         <label for="userFindQ" class="dohyeonForCheck">비밀번호 찾기 질문</label>
-                         <%-- <%=StringUtil.makeSelectBox(find_pw, (String)request.getAttribute(userVO1.getUserFindQ()), "userFindQ", false) %> --%>
+                        <%=StringUtil.makeSelectBox(find_pw, userFindQ, "userFindQ", false) %>
                         <br>
                     </div>
                     <div>
@@ -245,12 +265,12 @@
                     </div>
                     <div>
                         <label for="userAppStt" class="dohyeonForCheck">인증상태</label>
-						<%-- <%=StringUtil.makeSelectBox(bank_list, (String)request.getAttribute(userVO1.getUserAppStt()), "userAppStt", false) %> --%>
+						<%=StringUtil.makeSelectBox(user_status, userAppStt, "userAppStt", false) %>
                         <br>
                     </div>
                     <div>
-                        <label for="userAdmin" class="dohyeonForCheck">관리자여부</label>
-                        <%-- <%=StringUtil.makeSelectBox(user_status, (String)request.getAttribute(userVO1.getUserAdmin()), "admin_list", false) %> --%>
+                        <label for="userAdmin" class="dohyeonForCheck">관리자 여부</label>
+                        <%=StringUtil.makeSelectBox(admin_list, userAdmin, "userAdmin", false) %>
                         <br>
                     </div>
                     <div>
@@ -263,7 +283,7 @@
                         <input class="full-width" type="text"  id="userAppKey" name="userAppKey" value="${userVO1.userAppKey}" disabled="disabled">
                         <br>
                     </div>
-                    <input class="btn--primary full-width" type="submit" value="Submit">
+                    <input class="btn--primary full-width" id="joinBtn" type="submit" value="Submit">
                 </form>
 
             </div>
