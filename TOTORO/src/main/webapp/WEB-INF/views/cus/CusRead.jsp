@@ -84,24 +84,33 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 					<p class="cusContentValue"><c:out value="${vo.cusContent}"></c:out></p>
                 <p class="rId"><c:out value="${vo.userId}"></c:out></p>
                 </div>
+                <br><br><br>
+                 <div class="alert-box alert-box--error hideit">
              	<table id="listTable" class="table table-striped table-bordered table-hover">
 			
 				<tbody>  
+				
 				<c:choose>
+				
 					<c:when test="${list.size()>0}">
+					
 						<c:forEach var="cusReplyVo" items="${list}">
+						
 							<tr class="trclass">
+								<td class="text-center">작성자 : <c:out value="${cusReplyVo.userId}"></c:out></td>
 								<td class="text-center"><c:out value="${cusReplyVo.crContent}"></c:out></td>
-								<td class="text-center"><c:out value="${cusReplyVo.userId}"></c:out></td>
-								<td class="text-center"><c:out value="${cusReplyVo.crregDt}"></c:out></td>
+								<td class="text-center">작성일 : <c:out value="${cusReplyVo.crregDt}"></c:out></td>
 								<td class="text-center"><button type="button" class="btn btn--stroke" value="${cusReplyVo.crSeq}">삭제하기</button></td>
 							</tr>
 						</c:forEach>
 					</c:when>
-
+					
 				</c:choose>						
 				</tbody>
+				
 			</table>
+			</div>
+			</div>
 
 
 		<!--// Grid영역 ---------------------------------------------------->
