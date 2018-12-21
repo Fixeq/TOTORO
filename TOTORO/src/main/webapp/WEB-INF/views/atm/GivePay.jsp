@@ -65,7 +65,7 @@
   }
 </style> -->
 	<div class="page-header">
-	    		<h2 align="center">관리자 <mark>입금 관리</mark> 페이지</h2>
+	    		<h2 align="center">관리자 <mark>당첨금 처리</mark> 페이지</h2>
 	</div>
 	<form  name="frm" id="frm" action="givepay.do" method="get" class="form-inline">
 		<input type="hidden" name="page_num" id="page_num">
