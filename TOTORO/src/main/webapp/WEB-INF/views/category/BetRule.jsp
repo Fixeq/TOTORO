@@ -85,21 +85,19 @@
        ================================================== -->
        </div> <!-- end comments-wrap -->
 
-   </section> <!-- s-content -->
+ <!-- s-content -->
 
 				<p class="s-content__tags">
                    <span>Post Tags</span>
 
                    <span class="s-content__tag-list">
-                       <a href="#0">orci</a>
-                       <a href="#0">lectus</a>
-                       <a href="#0">varius</a>
-                       <a href="#0">turpis</a>
+                       <a >#축구</a>
+                       <a >#규정</a>
                    </span>
                </p> <!-- end s-content__tags -->
    <!-- s-extra
    ================================================== -->
-   <section class="s-extra">
+  
 
       
 

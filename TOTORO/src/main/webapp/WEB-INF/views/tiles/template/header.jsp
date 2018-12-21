@@ -124,6 +124,7 @@
 	                            <li><a href="/totoro/betresult/betresult.do">경기결과</a></li>
                             </ul>
                         </li>
+                        <li><a href="/totoro/chart/line_view.do" title="">승부예측</a></li>
                         <li><a href="/totoro/cus/search.do" title="">게시판</a></li>
                     </ul> <!-- end header__nav -->
 
