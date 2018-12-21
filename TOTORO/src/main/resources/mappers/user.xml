@@ -19,7 +19,7 @@
 					to_users.userName like  #{search_word}||'%'
 				</when>
 				<when test="'userAccount'==search_div">
-					to_users.userAccount #{search_word}||'%'
+					to_users.userAccount like #{search_word}||'%'
 				</when>
 			</choose>
 		</where>
@@ -187,6 +187,7 @@
 	               T.userName,
 	               T.userAppStt,
 	               T.userPoint,
+	               T.userAccount,
 	               TO_CHAR(T.userRegDt,'YYYY-MM-DD') userRegDt,
 	               T.rnum AS no
 			  FROM(

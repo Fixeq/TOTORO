@@ -253,6 +253,7 @@
 												<c:forEach var="userVO" items="${list}">
 													<tr>
 														<td>
+														<!-- var value = $("[name='nameofobject']"); -->
 															<%
 																List list = (List)(request.getAttribute("list"));
 																UserVO userVO= (UserVO)list.get(i);
@@ -262,8 +263,9 @@
 															<div class="pull-right">
 																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, "userAppStt", false) %>
 																<p>
-																	<a href="#" class="pull-right"><span class="glyphicon glyphicon-ok "></span> 적용</a> 
-																	<!-- <input type="button" class="pull-right applyStt " value=""></span>/> -->
+																	<a href="javascript:void(0);" class="pull-right"  name="${userVO.userId}" onclick="userAppSttUpdate(); return false;">
+																		<span class="glyphicon glyphicon-ok "></span> 적용 ${userVO.userId}
+																	</a>
 																</p>
 															</div>
 														</td>
@@ -289,7 +291,7 @@
 											</c:when>
 											<c:otherwise>
 												<tr class="pull-right">
-												    <td class="text-center" colspan="99">회원이 없습니다.ㅠㅠ 분발합시다</td>
+												    <td class="text-center" colspan="99"></td>
 												</tr>					
 											</c:otherwise>
 										</c:choose>						
@@ -339,6 +341,32 @@
 	
 
  	$(document).ready(function(){
+ 	
+ 		function userAppSttUpdate(){
+ 			var aTag = $(this);
+ 			/* console.log("atag value : "+aTag.val()) */
+ 			 
+ 			var userId1 = aTag.attr('class');
+ 			var userId2 = aTag.attr('name');
+ 			var userId3 = aTag.parent().attr('class');
+ 			var userId4 = aTag.parent().attr('name');
+ 			console.log("class맞냐 userId잘찾앗냐? : "+userId1);
+ 			console.log("name맞냐 userId잘찾앗냐? : "+userId2);
+ 			console.log("class맞냐 userId잘찾앗냐? : "+userId3);
+ 			console.log("name맞냐 userId잘찾앗냐? : "+userId4);
+ 		}	
+ 		$()
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
+ 		
  		
  		$(".do_update_user").on("click",function(){
  			

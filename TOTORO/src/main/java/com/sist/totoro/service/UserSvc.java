@@ -271,6 +271,13 @@ public class UserSvc {
 				out.println("</script>");
 				out.close();
 				return null;
+			} else if (userVO.getUserAppStt().equals("cancel")) {
+				out.println("<script>");
+				out.println("alert('탈퇴 회원입니다.');");
+				out.println("history.go(-1);");
+				out.println("</script>");
+				out.close();
+				return null;
 			} else {
 				out.println("<script>");
 				out.println("alert('TOTORO WORLD에 오신걸 환영합니다.');");
@@ -341,6 +348,8 @@ public class UserSvc {
 		} else { // 성공시
 			out.println("<script>");
 			out.println("location.href='http://localhost:8080/totoro/mypage/userList.do';");
+			
+			
 			out.println("</script>");
 			out.close();
 		}
@@ -361,17 +370,28 @@ public class UserSvc {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public void doUpdate(UserVO userVO, HttpServletResponse response)  throws ClassNotFoundException, SQLException, EmptyResultDataAccessException, IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		if(userDao.do_update_admin(userVO) ==0) {
+			out.println("<script>");
+			out.println("alert('수정 실패하셨습니다.')");
+			out.println("history.go(-2);");
+			out.println("</script>");
+			out.close();
+		}else {
+			out.println("<script>");
+			out.println("alert('수정 완료.')");
+			/*out.println("history.go(-2);");*/
+			/*out.println("location.href='redirect:/mypage/user_list';");*/
+			/*out.println("location.href='redirect:/mypage/userList.do';");*/
+			out.println("location.href='/totoro/mypage/userList.do';");
+			/*out.println("location.href='/mypage/user_list';");*/
+			out.println("</script>");
+			out.close();
+		}
+	}
 	
 	
 	

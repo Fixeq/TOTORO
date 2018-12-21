@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
@@ -6,6 +7,14 @@
  
 <%
 	String context = request.getContextPath();//context path
+	
+ 	//세션 타임아웃시 경고창과 함께 로그인페이지로 이동하는 부분!!
+    session = request.getSession(false);
+    PrintWriter outt = response.getWriter();
+    if(null==session || session.getAttribute("userId")==null){
+        outt.print("<script>alert('로그인 후 이용 가능 합니다.');location.href='/totoro/user/login.do'</script>");
+        return;
+    } 
 %>
 
 
@@ -46,7 +55,7 @@
 				<div class="header-moo">
 					<ul class="header__nav">
                         <li class="has-children">
-                            <a href="#0" title="">${userVO.getUserName()}님</a>
+                            <a href="#0" title="">${userName}님</a>
                             <ul class="sub-menu">
                             <c:choose>
                             	<c:when test="${userAdmin=='1'}">
@@ -56,7 +65,6 @@
 	                            </c:when>
 	                            <c:otherwise>
 	                            	<li><a href="#">point: ${userPoint}</a></li>
-		                            <li><a href="/totoro/mypage/" class="header__search-trigger">개인정보수정</a></li>
 		                            <li><a href="/totoro/user/logout.do">로그아웃</a></li>
 	                            </c:otherwise>
                             </c:choose>
@@ -116,7 +124,7 @@
                             </c:choose>
                             </ul>
                         </li>
-                        <li class="has-children current">
+                        <li class="has-children">
                             <a href="#0" title="">배팅</a>
                             <ul class="sub-menu">
 	                            <li><a href="/totoro/betHistory.do">배팅내역</a></li>

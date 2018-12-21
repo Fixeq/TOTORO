@@ -3,13 +3,17 @@ package com.sist.totoro.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.tiles.request.Request;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -142,24 +146,34 @@ public class UserController {
 		if(null == userVO) {
 			return "";
 		}else {
-			session.setAttribute("userVO", userVO);
-			session.setAttribute("userId",userVO.getUserId());
+			session.setAttribute("userVO"   , userVO);
+			session.setAttribute("userId"   ,userVO.getUserId());
 			session.setAttribute("userAdmin",userVO.getUserAdmin());
 			session.setAttribute("userPoint",userVO.getUserPoint());
+			session.setAttribute("userName",userVO.getUserName());
 			
-			//뒤로가기 세션 제거
-			response.setHeader("Cache-Control","no-cache");
-			response.setHeader("Cache-Control","no-store");
-			response.setHeader("Pragma","no-store");
-			response.setDateHeader("Expires",0);
 		}
+		/*return "redirect:/user/loginConfirm.do";*/
 		return "redirect:/mainpage/mainpage.do";
 	}
 	
 	//로그아웃하기 : 세션 삭제
 	@RequestMapping(value = "/user/logout.do", method = RequestMethod.GET)
 	public String logOut(HttpSession session, HttpServletResponse response) throws Exception{
+		session.removeAttribute("userVO");
+		session.removeAttribute("userId");
+		session.removeAttribute("userAdmin");
+		session.removeAttribute("userPoint");
+		session.removeAttribute("userName");
+	
+		response.setHeader("Cache-Control","no-cache");
+		response.setHeader("Cache-Control","no-store");
+		response.setHeader("Pragma","no-store");
+		response.setDateHeader("Expires",0);
 		session.invalidate();
+		
+
+		
 		return "redirect:/user/login.do";
 //		return "/user/login";
 	}
@@ -219,7 +233,7 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/mypage/userList.do")
-	public String do_retrieve(@ModelAttribute SearchVO searchVO, Model model) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
+	public String do_retrieve(@ModelAttribute SearchVO searchVO, Model model,HttpServletRequest request) throws EmptyResultDataAccessException, ClassNotFoundException, SQLException {
 		log.info("controller searchVO not yet into service : "+searchVO);
 		
 		//param을 add해서 view로 고고
@@ -260,6 +274,19 @@ public class UserController {
 		model.addAttribute("total_cnt",total_cnt);
 		model.addAttribute("list",list);
 		
+		
+		
+		
+		HttpSession session = request.getSession(true);
+		String userId = (String) session.getAttribute("userId");
+		String userLevel = (String) session.getAttribute("userAdmin");
+		String userName= (String) session.getAttribute("userName");
+		
+		log.info("userid : "+userId);
+		log.info("userLevel : "+userLevel);
+		log.info("userName : "+userName);
+		
+		
 //		return "/mypage/moveUserList.do";
 //		return "redirect:/mypage/moveUserList.do";
 		return "/mypage/user_list";
@@ -269,6 +296,10 @@ public class UserController {
 	@RequestMapping(value="/mypage/userSelectOne.do", method = RequestMethod.GET)
 	public String doSelectOne(@RequestParam("userId") String userId,@ModelAttribute UserVO userVO ,HttpServletRequest req, HttpServletResponse response, Model model) throws Exception{
 		log.info("userId 값 :"+userId);
+		
+		
+		
+		
 		
 		UserVO userVO1 = userSvc.getUserInfo(userId);
 		CodeVO userStatus=new CodeVO();
@@ -291,8 +322,12 @@ public class UserController {
 		
 		return "/mypage/userSelectOne";
 	}
-	
-	
+
+	@RequestMapping(value="/mypage/userUpdate.do", method = RequestMethod.POST)
+	public void doUpdate(@ModelAttribute UserVO userVO,  HttpServletResponse response) throws Exception{
+		userSvc.doUpdate(userVO, response);
+	}
+
 	
 }
 

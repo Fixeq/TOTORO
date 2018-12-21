@@ -201,15 +201,15 @@
         <div class="row narrow section-intro add-bottom">
             <div class="col-twelve tab-full">
                 <h3 class="add-bottom dohyeonForCheck">회원정보 수정</h3>
-                <form>
+                <form action="<%=cPath%>/mypage/userUpdate.do" method="post">
                     <div>
                         <label for="userId01" class="dohyeonForCheck">아이디</label>
-                        <input class="full-width" type="text"  id="userId01"  name="userId01" value="${userVO1.userId}" disabled="disabled">
+                        <input class="full-width" type="text"  id="userId01"  name="userId" value="${userVO1.userId}" readonly="readonly">
                         <br>
                     </div>
                     <div>
                         <label for="sampleInput" class="dohyeonForCheck">비밀번호</label>
-                        <input class="full-width userPw" type="password"  id="userPw1" name="userPw1" 
+                        <input class="full-width userPw" type="password"  id="userPw1" name="userPw" 
 			                        	required placeholder="비밀번호 (8~15자 영문 대 소문자,숫자,특수문자를 사용하세요)" oninput="pw_check()">
                         <br>
                     </div>
@@ -226,8 +226,8 @@
                     </div>
                     <div>
                         <label for="userPoint" class="dohyeonForCheck">포인트</label>
-                        <input type="Number"  class="full-width" step=10000 min=0 max=1000000 name="userPoint" id="userPoint" 
-                        value="${userVO1.userPoint}" placeholder="10000원 단위" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                        <input type="Number"  class="full-width" min=0 max=1000000 name="userPoint" id="userPoint" 
+                        value="${userVO1.userPoint}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
                         <br>
                     </div>
                     <div>
@@ -280,10 +280,11 @@
                     </div>
                     <div>
                         <label for="userAppKey" class="dohyeonForCheck">인증키</label>
-                        <input class="full-width" type="text"  id="userAppKey" name="userAppKey" value="${userVO1.userAppKey}" disabled="disabled">
+                        <input class="full-width" type="text"  id="userAppKey" name="userAppKey" value="${userVO1.userAppKey}" readonly="readonly">
                         <br>
                     </div>
-                    <input class="btn--primary full-width" id="joinBtn" type="submit" value="Submit">
+                    <input class="btn--primary full-width" id="joinBtn" type="submit" value="수정">
+                    <input class="btn--stroke full-width" id="back" type="button" value="취소" onclick="history.go(-1);">
                 </form>
 
             </div>
