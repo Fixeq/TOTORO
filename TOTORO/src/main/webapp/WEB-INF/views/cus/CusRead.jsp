@@ -126,8 +126,9 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
         			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="">댓글삭제</a>
         			</c:when>
         			
-        			<c:otherwise>
-					</c:otherwise>
+        			<c:when test="${userId==cusReplyVo.userId}">
+        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="">댓글삭제</a>
+        			</c:when>
 
 			</c:choose>
                                         
