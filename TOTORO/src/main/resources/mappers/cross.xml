@@ -40,11 +40,10 @@ SELECT T2.TOTALCNT,
                ROW_NUMBER() OVER(ORDER BY GAMEDATE) AS NO
           FROM CROSS cross
          WHERE GAMEDATE > SYSDATE 
-            OR GAMERESULT IS NULL
          ) T1,(SELECT COUNT(*) AS TOTALCNT
                  FROM CROSS
                 WHERE GAMEDATE > SYSDATE
-                   OR GAMERESULT IS NULL)T2 
+                   )T2 
  WHERE NO BETWEEN ((#{page_size} * (#{page_num}-1))+1) AND (#{page_size} * (#{page_num}-1))+#{page_size}
 	</select>
 	
@@ -59,7 +58,7 @@ SELECT T2.TOTALCNT,
 			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
  		  FROM CROSS
          WHERE GAMERESULT IS NULL
- 		 ORDER BY GAMEDATE DESC
+ 		 ORDER BY GAMEDATE ASC
 	</select>
 	
 	<select id="do_selectAdminYesResult" resultType="com.sist.totoro.domain.CrossVO">
@@ -74,7 +73,7 @@ SELECT T2.TOTALCNT,
 			   TO_CHAR(GAMEDATE, 'YYYY-MM-DD HH24:MI:SS') AS GAMEDATE
  		  FROM CROSS
          WHERE GAMERESULT IS NOT NULL
- 		 ORDER BY GAMEDATE DESC
+ 		 ORDER BY GAMEDATE ASC
  	</select>
 	
 	
