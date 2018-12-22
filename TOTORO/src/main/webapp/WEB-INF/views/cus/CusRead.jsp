@@ -54,7 +54,11 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 <!DOCTYPE html>
 <html>
 <head>
-
+<style type="text/css">
+.cusRegDtRight{
+	margin-left: 900px;
+}
+</style>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -77,22 +81,42 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                     <fieldset>
 		
                     
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 
-        <div class="row">
 
             <div class="s-content__header col-full">
-                <h1 class="s-content__header-title cusTitleValue">
+                <h1 class="s-content__header-title">
+                
 						<c:out value="${vo.cusTitle}"></c:out>
                 </h1>
             </div> <!-- end s-content__header -->
+            
+            
+           
+           <div class="row">
+				  <div><strong class="rId">작성자 : ${vo.userId}</strong><strong class="cusRegDtRight">${vo.cusRegDt }</strong></div>
+				  <hr>
+				  <div><strong class="cat">분류 : ${vo.cusCat}</strong></div>
+				  <hr>
 					<p class="cusContentValue"><c:out value="${vo.cusContent}"></c:out></p>
-                <p class="rId"><c:out value="${vo.userId}"></c:out></p>
-                </div>
+               
                 <br><br><br>
-
-
-
-                 <div class="comments-wrap">
+                
+                
+                
+                
+                
+                
+                             <div class="comments-wrap">
 
             <div id="comments" class="row">
                 <div class="col-full">
@@ -120,25 +144,19 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                                         <time class="comment__time">작성일 : <c:out value="${cusReplyVo.crregDt}"></c:out></time>
                                         
                                         
-                                        
-                                        	<c:choose>
+                 <!--  댓글 삭제 세션처리  -->                       
+             <c:choose>
         			<c:when test="${userAdmin=='1'}">
-        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="">댓글삭제</a>
+        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="" href="#">댓글삭제</a>
         			</c:when>
         			
         			<c:when test="${userId==cusReplyVo.userId}">
-        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="">댓글삭제</a>
+        			<a class="doDelete" id ="<c:out value="${cusReplyVo.crSeq}"></c:out>" onclick=""  value="" href="#">댓글삭제</a>
         			</c:when>
 
 			</c:choose>
                                         
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
+        
                                     </div>
                                 </div>
 
@@ -166,6 +184,16 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 
             </div> <!-- end row comments -->
         </div> <!-- end comments-wrap -->
+			</div>
+           
+           
+           
+           
+            
+
+
+
+    
 			
 			</div>
 
@@ -255,7 +283,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		alert('댓글삭제클릭');
 
 		var crSeq = $(this).attr('id'); //버튼값의 아이디를 가져온다 .
-		//애초에 세션의 비교없이 관리자 아이디가 아니면 삭제 버튼을 사라지게 한다 .
+
 		alert(crSeq);
 		
 	  	var cusSeq = $("#cusSeq").val();
