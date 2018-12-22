@@ -62,8 +62,8 @@
 
     <section id="styles" class="s-styles">
         <div class="row narrow section-intro add-bottom text-center">
-            <div class="col-twelve tab-지full">
-                <h1 class="dohyeon">밴유저페이</h1>
+            <div class="col-twelve tab-full">
+                <h1 class="dohyeon">당신은 졸업생 입니다^^</h1>
             </div>
         </div>
     </section> <!-- end styles -->

@@ -91,6 +91,94 @@
 </style>
 
 <script>
+	function joinValidate(){
+		//소문자,숫자 6~12자
+		var checkId   = /^[a-z0-9]{6,12}$/;
+		//영문자,숫자 8~15자
+		var checkPw   = /^[a-zA-Z0-9]{8,15}$/;
+		// i:대소문자 구별X, *:0번이상 반복
+		var checkEmail= /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+		//010 시작 8 숫자
+		var checkTel  = /010\d{8}$/;
+		//한글
+		var checkName = /^[ㄱ-ㅎ가-힣]*$/;
+		
+		//어떤값이든 공백이면 가입불가
+		var userId      = document.getElementById("userId");
+		var userPw      = document.getElementById("userPw");
+		var userEmail   = document.getElementById("userEmail");
+		var userTel     = document.getElementById("userTel");
+		var userName    = document.getElementById("userName");
+		var userAccount = document.getElementById("userAccount");
+		var userFindA   = document.getElementById("userFindA");
+		//아이디 유효성검사
+		if(!checkValidate(checkId,userId,"아이디는 6~12자 소문자, 숫자 조합을 입력해주세요")){
+			return false;
+		}
+		//비밀번호 유효성검사
+		if(!checkValidate(checkPw,userPw,"비밀번호는 8~15자 영문, 숫자 조합을 입력해주세요.")){
+			return false;
+		}
+		//비밀번호 유효성검사
+		if(!checkValidate(checkEmail,userEmail,"유효하지 않은 이메일입니다.")){
+			return false;
+		}
+		//비밀번호 유효성검사
+		if(!checkValidate(checkTel,userTel,"유효하지 않은 전화번호입니다.")){
+			return false;
+		}
+		//비밀번호 유효성검사
+		if(!checkValidate(checkName,userName,"이름을 정확히 입력해주세요.")){
+			return false;
+		}		
+		
+		
+		
+		
+		//비밀번호확인 검사
+		if(joinForm.userPwCF.value != joinForm.userPw.value){
+			alert("비밀번호를 확인해주세요.");
+			joinForm.userPwCF.value="";
+			joinForm.userPwCF.focus();
+		}
+		
+		//공백확인
+		if(userEmail  =""){
+			alert("이메일을 입력해주세요"); 
+			userEmail.focus(); 
+			return false;
+		}
+		if(userTel    =""){
+			alert("휴대폰번호를 입력해주세요");
+			userTel.focus(); 
+			return false;
+		}
+		if(userName   =""){
+			alert("예금주를 입력해주세요"); 
+			userName.focus(); 
+			return false;
+		}
+		if(userAccount=""){
+			alert("계좌번호를 입력해주세요"); 
+			userAccount.focus(); 
+			return false;
+		}
+		if(userFindA  =""){
+			alert("비밀번호를 찾을 때 필요한 항목입니다. 입력해주세요."); 
+			userFindA.focus(); 
+			return false;
+		}
+		
+	}
+	
+	function checkValidate(validate,inputValue,message){
+		if(validate.test(inputValue.value)){
+			return true;
+		}
+		alert(message);
+		inputValue.value="";
+		inputValue.focus();
+	}
 	
 	function pw_check(){
 		var userPw = $('#userPw').val();
@@ -242,14 +330,14 @@
 	                	<div class="panel-body">
 	                    	<h3 class="text-center dohyeon">
 	                        	회원가입</h3>
-                        	<form id="joinForm" action="<%=cPath%>/user/save.do" class="form form-signup" method="post">
+                        	<form id="joinForm" name="joinForm" onsubmit="return joinValidate();" action="<%=cPath%>/user/save.do" class="form form-signup" method="post">
 								<div class="form-group">
 									<div class="input-group">
 										<span class="input-group-addon">
 											<span class="glyphicon glyphicon-user"></span>
 										</span>
 										<input class="form-control onlynumeng " type="text"  id="userId" name="userId" 
-										required placeholder="아이디 (숫자 영문 조합 6~12자 입력해주세요)">
+										required placeholder="아이디 (숫자 소문자 조합 6~12자 입력해주세요)">
 									</div>
 									<span id="id_check" class="pull-right dohyeonForCheck" ></span><br/>
 								</div>
@@ -260,7 +348,7 @@
 											<span class="glyphicon glyphicon-lock"></span>
 										</span>
 										<input class="form-control userPw " type="password"  id="userPw" name="userPw" 
-			                        	required placeholder="비밀번호 (8~15자 영문 대 소문자,숫자,특수문자를 사용하세요)" oninput="pw_check()">
+			                        	required placeholder="비밀번호 (8~15자 영문 대 소문자,숫자를 사용하세요)" oninput="pw_check()">
 									</div>
 									<br/>
 								</div>

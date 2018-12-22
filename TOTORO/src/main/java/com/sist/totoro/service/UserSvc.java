@@ -88,7 +88,7 @@ public class UserSvc {
 		response.setContentType("text/html;charset=utf-8");
 		// PrintWriter java에서 web으로 출력을 원할 시
 		PrintWriter out = response.getWriter();
-
+		
 		if (userDao.id_check(userVO.getUserId()) > 0) {
 			out.println("<script>");
 			out.println("alert('동일한 아이디가 있습니다.');");
