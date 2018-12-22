@@ -180,10 +180,10 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
                           
         
 	 </form> <!-- end form -->
-                      <center>  <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>   
+                     <div style="text-align:center;"> <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>   
 						   <button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>   
 						   <button type="button" class="btn btn--stroke" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>  
-						     </center>
+						     </div>
                    		
   </section>
   

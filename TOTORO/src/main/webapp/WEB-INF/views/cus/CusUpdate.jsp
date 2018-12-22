@@ -50,10 +50,10 @@
 
     
 
-    <center>
+   <div style="text-align:center;">
         <button type="submit" class="btn btn--primary btn-sm" id="btnUpdate" >수정</button>
         <button type="submit" class="btn btn--stroke" onclick="javascript:readpage();">이전</button>
-    </center>
+    </div>
 </form>
 
                    		
