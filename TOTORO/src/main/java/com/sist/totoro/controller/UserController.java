@@ -298,9 +298,6 @@ public class UserController {
 		log.info("userId 값 :"+userId);
 		
 		
-		
-		
-		
 		UserVO userVO1 = userSvc.getUserInfo(userId);
 		CodeVO userStatus=new CodeVO();
 		CodeVO findPw=new CodeVO();		
@@ -328,6 +325,11 @@ public class UserController {
 		userSvc.doUpdate(userVO, response);
 	}
 
+	@RequestMapping(value="/mypage/updateUserAppStt.do", method = RequestMethod.GET)
+	public void doUpdateAppStt(@ModelAttribute UserVO userVO,  HttpServletResponse response) throws Exception{
+		log.info("userController >updateUserAppStt >userVO : "+userVO);
+		userSvc.doUpdateAppStt(userVO, response);
+	}
 	
 }
 

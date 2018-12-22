@@ -383,17 +383,30 @@ public class UserSvc {
 		}else {
 			out.println("<script>");
 			out.println("alert('수정 완료.')");
-			/*out.println("history.go(-2);");*/
-			/*out.println("location.href='redirect:/mypage/user_list';");*/
-			/*out.println("location.href='redirect:/mypage/userList.do';");*/
 			out.println("location.href='/totoro/mypage/userList.do';");
-			/*out.println("location.href='/mypage/user_list';");*/
 			out.println("</script>");
 			out.close();
 		}
 	}
 	
-	
+	public void doUpdateAppStt(UserVO userVO, HttpServletResponse response)  throws ClassNotFoundException, SQLException, EmptyResultDataAccessException, IOException{
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		
+		if(userDao.update_AppStt(userVO) ==0) {
+			out.println("<script>");
+			out.println("alert('수정 실패.')");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+		}else {
+			out.println("<script>");
+			out.println("alert('수정 완료.')");
+			out.println("location.href='/totoro/mypage/userList.do';");
+			out.println("</script>");
+			out.close();
+		}
+	}	
 	
 	
 	//-----------------------------------------------마이페이지-----------------------------------------------

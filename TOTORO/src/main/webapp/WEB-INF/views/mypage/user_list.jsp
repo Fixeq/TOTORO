@@ -163,7 +163,28 @@
 		button, .btn {
 			margin-bottom: 1.0rem;
 		}
-
+		
+		.btnApply{
+			display: inline-block;
+			font-family: 'Do Hyeon', sans-serif;
+		   font-size: 1.35rem;
+		   text-transform: uppercase;
+		   height: 2rem;
+		   padding: 0;
+		   margin: 0;
+		   color: #000000;
+		   text-decoration: none;
+		   text-align: right;
+		   white-space: nowrap;
+		   border-radius: 8px;
+		   cursor: pointer;
+		   -webkit-transition: all 0.3s ease-in-out;
+		   transition: all 0.3s ease-in-out;
+		   background-color: #FFF;
+		   border: 0rem solid #FFFF;		
+		
+		}
+		
 		.btn,
 		button,
 		input[type="submit"],
@@ -251,21 +272,23 @@
 											<c:when test="${list.size()>0}">
 												<%int i=0; %>
 												<c:forEach var="userVO" items="${list}">
-													<tr>
+													<tr id="${userVO.userId}">
 														<td>
-														<!-- var value = $("[name='nameofobject']"); -->
 															<%
 																List list = (List)(request.getAttribute("list"));
 																UserVO userVO= (UserVO)list.get(i);
+																String selectBoxIDNM= userVO.getUserId()+"UpdateUserAppStt";
 																String userAppStt= userVO.getUserAppStt();
 																i++;
 															%>
 															<div class="pull-right">
-																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, "userAppStt", false) %>
+																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, selectBoxIDNM, false) %>
 																<p>
-																	<a href="javascript:void(0);" class="pull-right"  name="${userVO.userId}" onclick="userAppSttUpdate(); return false;">
-																		<span class="glyphicon glyphicon-ok "></span> 적용 ${userVO.userId}
-																	</a>
+																	<%-- <a href="javascript:void(0);" class="pull-right select_box_for_update_app_stt" id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>" onclick="userAppSttUpdate(); return false;"> --%>
+																	<%-- <a href="updateUserAppStt.do?userId=<%=userVO.getUserId()%>&userAppStt=<%= %>" class="pull-right select_box_for_update_app_stt" id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>"> --%>
+																		<!-- <span class="glyphicon glyphicon-ok "></span> 적용 -->
+																	<!-- </a> -->
+																	<button type="button" class="btnApply pull-right select_box_for_update_app_stt"  id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>" ><span class="glyphicon glyphicon-ok "></span> 적용</button>
 																</p>
 															</div>
 														</td>
@@ -281,10 +304,8 @@
 																</div>
 															</div>
 														</td>
-														<td id="${userVO.userId}" >
+														<td>
 															<button type="button" class="pull-right do_update_user">수정</button>
-															<%-- <input type="hidden" id="${userId}" value="${userId}""/> --%>
-															<!-- <input type="button" class="pull-right" value="수정"/> -->
 														</td>	    	
 													</tr>
 												</c:forEach>
@@ -332,19 +353,14 @@
 		frm.submit();
 	}
 
-	function doWritePage(){
-		var frm = document.frm;
-		frm.page_num.value =1;
-		/* frm.action = "writepage.do"; */
-		frm.submit();
-	}
+
 	
 
  	$(document).ready(function(){
- 	
- 		function userAppSttUpdate(){
+  	
+<%--  		function userAppSttUpdate(){
  			var aTag = $(this);
- 			/* console.log("atag value : "+aTag.val()) */
+ 			 console.log("atag value : "+aTag.val()) 
  			 
  			var userId1 = aTag.attr('class');
  			var userId2 = aTag.attr('name');
@@ -355,30 +371,53 @@
  			console.log("class맞냐 userId잘찾앗냐? : "+userId3);
  			console.log("name맞냐 userId잘찾앗냐? : "+userId4);
  		}	
- 		$()
+ 
+
+			<div class="pull-right">
+				<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, selectBoxIDNM, false) %>
+				<p>
+					<a href="#" class="pull-right select_box_for_update_app_stt" id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>">
+						<span class="glyphicon glyphicon-ok "></span> 적용
+					</a>
+				</p>
+			</div>
+ 		  --%>
  		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
- 		
+ 		$(".select_box_for_update_app_stt").on("click",function(){
+ 			var aTag = $(this);
+ 			
+ 			var userId = aTag.parent().parent().parent().parent().attr('id');
+ 			var userAppStt = $("select[name="+userId+"UpdateUserAppStt]").val();
+
+ 			console.log("userId잘찾앗냐? : "+userId);
+ 			console.log("userAppStt잘찾앗냐? : "+userAppStt);
+ 			
+ 			$.ajax({
+ 				url : "/totoro/mypage/updateUserAppStt.do",
+ 				type : "GET",
+ 				dataType : "html",
+ 				data : {
+ 					userId : userId,
+ 					userAppStt : userAppStt
+ 				},
+ 				success : function(result){
+ 					location.href = "updateUserAppStt.do?userId="+userId+"&userAppStt="+userAppStt;
+ 				}
+ 			})
+ 			
+ 		});
  		
  		$(".do_update_user").on("click",function(){
  			
 			var btn = $(this);
  			 
- 			var userId = btn.parent().attr('id');
- 			console.log("맞냐 userId잘찾앗냐? : "+userId);
+ 			var userId = btn.parent().parent().attr('id');
+ 			console.log(" userId잘찾앗냐? : "+userId);
  
  			$.ajax({
 				url : "/totoro/mypage/userSelectOne.do",
 				type : "GET",
-				dataType:"html",
+ 				dataType : "html",
 				data : {
 					userId : userId
 				},

@@ -280,5 +280,18 @@ public class UserDao {
 		return this.sqlSession.selectList(statement, searchVO);
 	}
 	
+	
+	@Transactional
+	public int update_AppStt(UserVO userVO) {
+		String statement = NAME_SPACE+".update_AppStt";
+		
+		log.debug("1. statement : "+statement);
+		log.debug("2.param: "+userVO);
+		
+		int flag = this.sqlSession.update(statement, userVO);
+		log.debug("3.flag: "+flag);
+
+		return flag;
+	}	
 
 }
