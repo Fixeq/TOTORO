@@ -141,6 +141,10 @@ public class UserSvc {
 
 	// TODO메일보내기
 	public void sendEmail(UserVO userVO, String workDiv) {
+		//SMTP(Simple Mail Transfer Protocol)는 e-mail을 컴퓨터에서 
+		//다른 컴퓨터로 전송할 때 사용하는 메일 서버의 기본 프로토콜 입니다. 이 서버를 SMTP 서버라고 합니다.
+		//일반적으로 전자 메일 전송을위한 표준 프로토콜입니다. 
+		//이메일을 송수신하는 서버를 SMTP 서버라고합니다. 
 		// Mail Server 설정
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
@@ -152,7 +156,6 @@ public class UserSvc {
 		String fromName = "ADMIN MH";
 		String subject = "";
 		String msg = "";
-		//TODO 이메일 넣어야함 환경설정도
 		
 		if(workDiv.equals("join")) {
 		// 회원가입 메일 내용
@@ -279,9 +282,6 @@ public class UserSvc {
 				out.close();
 				return null;
 			} else {
-				out.println("<script>");
-				out.println("alert('TOTORO WORLD에 오신걸 환영합니다.');");
-				out.println("</script>");
 				return userVO;
 			}
 		} // else

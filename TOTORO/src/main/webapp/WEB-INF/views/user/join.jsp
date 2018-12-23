@@ -56,7 +56,6 @@
 	}
 	.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid #DE6262; }
 	.fullscreen_bg {
-	    /* position: fixed; */
 	    top: 0;
 	    right: 0;
 	    bottom: 0;
@@ -103,7 +102,6 @@
 		//한글
 		var checkName = /^[ㄱ-ㅎ가-힣]*$/;
 		
-		//어떤값이든 공백이면 가입불가
 		var userId      = document.getElementById("userId");
 		var userPw      = document.getElementById("userPw");
 		var userEmail   = document.getElementById("userEmail");
@@ -326,7 +324,7 @@
 		<div class="container" >
 	    	<div class="row">
 	        	<div class="col-md-6 col-md-offset-6">
-	            	<div class="panel panel-default">
+	            	<div class="panel panel-default" >
 	                	<div class="panel-body">
 	                    	<h3 class="text-center dohyeon">
 	                        	회원가입</h3>

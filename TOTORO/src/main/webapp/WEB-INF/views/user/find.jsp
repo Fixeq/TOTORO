@@ -13,14 +13,6 @@
     Logger log = LoggerFactory.getLogger(this.getClass());
     log.info("cPath:"+cPath);
     
-	List<CodeVO> user_status = (null == request.getAttribute("user_status"))
-		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("user_status");
-	List<CodeVO> find_pw = (null == request.getAttribute("find_pw"))
-		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("find_pw");
-	List<CodeVO> bank_list = (null == request.getAttribute("bank_list"))
-		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("bank_list");
-    List<CodeVO> admin_list = (null == request.getAttribute("admin_list"))
-		     ?new ArrayList<CodeVO>():(List<CodeVO>)request.getAttribute("admin_list");    
 %>	
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

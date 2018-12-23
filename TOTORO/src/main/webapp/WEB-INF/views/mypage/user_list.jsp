@@ -284,10 +284,6 @@
 															<div class="pull-right">
 																<%=StringUtil.makeSelectBoxForUserList(user_status, userAppStt, selectBoxIDNM, false) %>
 																<p>
-																	<%-- <a href="javascript:void(0);" class="pull-right select_box_for_update_app_stt" id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>" onclick="userAppSttUpdate(); return false;"> --%>
-																	<%-- <a href="updateUserAppStt.do?userId=<%=userVO.getUserId()%>&userAppStt=<%= %>" class="pull-right select_box_for_update_app_stt" id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>"> --%>
-																		<!-- <span class="glyphicon glyphicon-ok "></span> 적용 -->
-																	<!-- </a> -->
 																	<button type="button" class="btnApply pull-right select_box_for_update_app_stt"  id="<%=selectBoxIDNM%>" name="<%=selectBoxIDNM%>" ><span class="glyphicon glyphicon-ok "></span> 적용</button>
 																</p>
 															</div>

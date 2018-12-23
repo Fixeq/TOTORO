@@ -153,7 +153,6 @@ public class UserController {
 			session.setAttribute("userName",userVO.getUserName());
 			
 		}
-		/*return "redirect:/user/loginConfirm.do";*/
 		return "redirect:/mainpage/mainpage.do";
 	}
 	
