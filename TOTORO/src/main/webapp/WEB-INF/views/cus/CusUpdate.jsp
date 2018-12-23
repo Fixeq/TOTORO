@@ -83,8 +83,8 @@
     
     $(document).ready(function(){
         $("#btnUpdate").click(function(){
-				alert('수정하시겠습니까?')
-   
+				
+  			 if(false==confirm("수정 하시겠습니까?"))return;
   
         	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){
         		alert('제목이나 내용은 공란일수없습니다.')
@@ -97,6 +97,39 @@
         		 document.form2.submit();
         	}
         });
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    	$("#cusContent").keydown(function(key) {
+    		if (key.keyCode == 13) {
+    		
+    		if(false==confirm("수정 하시겠습니까?"))return;
+    		   
+    		  
+        	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){
+        		alert('제목이나 내용은 공란일수없습니다.')
+           	return;
+      
+            
+        	} else {
+        		  // 폼에 입력한 데이터를 서버로 전송
+        		   document.form2.action = "update.do";
+        		 document.form2.submit();
+        	}
+        	
+    		}
+    	});
+        
     });
     </script>
 </body>

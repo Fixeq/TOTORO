@@ -89,7 +89,32 @@
         		 document.form1.submit();
         	}
         });
+        
+        
+        
+    	$("#cusContent").keydown(function(key) {
+    		if (key.keyCode == 13) {
+    		  	if($("#cusTitle").val() == "" || $("#cusContent").val() == ""){
+            		alert('제목이나 내용은 공란일수없습니다.')
+               	return;
+          
+                
+            	} else {
+            		  // 폼에 입력한 데이터를 서버로 전송
+            		   document.form1.action = "save.do";
+            		 document.form1.submit();
+            	}
+    		}
+    	});
     });
+    
+    
+    
+    
+    
+    
+    
+
     </script>
 </body>
 </html>

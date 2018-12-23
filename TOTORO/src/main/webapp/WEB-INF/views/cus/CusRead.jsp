@@ -210,12 +210,32 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
         
 	 </form> <!-- end form -->
                      <div style="text-align:center;"> <button type="button" class="btn btn--primary btn-sm" id="do_rwritepage" onclick="javascript:doWritePage();">답글작성하기</button>   
-						   <button type="button" class="btn btn-default btn-sm" id="do_writepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>   
+						   
+						    <c:choose>
+        			<c:when test="${userAdmin=='1'}">
+        			<button type="button" class="btn btn-default btn-sm" id="do_updatepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>   
+        			</c:when>
+        			
+        			<c:when test="${userId==vo.userId}">
+        			<button type="button" class="btn btn-default btn-sm" id="do_updatepage" onclick="javascript:doUpdatePage();">게시글 수정하기</button>   
+        			</c:when>
+
+							</c:choose>
+						   
 						   <button type="button" class="btn btn--stroke" id="btnDelete" onclick="javascript:detail_delete();">삭제</button>  
 						     </div>
                    		
   </section>
   
+
+
+
+
+
+
+
+
+
 
  
   
@@ -234,7 +254,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 		
 		
 		
-		if(rId == sessionid || adminid =='1'){
+		
 			var frm = document.bofrm;
 	
 	    	 frm.cusTitle.value = cusTitle;
@@ -243,9 +263,8 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 	    	 frm.action = "updatepage.do";
 	    	 frm.submit();
 			return;
-		} else {
-			alert('작성자 본인의 글만 수정 가능합니다.')
-		}  
+		
+			
 		
 	
      }

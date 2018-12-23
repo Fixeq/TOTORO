@@ -81,6 +81,31 @@
         		 document.bofrm.submit();
         	}
         });
+        
+        
+        
+        
+        
+    	$("#crContent").keydown(function(key) {
+    		if (key.keyCode == 13) {
+
+            	if( $("#crContent").val() == ""){
+            		alert(' 내용은 공란일수없습니다.')
+               	return;
+          
+                
+            	} else {
+            		  // 폼에 입력한 데이터를 서버로 전송
+            		   document.bofrm.action = "rsave.do";
+            		 document.bofrm.submit();
+            	}
+    		}
+    	});
+        
+        
+        
+        
+        
     });
     </script>
 </body>
