@@ -29,7 +29,7 @@
 <fieldset><input type="hidden" name="cusSeq"  id="cusSeq" value="<c:out value="${vo.cusSeq}"></c:out>">
 
                         <div class="titleform">
-                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" placeholder="<c:out value="${vo.cusTitle}"></c:out>" value=""></input>
+                            <input name="cusTitle" type="text" id="cusTitle" class="full-width" value="<c:out value="${vo.cusTitle}"></c:out>"></input>
                         </div>
 
                        <div>
@@ -41,7 +41,7 @@
 							</div>
 
                         <div class="contentform">
-                        <textarea name="cusContent" id="cusContent" class="full-width"  placeholder="<c:out value="${vo.cusContent}"></c:out>" value=""></textarea>
+                        <textarea name="cusContent" id="cusContent" class="full-width" ><c:out value="${vo.cusContent}"></c:out></textarea>
                         </div>
 
                       
