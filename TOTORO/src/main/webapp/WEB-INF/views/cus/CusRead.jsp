@@ -280,11 +280,11 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
    
    //댓글삭제
    $(".doDelete").on("click",function(){
-		alert('댓글삭제클릭');
+		
 
 		var crSeq = $(this).attr('id'); //버튼값의 아이디를 가져온다 .
 
-		alert(crSeq);
+		
 		
 	  	var cusSeq = $("#cusSeq").val();
 	  	
@@ -292,7 +292,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
 	  	
 	  	//등록된 아이디 값 뽑아오는 방법!!
 		var rid = $(this).attr('id');
-	  	alert(rid)
+	  	
 		
 		
 		
@@ -322,7 +322,7 @@ List<CodeVO> code_page = (null == request.getAttribute("code_page"))
            
       }); //--ajax
       
-       alert('삭제성공');
+     
      	 var frm = document.bofrm;
     	 	     frm.cusSeq.value = $("#cusSeq").val();
     		 	  frm.action = "do_search_one.do";
