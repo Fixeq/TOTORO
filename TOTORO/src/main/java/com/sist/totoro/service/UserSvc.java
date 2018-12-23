@@ -145,10 +145,10 @@ public class UserSvc {
 		String charSet = "utf-8";
 		String hostSMTP = "smtp.naver.com";
 		String hostSMTPid = "y~64@naver.com";
-		String hostSMTPpwd = "y~v0~3";
+		String hostSMTPpwd = "y~3";
 //		jackpot1224bytotoro
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = "y~64@naver.com";
+		String fromEmail = "y~4@naver.com";
 		String fromName = "ADMIN MH";
 		String subject = "";
 		String msg = "";

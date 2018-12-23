@@ -43,11 +43,18 @@
         .s-styles { 
             background: #f2f2f2;
             padding-top: 12rem;
-            padding-bottom: 12rem;
+            padding-bottom: 80rem;
+             background-position:center center;
+             background-repeat: no-repeat
         }
 
         .s-styles .section-intro h1 {
             margin-top: 0;
+        }
+        
+        .ban-image{
+        	background-image: url("<%=cPath%>/resources/images/ban/졸업축.png");
+        
         }
      </style> 
 
@@ -60,7 +67,7 @@
 <!-- styles
     ================================================== -->
 
-    <section id="styles" class="s-styles">
+    <section id="styles" class="s-styles ban-image">
         <div class="row narrow section-intro add-bottom text-center">
             <div class="col-twelve tab-full">
                 <h1 class="dohyeon">당신은 졸업생 입니다^^</h1>
