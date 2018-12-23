@@ -133,7 +133,7 @@
                             </ul>
                         </li>
                         <li><a href="/totoro/chart/line_view.do" title="">승부예측</a></li>
-                        <li><a href="/totoro/cus/search.do" title="">게시판</a></li>
+                        <li><a href="/totoro/cus/search.do" title="">고객센터</a></li>
                     </ul> <!-- end header__nav -->
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
