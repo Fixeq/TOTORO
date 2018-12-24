@@ -66,7 +66,6 @@ font-family: 'Jua', sans-serif;
 			<button onclick="javascript:doSearch();">조회</button>
 		</form>
 	</div>
-
 </section>
 
 <section class="s-content">
@@ -152,7 +151,6 @@ font-family: 'Jua', sans-serif;
 			<%=StringUtil.renderPaging(totalCnt, oPageNum, oPageSize, bottomCount, "view.do", "search_page") %>
 		</div>
 	
-	
 </section> <!-- s-content -->
 </body>
 
@@ -201,7 +199,16 @@ font-family: 'Jua', sans-serif;
 		console.log(varName);
 		console.log("varId = " + varId);
 		
+		console.log("a : "+a);
+		
 		varGameSeq.push(varName);
+		for(var i = 0 ; i < varGameSeq.length-1; i++){
+			//추가시킨 상태를 확인해서 중복되는게 있으면 뒤에 팝시킴
+			if(varGameSeq[i]==varName){
+				delete varGameSeq[i];
+			}
+		}
+		
 		console.log("varGameSeq : " + varGameSeq);
 		console.log("val[] : " + varGameSeq[0]);
 		console.log("val[] : " + varGameSeq[1]);

@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
@@ -48,10 +50,30 @@ public class CrossController {
 		//아이디 뽑아내기
 		
 		String[] gameSeq = req.getParameterValues("varSeq");
+		String str1 = "";
 		//게임시퀀스[] 뽑아내기
 		//[1,2,3,4,5]
+		int count = 1;
+		for(int i = 0; i < gameSeq.length;i++) {
+			if((gameSeq[i]).equals("undefined")) {
+				continue;
+			}
+			log.info(gameSeq[i]);
+			if(count==1) {
+				str1+=gameSeq[i];
+			}else {
+				str1+=","+gameSeq[i];
+			}
+			count++;
+			log.info("test1: "+ str1);
+		}
+		String[] gameSeq2 =str1.split(",");
 		
-		double finalPercent = crossSvc.do_ViewPoint(gameSeq, req);
+		for(int i = 0; i<gameSeq2.length;i++) {
+			log.info("test2: "+gameSeq2[i]);
+		}
+		
+		double finalPercent = crossSvc.do_ViewPoint(gameSeq2, req);
 		
 		
 		String money = req.getParameter("money"); // 돈 얼마 걸었는
@@ -59,8 +81,8 @@ public class CrossController {
 		log.info("finalPercent : " + finalPercent);
 		
 		
-		for(int i = 0 ; i < gameSeq.length;i++) {
-			log.info("gameSeq : "+gameSeq);
+		for(int i = 0 ; i < gameSeq2.length;i++) {
+			log.info("gameSeq2 : "+gameSeq2);
 		}
 		log.info(money);
 		
@@ -68,7 +90,7 @@ public class CrossController {
 		//베팅 시퀀스 증가시키기.
 		
 		
-		betHistorySvc.do_makeUserBet(req, userId, finalPercent, money, gameSeq, betSeq);
+		betHistorySvc.do_makeUserBet(req, userId, finalPercent, money, gameSeq2, betSeq);
 		
 		
 /*		int count = 0;
