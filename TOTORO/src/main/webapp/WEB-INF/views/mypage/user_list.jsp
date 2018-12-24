@@ -121,7 +121,7 @@
 			width: 35px;
 		}
 		.media{
-			width:250%; 
+			width:210%; 
 		}
 		.table-filter .media-body {
 		    display: block;

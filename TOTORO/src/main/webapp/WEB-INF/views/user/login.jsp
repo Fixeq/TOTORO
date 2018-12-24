@@ -121,9 +121,10 @@
 		    
 							<div class="form-check">
 								<input type="button" class="btn float-left dohyeon" value="회원가입" onclick="location.href='<%=cPath%>/user/join.do'"/> 
-								<input type="submit" class="btn float-right dohyeon" value="로그인"/>
+								<input type="submit" class="btn float-leftd dohyeon" value="로그인"/>
 							</div>
 						</form>
+						<br/><br/>
 						<div class="find-text nanum"><a href="<%=cPath%>/user/find.do">아이디나 비밀번호가 기억이 안나시나요?</a></div>
 						<div class="copy-text nanum">평생을 당신과 같이 가겠습니다 <i class="fa fa-heart"></i></div>
 					</div>
