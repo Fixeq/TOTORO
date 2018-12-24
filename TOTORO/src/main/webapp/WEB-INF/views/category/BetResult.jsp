@@ -184,7 +184,6 @@
     
     
          function search_page(url,page_num){
-        	 alert(url+":search_page:"+page_num);
         	 var frm = document.frm;
         	 frm.page_num.value = page_num;
         	 frm.action = url;
@@ -209,7 +208,6 @@
          }
          
          function doSearch(){
-        	 alert("ready");
         	 var frm = document.frm;
         	 console.log("search_word111111111111111111111111111111="+search_word);
         	 frm.page_num.value =1;

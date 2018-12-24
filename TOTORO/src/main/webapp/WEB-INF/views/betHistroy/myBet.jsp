@@ -68,7 +68,6 @@ font-family: 'Jua', sans-serif;
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		alert("betHistory112");
 	});
 	
 	$("#myBetTable>tbody").on("click","tr",function(){

@@ -90,7 +90,6 @@ s
 
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("6");
 	});
 	
 	function closeCross(e){

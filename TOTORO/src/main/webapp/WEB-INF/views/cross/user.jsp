@@ -164,7 +164,6 @@ font-family: 'Jua', sans-serif;
 
 <script type="text/javascript">
 	$(document).ready(function(){   
-		alert("cross999");
 		
 		$("#money").keyup(function(){
 			t1 = $("#money").val();
